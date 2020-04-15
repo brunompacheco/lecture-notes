@@ -1,0 +1,67 @@
+\lecture{1}{13.04.2020}{Introduction to Process Mining}
+
+
+\section*{Overview}
+
+\subsection*{Definitions}
+
+About Process Mining.
+
+\begin{definition}
+	A Process is a discrete collection of activities executed to achieve a goal.
+\end{definition}
+
+\begin{definition}
+	Mining is ``Gaining knowledge of, and, insights in (business) processes by analysing the event data stored during execution of the process''.
+\end{definition}
+
+Basic process data example:
+
+\begin{table}[htpb]
+	\centering
+	\caption{Basic example of event data}
+	\label{tab:event-data}
+	\begin{tabular}{|c|c|c|}
+		\hline
+		package & task & timestamp \\
+		\hline
+		1eg081hr  & load      & 12:36 \\
+		1eg081hr  & dispatch  & 12:38 \\
+		41yp39he  & load      & 12:37 \\
+		\hline
+	\end{tabular}
+\end{table}
+
+The `package' column is the \emph{Case identifier}, it identifies the instance of the process. `task' is the \emph{Activity} column, it explains what is being performed at a data record (row). `timestamp' is the \emph{Timestamp} column, a time reference to the data record. The last one is not necessary and can come in several different ways, even sometimes having record for beginning and end.
+
+We can also have different data in a log, but these are the bare basics.
+
+\begin{definition}
+	An \emph{Event} captures the (partial) execution of an activity within a process instance.
+\end{definition}
+
+Events are the atoms of our data, the rows in the dataset.
+
+\begin{definition}
+	A \emph{Trace} is a collection of events related to a process instance.
+\end{definition}
+
+We can make traces by the \emph{Case identifier} reference.
+
+\subsection*{Process Mining - Anaylsis}
+
+There are three branches of Process Mining:
+
+\begin{definition}
+	\emph{Process Discovery} is deriving process models from process logs.
+\end{definition}
+
+\begin{definition}
+	\emph{Conformance Checking} is assessing if reality in the data is conforming to specification (from a process model).
+\end{definition}
+
+\begin{definition}
+	\emph{Process Enhancement} is providing performance information to a process model (as an overlay).
+\end{definition}
+
+Process discovery acts from event logs, in the model. Conformance checking acts between the model and the event logs, acting on both. Enhancement acts from logs on the models, with a feedback from the model.

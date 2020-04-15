@@ -1,0 +1,127 @@
+\lecture{2}{13.04.2020}{Introduction to Process Mining}
+
+\section*{Mathematical Background}
+
+\subsection*{Mathematical Preliminaries}
+
+Here we will set the grounds for the further lectures.
+
+\begin*{definition}
+	A \textbf{Set} is a group of objects without duplicates. 
+\end*{definition}
+
+Sets allow for union, intersection, difference and complement operations.
+
+\subsubsection*{Power of a set}
+
+\[
+	P(X) = \{X' | X' \subset X\}
+.\] 
+
+\begin*{remark}
+	The empty set $\emptyset$ is always a subset of every set.
+\end*{remark}
+
+\subsubsection*{Cartesian product}
+ 
+Given $ X_1, \ldots, X_n $ sets,
+\[
+X_1 \times \ldots\times X_n = \{\left( x_1, \ldots, x_n \right) | x_i \in X_i, \forall 1 \le i \le n\} 
+.\] 
+
+\subsubsection*{Functions}
+
+Functions are necessary for dealing with sets.
+
+\begin{definition}
+	Given sets $X$ and $Y$, a set $f \in X \times Y$ is a \textbf{function} $\iff \forall x \in X, \exists y \in Y \left( \left( x, y \right) \in f \right) \land \exists! y' \in Y, y' \neq y \left( \left( x, y' \right) \in f  \right)  $
+\end{definition}
+
+\emph{I.e.}, in a function $f:X\to Y$, there is one, and only one mapping for every element of $X$. Basic function definition.
+
+\begin{definition}
+	$f:X\nrightarrow Y$ is a \textbf{partial function} $\iff \exists X' \in X \mid f:X'\to Y$ is a function.
+\end{definition}
+
+\emph{I.e.}, a partial function map elements from a subset of the domain.
+
+\begin{remark}
+	A function $f:X\to Y$ is said \textbf{injective} $\iff f^{-1}:Y\to X$ is a partial function.
+\end{remark}
+
+\begin{remark}
+	A function $f:X\to Y$ is said \textbf{surjective} $\iff \forall y \in Y, \exists x \in X \mid \left( x, y \right) \in f $.
+\end{remark}
+
+\emph{I.e.}, surjectiveness is coverage of $Y$.
+
+ \begin{remark}
+	A function is said \textbf{bijective} if it is both \emph{injective} and \emph{surjective}.
+\end{remark}
+
+\subsubsection*{Multisets}
+
+Multisets are sets that allow for multiple elements. Usually written as $B = \left\{ a^{2}, b^{3}, c, d² \right\} $, given $X = \left\{ a, b, c, d \right\} $. They are represented as a function.
+
+\begin{definition}
+	A \textbf{Multiset} is a function $B:X\to \N$ that maps the elements of a set $X$ in their amounts.
+\end{definition}
+
+Multisets allow for several operations such as extension and union (across different base sets as well).
+
+\subsubsection*{Sequences}
+
+Sequences are enumerated collections of objects. Given a set $X= \left\{ a, b, c \right\} $ a sequence is usually written as $ <a,b,c,d>$.
+
+\begin{definition}
+	Given a set $X$, a \textbf{sequence} $ \sigma$ is a function  $\sigma:\left\{ 1,\ldots,n \right\} \to X, n \in \N$.
+\end{definition}
+
+Sequences are a subset of $\N \times X$.
+
+\begin{definition}
+	Given a set $X$, $X^*$ is the set of all possible sequences over $X$.
+\end{definition}
+
+Sequences can be concatenated: $\sigma_1= <a,b>, \sigma_2= <c,d>, \sigma_1 \times \sigma_2 = <a,b,c,d>$.
+
+\subsection*{Petri Nets}
+
+[ADD IMAGEM?]
+
+\begin{definition}
+	A \textbf{Bipartite graph} is a graph $G=\left\{ \left( v,e \right) \mid v \in V, e \in E\subset V\times V \right\} $, $V$ represents the vertices (or nodes) and E represents the edges, where $\exists V_1,V_2\subset V, V_1\cap V_2 = \O \land V_1 \cup V_2 = V$, such that $\forall e=(v_1,v_2) \in E, v_1 \in V_1, v_2\in V_2$.
+\end{definition}
+
+\emph{I.e.}, there is no edge between the elements of $V_1$ or $V_2$.
+
+\begin{definition}
+	Given $P, T$ sets of \emph{places} and \emph{transitions}, respectively, and $F\subset \left( P\times T \right) \cup \left( T\times P \right) $ the set of arcs, a tuple $N \in P\times T\times F$ is a \textbf{Petri Net} $\iff P$ and $T$ are partitions of the graph $G=\left\{ \left( v,e \right)  \mid v\in P\cup T, e \in F\right\} $.
+\end{definition}
+
+Let $N=\left( P,T,F \right) $ be a Petri Net, we can define
+
+\begin{itemize}
+	\item $\cdot x=\left\{ y\in P\cup T \mid \left( y,x \right) \in F \right\} $ as the pre-set of a vertex $x$.
+	\item $x\cdot =\left\{ y\in P\cup T \mid (x,y)\in F \right\} $ as the post-set of a vertex $x$.
+	\item $M\in B(P)$ is called a marking of $N$
+		 \begin{itemize}
+			 \item Given $p \in P$, we write $M(p)$ to denote the number of tokens in $p$.
+		\end{itemize}
+\end{itemize}
+
+\begin{definition}
+	A transition $t\in T$ is \textbf{enabled}, written $M[t\rangle$,  $\iff \forall p \in \cdot t, M(p)>0$.
+\end{definition}
+
+
+If a transition $t\in T$ is \textbf{fired}, we obtain a new marking $M' \in B(P)$ in the following way:
+
+\[
+M'(p) =
+\begin{cases}
+	M(p)+1, & p \in t\cdot \setminus \cdot t \\
+	M(p)-1, & p \in \cdot t \setminus \cdot t \\
+	M(p),
+\end{cases}
+.\] 
