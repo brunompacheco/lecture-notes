@@ -96,7 +96,7 @@
 \newtheorem*{intermezzo}{Intermezzo}
 \newtheorem*{notatie}{Notatie}
 \newtheorem*{observatie}{Observatie}
-\newtheorem*{oef}{Oefening}
+\newtheorem*{exe}{Exercise}
 \newtheorem*{opmerking}{Opmerking}
 \newtheorem*{praktisch}{Praktisch}
 \newtheorem*{probleem}{Probleem}
@@ -137,22 +137,22 @@
 
 % Exercise 
 % Usage:
-% \oefening{5}
-% \suboefening{1}
-% \suboefening{2}
-% \suboefening{3}
+% \exercise{5}
+% \subexercise{1}
+% \subexercise{2}
+% \subexercise{3}
 % gives
-% Oefening 5
-%   Oefening 5.1
-%   Oefening 5.2
-%   Oefening 5.3
-\newcommand{\oefening}[1]{%
-    \def\@oefening{#1}%
-    \subsection*{Oefening #1}
+% Exercise 5
+%   Exercise 5.1
+%   Exercise 5.2
+%   Exercise 5.3
+\newcommand{\exercise}[1]{%
+    \def\@exercise{#1}%
+    \subsection*{Exercise #1}
 }
 
-\newcommand{\suboefening}[1]{%
-    \subsubsection*{Oefening \@oefening.#1}
+\newcommand{\subexercise}[1]{%
+    \subsubsection*{Exercise \@exercise.#1}
 }
 
 
