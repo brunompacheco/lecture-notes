@@ -1,0 +1,156 @@
+\lecture{3}{20.04.2020}{Process Model}
+
+\section*{What is a Mathematical Model}
+
+A dictionarie definition:
+
+\begin{definition}
+	\emph{Miriam Webster}: usually miniature representation of something; a system of postulates, data, and inferences presented as a mathematical description of an entity or state of affairs.
+\end{definition}
+
+Course definitions:
+
+\begin{definition}
+	A \textbf{model} is a representation (possibly non-tangible) of a phenomenon/object/concept/product/etc. (possibly non-tangible).
+\end{definition}
+
+\begin{definition}
+	A \textbf{mathematical model} is a representation (possibly non-tangible) of a phenomenon/object/concept/product/etc. (possibly non-tangible) in a \emph{mathematical} language.
+\end{definition}
+
+The purpose of a model is \textbf{communication} and \textbf{knowledge generation}.
+
+\section*{Recap: Petri Nets}
+
+A Petri Net is a bipartite graph, whose partitions are places and transitions, i.e., there are no connections between places nor between transitions.
+
+Places allow us to express the \emph{state} in which the PN is (aka \emph{marking}), through the use of \emph{tokens}.
+
+A tranistion is \emph{enabled} when all its incoming arcs, the connecting place has at least one token. Note that a transition without incoing arcs is always enabled.
+
+When a transition is fired, it consumes all the tokens from the incoming arcs and produces tokens towards all its outcoming arcs.
+
+\section*{Workflow Nets}
+
+A Petri net is a Workflow Net (WF Net) iff:
+
+\begin{enumerate}
+	\item It has a \textbf{unique} source place (only outbound connections);
+	\item It has a \textbf{unique} sink place (only inward connections);
+	\item Connecting the sink to the source (with an artificial transition) yields a strongly connected component.
+\end{enumerate}
+
+\begin{remark}
+	A \textbf{strongly connected component}, in PN context, is a network that allows us to reach every node from every other node.
+\end{remark}
+
+Being a WF-net is a \textbf{purely graph-theoretical property}.
+
+\begin{remark}
+	The \textbf{language} of a net is the set of its firing sequences.
+\end{remark}
+
+A WF-net is \textbf{sound} if it presents:
+\begin{itemize}
+	\item \textbf{safeness}: places cannot hold multiple tokens at the same time;
+	\item \textbf{proper completion}: the sink can only be marked if all other places are empty;
+	\item \textbf{option to complete}: it is always possible to reach the marking of \textbf{just} the sink place;
+	\item \textbf{absence of dead parts}: for any transition there is a firing sequence enabling it.
+\end{itemize}
+
+\begin{remark}
+	\emph{Soundness} is a \textbf{behavioral property}.
+\end{remark}
+
+\section*{Process Trees}
+
+Process was already defined, but in this context \textbf{Tree} relates to the mathematical structure. Therefore, a \textbf{Process Tree} is another approach to model a process.
+
+\textbf{Leafs} represent the activities that can be performed. \textbf{Nodes} or \textbf{Operators} instruct how to combine its children.
+
+Operators:
+\begin{itemize}
+	\item Precedence ($\to $): sets the order of occurence of its childs.
+	\item AND (X): competition occurence between its leafs.
+	\item OR (+): parallel occurence between its leafs.
+	\item LOOP ($\circlearrowleft$):  repeats left branch if other branches occurs.
+\end{itemize}
+
+\subsection*{Translating Operators}
+
+\textbf{SEE SLIDE 137 AND 138}
+
+\subsection*{Benefits}
+
+\begin{itemize}
+	\item \textbf{Sound by design}
+\end{itemize}
+
+\subsection*{Limitations}
+
+\begin{itemize}
+	\item It is not possible to model all processes.
+	\item Is is not suitable for global interactions.
+\end{itemize}
+
+\subsection*{Definition}
+
+Then the formal definition:
+
+\begin{definition}
+	Let $A\subset \Sigma$ be a finite set of activities. Let $\tau \not\in A $. Let $\otimes = \left\{ \to ,\times, \wedge, \circlearrowleft \right\} $ denote operators. A \textbf{Process Tree} $T$ is a set such that:
+	\begin{itemize}
+		\item Given $a\in A\cup \left\{ \tau \right\}$ , then $T=a$ is a Process Tree;
+		\item Given $n > 0$ and $n$ Process Trees $T_1,\ldots,T_n$, for $o\in \left\{ \to , \times , \wedge \right\} $, $T=o(T_1,\ldots,T_n)$ is a Process Tree
+		\item Given Process Trees $T_1,T_2$, $T=\circlearrowleft(T_1, T_2)$ is a Process Tree.
+	\end{itemize}
+	
+\end{definition}
+
+Let $T$ be a process tree over some activity $A$, the language of $T$, i.e., $\L(T) \subset A^{*}$. E.g.,
+
+\begin{itemize}
+	\item $\L(\tau) = \left\{ \left< \right> \right\} $
+	\item $\L(a) = \left\{ \left<a \right> \right\} $ for $a\in A$
+	\item $\L(\to (T_1,\ldots,T_n)) = \L(T_1) \cdot \ldots \cdot  \L(T_n)$ (concatenation of sets of sequences)
+	\item $\L(\times (T_1, \ldots, T_n)) = \bigcup_{1 \le i\le n} \L(T_i) $
+	\item $\L( \wedge (T_1, \ldots, T_n) = \L(T_1) \leftrightharpoons \ldots \leftrightharpoons \L(T_n)$
+	\item Loop is a shuffling of the languages
+\end{itemize}
+
+\subsection*{State-Space}
+
+Multiple Alternatives Possible
+
+Let $T$ be a process tree over some activity set $A$.
+
+Defines states to the leafs and operators and how each type of operator handles the state changes. The states can be:
+\begin{itemize}
+	\item \textbf{$C$}losed
+	\item \textbf{$A$}ctive
+	\item  $E$nabled
+	\item $F$uture enabled
+\end{itemize}
+
+Start as Closed but for the initial node. Active operators can change childs from closed to Enabled and Future enabled. Every activation is an addition to the word. Cycle is Closed ($\to $ Future enabled) $\to $ Enabled $\to $ Active $\to $ Closed.
+
+\begin{remark}
+	We need \emph{Future enabled} state so our state-space is deterministic, \emph{i.e.}, we can define next step based on current state tuple.
+\end{remark}
+
+\section*{Model Quality}
+
+Answering the question "is the model a correct representation of the real process?" requires a look at a confusion matrix where Positive is the occurence of a behavior and Negative is the absence of a behavior, calculating precision and recall.
+
+However, since we (usually) just have access to the event log, we calculate \emph{replay fitness} which is recall calculated on the event log data.
+
+Since this is very vague, we use other metrics as well:
+
+\begin{description}
+	\item[Fitness] ability to explain observed behavior; \emph{versus}
+	\item[Simplicity] Occam's razor, penalises complexity of a model.
+	\item[Precision] avoiding underfitting; \emph{versus}
+	\item[Generalization] avoiding overfitting.
+\end{description}
+
+Precision and generalization follow the same idea of ML approaches.
