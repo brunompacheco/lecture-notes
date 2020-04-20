@@ -37,6 +37,14 @@
 \renewcommand\O{\ensuremath{\emptyset}}
 \newcommand\Q{\ensuremath{\mathbb{Q}}}
 \newcommand\C{\ensuremath{\mathbb{C}}}
+\renewcommand\L{\ensuremath{\mathcal{L}}}
+
+% Package for Petri Net drawing
+\usepackage[version=0.96]{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,automata,petri}
+\usepackage{tikzit}
+\input{petri_nets_style.tikzstyles}
 
 % Easily typeset systems of equations (French package)
 \usepackage{systeme}
