@@ -1,0 +1,110 @@
+\lecture{2}{21.04.2020}{Review of Fundamentals}
+
+\section*{Step Response}
+
+Steady state requirement is the difference of the response and the set when $t\to \infty$. Dynamic
+state requirements relate to the speed from 10\% of the desired output to 90\% of it, and the
+overshoot. That is not always the case, \emph{e.g.}, area of the response to disturbance curve may
+be important for a given application.
+
+\subsection*{Static Specifications}
+
+\begin{itemize}
+    \item \emph{Accuracy} is regarding the number of digits that the device must support.
+    \item \emph{Error} is the difference between the feedback and the reference $e(t)=r(t)-y(t)$.
+    \begin{itemize}
+	\item \begin{description}
+	    \item[Disturbance] whatever is not under our control.
+	\end{description}
+	\item \begin{description}
+	    \item[Noise] related to some real signals in the system (stochastic modeling done for
+		noise).
+	\end{description}
+    \end{itemize}
+\end{itemize}
+
+\begin{remark}
+    If $r(t)$ is a constant value, we are dealing with the \textbf{control problem}, which focuses
+    on rejecting disturbances. \emph{E.g.}, rejecting turbulence in an airplane.
+    If $r(t)$ is a generic function in time and it is important for the system to follow it
+    precisely, we are dealing with a \textbf{servo problem} (2 DoF control). \emph{E.g.}, a CNC
+    must follow the design tracks as much as possible.
+\end{remark}
+
+\subsection*{Dynamic Specifications}
+
+Broadly two types: \textbf{time domain} \textbf{frequency domain} specifications. To link these,
+the \emph{system model} is critical. [System model as in the Laplace domain].
+
+\subsubsection*{\emph{E.g.,}}
+
+System:
+\[
+    G(s)= \frac{\omega_o^{2}}{s^{2}+2\xi \omega_o s + \omega_o^{2}}
+.\] 
+In the feedback loop:
+\[
+    Y(s)=\frac{G(s)}{s} \to  \L^{-1}(Y(s))=y(t)
+.\] 
+What about $\omega_o$ and $\xi$? How do they influence the $y(t)$ response?
+
+\subsection*{System Type}
+
+\begin{definition}
+    In a system \[
+	G(s)=\frac{K \prod_{i}\left( s-s_i \right) }{s^{M}\prod_{j} (s-s_j)}
+    .\]
+    the order $M$ is the \textbf{system type}. [I didn't got the difference between the type and
+    the order]
+\end{definition}
+
+\subsection*{Step Response}
+
+In slide 7, $\zeta =1$ is critically damped.
+
+\subsection*{Steady state error for a step input}
+\[
+	G(s)=\frac{K \prod_{i}\left( s-s_i \right) }{s^{M}\prod_{j} (s-s_j)}
+\] 
+\[
+	U(s) = \frac{1}{s}
+\] 
+\[
+    e_{ss} = \frac{1}{1+G(s)} U(s) \implies e_{ss}=\frac{1}{1+G(s)}
+\] 
+\[
+	K_p = \lim_{s \to 0} G(s) = \frac{K \prod_{i} (s_i)}{s^{M} \prod_{i} (s_j)}    
+\] 
+
+Note that the error comes from a standard feedback loop arrangement.
+
+\begin{itemize}
+    \item For $M=0$ systems, $e_{ss}=\frac{1}{1+ K_p}$
+    \item For $M\ge 1$, $e_{ss}=0$ [there is a pole in 0]
+\end{itemize}
+
+\subsection*{Steady state error for a ramp input}
+
+\[
+    U(s)=\frac{1}{s^{2}}
+\] 
+\[
+    K_v = \lim_{s \to 0} s G(s) = \frac{K \prod_{i} s_i}{s^{M-1}\prod_{j} s_j }
+\] 
+\[
+    e_{ss} = \frac{1}{1+G(s)}\frac{1}{s^2} \implies e_{ss} = \frac{1}{K_v}
+\]
+
+\begin{itemize}
+    \item For $M=0$, $e_{ss}\to \infty$
+    \item For $M=1$, $e_{ss}=\frac{1}{K_v}$ 
+    \item For $M\ge 2$, $e_{ss}=0$
+\end{itemize}
+
+The same reasoning applies to higher-dimensional (accelerated) inputs.
+
+\subsection*{Dominant poles}
+
+The closes a pole is to the imaginary axis (the slowest it is), the more it defines the response
+of a system. This means that we can ignore the faster poles in a high-dimensional system without
+great loss of accuracy.
