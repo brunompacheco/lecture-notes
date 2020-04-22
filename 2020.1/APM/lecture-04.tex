@@ -1,1 +1,123 @@
 \lecture{4}{20.04.2020}{Basic Discovery and Inductive Miner}
+
+\section*{Basic Process Discovery}
+
+Reminder: Process Discovery is translating event logs into process models.
+
+\subsection*{Transition relationships}
+
+Alpha algorithm is based on a few relationships that can be extracted from an event log.
+
+\begin{description}
+    \item[Direct succession] $x > y \iff$ for some case, $x$ is directly followed by $y$.
+\end{description}
+
+\emph{E.g.},
+
+Given an event log like
+\[
+L_1=\left[ \left<a,b,c,d \right>^3, \left<a,c,b,d \right>^2, \left<a,e,d \right> \right] 
+\] 
+We can obtain the following set of relations
+\[
+\left\{ a>b,a>c,a>e,b>c,b>d,c>b,c>d,e>d  \right\}
+\] 
+
+\begin{description}
+    \item[Causality] $x\to y \iff x>y \land \neg y>x$
+\end{description}
+
+In our example, then, the causality relations are
+\[
+\left\{ a\to b, a\to c, a\to e, b\to d, c\to d, e\to d \right\} 
+\] 
+
+\begin{description}
+    \item[Parallel] $x||y \iff x>y \land y>x$
+\end{description}
+
+In our example, then, the parallel relations are
+\[
+\left\{ b||c, c||b \right\} 
+\] 
+
+\begin{description}
+    \item[Choice] $x\#y \iff \neg x>y \land \neg y>x$
+\end{description}
+
+These relations are all that do not showed up before.
+
+\begin{remark}
+    The group $Choice(A)$ of choice relationships can be defined as  $Choice(A) = DS(A) \ A\times
+    A$, of the $DS(A)$ set of direct succession relationships.
+\end{remark}
+
+\subsection*{Patterns}
+
+Patterns that can occur in the net. Given transitions $a, b$ and $c$,
+\begin{description}
+    \item[Sequence] $a\to b$, when they are directly followed, there is no option for a
+    \item[XOR-split] $a\to b, a\to c, b\#c$, when the token has two options after $a$: $b$ XOR $c$ 
+    \item[XOR-join] $b\to c, a\to c, a\#c$
+    \item[AND-split] $a\to b, a\to c, b||c$
+\end{description}
+
+\subsection*{Alpha Miner}
+
+So in our example, we can use the relations and the patterns to build the net seen in slide 49.
+
+We start by building a matrix with the relations described before, having the transitions as
+indexes, with the addition of the $\gets = \to^{-1} $ relation. Notice this is actually an
+upper-triangular matrix, once it is symmetric along the diagonal.
+
+\begin{remark}
+    we connect a set of transitions $X$ with a set of transitions $Y$ if every  $x,x' \in X$ has
+    $x\#x'$, every $y,y'\in Y$ has $y\#y'$ and every $x\in X$ has $x\to y$.
+\end{remark}
+
+Notice that $x\neq x'$ is not a requirement, so it applies for \textbf{singleton sets}. So in our
+example, $X=\left\{ a \right\} , Y=\left\{ b \right\} $ applies and you can connect the transitions.
+
+The \emph{Alpha Miner} algorithm is based on this premise, but has a few caveats:
+
+\begin{enumerate}
+    \item Performs initial trial on the event log and gets the transitions
+    \item Gets the \emph{largest} sets $A$ and  $B$ that contain transitions with choice relation within
+	the sets, but sequence relations from $A$ to $B$
+    \item Generates places for this pair of sets and for the initial and final transitions (acquired
+	at step 1)
+    \item Connects the place to the transitions in  $A$ and $B$, and to the final and initial places
+	to the respective transitions
+    \item Repeats steps 3 and 4 for all the $A$ and $B$ possible (keeping the \emph{largest}
+	characteristic)
+\end{enumerate}
+
+Alpha Miner does not handle self loops! It creates a disconnection. See Alpha+ for a solution (I
+guess it filters it at the beginning).
+
+\subsection*{Heuristic Miner}
+
+The \emph{Heuristic Miner} takes on account the frequency of occurrence to create a causal graph.
+
+\[
+    x\to y = \frac{|x>y| - |y>x|}{|x>y| + |y>x|+1}
+\] 
+
+Upon this, we set a threshold and draw the graph for the relations that are above that value (e.g.,
+0.75).
+
+\section*{Inductive Miner Basic Idea}
+
+The original problem is that the Alpha Miner generates very complex and hard to read PN, and the
+Heuristic Miner only shows what is on the data, does not generalize enough (?).
+
+The \textbf{Inductive Miner} generates very nice graphs. It actually generates a process tree. It
+discovers a process trees from a directly follows graph, which is a graph from the direct succession
+relations.
+
+Given an event log $L:A*\to \N$, 
+\begin{enumerate}
+    \item Gets the direct succession relations and builds a directed graph
+    \item Assuming that this graph is generated from a process tree
+    \item Recursively splits the graph and finds structures (operations)
+\end{enumerate}
