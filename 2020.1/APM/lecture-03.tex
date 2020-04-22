@@ -2,7 +2,7 @@
 
 \section*{What is a Mathematical Model}
 
-A dictionarie definition:
+A dictionary definition:
 
 \begin{definition}
 	\emph{Miriam Webster}: usually miniature representation of something; a system of postulates, data, and inferences presented as a mathematical description of an entity or state of affairs.
@@ -26,9 +26,10 @@ A Petri Net is a bipartite graph, whose partitions are places and transitions, i
 
 Places allow us to express the \emph{state} in which the PN is (aka \emph{marking}), through the use of \emph{tokens}.
 
-A tranistion is \emph{enabled} when all its incoming arcs, the connecting place has at least one token. Note that a transition without incoing arcs is always enabled.
+A transition is \emph{enabled} when all its incoming arcs, the connecting place has at least one
+token. Note that a transition without incoming arcs is always enabled.
 
-When a transition is fired, it consumes all the tokens from the incoming arcs and produces tokens towards all its outcoming arcs.
+When a transition is fired, it consumes all the tokens from the incoming arcs and produces tokens towards all its outgoing arcs.
 
 \section*{Workflow Nets}
 
@@ -70,9 +71,9 @@ Process was already defined, but in this context \textbf{Tree} relates to the ma
 
 Operators:
 \begin{itemize}
-	\item Precedence ($\to $): sets the order of occurence of its childs.
-	\item AND (X): competition occurence between its leafs.
-	\item OR (+): parallel occurence between its leafs.
+	\item Precedence ($\to $): sets the order of occurrence of its children.
+	\item AND (X): competition occurrence between its leafs.
+	\item OR (+): parallel occurrence between its leafs.
 	\item LOOP ($\circlearrowleft$):  repeats left branch if other branches occurs.
 \end{itemize}
 
@@ -132,7 +133,7 @@ Defines states to the leafs and operators and how each type of operator handles 
 	\item $F$uture enabled
 \end{itemize}
 
-Start as Closed but for the initial node. Active operators can change childs from closed to Enabled and Future enabled. Every activation is an addition to the word. Cycle is Closed ($\to $ Future enabled) $\to $ Enabled $\to $ Active $\to $ Closed.
+Start as Closed but for the initial node. Active operators can change children from closed to Enabled and Future enabled. Every activation is an addition to the word. Cycle is Closed ($\to $ Future enabled) $\to $ Enabled $\to $ Active $\to $ Closed.
 
 \begin{remark}
 	We need \emph{Future enabled} state so our state-space is deterministic, \emph{i.e.}, we can define next step based on current state tuple.
@@ -140,7 +141,8 @@ Start as Closed but for the initial node. Active operators can change childs fro
 
 \section*{Model Quality}
 
-Answering the question "is the model a correct representation of the real process?" requires a look at a confusion matrix where Positive is the occurence of a behavior and Negative is the absence of a behavior, calculating precision and recall.
+Answering the question "is the model a correct representation of the real process?" requires a
+look at a confusion matrix where Positive is the occurrence of a behavior and Negative is the absence of a behavior, calculating precision and recall.
 
 However, since we (usually) just have access to the event log, we calculate \emph{replay fitness} which is recall calculated on the event log data.
 
