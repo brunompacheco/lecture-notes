@@ -45,10 +45,39 @@ snippet template "Basic template" b
 \end{document}
 endsnippet
 
+snippet exercise "Exercise template" b
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+
+\title{Exercises $1}
+
+\begin{document}
+\maketitle
+
+$0
+
+\end{document}
+endsnippet
+
 snippet beg "begin{} / end{}" bA
 \\begin{$1}
 	$0
 \\end{$1}
+endsnippet
+
+snippet exer "exercise" b
+\\exercise{$1}
+$2
+endsnippet
+
+snippet sexer "subexercise" b
+\\subexercise{$1}
+$2
+endsnippet
+
+snippet ssexer "subsubexercise" b
+\\subsubexercise{$1}
+$2
 endsnippet
 
 snippet sec "section" b
@@ -140,12 +169,12 @@ snippet sig "sigma" i
 endsnippet
 
 context "math()"
-snippet and "logical and"
+snippet and "logical and" i
 \land 
 endsnippet
 
 context "math()"
-snippet orr "logical or"
+snippet orr "logical or" i
 \wedge
 endsnippet
 
