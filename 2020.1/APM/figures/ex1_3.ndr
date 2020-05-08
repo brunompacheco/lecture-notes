@@ -1,0 +1,85 @@
+p 230.0 115.0 p0 0 n
+t 130.0 115.0 t0 c 0 w n register n
+t 345.0 115.0 t1 c 0 w n {introductional lecture} n
+t 545.0 115.0 t2 c 0 w n postpone n
+t 635.0 50.0 t3 c 0 w n {focus on other lectures} n
+p 700.0 115.0 p2 0 n
+t 765.0 50.0 t4 c 0 w n {enjoy life} n
+p 940.0 115.0 p3 0 n
+t 820.0 115.0 t5 c 0 w n hurry n
+t 940.0 215.0 t6 c 0 w n {check instruction} e
+t 1140.0 215.0 t7 c 0 w n {watch lecture} e
+p 940.0 315.0 p8 0 e
+t 860.0 215.0 t8 c 0 w n panic n
+t 940.0 395.0 t9 c 0 w n exam e
+p 460.0 115.0 p1 0 n
+p 460.0 395.0 p9 0 ne
+t 460.0 215.0 t10 c 0 w n {stay tuned} nw
+t 360.0 315.0 t11 c 0 w n {recent lecture} n
+p 280.0 315.0 p10 0 n
+p 280.0 395.0 p11 0 n
+t 180.0 355.0 t12 c 0 w n {recent instruction} n
+t 360.0 395.0 t13 c 0 w n excited n
+t 540.0 395.0 t14 c 0 w n {prepare relaxed} s
+p 620.0 395.0 p12 0 n
+p 800.0 395.0 p13 0 n
+t 700.0 395.0 t15 c 0 w n exam s
+p 800.0 295.0 p16 0 e
+t 700.0 295.0 t17 c 0 w n {Assignment A2} s
+p 700.0 215.0 p15 0 e
+p 545.0 215.0 p14 0 s
+t 625.0 215.0 t16 c 0 w n {Assignment A1} s
+t 860.0 475.0 t18 c 0 w n {Pass the course} e
+t 720.0 475.0 t19 c 0 w n {Pass the course with a good grade} sw
+p 420.0 475.0 p17 0 n
+p 800.0 535.0 p18 0 n
+p 30.0 115.0 p19 1 n
+e p19 t0 1 n
+e t19 p18 1 n
+e t18 p18 1 n
+e p13 t18 1 n
+e p13 t19 1 n
+e p17 t19 1 n
+e t10 0.5000000002 318.0 p17 0.4641636868 367.2710171 1 n
+e p16 t9 1 n
+e p16 t15 1 n
+e t17 p16 1 n
+e p15 t17 1 n
+e t16 p15 1 n
+e p14 t16 1 n
+e t2 p14 1 n
+e t10 p14 1 n
+e t9 p13 1 n
+e t15 p13 1 n
+e p12 t15 1 n
+e t14 p12 1 n
+e p9 t14 1 n
+e t13 p9 1 n
+e p11 t13 1 n
+e t12 p11 1 n
+e p10 t12 1 n
+e p9 t11 1 n
+e t11 p10 1 n
+e t10 p9 1 n
+e p1 t10 1 n
+e p8 t9 1 n
+e t8 p3 1 n
+e t7 p8 1 n
+e t6 p8 1 n
+e p8 t8 1 n
+e p3 t7 1 n
+e p3 t6 1 n
+e t5 p3 1 n
+e p2 t5 1 n
+e t4 0.6552375751 37.44329045 p2 0.09585700829 38.83297568 1 n
+e p2 0.1684506846 36.71511953 t4 0.5885166049 43.56604185 1 n
+e t3 0.8360104353 40.81666326 p2 0.4164761588 43.9089968 1 n
+e p2 0.3237918088 35.77708764 t3 0.9178393394 42.5440944 1 n
+e t2 p2 1 n
+e p1 t2 1 n
+e t1 p1 1 n
+e p0 t1 1 n
+e t0 p0 1 n
+h ex1_3
+
+

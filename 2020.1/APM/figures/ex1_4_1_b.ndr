@@ -1,0 +1,40 @@
+p 220.0 360.0 G1 0 n
+p 300.0 220.0 RY1 0 e
+p 140.0 220.0 GY1 0 w
+t 140.0 140.0 t1 c 0 w n {yellow to red} w
+t 140.0 300.0 t2 c 0 w n {green to yellow} w
+t 300.0 300.0 t3 c 0 w n {yellow to green} e
+p 700.0 360.0 G2 0 n
+p 780.0 220.0 RY2 0 e
+p 620.0 220.0 GY2 0 w
+t 620.0 140.0 t5 c 0 w n {yellow to red} w
+t 620.0 300.0 t6 c 0 w n {green to yellow} w
+t 780.0 300.0 t7 c 0 w n {yellow to green} e
+t 300.0 140.0 t0 c 0 w n {red to yellow} e
+p 700.0 80.0 R2 1 n
+p 220.0 80.0 R1 1 n
+t 775.0 140.0 t4 c 0 w n {red to yellow} e
+p 460.0 50.0 p8 1 n
+e t1 p8 1 n
+e t5 p8 1 n
+e p8 t4 1 n
+e p8 t0 1 n
+e R2 t4 1 n
+e t4 RY2 1 n
+e RY2 t7 1 n
+e t7 G2 1 n
+e G2 t6 1 n
+e t6 GY2 1 n
+e GY2 t5 1 n
+e t5 R2 1 n
+e t1 R1 1 n
+e GY1 t1 1 n
+e t2 GY1 1 n
+e G1 t2 1 n
+e t3 G1 1 n
+e RY1 t3 1 n
+e t0 RY1 1 n
+e R1 t0 1 n
+h ex1_4_1_b
+
+
