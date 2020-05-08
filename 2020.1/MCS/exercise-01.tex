@@ -1,0 +1,32 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+
+\title{Exercises 01}
+
+\begin{document}
+\maketitle
+
+\exercise{3}
+
+\subexercise{2}
+
+We have that our error is given by \[
+    E(s) = \frac{R(s)}{1 + G(s)}
+\] where \[
+G(s) = \frac{120(s+2)}{(s+3)(s+4)}
+.\]
+We know that \[
+    e_{ss} = \lim_{t \to \infty} e(t) = \lim_{s \to 0} s*E(s)
+,\] so for an input of $5u(t)$, our steady-state error will be
+\begin{equation}
+\begin{split}
+    e_{ss} &= \lim_{s \to 0} s*\frac{\frac{5}{s}}{1 + G(s)}  \\
+	   &= \lim_{s \to 0} \frac{5(s+3)(s+4)}{(s+3)(s+4) + 120(s+2)} \\
+	   &= \frac{60}{252} \approx 0,238.
+\end{split}
+\end{equation}
+For the case where $R(s)=5u(t)t$, it's enough to notice that it would be similar to equation (1) but
+with another $s$ in the quotient, therefore the limit diverges towards infinity. The same holds to
+$R(s)=5u(t)t^2$.
+
+\end{document}
