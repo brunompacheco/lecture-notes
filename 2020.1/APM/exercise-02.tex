@@ -1,0 +1,179 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+
+\title{Exercises 2}
+
+\begin{document}
+\maketitle
+
+\section*{Process Trees}
+
+\exercise{1}
+
+\begin{enumerate}
+    \item No. Given that there are no sink nor source places
+    \item No. Given the initial marking on the only source place of the net, the top transition is
+	never active.
+    \item No. See that the only sink place of the net can be marked together with the second
+	leftmost place of the net, so it provides no proper completion.
+    \item No. It is not safe for the third place (left to right) can hold infinitely mane tokens
+	given that there is no restrictions on the activation of the second transition after a token
+	is set on the second place.
+    \item Yes.
+\end{enumerate}
+
+\exercise{2}
+
+\subexercise{1}
+
+\begin{enumerate}
+    \item It is not reachable for both transitions of the $\times $ operator are \emph{Future
+	Enabled}, which is impossible.
+    \item It is not reachable as there is an enabled transition ($d$) of the $\times $ operator that
+	is \emph{Enabled} while the node is not \emph{Active}. Besides that, the transitions
+	of the $\to $ operator changed their state before their node was \emph{Enabled}.
+\end{enumerate}
+
+\subexercise{2}
+
+\begin{enumerate}
+    \item It is not reachable given that the $\times $ operator only enables one of its children,
+	and both $b$ and the $\to $ operator were enabled (the $\to $ operator is
+	\emph{Active}, which means it was previously enabled.
+    \item It is not reachable for both $b$ and the $\to $ operator are marked as \emph{Future
+	Enabled}, which is impossible for the same reason as before.
+\end{enumerate}
+
+\subexercise{3}
+
+\begin{enumerate}
+    \item It is reachable and the only state possible following this one is $S_d=A$.
+    \item Not reachable as both children of a $\times $ node cannot be both \emph{Future Enabled} and
+	\emph{Enabled}.
+\end{enumerate}
+
+\subexercise{4}
+
+\begin{enumerate}
+    \item It is reachable and the only possible next state is $S_e=C$.
+    \item Not reachable because the children of $\wedge$ are \emph{Enabled} before the node is
+	active. 
+\end{enumerate}
+
+\subexercise{5}
+
+\begin{enumerate}
+    \item Not reachable as $ c$ cannot be enabled before $b$.
+    \item Not reachable for neither $\times $ nor $ \wedge$ mark their children as
+	\emph{Future Enabled}.
+\end{enumerate}
+
+\subexercise{6}
+
+\begin{enumerate}
+    \item Not reachable for the same reason as before.
+    \item It is reachable and the only possible state is with $S_c=A$.
+\end{enumerate}
+
+\subexercise{7}
+
+\begin{enumerate}
+    \item Not reachable for $ \wedge$ does not mark its children as \emph{Future Enabled}, as
+	is marked for $\to $.
+    \item It is reachable and there is two possible following states, one where $a$ is
+	activated and the other where $e$ is activated.
+\end{enumerate}
+
+\section*{Alpha Miner}
+
+\exercise{3}
+
+$\to _L$ relation:
+
+\begin{enumerate}
+    \item $\to L_1=\left\{ (a,b), \left(a,c \right), \left( a,e \right)
+	, \left( b,d \right) , \left( c,d \right) , \left( e,d \right) \right\} $
+    \item $\to L_2= \left\{ \left( a,b \right),\left( b,c \right) ,\left( b,d \right) , \left(
+	c,e\right) ,\left( d,e \right) ,\left( e,f \right) ,\left( e,g \right) ,\left( f,b \right)
+    \right\} $
+    \item $\to L_3= \left\{ \left( a,c \right),\left( b,c \right) , \left( c,d \right) ,\left(
+	c,e\right)    \right\} $
+    \item $\to L_4= \left\{ \left( a,b \right),\left( a,e \right) ,\left( b,c \right) ,\left(
+	b,f\right) ,\left( c,d \right) ,\left( d,b \right) , \left( e,f \right) \right\} $
+    \item $\to L_5= \left\{ \left(  \right)  \right\} $
+    \item $\to L_6= \left\{ \left(  \right)  \right\} $
+    \item $\to L_7= \left\{ \left(  \right)  \right\} $
+    \item $\to L_8= \left\{ \left(  \right)  \right\} $
+    \item $\to L_9= \left\{ \left(  \right)  \right\} $
+    \item $\to L_{10}= \left\{ \left(  \right)  \right\} $
+    \item $\to L_1= \left\{ \left(  \right)  \right\} $
+    \item $\to L_1= \left\{ \left(  \right)  \right\} $
+    \item $\to L_1= \left\{ \left(  \right)  \right\} $
+    \item $\to L_1= \left\{ \left(  \right)  \right\} $
+    \item $\to L_1= \left\{ \left(  \right)  \right\} $
+\end{enumerate}
+
+AlphaMiner resulting Petri Net.
+
+\begin{enumerate}
+    \item \includegraphics[width=1\textwidth]{figures/ex2_3_1.pdf}
+\end{enumerate}
+
+New trace
+
+\begin{enumerate}
+    \item Not possible.
+\end{enumerate}
+
+Addition of $\left<a,d,f,e,h \right>$ 
+\begin{enumerate}
+    \item It fails for the precedence relation $e\to h$ implies in the addition of $\left( \left\{
+	e\right\} , \left\{ d,h \right\}  \right) $ to $X_{L_1}$ and to $Y_{L_1}$, which results
+	in the creation of the same name state and an inbound arc for $d$, thus, $d$ is not
+	enabled anymore for the former sequences.
+\end{enumerate}
+
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+\subexercise{1}
+
+\begin{enumerate}
+    \item 
+\end{enumerate}
+
+
+
+\end{document}
