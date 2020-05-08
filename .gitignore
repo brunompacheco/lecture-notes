@@ -278,3 +278,7 @@ tags
 .vim
 
 # End of https://www.gitignore.io/api/vim,latex
+
+# Vim Ctrl+Space extension
+.cs_files
+.cs_workspaces
