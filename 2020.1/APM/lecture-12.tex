@@ -1,0 +1,115 @@
+\lecture{12}{09.06.2020}{Streaming Data}
+
+\renewcommand\slidesfile{lecture_12_streaming_data.pdf}
+
+\nextslides[slide=5,until=6,highlight=6]
+
+The analysis techniques we learned so far result in conclusions for the past. Stream based process mining aims to look at the events while they happen and allows for faster ("instantaneous") conclusions.
+
+\nextslides[slide=8,until=24,highlight=18]
+
+Even the simple task of counting the occurrence of numbers in an infinite sequence of unsigned long numbers, we use a very large amount of disk space with the naive approach of creating a table for it.
+
+There are approaches more memory efficient, but you trade accuracy for it.
+
+\nextslides[until=27, highlight=27]
+
+One can use a hash function to reduce the dimensionality of the problem, thus using less memory.
+
+\nextslides[until=43,highlight=40]
+
+Note that the hash functions here are arbitrary, thus not related to the one defined before.
+
+Whatever value we pick, it will be an overestimate of the actual count because of the collisions.
+
+\nextslides[until=46,highlight=46]
+
+The best approximation would be then the smallest one, which would still be an overestimate.
+
+\nextslides[slide=48]
+
+This provides boundaries for the lack of accuracies given the choice $k$ of the number of hash functions.
+
+\nextslides[until=59,highlight=50]
+
+Given that the previous approach is based on searching the table, it would not be feasible to answer the question regarding the most frequent number (i.e., one would need to search for all the numbers in the table).
+
+In the \emph{FREQUENT} algorithm, $T$ maintains the most frequent items, $n$ is the index (?) of the set (I don't see much use for it). $i$ is the current number we see in the stream (loops along the stream). The table is populated with the count of the seen numbers until the full capacity ($k$) is reached, then one decreases all the values and, if there's any zero, this would be replaced by the new value.
+
+\nextslides[until=64]
+
+In the \emph{SPACESAVING} algorithm, when a new value shows up, it enters the table (last "else") in the space of the value with the smallest count and receives that count plus one.
+
+\nextslides[until=66]
+
+Just another algorithm, didn't went deep into it
+
+\nextslides[until=68]
+
+Any algorithm is an approximation, but they reduce the memory usage very well.
+
+\nextslides[slide=70,until=72]
+
+Note that an event contains the case and the activity!
+
+How to perform the 3 major tasks of PM with stream data?
+
+\nextslides[until=78,highlight=78]
+
+\nextslides[until=88,highlight=88]
+
+Using a sliding window to store the most recent events.
+
+\nextslides[until=92]
+
+The sliding window can then be easily transferred into an event log, and then a discovery algorithm can be applied. Since the miners mentioned rely on the DFG, it will be focused on here.
+
+\nextslides[until=94,highlight=94]
+
+The idea would be to store the possible "left-side" values for the DFG relations in a table with the last values for each case, then update the DFG based on that, when receiving new activities for any given case.
+
+\nextslides[until=108,highlight=108]
+
+The table with the DF relations can be updated using a frequency algorithm, as seen before, but with the pairs instead of the numbers.
+
+\nextslides[until=111,highlight=111] 
+
+Also the table for the cases can be kept with such an algorithm by storing the count on which the cases have been updated in the current window.
+
+\nextslides
+
+This decoupling implies in that the most frequent DF relation is present even if it doesn't show up in the current window (most recent values). Therefore, the novelty of the DF relation is not so influential in its representativeness in the DFG.
+
+\nextslides[until=114] 
+
+One can take some conclusions on the addition and removal of cases in the cases table regarding the start and end events (when added, it is the start event, when removed, the last event is the finishing event). But that can be a problem for events that pauses for longer times than the windows.
+
+\nextslides[until=117,highlight=117,slide=116]
+
+\nextslides[until=121,highlight=121] 
+
+In the offline scenario, one must be aware that the trace must come to the end places, which does not apply to the online setting
+
+\nextslides[until=128] 
+
+In the online, the question remains on what should we "consider" the end place for the model net ("bottom" part of the synchronous net).
+
+\nextslides[until=130,highlight=130] 
+
+So basically we don't consider the alignment after we get to the end of the trace model.
+
+\nextslides[until=144] 
+
+The problem arises when a new activity conflicts (based on the model) with the previous ones.
+
+\nextslides[until=149] 
+
+?
+
+\nextslides[until=150,highlight=150] 
+
+Instead of reverting the alignment, one can continue the search with $A^*$.
+
+\nextslides[until=152,highlight=152]
+
+
