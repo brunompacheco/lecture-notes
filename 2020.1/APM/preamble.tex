@@ -11,6 +11,144 @@
 
 \pdfminorversion=7
 
+% reduces left margin
+\usepackage[a4paper,lmargin=0.5in, rmargin=1in]{geometry}
+
+% slide settings
+\usepackage{xparse}
+\setlength\columnsep{20pt} % This is the default columnsep for all pages
+\newcommand*{\slidesfile}{filename-not-set}
+\def\isfirstslide{1}
+\newcommand{\insertslide}[1]{
+\begin{wrapfigure}{l}{0.6\linewidth}
+    \centering
+    \fbox{\includegraphics[page=#1,width=\linewidth]{\slidesfile}}
+\end{wrapfigure}
+}
+\newcounter{currslidenum}
+\newcommand{\newslide}[2][]{
+    \ifthenelse{\equal{\isfirstslide}{1}}{}{\clearpage}
+    \def\isfirstslide{0}
+    \setcounter{currslidenum}{#2}
+    \section*{\ifthenelse{\equal{#1}{}}{Slide #2}{#1}}
+    \hrule
+    \insertslide{#2}
+}
+\newcommand{\nextslide}[1][]{
+    \stepcounter{currslidenum}
+    \ifthenelse{\equal{#1}{}}{%
+    \newslide{\thecurrslidenum}}{%
+    \newslide[#1]{\thecurrslidenum}}
+}
+\newcommand{\insertminislides}[2][0]{
+    \begin{wrapfigure}{l}{0.6\linewidth}
+	\fbox{\includegraphics[page=#2,width=\linewidth]{\slidesfile}}
+	\ifnum#1>0 %
+	    \begin{subfigure}{\linewidth}
+		% TODO: fix figs alignment
+		\ifnum#1<3 %
+		    \def\subfigwidth{.48\linewidth}
+		\else
+		    \def\subfigwidth{.3\linewidth}
+		\fi
+
+		\newcount\minislides
+		\minislides=#2
+		\advance \minislides by 1
+		\newcount\looplimit
+		\looplimit=#2
+		\advance \looplimit by #1
+		\advance \looplimit by 1
+
+		\loop
+		\fbox{\includegraphics[page=\the\minislides,width=\subfigwidth]{\slidesfile}}
+		%\stepcounter{minislidescounter}
+		%\ifnum \minislidescounter<\looplimit
+		\advance \minislides by 1
+		\ifnum \minislides<\looplimit
+		\repeat
+	    \end{subfigure}
+	\fi
+    \end{wrapfigure}
+}
+\newcommand{\insertmultipleslides}[3][]{
+    \begin{wrapfigure}{l}{.6\linewidth}
+	\ifthenelse{\equal{#2}{#3}}{
+	    \fbox{\includegraphics[page=#3,width=\linewidth]{\slidesfile}}
+	}{
+	    % sets highlighted slide
+	    \newcount\hlslide
+	    \ifthenelse{\equal{#1}{}}{%
+		\hlslide=#2
+	    }{%
+		\hlslide=#1
+	    }
+	    \fbox{\includegraphics[page=\the\hlslide,width=\linewidth]{\slidesfile}}
+
+	    \begin{subfigure}{\linewidth}
+		\newcount\currminislide
+		\currminislide=#2
+		\newcount\lastminislide
+		\lastminislide=#3
+		\newcount\nminislides
+		\nminislides=\lastminislide
+		\advance \nminislides -\currminislide
+		\advance \nminislides by 1
+
+		\ifnum \nminislides < 3 %
+		    \def\subfigwidth{.48\linewidth}
+		\else
+		    \def\subfigwidth{.3\linewidth}
+		\fi
+		
+		\advance \lastminislide by 1
+		\loop
+		\fbox{\includegraphics[page=\the\currminislide,width=\subfigwidth]{\slidesfile}}
+		\advance \currminislide by 1
+		\ifnum \currminislide < \lastminislide
+		\repeat
+	        
+	    \end{subfigure}
+	}
+    \end{wrapfigure}
+}
+
+\usepackage{keycommand}
+
+\newkeycommand*\nextslides[title,slide,until,highlight]{
+    \newcount\startslide
+    \ifthenelse{\equal{\commandkey{slide}}{}}{
+	\stepcounter{currslidenum}
+	\startslide=\thecurrslidenum
+    }{
+	\startslide=\commandkey{slide}
+	\ifthenelse{\equal{\commandkey{until}}{}}{
+	    \setcounter{currslidenum}{\the\startslide}
+	}{
+	    \setcounter{currslidenum}{\commandkey{until}}
+	}
+    }
+
+    \ifthenelse{\equal{\isfirstslide}{1}}{}{\clearpage}
+    \def\isfirstslide{0}
+    
+    \section*{\ifthenelse{\equal{\commandkey{title}}{}}{%
+	Slide \ifthenelse{\equal{\commandkey{highlight}}{}}{%
+	    \the\startslide}{\commandkey{highlight}
+	}
+    }{%
+	\commandkey{title}
+    }}
+    \hrule
+
+    \ifthenelse{\equal{\commandkey{until}}{}}{
+	\insertmultipleslides[\commandkey{highlight}]{\the\startslide}{\the\startslide}
+    }{
+	\insertmultipleslides[\commandkey{highlight}]{\the\startslide}{\commandkey{until}}
+    }
+}
+
+
 % Don't indent paragraphs, leave some space between them
 \usepackage{parskip}
 
@@ -19,6 +157,9 @@
 \usepackage{subcaption}
 \usepackage{multicol}
 \usepackage{xcolor}
+
+% wrap text around figures
+\usepackage{wrapfig}
 
 % Other font I sometimes use.
 % \usepackage{cmbright}
@@ -38,13 +179,6 @@
 \newcommand\Q{\ensuremath{\mathbb{Q}}}
 \newcommand\C{\ensuremath{\mathbb{C}}}
 \renewcommand\L{\ensuremath{\mathcal{L}}}
-
-% Package for Petri Net drawing
-\usepackage[version=0.96]{pgf}
-\usepackage{tikz}
-\usetikzlibrary{arrows,shapes,automata,petri}
-\usepackage{tikzit}
-\input{petri_nets_style.tikzstyles}
 
 % Easily typeset systems of equations (French package)
 \usepackage{systeme}
