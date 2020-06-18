@@ -1,0 +1,83 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+
+\title{Exercises 3}
+
+\begin{document}
+\maketitle
+
+\section*{Inductive Miner}
+
+\exercise{1}
+
+\[
+L_1 = \left[ \left< a,b,c,d\right>^{5}, \left<a,c,b,d \right>^{8}, \left<a,e,d \right>^{9} \right] 
+\] 
+
+We can, immediately notice there is a sequence cut $(\to ,\left[ a \right] , \left[ b,c,e \right]
+, \left[ d \right] $ on our log, so 
+\begin{equation}
+    \begin{split}
+	L_{11}&= \left[ \left<a \right> \right]  \\
+	L_{12}&= \left[ \left<b,c \right>, \left<c,b \right>, \left< e\right> \right] \\
+	L_{13}&= \left[ \left<d \right> \right] .
+    \end{split}
+\end{equation}
+
+On $L_{12}$ we can see now an exclusive choice cut $\left( \times , \left[ b,c \right] ,\left[
+e\right] \right) $ where, then,
+\begin{equation}
+    \begin{split}
+	L_{121}&= \left[ \left<b,c \right>,\left<c,b \right> \right] \\
+	L_{122}&= \left[ \left<e \right> \right] .
+    \end{split}
+\end{equation}
+
+Finally, we have a parallel cut $(\wedge, \left[ b \right] , \left[ c \right] )$ where
+\begin{equation}
+\begin{split}
+    L_{1211}&= \left[ \left<b \right> \right] \\
+    L_{1212}&= \left[ \left<c \right> \right] .
+\end{split}
+\end{equation}
+
+Therefore, we have the tree \[
+    Q_1= \to (a, \times (e, \wedge(b,c)), d)
+\] 
+
+\exercise{3}
+
+\[
+L_3=\left[ \left<a,c,d \right>, \left<b,c,d \right>, \left< a,c,e\right>, \left<b,c,e \right> \right] 
+\] 
+We can apply at first the sequence cut $(\to , [a,b], [c], [d,e])$ implying
+\begin{equation}
+    \begin{split}
+	L_{31}&= \left[ \left<a \right>, \left<b \right> \right] \\
+	L_{32}&=\left[ \left<c \right> \right] \\
+	L_{33}&=\left[ \left<d \right>,\left<e \right> \right] .
+    \end{split}
+\end{equation}
+
+And we can apply a exclusive choice cut in both $L_{31}$ and $L_{33}$. So our resulting
+tree is \[
+    Q_3=\to (\wedge(a,b),c,\wedge(d,e)).
+\] 
+
+\exercise{9}
+\[
+L_9=\left[ \left<a,d,f,h \right>,\left<a,c,e,g,c,e,h \right>,\left<b,f,g,d,f,h \right> \right] 
+\]
+First we notice the impossibility of an exclusive-choice cut, for it is a connected graph. We
+then notice that $A_{L_9}^{start}=[a,b]$ and $A_{L_9}^{end}=[h]$. Given this, we can apply a
+sequence cut $(\to ,[a,b], [c,d,e,f,g],[h])$ resulting in the logs
+\begin{equation}
+    \begin{split}
+	L_{91}&=\left[ \left<a \right>, \left<b \right> \right] \\
+	L_{92}&=\left[ \left<d,f \right>, \left<c,e,g,c,e \right>,\left<f,g,d,f \right> \right]
+	\\
+	L_{93}&=\left[ \left<h \right> \right] .
+    \end{split}
+\end{equation}
+
+\end{document}
