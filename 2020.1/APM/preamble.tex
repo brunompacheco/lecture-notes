@@ -25,20 +25,20 @@
     \fbox{\includegraphics[page=#1,width=\linewidth]{\slidesfile}}
 \end{wrapfigure}
 }
-\newcounter{currslidenum}
+\newcount\currslidenum
 \newcommand{\newslide}[2][]{
     \ifthenelse{\equal{\isfirstslide}{1}}{}{\clearpage}
     \def\isfirstslide{0}
-    \setcounter{currslidenum}{#2}
+    \currslidenum=#2
     \section*{\ifthenelse{\equal{#1}{}}{Slide #2}{#1}}
     \hrule
     \insertslide{#2}
 }
 \newcommand{\nextslide}[1][]{
-    \stepcounter{currslidenum}
+    \advance \currslidenum by 1
     \ifthenelse{\equal{#1}{}}{%
-    \newslide{\thecurrslidenum}}{%
-    \newslide[#1]{\thecurrslidenum}}
+    \newslide{\the\currslidenum}}{%
+    \newslide[#1]{\the\currslidenum}}
 }
 \newcommand{\insertminislides}[2][0]{
     \begin{wrapfigure}{l}{0.6\linewidth}
@@ -62,8 +62,6 @@
 
 		\loop
 		\fbox{\includegraphics[page=\the\minislides,width=\subfigwidth]{\slidesfile}}
-		%\stepcounter{minislidescounter}
-		%\ifnum \minislidescounter<\looplimit
 		\advance \minislides by 1
 		\ifnum \minislides<\looplimit
 		\repeat
@@ -118,15 +116,15 @@
 \newkeycommand*\nextslides[title,slide,until,highlight]{
     \newcount\startslide
     \ifthenelse{\equal{\commandkey{slide}}{}}{
-	\stepcounter{currslidenum}
-	\startslide=\thecurrslidenum
+	\advance \currslidenum by 1
+	\startslide=\the\currslidenum
     }{
 	\startslide=\commandkey{slide}
-	\ifthenelse{\equal{\commandkey{until}}{}}{
-	    \setcounter{currslidenum}{\the\startslide}
-	}{
-	    \setcounter{currslidenum}{\commandkey{until}}
-	}
+    }
+    \ifthenelse{\equal{\commandkey{until}}{}}{
+	\currslidenum=\the\startslide
+    }{
+	\currslidenum=\commandkey{until}
     }
 
     \ifthenelse{\equal{\isfirstslide}{1}}{}{\clearpage}
@@ -322,7 +320,7 @@
 	\clearpage
 	\renewcommand\slidesfile{#1}
 	\def\isfirstslide{1}
-	\setcounter{currslidenum}{0}
+	\currslidenum=0
     }
     \ifthenelse{\isempty{#4}}{%
         \def\@lecture{Lecture #2}%
