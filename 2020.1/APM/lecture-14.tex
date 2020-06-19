@@ -1,0 +1,100 @@
+\lecture[presentations/lecture_14_uncertainty.pdf]{14}{19.06.2020}{Uncertainty}
+
+\nextslides[slide=4] 
+
+\nextslides
+
+\nextslides
+
+\nextslides
+
+\nextslides
+
+\nextslides
+
+Indeterminate event is recorded as normal, but we are not sure whether it happened or didn't happen.
+
+\nextslides[until=11]
+
+$N(t,2)$ is a normal distribution centered at timestamp $t$ with variance 2.
+
+\nextslides
+
+Highlight to Bayesian approach, which distinguishes this from the frequentist approach!
+
+\nextslides
+
+Remember that the weight we give to the uncertain is a degree of belief!
+
+\nextslides[slide=15] 
+
+\nextslides[until=18, highlight=16] 
+
+Recall alignments: alignments are a method to measure the conformance of a given trace with a given model.
+
+\nextslides
+
+Note that $\left< A,B,C,D,E \right>$ is valid because of the uncertainty of the timestamp!
+
+\nextslides
+
+The "optimized" procedures are for bounds, the real value is through conformance checking/alignment calculation.
+
+\nextslides
+
+\nextslides
+
+\nextslides
+
+\nextslides[slide=27] 
+
+\nextslides
+
+\nextslides
+
+\nextslides
+
+\nextslides[until=34, highlight=33] 
+
+These are simulated settings to validate the hypothesis, previously formulated as questions.
+
+Note: p is a probability reference.
+
+\nextslides[until=36, highlight=35] 
+
+\nextslides[slide=38]
+
+This will be a deeper explanation of the graph synthesis from the previous slides.
+
+\nextslides
+
+\nextslides
+
+\nextslides[slide=42,until=44,highlight=44]
+
+\nextslides
+
+That is, the very first slides that we add to the graph.
+
+\nextslides[until=49, highlight=49]
+
+We create two entries for each timestamp boundary, marking with subscript L and R.
+
+\nextslides
+
+\nextslides[until=70,highlight=51]
+
+\nextslides[until=75] 
+
+Formal arguments for the correctness of the algorithm.
+
+From my understanding, the search stops as soon as it finds a certain successor (either the end of an uncertain or a certain) because it wouldn't be possible to connect to anything after that, as it is certain that a following event already happened.
+
+\nextslides[until=80] 
+
+Upper and lower complexity bounds. Both quadratic, aka $\Theta(n^{2})$.
+
+
+\nextslides[until=82] 
+
+\nextslides[slide=84] 
