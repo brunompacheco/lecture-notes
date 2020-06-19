@@ -317,14 +317,20 @@
 }
 
 \def\@lecture{}%
-\newcommand{\lecture}[3]{
-    \ifthenelse{\isempty{#3}}{%
-        \def\@lecture{Lecture #1}%
+\newcommand{\lecture}[4][]{
+    \ifthenelse{\isempty{#1}}{}{
+	\clearpage
+	\renewcommand\slidesfile{#1}
+	\def\isfirstslide{1}
+	\setcounter{currslidenum}{0}
+    }
+    \ifthenelse{\isempty{#4}}{%
+        \def\@lecture{Lecture #2}%
     }{%
-        \def\@lecture{Lecture #1: #3}%
+        \def\@lecture{Lecture #2: #4}%
     }%
     \subsection*{\@lecture}
-    \marginpar{\small\textsf{\mbox{#2}}}
+    \marginpar{\small\textsf{\mbox{#3}}}
 }
 
 
