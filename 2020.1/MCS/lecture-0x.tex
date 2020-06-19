@@ -1,0 +1,73 @@
+\lecture{X}{19.06.2020}{Optimal Control}
+
+\section*{Review}
+
+Review of what's been seen so far.
+
+Our system is
+\[
+    \dot{x} = Ax + Bu
+\] \[
+y = Cx + Du
+\] 
+
+The critical values (equivalent to roots of the transfer function) are the eigenvalues of the characteristic equation, that is \[
+    det(\lambda I-A) = 0
+\] .
+
+Stability means that \[
+    Re(\lambda_i)<0 \forall i
+\] .
+
+Control design.
+
+Pole placement approach: if we have order $n$, define $n$ eigenvalues for the closed loop $P_1, \ldots, P_n$. Steps:
+\begin{enumerate}
+    \item Controlability check \[
+    W_c = \left[ B | AB | \ldots | A^{n-1}B \right] 
+\] $rank(W_c) = n \implies $ controlability
+    \item Desired polynomial \[
+	    P_d = \prod_{j=1}^{n} (\lambda-P_j) 
+    \] . If the system is controllable we can achieve this polynomial as the characteristic function, that is, we define $B k$ such that \[
+    P_{closed loop} = det(\lambda I - A + B k)
+    \] \[
+    = P_d
+    \] .
+\end{enumerate}
+
+If we can't measure our state variables, we can design an \textbf{observer}. For that we need to check the observability of the system, that is, given \[
+    W_o = \begin{bmatrix} C \\ CA \\ \ldots \\ CA^{n-1}\end{bmatrix} 
+\] we need \[
+rank(W_o) = n
+\] . If that is verified, we determine the poles we want for the observer as \[
+P_o = \prod_{i=1}^{n} (\lambda - P_i) 
+\] and so we define L such that \[
+P_{ob} = det(\lambda I - A + LC)
+\] \[
+P_{ob} = P_o
+\] .
+
+This way, our observer is defined as \[
+    \hat{x} = A \hat{x} + Bu + L(y - \hat{y})
+\] where \[
+\hat{y} = C \hat{x} + Du
+\] with $D=0$ for simplicity. In this scenario, our state feedback gain $k$ is applied to $\hat{x}$.
+
+
+\section*{Optimal Control (LQR)}
+
+Optimal control is the task of designing a controlling by looking beyond performance, so optimizing also the \emph{costs} associated.
+
+The idea is that we want to define the control input  $\bm{u}(t)$ in an interval $t_0 \le t\le t_f$ such that the state of the system goes from an initial value to a desired final value minimizing a cost function. So we formulate this as an optimization problem with the initial and final states as the restrictions (more restrictions may exist). Note that the values that $\bm{x}(t)$ assumes during the time interval define a \emph{trajectory}.
+
+Regarding the solutions to this problem:
+
+\begin{enumerate}
+    \item Certain combinations of cost functions and dynamic system models have analytic solutions;
+    \item In a wide class of problems, we can find control laws;
+    \item The speed of modern computers can perform the calculations in real time, which allows us to recompute the trajectories.
+\end{enumerate}
+
+\subsection*{The Optimal Control Problem}
+
+
