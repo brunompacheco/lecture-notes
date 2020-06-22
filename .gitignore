@@ -282,3 +282,5 @@ tags
 # Vim Ctrl+Space extension
 .cs_files
 .cs_workspaces
+
+!**/presentations/*
