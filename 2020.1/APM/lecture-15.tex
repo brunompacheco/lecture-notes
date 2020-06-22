@@ -1,0 +1,70 @@
+\lecture[presentations/lecture_15_celonis.pdf]{15}{22.06.2020}{Celonis}
+
+\nextslides[slide=7]
+
+Data collection is a huge task, the integration with several different systems is difficult.
+
+\nextslides
+
+Overview of the approach they take with a given client.
+
+\nextslides
+
+
+\nextslides[slide=11]
+
+Looks like an ETL suited for industrial (by the "Connect" first step) process mining (by the building of a data model at the end.
+
+\nextslides
+
+
+\nextslides
+
+.
+
+\begin{enumerate}
+    \item Start with the event collection through a connection to a ERP system, for example, or through files (.xl or .csv) or google sheets.
+    \item The preprocessing of the data is done through data jobs. These are executed using (and limited by) SQL.
+    \item Define CAT columns (Case id, Activity and Timestamp). Set the relation between the tables.
+\end{enumerate}
+
+\nextslides[until=15] 
+
+It looks like it already generates the DFG.
+
+The approach to showing the model is quite interesting. They provide several variants of it segmented by the amount of traces they cover. These actually seem to be the variants of traces, not so sure.
+
+This step covers discovery (model generation) and conformance checking.
+
+\nextslides[until=17] 
+
+In this step, you set goals and then analyse the model, so before we were doing diagnosis and now we are doing prognosis (roughly).
+
+The Action Engine provides alarms and even prognosis based on certain triggers. It also suggests automations like value updates in the ERP system.
+
+\nextslides[until=19] 
+
+This is done through the Transformation Center. You define KPIs. One can also assign tasks. The basic goal is to \emph{ensure the key metrics are kept within a given range}.
+
+\nextslides[until=23] 
+
+PQL is based on SQL. Focused on working with Event Logs and suitable for business-driven users.
+
+\nextslides
+
+So they define implicitly some things and do others visually.
+
+\nextslides
+
+Didn't understand this well, but it seems like the different approaches for events relation.
+
+\nextslides[slide=27] 
+
+They implement also complex filters based on process, so things like "\emph{PROCESS EQUALS START 'Activity A' TO 'Activity B' TO ANY}" is a valid filter on the subtrace as defined.
+
+The KPI creation and dashboard design resembles Power BI.
+
+\nextslides[slide=34] 
+
+Interesting add of another dimension, considering multiple processes that are interlinked.
+
