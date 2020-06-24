@@ -70,4 +70,22 @@ Regarding the solutions to this problem:
 
 \subsection*{The Optimal Control Problem}
 
+The general optimization problem can be seen as the minimization of the cost function \[
+J=\phi(\bm{x}(t_f),t_f) + \int_{t_o}^{t_f} \L(\bm{x}(t),\bm{u}(t),t)dt 
+\] where $\phi$ is the \emph{final state penalty} and the integral of $\L$ is the cost associated with the states  trajectory.
+
+We know that the states are dictated by the dynamics of the (linear) system. So the following must be satisfied \[
+    \dot{\bm{x}} = A\bm{x} + B\bm{u}
+\], that is, it is a constraint to the optimization.
+
+Therefore, our optimization problem can be stated as \[
+    \min_{\bm{u}, t_f} J(\bm{x},\bm{u},t_f,t_0)
+\] \[
+\textrm{s.t. } \dot{\bm{x}} = A\bm{x} + B\bm{u}
+\] \[
+\bm{x}(t_0) = \bm{x}_0
+\] \[
+\bm{x}(t_f) = \bm{x}_D
+\]. Of course this is subject to the problem and more constraints can be added or the current can be loosened.
+
 
