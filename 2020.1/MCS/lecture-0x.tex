@@ -88,4 +88,18 @@ Therefore, our optimization problem can be stated as \[
 \bm{x}(t_f) = \bm{x}_D
 \]. Of course this is subject to the problem and more constraints can be added or the current can be loosened.
 
+\subsection*{Optimization}
 
+\begin{description}
+    \item[Open-loop Parametric Optimization] when $\bm{u}(t)$ is assumed to be a known function defined by parameters $\bm{k}$, therefore we can write $\bm{u}(\bm{k},t)$.
+\end{description}
+
+In this case, the optimization problem can be seen as an optimization over $\bm{k}$. Therefore, we need to find \emph{local minima} of $J$, that is, we must find $\bm{k}$ such that \[
+    \frac{\partial J}{\partial \bm{k}}=\bm{0}
+\] and \[
+\frac{\partial^{2}J}{\partial \bm{k}^{2}}>\bm{0}
+\]. Note that this equations can be seen as a system of equations over the unknown variables $\bm{k}$, that is, in matrix form.
+
+\begin{description}
+    \item[Closed-loop Parametric Optimization] when  $\bm{u}(t)$ is a function over the dynamic state, that is, $\bm{u}(t) = \bm{\psi}[\bm{k},\bm{x}(t),t]$ where $\bm{\psi}[.]$ is the \emph{control law}.
+\end{description}
