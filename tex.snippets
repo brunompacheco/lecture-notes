@@ -95,6 +95,15 @@ snippet sssec "subsubsection" b
 $2
 endsnippet
 
+snippet ns "next slide" b
+\\nextslides
+endsnippet
+
+snippet nss "next slide []" b
+\\nextslides[slide=$1,until=$2,highlight=$3]
+$4
+endsnippet
+
 snippet emph "Emphasize"
 \\emph{$1}`!p
 if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
