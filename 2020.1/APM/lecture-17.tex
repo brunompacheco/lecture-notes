@@ -1,0 +1,181 @@
+\lecture[presentations/lecture_17_model_quality.pdf]{17}{21.07.2020}{Process Model Quality}
+
+\nextslides[slide=4]
+
+Real world information is recorded in event logs through software systems. In all three activities performed upon event logs, process models are fundamental.
+
+\nextslides
+
+Petri Nets are used because they are well structured (token game). And we can analyse their behavior.
+
+\nextslides
+
+But in real world a different type of model is used. They use something like DFG. Vertices are activities and directed edges are a sequence indicator. It differs from DFG because they can show some annotations and other relations. Petri Nets are harder to explain.
+
+\nextslides[slide=9]
+
+It does not need a clear semantical meaning.
+
+\nextslides[slide=15]
+
+We model so we can talk about an object with others without the model at hand, allowing to be more expressive about it. But this differs a bit on the purpose we have in academia.
+
+\nextslides
+
+The models we have in academia are much more powerful and more precise.
+
+If we are to create a DFG out of this model, it would be much less descriptive.
+
+\nextslides
+
+The emphasis of the commercial model is on the communication side. They have a trade-off between semantic and descriptiveness against audience size.
+
+\nextslides
+
+Our models are \emph{Executable Models}. While the ones used by commercial tools are \emph{Conceptual Models}.
+
+\nextslides[until=22,highlight=22]
+
+Abstraction is a key concept, we can define it as reduction to the fundamental characteristics.
+
+\nextslides[until=24]
+
+Commercial models are less generalizable.
+
+\nextslides
+
+Note that conformance checking and process discovery are represented twice, the dashed arrows are what we are trying to achieve.
+
+\nextslides[slide=,until=,highlight=]
+
+TN are sequences of behaviors that are not part of the process. Red is the real behavior and green are the ones that are modeled. We are talking about traces.
+
+\nextslides[slide=,until=28,highlight=28]
+
+We cannot measure these metrics because the event log is a small subset of the red circle (real behavior). So we can only use \emph{replay fitness}, which is another representation of recall.
+
+\nextslides
+
+Several problems arise.
+
+No negative examples because the log only contain a subset of the real behavior, which the model usually learns.
+
+\nextslides
+
+We want these 4 to balance. Notice that precision and generalization are not opposite, but usually balance.
+
+Fitness and Precision are log driven. Generalization is process driven.
+
+\nextslides[slide=,until=35,highlight=35]
+
+\texttt{Study on these for the exam, one must be able to reason about models}.
+
+Note that these are hard to express mathematically as this last model, f.e., has infinite traces and, thus, represents infinitely more behavior than what is on the log.
+
+\nextslides[slide=38,until=,highlight=]
+
+\nextslides[slide=,until=43,highlight=43]
+
+Footprint is the table with the relations allowed between the activities. So the \emph{footprint comparison} is the difference between the log table and the model table. Like DFG.
+
+\nextslides[until=47,highlight=47]
+
+It is not a replay-fitness metric.
+
+It is implicitly measuring the precision as it gives equal weight to model and log, that is, it takes on account when the model is more powerful than the log.
+
+\nextslides[slide=,until=,highlight=]
+
+The analysed trace is \emph{a,b,e,g}.
+
+Replay the traces in the model and add tokens when one gets stuck.
+
+Note that we divide added tokens by consumed tokens and remaining by produced, as these are their upper limit. That is, missing is never bigger than consumed, the same for the other two.
+
+\nextslides
+
+\nextslides[slide=60,until=63,highlight=63]
+
+\nextslides[slide=,until=65,highlight=]
+
+Alignments solve this problem.
+
+\nextslides[slide=72,until=,highlight=]
+
+Nope, the shortest path through the model would be a silent move with cost 0. So shortening we are reducing the replay-fitness value.
+
+\nextslides[slide=,until=74,highlight=74]
+
+Alignments are often used for diagnosis, as they show what was supposed to happen but didn't.
+
+If one observes only the \emph{<parse file>}, the alignment will compensate with the \emph{file not found}, which does not make sense for the application.
+
+\nextslides[slide=78,until=,highlight=]
+
+\nextslides
+
+Escaping edges creates a state machine out of the model and evaluates the traces on this state machine and then checks for each state what is described by the trace and what is described by the model (?).
+
+\nextslides[slide=,until=81,highlight=81]
+
+\nextslides[slide=,until=89,highlight=89]
+
+The state machine is the reachability graph of the model. And the prefix tree from the log.
+
+Then overlay these structures. It adds the outgoing edges from the reachability graphs to the prefix tree and counts these \emph{escaping edges}.
+
+\nextslides
+
+It ponders the mismatches (actually it counts the rate of matches over occurrences) by the amount of times the states were visited.
+
+Note that structures that are not visited by the log aren't considered. So if there were absurd structures in s4, it would make no difference.
+
+\nextslides
+
+Another example.
+
+\nextslides[slide=95,until=98,highlight=98]
+
+If we look at the languages, a) and b) can describe the same language (any order is possible), because of the invisible transitions. This is counter-intuitive as it is expected that c) is the most precise model, as it fixes the first activity.
+
+\nextslides[slide=,until=107,highlight=107]
+
+Axioms for an ideal precision metric.
+
+Axiom 3: the flower model should be a lower bound.
+
+\nextslides[slide=116,until=,highlight=]
+
+Keep it simple.
+
+\nextslides[slide=,until=118,highlight=118]
+
+Problem: simplicity is not so well defined in PM.
+
+The architecture has an impact on perceived simplicity.
+
+\nextslides
+
+It is hard even to have an upper bound for it (what does "simplicity of 1" means?).
+
+\nextslides
+
+\nextslides[slide=,until=122,highlight=122]
+
+It is hard to ponder which one is better.
+
+\nextslides
+
+\nextslides[slide=125,until=126,highlight=126]
+
+\nextslides[slide=,until=128,highlight=128]
+
+\nextslides
+
+Similar approach to ML. But it is only fair to the event log, not to the process.
+
+\nextslides[slide=131,until=132,highlight=132]
+
+Because of noise, the log goes even a bit beyond process behavior. And there is also the difference from what is allowed by the process and what is desired or optimal.
+
+The question is: is the optimal model covering the desired behavior or process behavior?
