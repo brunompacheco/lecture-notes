@@ -72,21 +72,31 @@ Regarding the solutions to this problem:
 
 The general optimization problem can be seen as the minimization of the cost function \[
 J=\phi(\bm{x}(t_f),t_f) + \int_{t_o}^{t_f} \L(\bm{x}(t),\bm{u}(t),t)dt 
-\] where $\phi$ is the \emph{final state penalty} and the integral of $\L$ is the cost associated with the states  trajectory.
+\] where $\phi$ is the \emph{final state penalty} and the integral of $\L$ is the cost associated with the states  trajectory. Note that $\phi$ depends on both the states on the final time and the final time $t_f$ itself, so we can formulate both the minimization of the final state position ($\bm{x}(t_f)$) and the minimization of the final time.
+
+Also, note how the equation is limited to $t_f$, that is, we do not look after this moment, which means that the classical idea of stability (BIBO) does not make sense, as we are not looking to what happens after a certain point and, therefore, both the input and output are always bounded.
+
+Back to the problem formulation, we also add a constraint \[
+    \bm{c}(\bm{x}) = 0
+\] which implies that the solution has to remain on the surface defined by $\bm{c}$.
 
 We know that the states are dictated by the dynamics of the (linear) system. So the following must be satisfied \[
     \dot{\bm{x}} = A\bm{x} + B\bm{u}
-\], that is, it is a constraint to the optimization.
+\], that is, it is a constraint to the optimization if we formulate it as \[
+    \dot{\bm{x}} - A\bm{x} - B\bm{u} = 0
+\].
 
 Therefore, our optimization problem can be stated as \[
     \min_{\bm{u}, t_f} J(\bm{x},\bm{u},t_f,t_0)
 \] \[
-\textrm{s.t. } \dot{\bm{x}} = A\bm{x} + B\bm{u}
-\] \[
-\bm{x}(t_0) = \bm{x}_0
-\] \[
-\bm{x}(t_f) = \bm{x}_D
-\]. Of course this is subject to the problem and more constraints can be added or the current can be loosened.
+\textrm{s.t. } \bm{c}(\bm{x}) = 0
+\]. Of course this is subject to the problem and more constraints (other than that of the system model) can be added or the current can be loosened. \emph{E.g.,} the final state can be seen as a constraint.
+
+So, then, to solve our optimization problem, we must find a solution to the derivatives of $J$ in the directions along the surface. That is, the gradients \[
+    \frac{\partial J(\bm{x}^*)}{\partial x} + p \frac{\partial \bm{c}(\bm{x}^*)}{\partial x} = 0
+\] for a solution $\bm{x}^*$. Which means we can now formulate a new unconstrained problem \[
+    J_a(\bm{x}, p) = J(\bm{x}) + pc(\bm{x})
+\] in which $p$ is the coefficient that defines the linear combination.
 
 \subsection*{Optimization}
 
