@@ -113,3 +113,128 @@ In this case, the optimization problem can be seen as an optimization over $\bm{
 \begin{description}
     \item[Closed-loop Parametric Optimization] when  $\bm{u}(t)$ is a function over the dynamic state, that is, $\bm{u}(t) = \bm{\psi}[\bm{k},\bm{x}(t),t]$ where $\bm{\psi}[.]$ is the \emph{control law}.
 \end{description}
+
+\subsection*{Linear Quadratic Regulator (LQR)}
+
+Beware: it applies \textbf{only to linear systems}.
+
+Given a system defined as \[
+    \dot{x}(t) = Ax(t) + B_u u(t)
+\] \[
+y(t) = C_y x(t)
+\] in which $C_y$ can be the identity matrix, then we define our cost function as \[
+J(x(t), u(t)) = \frac{1}{2}y^T(t_f)H_yy(t_f) + \frac{1}{2}\int_{0}^{t_f}\left[ y^{T}(t)Q_yy(t) + u^T(t)Ru(t) \right] dt
+\] \[
+x(0) = x_0
+\]  in which $H_y$, $Q_y$, and $R$ are positive definite.
+
+Note how the cost functions are made of quadratic functions. Also, it is important to note that in the integral, one is related to the states (since we defined or system without the direct influence of the input in the output), and the input.
+
+Note how, in this formulation of the system, we are understanding our output as the same as our state variables, then $C_y$ can determine which are the states we are trying to control.
+
+Remember that, for a quadratic function \[
+    F(y) = y^TAy
+\] in which $y$ is a vector and $A$ is a matrix, is the quadratic combination over the dimensions of $y$, so an example for the 2 dimensional case \[
+\begin{bmatrix} y_{1} & y_2 \end{bmatrix} \begin{bmatrix} a_{11} & a_{12} \\ a_{21} & a_{22} \end{bmatrix} \begin{bmatrix} y_1\\ y_2 \end{bmatrix} = a_{11}y_1^{2}+(a_{12} + a_{21})y_1y_2 + a_{22}y_2^{2}
+\] .
+
+Normally, in the definition of our LQR terms, we set the non-diagonal terms of $Q_y$ are $0$, having only the main diagonal controlling the importance of each state.
+
+Here, our problem is to bring our output to zero, which is a common approach to the regulator problem (since bringing it to any other value is a simple change).
+
+\subsubsection*{Hamiltonioan Equation}
+
+Integrating the constraints with the cost function, we have \[
+    J_a(x(t),u(t),p(t)) = J(x(t),u(t)) + \int_0^{t_f}p^{T}(t)\left[ A(x(t) + B_uu(t) - \dot{x}(t) \right] dt
+\] so substituting $y=C_yx$ and applying the transformation $H=C_y^{T}H_yC_y$ and $Q=C_y^{T}Q_yC_y$, we have \[
+    J_a(x(t),u(t),p(t)) = \frac{1}{2}x^T(t_f)Hx(t_f) +
+\] \[
+\frac{1}{2}\int_{0}^{t_f}\left[ x^{T}(t)Qx(t) + u^T(t)Ru(t) + p^{T}(t)\left[ A(x(t) + B_uu(t) - \dot{x}(t) \right] \right] dt
+\]. This way we enlarge our problem but transform it into an unconstrained problem.
+
+To solve it we calculate the variation (?) of the function and achieve the following restrictions: 
+\begin{equation*}
+\begin{split}
+    & p^{T}(t_f) = x^T(t_f)H \\
+    & \dot{p}(t) = -x^T(t)Q - p^T(t)A \\
+    & 0 = u^T(t)R + p^T(t)B_u \\
+    & \dot{x}(t) = Ax(t) + B_uu(t)
+\end{split}
+\end{equation*}
+From which we can derive \[
+    u(t) = -R^{-1}B_u^Tp(t)
+\] .
+
+Now, removing $u(t)$, we simplify the problem to a set of differential equations
+\begin{equation}
+    \begin{bmatrix} \dot{x}(t) \\ \dot{p}(t) \end{bmatrix} = \begin{bmatrix} A & -B_uR^{-1}B^{T}_u \\ -Q & -A^T \end{bmatrix} \begin{bmatrix} x(t) \\ p(t) \end{bmatrix} 
+\end{equation}
+with initial conditions
+\begin{equation*}
+    \begin{split}
+	& x(0) = x_0 \\
+	& p(t_f) = Hx(t_f)
+    \end{split}
+\end{equation*}
+
+From handling the general solution of this system of differential equations, we can achieve \[
+    p(t) = P(t)x(t)
+\] which implies in \[
+u(t) = -R^{-1}B_u^{T}p(t) = -K(t)x(t)
+\] so a time variant gain matrix. This way we can define our controller as a linear, time-varying state feedback. This way, we can summarize our approach to the problem to the calculation of $P(t)$.
+
+\subsubsection*{Riccati Equation}
+
+From $p(t)=P(t)x(t)$ we can derive the following relation \[
+    \dot{p}(t)=\dot{P}(t)x(t) + P(t)\dot{x}(t)
+\] which we can substitute in equation (1) together with the system equation for $\dot{x}(t)$. Through this, we achieve the \emph{Riccati Equation} \[
+\dot{P}(t) + P(t)A + A^TP(t) + Q - P(t)B_uR^{-1}B_u^{T}P(t) = 0
+\] together with the final condition \[
+P(t_f) = H
+\] . This has no feasible analytical solution, but the numerical solution (through backward integration) is very useful and doesn't need to be computed in real time.
+
+\subsubsection*{Steady-State LQR}
+
+If the controller is needed to remain active for a long period of time. This requires a formulation of the problem as \[
+J(x(t), u(t)) = \frac{1}{2}\int_{0}^{\infty}\left[ x^{T}(t)Qx(t) + u^T(t)Ru(t) \right] dt
+\] with the initial condition \[
+x(0) = x_0
+\] . We remove the first term because we know that the states are going to $0$.
+
+Note that, by the definition, our system is stable, no matter the choice of $Q$ and $R$.
+
+Now, our set of differential equations is given by
+\begin{equation}
+    \begin{bmatrix} \dot{x}(t) \\ \dot{p}(t) \end{bmatrix} = \begin{bmatrix} A & -B_uR^{-1}B^{T}_u \\ -Q & -A^T \end{bmatrix} \begin{bmatrix} x(t) \\ p(t) \end{bmatrix} 
+\end{equation}
+with initial conditions
+\begin{equation*}
+    \begin{split}
+	& x(0) = x_0 \\
+	& p(t_f) = 0
+    \end{split}
+\end{equation*}
+that is, the costate also goes to $0$.
+
+This means that the solution is the steady state solution of the equation. The problem is that the Hamiltonian equations are not stable. They are, in fact, symmetric to the imaginary axis.
+
+To solve this, we diagonalize the system with \[
+    \begin{bmatrix} \dot{z}_1(t) \\ \dot{z}_2(t) \end{bmatrix} = \begin{bmatrix} -\Lambda & 0 \\ 0 & \Lambda \end{bmatrix} \begin{bmatrix} z_1(t) \\ z_2(t) \end{bmatrix} 
+\] in which $\Lambda$ are the right half-plane eigenvalues of the Hamiltonian. So $z_1$ are the stable eigenvalues while $z_2$ are the unstable. So the transformation is defined by \[
+\begin{bmatrix} x(t) \\ p(t) \end{bmatrix} = \Psi \begin{bmatrix} z_1(t) \\ z_2(t) \end{bmatrix} 
+\]. By analysing the solution and the steady-state of the solution, we reach at \[
+K = R^{-1}B_u^{T}\Psi_{21}(\Psi_{11})^{-1}
+\] where \[
+P = \Psi_{21}(\Psi_{11})^{-1}
+\].
+
+So to define the steady-state solution for the LQR controller:
+\begin{enumerate}
+    \item Find eigenvalues and eigenvectors of the Hamiltonian equation
+    \item Select the eigenvectors associated with the $n_x$ eigenvalues in the left half-plane
+    \item Form the two required matrices from the first $n_x$ elements of these $n_x$ eigenvectors and the second $n_x$ elements of these $n_x$ eigenvectors respectively (extract the sub-matrices)
+    \item Compute the steady-state Riccati solution
+    \item Compute the steady-state feedback gain matrix
+\end{enumerate}
+
+Note it can be shown that the closed loop poles of the steady-state LQR are the left half-poles of the Hamiltonian equation.
