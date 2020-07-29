@@ -1,0 +1,63 @@
+\lecture{8}{29.07.2020}{Vector Random Processes}
+
+Uncertainties are inherent to any measurement. Therefore it is interesting to have techniques that mitigate this stochastic effect in a system.
+
+Given a observer as \[
+    \hat{\dot{x}}=A\hat{x}+Bu + K \left( y-C\hat{x} \right) 
+\] the $K$ factor weights the model influence and the influence of the plant. So it also balances their \emph{uncertainties}.
+
+Now, if we can model our uncertainties, we can create an optimization process to achieve the best model. So we want to find a way to quantify the influence the noise in the system.
+
+\begin{description}
+    \item[Vector Random Process] is a mapping between the outcome of a random experiment and a vector-valued function.
+\end{description}
+
+In a given system, for a given initial condition and a predefined input, the path that the states will perform in the state space is under a certain amount of uncertainty. This means that it, if our initial and final conditions are called $x_o$ and $x_1$ for this example, there exist many paths that start in a neighborhood of $x_0$ and reach the neighborhood of $x_1$. We also want to, given a time cut of these paths, know the probability that the state variables are in any of these points.
+
+We actually are going to deal with a simplified description used 2 DoF, which means that at any given point, the probability function can be described by a gaussian function. This means that our uncertainties model will be effective as long as we can approximate our stochastic and random process as a gaussian process. This is, up to a certain degree, secured by the center value theorem.
+
+\subsection*{Fundamentals}
+
+\begin{description}
+    \item[First Moment] of a signal is its mean value.
+    \item[Second Moment] is its variance.
+    \item[Correlation] is defined as the expected value of the product of a pair of random variables.
+    \item[Correlation Matrix] $\Sigma_x(t) = E\left[ x(t)x^{T}(t) \right] = R_x(t,t)$.
+    \item[White Noise] is a signal which is totally random (no memory) with a gaussian probability density function. So the changes can happen in any frequency.
+\end{description}
+
+
+\subsection*{}
+
+If we have a linear system with white noise, a deterministic approach is not possible, so we focus on first and second moment analysis.
+
+So given a system \[
+    \dot{x}(t) = Ax(t) + Bw(t)
+\] \[
+y(t) = Cx(t)
+\] with the following assumptions
+\begin{enumerate}
+    \item The mean of the initial conditions is zero ($m_x(0)=0$)
+    \item The correlation matrix of the initial condition is known ($R_x(0)=E\left[ x(0)x(0)^{T} \right] $)
+    \item Initial conditions are not correlated with the input ($E\left[ x(0)w^{T}(t) \right] = E\left[ x(0) \right] E\left[ w^{T}(t) \right] =0$)
+\end{enumerate}
+
+From this we can determine that the mean of the states through the closed-loop solution to of the system 
+\begin{equation*}
+    \begin{split}
+	x(t) &= e^{At}x(0) + \int_0^{t}e^{A(t-\tau)}Bw(\tau)d\tau \\
+	\implies m_x(t) &= E\left[ x(t) = e^{At}x(0) + \int_0^{t}e^{A(t-\tau)}Bw(\tau)d\tau \right] \\
+			&= e^{At}E\left[ x(0) \right] + \int_0^{t}e^{A(t-\tau)}BE\left[w(\tau)\right]d\tau = 0
+    \end{split}
+\end{equation*}
+as $E\left[ x(0) \right] =0$ and $E\left[ w(t) \right] =0, \forall t$. Which means that a white noise in the input with null mean value, there is no impact in the states mean value.
+
+So to move from a deterministic system to a deterministic one with probabilistic inputs, we need to expand our state variables with the mean and the correlation. But as we saw before, the mean won't be affected. Still, the correlation matrix can be added as \[
+    \dot{\Sigma}_x(t) = A\Sigma_x(t) + \Sigma_x(t)A^{T}+BS_wB^{T}
+\] . So now our system usual equations define the \emph{expected} values. 
+
+If we do not face white noise, we can still use this approximation as long as the bandwidth is much larger than that of the system. Still, we can expand the system model with a filter, as any colored noise can be generated from white noise through a shaping filter \[
+    S_w(\omega) = G(-j\omega)G^{T}(j\omega)
+\]. That is, this can be seen as an additional "block" in the input of the system.
+
+# TODO: next lecture begins in the 09.06.20 lecture at 1:06:00
