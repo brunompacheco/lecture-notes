@@ -19,11 +19,14 @@ We actually are going to deal with a simplified description used 2 DoF, which me
 \subsection*{Fundamentals}
 
 \begin{description}
-    \item[First Moment] of a signal is its mean value.
+    \item[First Moment] of a signal is its mean value ($m_x(t)=E\left[ x(t) \right] $).
     \item[Second Moment] is its variance.
-    \item[Correlation] is defined as the expected value of the product of a pair of random variables.
-    \item[Correlation Matrix] $\Sigma_x(t) = E\left[ x(t)x^{T}(t) \right] = R_x(t,t)$.
-    \item[White Noise] is a signal which is totally random (no memory) with a gaussian probability density function. So the changes can happen in any frequency.
+    \item[Correlation] is defined as the expected value of the product of a pair of random variables ($E[x(t_1)y(t_2)^{T}]=R_{xy}(t_1,t_2)$).
+    \item[Correlation Matrix] The correlation function applied to a variable at a single instant ($\Sigma_x(t) = E\left[ x(t)x^{T}(t) \right] = R_x(t,t)$).
+    \item[Uncorrelation] occurs if $E[x(t_1)y(t_2)^{T}] = 0$.
+    \item[Wide-sense stationarity] means that a signal has constant mean value ($E\left[ x(t) \right] =m_x, \forall t$) and the correlation function depends only on the time difference ($R_x(t_1,t_2)=E\left[ x(t_1)x^{T}(t_1+\tau) \right] =R_x(\tau)$).
+    \item[Spectral density] of a signal  $x(t)$ is described by $S_x(\omega)$.
+    \item[White Noise] is a signal which is totally random (no memory) with a gaussian probability density function. So the changes can happen in any frequency. It is described by $R_w(t_1,t_2)=S_w(t_1)\delta(t_1-t_2)$ and, if it is stationary, it follows that $R_w(\tau)=S_w\delta(\tau)$ where $S_w(\omega)=S_w$.
 \end{description}
 
 
@@ -60,4 +63,3 @@ If we do not face white noise, we can still use this approximation as long as th
     S_w(\omega) = G(-j\omega)G^{T}(j\omega)
 \]. That is, this can be seen as an additional "block" in the input of the system.
 
-# TODO: next lecture begins in the 09.06.20 lecture at 1:06:00
