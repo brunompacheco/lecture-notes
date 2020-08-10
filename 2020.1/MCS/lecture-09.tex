@@ -109,14 +109,53 @@ R = E\left[ vv^{T} \right]
 
 Now, if the measurements are obtained in a sequential manner, the above equation is applied at each time, which implies in growing $H$ and $R$, so we achieve an recursive equation for the estimations, that is, given estimate $\hat{x}_{k-1}$ after $k-1$ measurements, one wants to determine $\hat{x}_k$ to determine $y_k$.
 
-The recursive structure now is \[
+The recursive structure now is
+\begin{equation}\label{x_k_equation}
     \hat{x}_k=\hat{x}_{k-1}+K_k\left( y_k-H_k\hat{x}_k-1 \right) 
-\] where $K_k$ is the estimator gain matrix and is multiplied by the correction term.
+\end{equation}
+where $K_k$ is the estimator gain matrix and is multiplied by the correction term.
 
-One can calculate the optimal gain through \[
+Using the sum of the squares of error variances as the objective function, we can calculate the covariance matrix as
+\begin{equation}\label{P_k_equation}
+    P_k = \left( I-K_kH_k \right) P_{k-1}\left( I-K_kH_k \right)^{T} + K_kR_kK_k^{T}
+\end{equation}
+and the optimal gain matrix through
+\begin{equation}\label{K_k_equation}
     K_k=P_{k-1}H_k^{T}\left( H_kP_{k-1}H_k^{T}+R_k \right) ^{-1}
-\] and run the filter as
+\end{equation}
+and run the filter as
 
 INSERT ALGORITHM
 
-# TODO: stopped at 44 minutes
+\begin{enumerate}
+    \item For $k=0$, initialise a guess for $\hat{x}_0 and P_0$
+    \item For $k=1,2,3,\ldots$
+	\begin{enumerate}
+	    \item Calculate $K_k$ given (\ref{K_k_equation})
+	    \item Update $\hat{x}_{k-1}$ with the new measurement $y_k$ given equation (\ref{x_k_equation})
+	    \item Update $P_k$ using equation (\ref{P_k_equation})
+	\end{enumerate}
+\end{enumerate}
+
+With this, we end up, in a way, cleaning a measurement with noise. Another application is in the situation where the noise has a broad range of frequencies and a low-pass filter would interfere with the frequencies of the controller.
+
+Now, in a deterministic but uncertain model, we model the expected value and covariance, and again we see that the mean is propagated through the system dynamic as with the model without uncertainty. On the other hand, the covariance is propagated following \[
+P_k = F_{k-1}P_{k-1}F_{k-1}^{T} + Q_{k-1}
+\]. With these, we can now understand the application of the Kalman filter as in the figure below.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/kalman_filter_prediction.png}
+    \caption{Kalman Filter prediction diagram.}
+    \label{fig:kalman_filter_prediction}
+\end{figure}
+
+So our estimate of the state expected value as \[
+\hat{x}_k^+ = \hat{x}_k^- + K_k\left( y_k - H\hat{x}_k^- \right) 
+\] and covariance would be \[
+P_k^+ = \left( I - K_kH \right) P_k^- \left( I-K_kH \right)^{T} + K_kRK_k^{T}
+\].
+
+\textbf{Note on steady-state approach}
+
+The usefulness of the steady-state version of both Kalman filter and LQR is defined by the duration of the transient of the system's characteristics that affect the model. So if the transient of the Kalman gain lasts a few seconds and the application is run for hours, than it is probably not worth it to use the time-variant version of it.
