@@ -1,0 +1,35 @@
+\lecture{11}{18.08.2020}{Nonlinear Control: Sliding Mode and Synergetic Control}
+
+We will cover Sliding Mode Control (SMC) and Synergetic Control approaches to nonlinear control. Both are based on the idea of establishing a \emph{linear relation} between the state variables to simplify the solution. This way, the (state of the) system is forced to move to a certain locus/manifold $\psi(x)=0$. That is, through some constraints, we map the original system to a simpler one.
+
+Note we are not talking about linearizing the system through some approximation, but we are adding to the system so the result is linear.
+
+In traditional feedback control, the structure of the feedback is fixed, that is, our input $u(t)$ which must be defined based on the state of the system $x(t)$ is set to be $u(t)=f\left( x(t) \right) =k^{T}x(t)$. In the \textbf{Variable Structure System (VSS)}, the system is allowed to change its structure at any instant. So the design problem becomes the selection of parameters of each structure and the definition of the switching logic.
+
+So in a double-integrator system (second-order) in a closed-loop, given by \[
+    \ddot{x}(t)=-\Psi x(t)
+\] in which $\Psi$ can alternate between $\Psi=a_1^{2},\Psi=a_2^{2}$, where $0<a_2<1<a_1$, we know that the solution in both cases is not asymptotically stable. Even more, both are of the form of a complex conjugate with null real part (see Note 1 below).
+
+\begin{note}
+    A solution for \[
+    \ddot{x}(t) = -K x(t)
+    \] , or any similar system, can be easily found by assuming that the solution may be in the form of $e^{\lambda t}$. Then we have \[
+    \lambda^{2}e^{\lambda t} = -K e^{\lambda t}
+    \] which implies \[
+    \lambda^{2}+K = 0 \implies \lambda = \pm i\sqrt{K}
+    \].
+\end{note}
+
+If we understand the state variables of the system as $x_1=x$ and $x_2=\dot{x}$, then our system becomes \[
+\begin{cases}
+    \dot{x}_1(t)=x_2 \\
+    \dot{x}_2=-\Psi x_1
+\end{cases}
+\] and if we define a switching of \[
+\Psi = \begin{cases}
+    a_1^{2}, & \dot{x}x>0 \\
+    a_2^{2}, & \dot{x}x < 0
+\end{cases}
+\] 
+
+% STOPPED @ 14:21
