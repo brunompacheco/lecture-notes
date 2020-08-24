@@ -327,7 +327,7 @@
     }{%
         \def\@lecture{Lecture #2: #4}%
     }%
-    \subsection*{\@lecture}
+    \subsection{\@lecture}
     \marginpar{\small\textsf{\mbox{#3}}}
 }
 
@@ -409,3 +409,9 @@
 
 % My name
 \author{Bruno M. Pacheco}
+
+% Fixes sections starting at 0
+\setcounter{chapter}{1}% Not using chapters, but they're used in the counters
+
+% Hides the numbers of sections but keeps them at the toc
+\setcounter{secnumdepth}{0}
