@@ -1,0 +1,469 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+
+\title{Artificial Intelligence and Data Analytics for Engineers - Exam Summary}
+
+\begin{document}
+
+\maketitle
+
+\section*{Python}
+
+Why Python?
+
+\begin{itemize}
+    \item Several scientific computing libraries;
+    \item Big community for data analytics and AI.
+\end{itemize}
+
+\section*{Data Preparation}
+
+\begin{definition}
+    \emph{Data preparation} is the process of modifying raw data into a state suitable for analysis (\emph{e.g.}, by removing outliers).
+\end{definition}
+
+Data preparation is necessary as real world data often comes with several challenges to be overcome, like noise, missing values and outliers, which makes the analysis of the data inefficient, misleading and often time even impossible.
+
+\subsection*{Data Exploration}
+
+\begin{definition}
+    \emph{Data exploration} is the process of creating an initial understanding of the properties (\emph{e.g.}, distribution, characteristics) of the data at hand.
+\end{definition}
+
+\subsection*{Data}
+
+\begin{description}
+    \item[Noisy data] is data that contains attributes or values which can potentially harm the understanding or the analysis of it. That is, noisy data has to be removed before the analysis task;
+    \item[Missing data] can be divided in:
+	\begin{description}
+	    \item[Missing Completely at Random (MCAR)]: not related to the missing value or the other values;
+	    \item[Missing at Random (MAR)]: not related to the missing data, it is related to some of the observed data;
+	    \item[Missing not at Random (MNAR)]: missing because of the hypothetical value or dependent on some other variable.
+	\end{description}
+    \item[Outlier] is a value that lies an abnormal distance from other values in a random sample from a population;
+    \item[Inconsistent data] is data whose attributes do not match their values or if the data values change "midway"
+\end{description}
+
+Missing data can be dealt with through \textbf{deletion} or \textbf{imputation}.
+
+\subsection*{Data Transformation}
+
+\begin{description}
+    \item[Normalization] is the task of changing the values of numeric columns to a common scale, without distorting differences in the ranges of values;
+    \item[Aggregation] is the process of aggregating a minimum of two attributes into one (\emph{e.g.}, two data columns into one);
+    \item[Discretization] is the process of converting continuous data attribute values into a finite set of intervals and associating with each interval some specific data value.
+\end{description}
+
+For certain algorithms, normalization ensures that the features have all the same weight.
+
+\section*{Data Integration}
+
+Often times, the systems in an industry are not integrated, which generates several disperse data storages. The task, then, is to \textbf{access} and \textbf{integrate} data from various sources.
+
+\begin{definition}
+    \emph{Data integration} is the task of combining different (possible heterogeneous) data from various sources to enable users a unified access to them (\emph{e.g.}, for data analysis).
+\end{definition}
+
+Examples of approaches for data integration are data warehouses and data lakes.
+
+\begin{definition}
+    A \emph{data pipeline} is any software system that takes data from one or more inputs and transforms it in some way before writing it to one or more outputs.
+\end{definition}
+
+Pipelines \emph{realize} the integration and are highly dependent on the IT environment.
+
+\subsection*{Databases}
+
+The use of databases provides easy searching and crossing of information ("Which customers have capital over X?").
+
+Databases are fail-safe through \textbf{ACID}:
+
+\begin{description}
+    \item[Atomicity] Transactions are either done completely or not at all;
+    \item[Consistency] Constraints imposed by the DB schema are always met;
+    \item[Isolation] Queries do not interfere with each other;
+    \item[Durability] Data is preserved in case of DB crashes, power loss, etc.
+\end{description}
+
+\begin{table}[H]
+    \centering
+    \caption{Relation vs Document-oriented DBs}
+    \label{tab:nosql-tables-comparison}
+    \begin{tabular}{l l}
+    \toprule
+    Relational DB & Document-oriented DB \\
+    \midrule
+    SQL & NoSQL \\
+    Several tables related through columns & Several documents, similar to JSON \\
+    Predefined schema & Each document can be different \\
+    Not flexible/scalable & High flexibility and scalability \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\subsubsection*{SQL}
+
+Examples:
+
+\begin{itemize}
+    \item \texttt{SELECT Column1, Column2 FROM TableName WHERE Column = 'Condition'}
+    \item \texttt{INSERT INTO TableName (Col1, Col2) VALUES (ValueCol1, ValueCol2)}
+    \item \texttt{UPDATE TableName SET Col1 = ValueCol1 WHERE Condition}
+\end{itemize}
+
+\subsection*{Approaches to Data Integration}
+
+\begin{definition}
+    \emph{ETL} is a process in which data is first \emph{E}xtracted from various sources, then \emph{T}ransformed, \emph{e.g.}, cleaned, and finally \emph{L}oaded into the target system (\emph{e.g.}, a data warehouse).
+\end{definition}
+
+\begin{definition}
+    A \emph{data warehouse} (DWH) is a central database system which integrates data from all kinds of company-wide operational data sources for subsequent analysis purposes.
+\end{definition}
+
+\begin{definition}
+    A \emph{data lake} is a central repository for storing data in its natural format, \emph{i.e.}, it includes raw copies of the data from the data sources.
+\end{definition}
+
+\begin{table}[H]
+    \centering
+    \caption{Data Warehouse vs Data Lake}
+    \label{tab:warehouse-lake-comparison}
+    \begin{tabular}{l l}
+    \toprule
+    Data Warehouse & Data Lake \\
+    \midrule
+    Integrates data from other sources through views  & Keeps copies of the data sources  \\
+    \emph{Relational} approach & \emph{Non-relational} approach \\
+    Schema-on-write (faster, more reliable) & Schema-on-read (more flexible and scalable) \\
+    Business-focused & Data analysis-focused \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\section*{Data Representation}
+
+\begin{definition}
+    A \emph{feature} is an individual measurable property or characteristic of a phenomenon being observed.
+
+    A \emph{feature vector} is used to represent the features of an object in a mathematical form. Multiple feature vectors from the feature space.
+\end{definition}
+
+Feature extraction is the process of deriving features from real world objects. Feature engineering is creating features having a \emph{task} in mind, using \emph{domain knowledge}.
+
+\begin{note}
+    Features should be \textbf{informative} and \textbf{not redundant}.
+\end{note}
+
+\begin{definition}
+    The \emph{curse of dimensionality} refers to the exponential growth of the feature space with the growth of feature/dimensions, while the number of samples decreases.
+\end{definition}
+
+\begin{definition}
+    \emph{Feature selection} is the process of picking only a subset of the features and not the whole set. Some of the features might not be relevant to the task at hand and some might be redundant.
+
+    \emph{Dimensionality reduction} is the process of reducing a high dimensional space of features through a projections in a low dimensional space.
+\end{definition}
+
+\subsection*{Principal Component Analysis}
+
+\textbf{Idea}: directions with highest variance are the most important, so one should find a set of orthogonal axes in the features space that is ordered based on the data variance.
+
+\begin{enumerate}
+    \item Find axis along the direction of the highest variance along the data;
+    \item Find a new axis, orthogonal to all the previous ones, along the direction of highest variance;
+    \item Repeat step 2 until there are no more orthogonal axis possible (\emph{i.e.}, until there are as many axes as data dimensions).
+\end{enumerate}
+
+\subsection*{Linear Discriminant Analysis}
+
+\textbf{Idea}: given a \textbf{labeled} dataset, we want to find a projection of the data such that the distance between the mean coordinates of the groups (from the labels) is maximal and the scatter within each group is minimal.
+
+\begin{enumerate}
+    \item Compute scatter matrices of the groups;
+    \item Compute compute group's mean coordinates difference matrices;
+    \item Multiply matrices from the previous steps and solve the eigenvalue problem (find projection).
+\end{enumerate}
+
+\section*{Supervised Learning}
+
+\begin{definition}
+    \emph{Supervised learning} is a task that consists in training an algorithm over example \textbf{labeled data} (input-output pairs), to be able to map an input space into an output space.
+
+    In other words, given a set $D=\left\{ (\bm{x}_i,y_i) : i= {1,..,N} , \bm{x}_i \in  X, y_i \in Y \right\} $, and a function $f_{\bm{\theta}} : X \to  Y$ that maps the input space to the output space parametrized by $\bm{\theta}$, learning $\bm{\theta}$ from $D$ is \emph{supervised learning}.
+\end{definition}
+
+\begin{note}
+    A supervised learning task can be further classified as:
+    \begin{description}
+	\item[Regression], if the output space is real-valued (or, at least, continuous);
+	\item[Classification], if the output space is discrete and finite (categorical).
+    \end{description}
+\end{note}
+
+\subsection*{Metrics}
+
+Regression metrics:
+
+\begin{itemize}
+    \item Mean absolute error \[
+    MAE = \frac{\sum_{i=1}^{n}\|y_i - \hat{y}_i\|}{n}
+    \] 
+\item Mean square error \[
+	MSE = \frac{1}{n}\sum_{i=1}^{n}\left( y_i - \hat{y}_i \right) ^{2}
+\] 
+\item R2 score (proportion of the variance in the dependent variable that is predictable from the independent variable) \[
+R^2 = 1 - \frac{SS_{res}}{SS_{tot}}
+\] 
+\end{itemize}
+
+Classification metrics:
+\begin{itemize}
+    \item From confusion matrix:
+	\begin{itemize}
+	    \item Accuracy \[
+	    ACC = \frac{TP + TN}{P + N}
+	    \] 
+	\item F1-score \[
+	F_1 = 2\cdot \frac{2\cdot TP}{2\cdot  TP + FP + FN}
+	\] 
+	\end{itemize}
+\end{itemize}
+
+\subsection*{Training}
+
+\begin{definition}
+    \emph{Gradient descent} is the method for training that optimizes the parameters $\bm{\theta}$ of the function through the gradient of a pre-defined \emph{loss function}, in an iterative manner.
+\end{definition}
+
+\section*{Unsupervised Learning}
+
+\begin{definition}
+    \emph{Unsupervised learning} deals with problems in which your dataset doesn't have labels. Instead, the model is allowed to discover relations in the data on its own.
+\end{definition}
+
+Unsupervised learning algorithms can be divided into:
+\begin{description}
+    \item[Clustering]: the task of grouping sets of objects (clusters), maximizing similarity within the clusters and dissimilarity between the clusters;
+	\begin{description}
+	    \item[Hierarchical] creates clusters by merging others;
+	    \item[Partitioning] optimizes cluster centers to minimize the distance from the instances to the clusters;
+	    \item[Density-based] locates high-density regions.
+	\end{description}
+    \item[Anomaly detection]: the task of finding anomalies in the data (that is, dissimilar data);
+	    \begin{description}
+	        \item[Clustering] is used to identify data points that are not in a cluster or that are far from the cluster centers;
+		\item[Specific] approaches exist, like Isolation Forest, which constructs trees to isolate each instance and then count the splits, the less the amount of splits, the more anomalous.
+	    \end{description}
+	\item[Association rule mining]: these methods try to discover associations (relationships or dependencies) between variables in a dataset of transactions of items;
+	    \begin{itemize}
+		\item Given a candidate antecedent and a candidate consequent, define rules which maximize the support (intersection of occurrences) above a certain confidence (ratio of intersection over total occurrences of antecedent) threshold.
+	    \end{itemize}
+    \item[Dimensionality reduction]: with minimal information loss.
+	\begin{description}
+	    \item[Feature selection] measures relevancy of features and drops the least relevant ones;
+	    \item[Linear projections] try to find the main components of the data through projections, \emph{e.g.}, grouping correlated variables, search for uncorrelated ones, search eigenvectors of latent variables, also PCA, SVD and ICA;
+	    \item[Non-linear projections (manifold learning)] algorithms are based on the idea that the dimensionality of datasets is artificially high, and try to find manifolds for the data by transforming the features space while keeping local distance values.
+	\end{description}
+\end{description}
+
+\section*{Reinforcement Learning}
+
+The main idea of RL is to create an \textbf{agent} that learns from success and failure through \textbf{reward} and \textbf{punishment} in an environment.
+
+\begin{definition}
+    \emph{Reinforcement learning} is defined as a Markov decision-making process (MDP) $\left< S, A, P, R, \gamma \right>$ in which
+     \begin{itemize}
+	 \item $S$ is a finite set of \textbf{states};
+	 \item $A$ is a finite set of \textbf{actions};
+	 \item $P$ is a transition matrix that maps the probability that any action $a\in A$ leads from any state $s$ to a state $s'$, $s,s' \in S$;
+	 \item $R$ is a reward function that maps the reward an action taken in an state returns;
+	 \item $\gamma$ is the discount factor and $\gamma\in \left[ 0,1 \right] $.
+    \end{itemize}
+\end{definition}
+
+Properties:
+\begin{itemize}
+    \item $P\left[ S_{t+1} | S_t \right] = P\left[ S_{t+1} | S_1,\ldots,S_t \right] $, that is, the only influence on the next state ($S_{t+1}$) probability is the current state ($S_t$);
+    \item Expected return $G_t = R_{t+1} + \gamma G_{t+1}$, so our expected return is a "exponential smoothing" of future expected rewards;
+    \item Given a policy $\pi$ (which actions to take), the (state) value function is $V_\pi(S_t) = E_\pi\left( G_t | S_t \right) $, that is, the expected return by applying the policy in current state, because the policy can be stochastic and the transitions in real world can be stochastic as well;
+    \item Again, given a policy $\pi$, the Q-function (action value function) is $Q_\pi(S_t, a) = E_\pi(G_t | S_t, a)$, so the expected return, given the policy, of taking a certain action $a $;
+    \item Bellman equation states that the value of the current states depends only on the possible next states, that is, $V_\pi(S_t) = E_\pi\left( R_{t+1}+\gamma V_\pi(S_{t+1}) | S_t \right) $;
+\end{itemize}
+
+\subsection*{Types of RL}
+
+\begin{table}[H]
+    \centering
+    \caption{Offline vs Online}
+    \label{tab:offline-online-rl}
+    \begin{tabular}{l l}
+    \toprule
+    Offline Solution (MDP) & Online Learning (RL) \\
+    \midrule
+    Simulates everything and tries to optimize a policy & Agent executes action and experiences rewards  \\
+    Dynamic programming, Synchronous DP, Asynchronous DP & Model-based learning, Model-free learning \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[H]
+    \centering
+    \caption{Model-based vs Model-free}
+    \label{tab:model-based-free-rl}
+    \begin{tabular}{l l}
+    \toprule
+    Model-based learning & Model-free learning \\
+    \midrule
+    Derives MDP model from experience & Strategy is derived directly (value function and Q-function) \\
+    Solves MDP as offline solution & Active or passive learning \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+Passive learning approaches perform evaluation of policies, that is, given a policy, learns the state value function $V(s)$:
+\begin{description}
+    \item[Monte-Carlo]: runs on episodes (start-to-end execution of a policy), updates $V$ function;
+    \item[Temporal difference]: learns (updates $V$) at every experience (transition).
+\end{description}
+
+Active learning approaches do not fix a policy, but try to learn the Q-function and select the action that has the best Q values at a given state. This is also called \textbf{off-policy learning}.
+
+Active learners have great results and it is shown that it does not matter how the actions are taken, with enough exploration it converges to an optimal policy. What must be done is to keep a chance of not following the optimal strategy (maximum $Q$), to guarantee exploration, but this probability must decrease over time.
+
+\section*{Artificial Neural Networks}
+
+ANNs are composed of linear units called \emph{neurons}, which are a function that performs a linear combination of the inputs, adds a bias value, and applies an activation function.
+
+Non-linearity can be modelled through the transformation of the inputs, but the dimension of the input explodes as the transformations are not known beforehand. So one can \emph{combine multiple neurons}.
+
+\subsection*{Training}
+
+Training is performed through the optimization of a \textbf{cost function}, normally \textbf{back-propagating} the gradient of the cost function (\textbf{gradient descent}) to each of the weights of each neuron on each layer. So the update of the weights of a layer $j$ is \[
+    W^{(j)} = W^{(j)} - \alpha \frac{\partial L\left( f(x) \right) }{\partial W^{(j)}} 
+\] in which $\alpha$ is the \textbf{learning rate}.
+
+\subsubsection*{Overview}
+
+Given a training set $X = \left\{ \left(x^{i}, y^{i}\right)\right\} $ :
+\begin{enumerate}
+    \item Select a topology (\# of layers, \# of neurons, activation function);
+    \item Initialize weights randomly;
+    \item Calculate output values $\hat{y}^{i}$ for each $x^{i}$;
+    \item Calculate gradients and optimize weights through backpropagation.
+\end{enumerate}
+
+\section*{Deep Neural Networks}
+
+\begin{definition}
+    \emph{Deep learning} is a subset of machine learning algorithms that use multi-layered neural networks to model the dependencies between input data and desired output.
+\end{definition}
+
+\begin{note}
+    \emph{Forward pass} is the computation of the output given an input.
+    \emph{Backward pass} is using the loss function with the computed output and the desired output to back-propagate the error through the network.
+\end{note}
+
+\subsection*{DNN in Computer Vision}
+
+\begin{definition}
+    \emph{Convolutional neural networks} (CNNs) are neural networks that use discrete convolutions as a base computational unit.
+\end{definition}
+
+\begin{note}
+    CNNs are mainly used for:
+    \begin{itemize}
+        \item Classification;
+	\item Object detection;
+	    \begin{itemize}
+	        \item One-staged: returns object region and pose;
+		\item Two-staged: first detects object and region, then computes pose.
+	    \end{itemize}
+	\item Segmentation;
+	    \begin{itemize}
+	        \item Instance segmentation segments each instance of an object;
+		\item Semantic segmentation groups the instances (e.g., all persons).
+	    \end{itemize}
+    \end{itemize}
+\end{note}
+
+\subsection*{Autonomous Vehicles}
+
+There can be several networks for specific tasks, like: object detection, lane markings, and trajectory generation. Or a single net for everything.
+
+A human is involved in the training process through the finding of risky or edge cases.
+
+\subsection*{NLP}
+
+
+\begin{definition}
+    \emph{Recurrent neural networks} (RNNs) use the previous output of a neuron as an input for itself, thus allowing them some memory of the previous run and, therefore, making it a suitable approach for \emph{sequence data}.
+\end{definition}
+
+LSTM solve the vanishing gradient problem of RNNs.
+
+Remaining problems of NLP is that they do not understand the language, \emph{e.g.}, "three plus two".
+
+\subsection*{Deep Reinforcement Learning}
+
+In DRL, parts of the algorithms of RL are replaced by DNNs, so, e.g., in Q-Learning, instead of having a table that maps states and actions into the Q-value, one can have a DNN.
+
+\section*{Visual Analytics}
+
+\begin{definition}
+    \emph{Visualization} is any technique for creating visual representations (images, diagrams or animations) from data, in order to communicate a message.
+\end{definition}
+
+The main reason to use visualization is for efficiency and effectiveness towards humans.
+
+\begin{definition}
+    \emph{Visual analytics} is the science of analytical reasoning supported by interactive visual interfaces.
+
+    It can also be defined as a process that combines our visual intelligence and analysis techniques with interactive visualization technologies to get relevant information/insights about data.
+\end{definition}
+
+It has the goal of, through visualizations, enabling people to:
+\begin{itemize}
+    \item Synthesize information and derive insights from data;
+    \item Detect the expected and discover the unexpected;
+    \item Provide timely, defensible, and understandable assessments;
+    \item Communicate assessment effectively for action.
+\end{itemize}
+
+The process can be summarized in:
+\begin{enumerate}
+    \item Preprocessing
+    \item Algorithmic analysis
+    \item Visualization
+    \item Insightful knowledge generation
+    \item Derive new hypothesis
+    \item Update visualizations
+\end{enumerate}
+
+\begin{note}
+    The main advantage over statistical analysis is the need for modeling the problem usually oversimplifying it. Thus, visual analytics shortens the gap between the intuitive human understanding of the domain and the analytical capacity of understanding the problem. Also, the summary statistics are often not enough to distinguish data, being misleading.
+\end{note}
+
+\begin{table}[H]
+    \centering
+    \caption{EDA and Modeling with visual analytics}
+    \label{tab:eda-modeling}
+    \begin{tabularx}{\textwidth}{X X}
+    \toprule
+    EDA and visual analytics & Modeling and visual analytics \\
+    \midrule
+    Visual representations of \textbf{data} & Visual representation of \textbf{models} and \textbf{predictions} \\
+    Understanding underlying information of the data & Understanding the working mechanisms of the models \\
+    Explore, visualize, interact & \\
+    \midrule
+    Speed up development, improve discovery efficiency, improved understanding & (XAI) Improve understanding and trust in models, so to allow them for decision making (responsible AI) \\
+    \midrule
+    Scalability to high dimensional data and high volume of data & Trace-back the main influences in the output \\
+    Data quality representation and impact & Activations of the neurons \\
+    Choice of visualization and level of detail & Highlights in the inputs \\
+    UX & \\
+    \bottomrule
+    \end{tabularx}
+\end{table}
+
+\end{document}
