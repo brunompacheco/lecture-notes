@@ -1,0 +1,112 @@
+\lecture{11}{18.08.2020}{Nonlinear Control: Sliding Mode and Synergetic Control}
+
+We will cover Sliding Mode Control (SMC) and Synergetic Control approaches to nonlinear control. Both are based on the idea of enforcing a \emph{linear relation} between the state variables to simplify the solution. This way, the (state of the) system is forced to move to a certain locus/manifold $\psi(x)=0$. That is, through applying some constraints, we map the original system to a simpler one.
+
+Note we are not talking about linearizing the system through some approximation, but we are adding to the system so the result is linear.
+
+\section*{Variable Structure System}
+
+In traditional feedback control, the structure of the feedback is fixed, that is, our input $u(t)$ which must be defined based on the state of the system $x(t)$ is set to be $u(t)=f\left( x(t) \right) =k^{T}x(t)$. In the \textbf{Variable Structure System (VSS)}, the system is allowed to change its structure at any instant. So the design problem becomes the selection of parameters of each structure and the definition of the switching logic.
+
+So in a double-integrator system (second-order) in a closed-loop, given by \[
+    \ddot{x}(t)=-\Psi x(t)
+\] in which $\Psi$ can alternate between $\Psi=a_1^{2},\Psi=a_2^{2}$, where $0<a_2<1<a_1$, we know that the solution in both cases is not asymptotically stable. Even more, both are of the form of a complex conjugate with null real part (see Note 1 below).
+
+\begin{note}
+    A solution for \[
+    \ddot{x}(t) = -K x(t)
+    \] , or any similar system, can be easily found by assuming that the solution may be in the form of $e^{\lambda t}$. Then we have \[
+    \lambda^{2}e^{\lambda t} = -K e^{\lambda t}
+    \] which implies \[
+    \lambda^{2}+K = 0 \implies \lambda = \pm i\sqrt{K}
+    \].
+\end{note}
+
+If we understand the state variables of the system as $x_1=x$ and $x_2=\dot{x}$, then our system becomes \[
+\begin{cases}
+    \dot{x}_1(t)=x_2(t) \\
+    \dot{x}_2(t)=-\Psi x_1(t)
+\end{cases}
+\] and if we define a switching of \[
+\Psi = \begin{cases}
+    a_1^{2}, & \dot{x}x>0 \\
+    a_2^{2}, & \dot{x}x < 0
+\end{cases}
+\] we can check the stability through Lyapunov. So defining the Lyapunov function as \[
+V = x_1^{2} + x_2^{2}
+\] we have 
+\begin{align*}
+    \dot{V} &= 2 \dot{x}_1 x_1 + 2 \dot{x}_2 x_2 \\
+	    &= 2 x_2 x_1 - 2 \Psi x_1 x_2 \\
+	    &= 2x_1x_2(1-\Psi) \\
+    \implies \dot{V} &= \begin{cases}
+	2x_1x_2(1-a_1^{2}), & \dot{x}x > 0 \\
+	2x_1x_2(1-a_2^{2}), & \dot{x}x < 0 \\
+    \end{cases}
+\end{align*}
+or, using the state variables, \[
+    \dot{V} = \begin{cases}
+	2x_1x_2(1-a_1^{2}), & x_2x_1 > 0 \\
+	2x_1x_2(1-a_2^{2}), & x_2x_1 < 0 \\
+    \end{cases}
+\] which is always negative, therefore, the trajectory moves towards the equilibrium point (the origin).
+
+\section*{Sliding Mode Control}
+
+The SMC approach aims to keep the states close to a region where the switching happens.
+
+So keeping with the previous example with \[
+\ddot{x}(t) = u(t)
+\] , we can choose \[
+\begin{cases}
+    \dot{x}_1 = x_2 \\
+    \dot{x}_2 = u(t)
+\end{cases}
+\] where \[
+u(t) = -sign(x) = \begin{cases}
+    -1, & kx_1 + x_2 > 0 \\
+    1, & kx_1+x_2 < 0
+\end{cases}
+\]. Note that the switching function represents a line with slope $-k$ in the phase plot. Therefore, if we consider a Lyapunov function  \[
+V(x_1,x_2) = \frac{1}{2} \left( kx_1 + x_2 \right) ^{2}
+\] (which is a classic quadratic function but on the plane that we defined for the state variables), we have
+\begin{align*}
+    \dot{V} &= \left( kx_1 + x_2 \right) * \left( k\dot{x}_1 + \dot{x}_2 \right) \\
+	    &=  \left( kx_1 + x_2 \right) * \left( kx_2 + u \right) \\
+	    &=  \left( kx_1 + x_2 \right) * kx_2 + \left( kx_1 + x_2 \right) * u \\
+\end{align*}
+and also, we have that $\left( kx_1 + x_2 \right) * u = - \|\left( kx_1 + x_2 \right)\|$ by the definition of $u$, thus  \[
+    \dot{V} \le \|\left( kx_1 + x_2 \right)\|(k|x_2| - 1)
+\] which is smaller than zero whenever $|x_2| < \frac{1}{k}$. So now we know that, given the aforementioned condition, the system converges to the plane defined, so we \textbf{guarantee a linear relation between the two state variables}.
+
+\subsection*{Problem Formulation?}
+
+Given a surface $s$ defined over the state variables, so $s(x) = 0$, one condition is that the surface must be \textbf{locally attractive}, that is
+\begin{align*}
+    V &= \frac{1}{2}s(x)^{2} \\
+    \implies \dot{V} &=\nabla V \cdot \dot{s}(x) \\
+		     &= s\dot{s} < 0
+\end{align*}
+and $s\dot{s}<0$ (reachability condition)  means that, "above" the surface, or when $s > 0$, by the condition, $\dot{s}<0$, which results in the attraction to the surface. The same happens for $s<0$. 
+
+\subsection*{Summary}
+
+We saw a use of the VSS with a switching structure that ensures the state variables are always in a neighborhood of the defined plane, which guarantees a linear relation between two state variables.
+
+\section*{Synergetic Control}
+
+We assume that our system can be formulated as \[
+    \dot{x} = f(x) + g(x)u
+\] and try to achieve a simpler system by bounding it to a manifold $\Psi$ such that \[
+T \dot{\Psi}(x) + \Psi(x) = 0
+\]. So we look for a function $u(x)$ that satisfies this condition. Also, we define the value of $T$, so the speed in which the system approaches the surface.
+
+The biggest difference from SMC is that we do not define a discrete set of input approaches, so the more the switching speed requirement increase, the more we approach synergetic control.
+
+So the challenges are:
+\begin{itemize}
+    \item Is the manifold reachable?
+    \item Is the manifold stable?
+    \item If there is a desired specific point in the manifold, is it reachable through the manifold?
+\end{itemize}
+
