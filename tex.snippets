@@ -168,10 +168,12 @@ snippet pac "Package" b
 \usepackage[${1:options}]{${2:package}}$0
 endsnippet
 
+context "math()"
 snippet => "implies" Ai
 \implies
 endsnippet
 
+context "math()"
 snippet =< "implied by" Ai
 \impliedby
 endsnippet
@@ -498,6 +500,11 @@ endsnippet
 snippet nn "Tikz node" w
 \node[$5] (${1/[^0-9a-zA-Z]//g}${2}) ${3:at (${4:0,0}) }{$${1}$};
 $0
+endsnippet
+
+context "math()"
+snippet mbb "mathbb" iA
+\mathbb{$1}$0
 endsnippet
 
 context "math()"
