@@ -1,0 +1,189 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Relatório 1}
+\author{Bruno M. Pacheco\\
+DAS 5142 - Sistemas Dinâmicos}
+ 
+\maketitle
+ 
+\exercise{Pêndulo Simples}
+
+Dada a formulação apresentada na descrição do experimento para o problema do pêndulo simples, encontrou-se os pontos de equilíbrio do sistema. Por definição, sabemos que um ponto de equilíbrio $\bm{\overline{x}}$ é tal que $\bm{\dot{x}}(\bm{\overline{x}}) = 0$, assim, temos que $\dot{x_1} = x_2 = 0$ $\dot{x}_2 = 0$, portanto \[
+    -a \sin x_1 = 0 \implies \sin x_1 = 0
+\] o que indica que os pontos de equilíbrio do sistema são da forma $\bm{\overline{x}} = n\pi$ onde $n\in \N$. Ou seja, os pontos de equilíbrio são as posições em que o ângulo está perfeitamente equilibrado em cima do eixo ou pendurado abaixo dele.
+
+Analisou-se, então, a estabilidade desses pontos de equilíbrio. Tem-se que \[
+    J\bm{\dot{x}} = \begin{bmatrix} 0 & 1 \\ -a\cos x_1 & -b \end{bmatrix} 
+. \] Primeiro, vemos claramente que, para $b=0$, os autovalores do sistema serão da forma  \[
+\lambda = \pm \frac{\sqrt{-4a}}{2} = \pm \frac{i \sqrt{4a} }{2}
+\], ou seja, o sistema é sempre oscilatório uma vez que $a>0$.
+
+Para os pontos de equilíbrio da forma $\bm{\overline{x}} = (2n\pi,0)$, \[
+    J\bm{\dot{x}} = \begin{bmatrix} 0 & 1 \\ -a & -b \end{bmatrix} 
+\] que possui autovalores da forma \[
+\lambda = \frac{-b \pm \sqrt{b^2 -4a} }{2}
+\]. Assim, divide-se a análise em dois casos. O primeiro, caracterizado por autovalores reais:
+\begin{align*}
+    &a < \left(\frac{b}{2}\right)^2 \\
+    &\implies \sqrt{b^2 - 4a} \in \R \\
+    &\implies \mathcal{R}(\lambda) = \frac{-b\pm\sqrt{b^2 - 4a} }{2}
+\end{align*}
+assim, analisamos cada um dos dois autovalores. Neste caso, claramente\[
+    \lambda_2 = \frac{-b - \sqrt{b^2 -4a} }{2} < 0
+\]. Em relação ao outro autovalor, tem-se que 
+\begin{align*}
+    &\lambda_2 = \frac{-b + \sqrt{b^2 -4a} }{2} \\
+    &-b = -\sqrt{b^2} < -\sqrt{b^2-4a} \\
+    &\implies -b + \sqrt{b^2 -4a} < -\sqrt{b^2-4a} + \sqrt{b^2-4a} \\
+    &\implies \lambda_2 < 0 \\
+.\end{align*}
+
+Já no outro caso 
+\begin{align*}
+    &a \ge  \left(\frac{b}{2}\right)^2 \\
+    &\implies \mathcal{R}(\lambda) = \frac{-b}{2} < 0
+.\end{align*}
+Portanto, sabemos que os autovalores estão sempre no semiplano esquerdo, o que nos garante que o sistema nos pontos de equilíbrio da forma $\bm{\overline{x}} = 2n\pi$ é estável.
+
+Agora, para os pontos de equilíbrio da forma $\bm{\overline{x}} = (2n+1)\pi$ tem-se \[
+    J\bm{\dot{x}} = \begin{bmatrix} 0 & 1 \\ a & -b \end{bmatrix} 
+\] e, portanto, tem autovalores \[
+\lambda = \frac{-b \pm \sqrt{b^2 +4a} }{2}
+\]. Entretanto, $\sqrt{b^2 +4a} >  b$, portanto \[
+    \lambda_2 = \frac{-b - \sqrt{b^2 -4a} }{2} <  0
+\] e \[
+    \lambda_1 = \frac{-b + \sqrt{b^2 -4a} }{2} <  0
+\], ou seja, estes pontos de equilíbrio são instáveis.
+
+Simulou-se, então, o sistema do pêndulo simples utilizando o aplicativo \emph{pplane8} no MATLAB. Para a configuração de parâmetros $a=1, b=0$, o aplicativo foi configurado da forma ilustrada na figura \ref{fig:figures-pplane_pendulo_simples_1-png}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pplane_pendulo_simples_1.png}
+    \caption{Configuração do sistema do pêndulo simples no aplicativo pplane8.}
+    \label{fig:figures-pplane_pendulo_simples_1-png}
+\end{figure}
+
+O resultado da simulação pode ser observado na figura \ref{fig:figures-pplane_pendulo_simples_2-png}. Vemos que, sem atrito, o sistema conserva sua energia, alternando entre cinética e gravitacional, para qualquer estado inicial que não seja o equilíbrio. Ainda mais, pode-se observar dois movimentos possíveis para o pêndulo: um oscilatório marcado pelas trajetórias fechadas, quando a sua energia cinética não é o suficiente para que ele complete uma volta e portanto sua velocidade angular alterna o sinal periodicamente; e um rotativo marcado pelas trajetórias abertas nas extremidades verticais do gráfico, em que sua energia cinética inicial é suficiente para que ele complete uma volta e, portanto, não tenha uma inversão na direção da sua velocidade angular. Nota-se que a modelagem faz com que o segundo tipo de movimento detectado não aparente ser um ciclo limite, uma vez que a posição angular foi modelada em um espaço cartesiano ("não cíclico"). Entretanto, a interpretação física do problema nos permite apontar que esse também representa trajetórias fechadas.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pplane_pendulo_simples_2.png}
+    \caption{Espaço de estados do modelo do pêndulo simples sem atrito. Em vermelho marcam-se os pontos de equilíbrio e em azul possíveis trajetórias do estado.}
+    \label{fig:figures-pplane_pendulo_simples_2-png}
+\end{figure}
+
+Simula-se, após, o sistema com a adição do atrito ($b=0.1$). O resultado é visível na figura \ref{fig:figures-pplane_pendulo_simples_3-png}. Observamos agora que o sistema se torna estável, com suas trajetórias convergindo para o ponto de equilíbrio em $(0,0)$, tal qual calculado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/pplane_pendulo_simples_3.png}
+    \caption{Espaço de estados do modelo do pêndulo simples com atrito.}
+    \label{fig:figures-pplane_pendulo_simples_3-png}
+\end{figure}
+
+Para verificar as reações do sistema no domínio do tempo implementou-se o modelo conforme visível na figura \ref{fig:figures-simulink_pendulo_simples_1-png}. Os resultados da simulação podem ser observados na figura \ref{fig:figures-simulink_pendulo_simples_2-png}. Vê-se que os resultados são consistentes com a análise feita.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/simulink_pendulo_simples_1.png}
+    \caption{Modelo do pêndulo simples implementado no Simulink.}
+    \label{fig:figures-simulink_pendulo_simples_1-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/simulink_pendulo_simples_2.png}
+	\caption{$a=1$ e $b=0$, estado inicial $(0,1)$.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/simulink_pendulo_simples_3.png}
+	\caption{$a=1$ e $b=0.1$, estado inicial $(0,1)$.}
+    \end{subfigure}
+    \caption{Simulação do modelo do pêndulo simples com diferentes parâmetros, ambos com estado inicial $(0,0)$.}
+    \label{fig:figures-simulink_pendulo_simples_2-png}
+\end{figure}
+
+\exercise{Oscilador de Van der Pol (VDP)}
+
+O sistema fornecido foi modelado através de duas variáveis de estado: $x_1(t)=x(t)$ e $x_2(t)=\dot{x}(t)$. Assim, o modelo do sistema utilizado torna-se \[
+    \begin{cases}
+        \dot{x}_1(t) = x_2(t) \\
+	\dot{x}_2(t) = -\mu\left( x_1(t)^2 - 1 \right) x_2(t) - x_1(t)
+    \end{cases}
+\]. Primeiro nota-se que o ponto de equilíbrio do sistema independe do parâmetro $\mu$ e é sempre $\bm{\overline{x}}=(0,0)$.
+
+Assim, estudou-se o comportamento do sistema de acordo com os valores do parâmetro $\mu$.
+
+\subsection*{$\mu = 0$}
+
+Neste caso, o sistema torna-se \[
+    \begin{cases}
+        \dot{x}_1(t) = x_2(t) \\
+	\dot{x}_2(t) = - x_1(t)
+    \end{cases}
+\]. A matriz jacobiana do sistema \[
+\begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix} 
+\] tem autovalores $\lambda = \pm i$, o que nos indica que o sistema em torno do ponto de equilíbrio é conservativo, tendo comportamento oscilatório.
+
+Verificou-se o comportamento do sistema através do aplicativo \emph{pplane8}. O resultado é visível na figura \ref{fig:figures-pplane_vdp_1}. Novamente, vemos o caráter oscilatório do sistema tanto na trajetória presente no espaço de estados quanto no diagrama dos estados no tempo.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/pplane_vdp_1_1.png}
+	\caption{Espaço de estados do sistema.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/pplane_vdp_1_2.png}
+	\caption{Resposta do sistema (estados) no tempo.}
+    \end{subfigure}
+    \caption{Resposta do oscilador de Van der Pol com $\mu=0$.}
+    \label{fig:figures-pplane_vdp_1}
+\end{figure}
+
+\subsection*{$\mu<0$}
+
+Neste caso, a matriz jacobiana do sistema \[
+    \begin{bmatrix} 0 & 1 \\ -1-2\mu x_1x_2 & -\mu (x_1^2-1) \end{bmatrix} 
+\] avaliada no ponto de equilíbrio apresenta autovalores \[
+    \lambda = \frac{\mu \pm \sqrt{\mu^2 - 4} }{2}
+\]. Para $\mu \ge  -2$, temos que $\mathcal{R}(\lambda) = \frac{\mu}{2}$. Agora para $\mu > 2$, temos que $|\mu| = |\sqrt{\mu^2}| > |\sqrt{\mu^2 - 4}|$, portanto, $\lambda < 0$. Assim, conclui-se que o sistema é estável no ponto de equilíbrio. A verificação dessas conclusões pode ser observada no resultado da simulação visível na figura \ref{fig:figures-pplane_vdp_2}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/pplane_vdp_2_1.png}
+	\caption{Espaço de estados do sistema.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/pplane_vdp_2_2.png}
+	\caption{Resposta do sistema (estados) no tempo.}
+    \end{subfigure}
+    \caption{Resposta do oscilador de Van der Pol com $\mu=-1$.}
+    \label{fig:figures-pplane_vdp_2}
+\end{figure}
+
+\subsection*{$\mu>0$}
+
+Similar ao caso anterior, entretanto agora temos os autovalores do sistema sempre positivos, concluindo, então, que o ponto de equilíbrio é instável. A resposta simulada do sistema pode ser observada na figura \ref{}. Observa-se que, mesmo começando nas imediações do ponto de equilíbrio, os estados entram rapidamente em uma trajetória oscilatória limitada, ou seja, o valor dos estados mantém-se limitados. Além disso, é evidente também a simetria entre as trajetórias oscilatórias deste com o caso anterior.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/pplane_vdp_3_1.png}
+	\caption{Espaço de estados do sistema.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/pplane_vdp_3_2.png}
+	\caption{Resposta do sistema (estados) no tempo.}
+    \end{subfigure}
+    \caption{Resposta do oscilador de Van der Pol com $\mu=1$.}
+    \label{fig:figures-pplane_vdp_2}
+\end{figure}
+
+\end{document}
