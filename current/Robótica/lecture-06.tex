@@ -1,0 +1,10 @@
+\lecture{6}{17.09.2020}{}
+
+A ordem das operações (deslocamento e rotação) segue a ordem das operações que representam-nas, ou seja, primeiro realiza-se a rotação, que é aplicada através do produto, e depois o deslocamento, que é aplicada pela soma.
+
+Entre operações similares, temos que os deslocamentos são comutativos, tal qual a soma, entretanto rotações não o são, tal qual o produto matricial. Assim, devemos sempre atentar que a ordem das rotações altera os resultados. Define-se como padrão duas abordagens:
+\begin{description}
+    \item[Sistema de coordenadas corrente] é aquele em que as rotações são aplicadas ao sistema de coordenadas após a última rotação, ou seja, aos \emph{novas eixos de referência}; neste caso, a multiplicação é inversa à ordem das operações, \emph{e.g.}, uma rotação em z seguida de uma rotação em y a um ponto $P$ seria calculada como $R_zR_yP$;
+    \item[Sistema de coordenadas fixo] define rotações em torno da referência original; neste caso, a multiplicação segue a ordem das operações, \emph{e.g.}, uma rotação em z seguida de uma rotação em y a um ponto $P$ seria calculada como $R_yR_zP$.
+\end{description}
+

@@ -1,0 +1,10 @@
+\lecture{4}{10.09.2020}{Posição e Orientação}
+
+Para garantir a boa utilização de um robô, precisamos descrever sua \textbf{posição} e \textbf{orientação} em relação à uma dada referência. Para tal, define-se uma referência local em um corpo e define-se a posição do corpo como o vetor distância da origem da referência local em relação à referência local. A orientação é definida a partir de uma segunda referência pontual, sendo marcada pela posição desse ponto em relação à referência local.
+
+\begin{definition}
+    Dado um corpo com uma referência local $i$, um ponto $P_i'$ (em relação à referência local) e uma referência global $j$, definimos esse corpo através de \[
+    P_j' = P_i^{j} + R_i^{j}P_i'
+    \], em que $P_i^{j}$ é o vetor que demarca a origem da referência $i$ em relação à referência $j$ e  $R_i^{j}$ é a rotação da referência $i$ para a referência $j$, definida a partir da projeção dos vetores unitários da primeira na segunda.
+\end{definition}
+

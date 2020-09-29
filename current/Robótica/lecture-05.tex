@@ -1,0 +1,42 @@
+\lecture{5}{15.09.2020}{Operador de Rotação}
+
+Um operador de rotação $R_i^{j}$ de um corpo definido em uma referência $i$ para uma referência $j$ é definido a partir das projeções dos vetores unitários (paralelos aos eixos) da referência destino na referência original. Então se a referência original $i$ possui vetores unitários $x_i$, $y_i$ e $z_i$ (considerando um espaço tridimensional), o operador de rotação pode ser definido como \[
+    R = \begin{bmatrix} | & | & | \\ x^{i}_j & y^{i}_j & z_j^{i} \\ | & | & | \end{bmatrix} 
+\] em que, e.g., $x_j^{i}$ é a projeção do vetor $x_j$ na referência $i$. Assim, a rotação de um ponto qualquer $P$ é definida pelo produto matricial $R'P$.
+
+\begin{eg}
+    Uma rotação de $+\frac{\pi}{2}$ em torno do eixo z pode ser definida pelo operador de rotação \[
+	R' = \begin{bmatrix} 0 & -1 & 0 \\ 1 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix} 
+    \]. Dado um ponto \[
+    P = \begin{bmatrix} 2 \\ 2 \\ 0 \end{bmatrix} 
+    \], sua rotação em torno do eixo z seria \[
+    P' = R'P = \begin{bmatrix} -2 \\ 2 \\ 0 \end{bmatrix} 
+    \].
+\end{eg}
+
+Para rotacionar um corpo, basta definir o operador de rotação das referências e aplicar a operação a cada ponto do corpo.
+
+\section*{Rotações elementares}
+
+Podemos decompor uma rotação qualquer nos seus componentes em torno dos 3 eixos do espaço. Ou seja, para aplicarmos uma rotação qualquer a um ponto, aplicamos, por convenção, as rotações \emph{elementares} em torno dos 3 eixos, e sequência.
+
+Assim, definimos, por exemplo, a rotação de um ângulo $\theta_x$ em torno do eixo x (utilizando a regra da mão direita para definir a orientação), como \[
+    R_x\left( \theta_x \right) = \begin{bmatrix} 1 & 0 & 0 \\ 0 & \cos\theta_x & - \sin\theta_x \\ 0 & \sin\theta_x & \cos\theta_x \end{bmatrix} 
+\].
+
+As demais rotações são definidas como \[
+R_y\left( \theta_y \right)  = \begin{bmatrix} 
+    \cos\theta_y & 0 & \sin\theta_y \\
+    0 & 1 & 0 \\
+    - \sin\theta_y & 0 & \cos\theta_y \\
+\end{bmatrix} 
+\] e \[
+R_z\left( \theta_z \right) = \begin{bmatrix} 
+    \cos\theta_z & -\sin\theta_z & 0 \\
+    \sin\theta_z & \cos\theta_z & 0 \\
+    0 & 0 & 1
+\end{bmatrix} 
+\].
+
+Note que toda matriz de rotação elementar possui determinante 1 e linhas/colunas com norma 1.
+
