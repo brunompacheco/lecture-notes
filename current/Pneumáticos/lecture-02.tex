@@ -1,0 +1,25 @@
+\lecture{2}{22.08.2020}{Componentes do Sistema Hidráulico}
+
+\section*{Válvulas}
+
+\subsection*{Servoválvula e Válvulas Proporcionais}
+
+Vimos já válvulas direcionais, que possuem estados discretos, normalmente: fechado, paralelo e cruzado.
+
+\begin{definition}
+    \emph{Válvulas de Controle Contínuo} (VCC) são válvulas que controlam o fluxo de energia de um sistema de modo contínuo, em resposta a um sinal de entrada também contínuo.
+\end{definition}
+
+Elas possuem os mesmos estados das válvulas direcionais, mas \emph{trocam de estado de forma contínua}.
+ 
+\subsubsection*{Válvulas Proporcionais}
+
+É uma VCC, mas possui uma construção com dois solenóides proporcionais.
+
+A sua vazão é derivada a partir da vazão através de um orifício \[
+q_V = cd\cdot A_0\cdot \sqrt{\frac{2\Delta p}{\rho}} 
+\], onde $A_0$ é a área do orifício, $\Delta p$ é a diferença de pressão entre as extremidades, $\rho$ é o coeficiente de algo relacionado ao fluido, e $cd$ é um coeficiente relacionado ao formato do orifício. Assim, a vazão da válvula carretel de 4 vias pode ser calculada como \[
+q_{VC} = Kv\cdot \frac{x}{x_n}\cdot \sqrt{\Delta p_t} 
+\], onde $Kv$ é o coeficiente de vazão, $x$ é o deslocamento do carretel, e $x_n$ é o deslocamento nominal do carretel. Temos que $\Delta p_t = 2\cdot \Delta p_{via}$. Além disso, podemos utilizar também $\frac{i}{i_n}$ ou $\frac{U}{U_n}$, dependendo do coeficiente de vazão.
+
+
