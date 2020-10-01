@@ -1,0 +1,16 @@
+\lecture{7}{22.09.2020}{Notação Mínima}
+
+Devido às propriedades do operador de rotação, é possível representar qualquer rotação (composição de rotações) através de 3 valores, que são chamados de notação mínima.
+
+É um resultado de Euler que é possível representar qualquer orientação (composição de rotações) através de 3 rotações consecutivas, desde que duas dessas três sejam no mesmo eixo desde que não sejam consecutivas. Por exemplo, podemos utilizar como padrão rotações $R_z \to R_y \to R_z$. Além disso, é preciso definir o sistema de coordenadas.
+
+\begin{definition}
+    Chamamos de \emph{Ângulos de Euler} as 3 rotações em um sistema de coordenadas corrente.
+\end{definition}
+
+Então, se utilizarmos o padrão $R_z(\varphi) \to R_y(\vartheta) \to R_z(\psi)$ em um sistema de coordenadas corrente, $\varphi$, $\vartheta$ e $\psi$ são ângulos de Euler e podemos representar qualquer rotação/orientação com esses três escalares.
+
+\begin{note}
+    Podemos calcular um ângulo $\theta$ a partir de um par $\sin\theta$, $\cos\theta$ utilizando a função $atan2(\cdot ,\cdot )$, que leva em consideração os sinais para encontrar uma resposta em todo o círculo unitário. Isso é bastante útil quando possuímos a orientação desejada e precisamos encontrar os ângulos necessários para deslocar o robô.
+\end{note}
+
