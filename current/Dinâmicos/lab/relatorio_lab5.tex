@@ -1,0 +1,174 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+
+\title{Relatório 5}
+\author{Bruno M. Pacheco\\
+DAS 5142 - Sistemas Dinâmicos}
+ 
+\maketitle
+ 
+\exercise{E1}
+
+\subsubsection*{a)}
+
+Sem a saturação, o polinômio característico do sistema é \[
+    1 + Ks(s+1)(s+p)
+\]. Analisamos a estabilidade do sistema utilizando o método de Routh-Hurwitz. A matriz
+\begin{center}
+\begin{tabular}{c | c | c}
+    $s^{3}$ & 1 & $p$ \\
+    $s^{2}$ & $(1+p)$ & $50K$ \\
+    $s$ & $\frac{(1+p)p-50K}{(1+p)}$ & 0 \\
+    $1$ & $50K$ & 
+\end{tabular}
+\end{center}
+nos indica que temos condições de estabilidade
+\begin{align*}
+    K&>0 \\
+    K&<p(1+p) \\
+\end{align*}
+.
+
+\subsubsection*{b)}
+
+Agora, considerando a aproximação do elemento não linear do sistema por um ganho \[
+    N(A) = \frac{4}{\pi A}
+\], pode-se analisar a estabilidade do sistema no ponto crítico, \emph{i.e.}, no ponto de oscilação. Ou seja, queremos que, para um sinal de entrada com amplitude $A = 0,58$ e frequência $\omega = \sqrt{10}$ seja verdade que \[
+1 + KN(A)G(j\omega) = 0
+\]. Assim, encontra-se os valores de $p=10$ e $K\cong1$ como uma solução para a equação.
+
+Encontrou-se, então, o modelo equivalente por variáveis de estado do sistema. Definiu-se como estados \[
+\bm{x} = \begin{bmatrix} y(t) \\ \dot{y}(t) \\ \ddot{y}(t) \end{bmatrix} 
+\] e, assim, o sistema pode ser formulado como \[
+\begin{cases}
+    \dot{x}_1(t) = x_2(t) \\
+    \dot{x}_2(t) = x_3(t) \\
+    \dot{x}_3(t) = -10x_2(t) -11x_3(t) + 50\phi\left( u(t) \right) 
+\end{cases}
+\] onde a entrada do sistema, em malha fechada, é $u(t) = K(y_r(t)-x_1(t))$.
+
+Simulou-se o sistema no Simulink conforme o modelo da figura \ref{fig:figures-lab5_1_simulink_model-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5_1_simulink_model.png}
+    \caption{Modelo do sistema no \emph{Simulink}.}
+    \label{fig:figures-lab5_1_simulink_model-png}
+\end{figure}
+
+Os resultados da simulação podem ser vistos nas figuras \ref{fig:figures-lab4_1_resposta_simulink}, onde podemos observar o comportamento dos estados do sistema entrando no ciclo limite e a saída, onde confirma-se a proximidade da oscilação desejada, com uma amplitude levemente maior.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab5_1_x_1.png}
+	\caption{Saída do sistema ($x_1$).}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab5_1_ciclo_limite.png}
+	\caption{Trajetória dos estados do sistema.}
+    \end{subfigure}
+    \caption{Resposta do sistema à referência nula.}
+    \label{fig:figures-lab4_1_resposta_simulink}
+\end{figure}
+
+\exercise{E2}
+
+\subsubsection*{a)}
+
+Para o sistema idêntico ao anterior, sabemos já as características do sistema oscilando, ou seja, $A_c \cong 0,61$ e $T_{osc}\cong 2,07$. Assim, através do método de Ziegler-Nichols, projetou-se um controlador PID com parâmetros \[
+\begin{cases}
+    K_p = 1,25 \\
+    T_i = 1,04 \\
+    T_d = 0,26
+\end{cases}
+\].
+
+O controlador foi realizado com uma ação \emph{anti-windup} conforme pode ser observado na figura \ref{fig:figures-lab5_2_PID-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5_2_PID.png}
+    \caption{Realização do controlador PID.}
+    \label{fig:figures-lab5_2_PID-png}
+\end{figure}
+
+A resposta do sistema em malha fechada pode ser observada na figura \ref{fig:figures-lab5_2_a-png}. O comportamento do sistema condiz com o esperado pelo método de \emph{tuning}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5_2_a.png}
+    \caption{Resposta do sistema em malha fechada à um degrau unitário.}
+    \label{fig:figures-lab5_2_a-png}
+\end{figure}
+
+\subsubsection*{b)}
+
+Para o sistema de segunda ordem, verificou-se que a sintonia com um relé simples, sem histerese, seria impossível, uma vez que, tendo $N(A) = \frac{4M}{\pi A}$, a equação
+\begin{align*}
+    &G\left( j\omega \right) = \frac{-1}{N(A)} \\
+    &\implies \frac{50}{-\omega^2 + 11j\omega + 10} = \frac{-\pi A}{4M} \\
+    &\implies \omega^2 - 11j\omega -10 -\frac{200M}{\pi A} = 0
+\end{align*}
+não possui solução.
+
+Assim, utilizou-se uma solução gráfica para definir o valor da histerese. A análise do gráfico de Nyquist de $G(j\omega)$ nos permite definir $h$ tal que a interseção entre a reta $\frac{-1}{N(A_c)}$ tenha interseção ortogonal com a trajetória de Nyquist, ou seja, para este sistema, no ponto com menor valor real. Esse valor pode ser observado na figura \ref{fig:figures-lab5_2_b_nyquist-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5_2_b_nyquist.png}
+    \caption{Diagrama de Nyquist do segundo sistema.}
+    \label{fig:figures-lab5_2_b_nyquist-png}
+\end{figure}
+
+Ou seja, adicionou-se a restrição de que a reta $\frac{-1}{N(A)}$ passe pelo ponto $-0,26 - j0,60$. Sabe-se também que
+\begin{align*}
+    \frac{-1}{N(A)} &= -\frac{\pi A}{4M}e^{j\sin^{-1}\left( \frac{h}{A} \right) } \\
+		    &= -\frac{\pi A}{4M}\left[\sqrt{1-\left( \frac{h}{A} \right)^2 } + j\frac{h}{A}  \right] \\
+.\end{align*}
+Com $h<A$ para o ponto de interseção (\emph{i.e.}, assumindo que a interseção ocorre já fora da zona de histerese), temos que \[
+    \Im\left\{  \frac{-1}{N(A)}\right\} = -\frac{\pi A}{4M}\frac{h}{A} = -\frac{\pi h}{4M}
+\], portanto, para que a interseção se realize, utilizando um relé com $M=1$, \[
+h= 0,60 \frac{4}{\pi} \cong 0,76
+\].
+
+Então, avaliando o polinômio característico na frequência de interseção $\omega_c \cong 6,37$, tem-se
+\begin{align*}
+    &G(j\omega) = \frac{-1}{N(A_c)} \\
+    &\implies \frac{200M}{\pi A_c}\left[\sqrt{1-\left( \frac{h}{A_c} \right)^2 } -j \frac{h}{A_c} \right] = \omega_c^2 - 11j\omega_c - 10 \\
+    &\alpha := \frac{h}{A_c} \implies 83,77 \alpha \left[\sqrt{1-\alpha^2 } -j \alpha \right] = \omega_c^2 - 11j\omega_c - 10 \\
+\end{align*}
+. Igualando as partes imaginárias, tem-se
+\begin{align*}
+    &\omega_c = 7,62 \alpha^2 \\
+    &\implies \alpha = \sqrt{\frac{\omega_c}{7,62}} \\
+    &\implies A_c \cong 0,83
+.\end{align*}
+
+Verificou-se, então, esses resultados através da simulação. O resultado pode ser observado na figura \ref{fig:figures-lab5_2_b_x_1-png}. Pode-se observar uma boa aproximação dos valores calculados, tanto para a amplitude quanto para a frequência de oscilação, validando-os.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab5_2_b_x_1.png}
+    \caption{Saída do sistema à referência nula utilizando o relé com histerese com os parâmetros calculados}
+    \label{fig:figures-lab5_2_b_x_1-png}
+\end{figure}
+
+Em seguida, projetou-se o controlador PID com parâmetros \[
+\begin{cases}
+    K_p = 0,92 \\
+    T_i = 0,49 \\
+    T_d = 0,12
+\end{cases}
+\] e implementou-o utilizando o mesmo arranjo apresentado previamente. Os resultados podem ser observados na figura \ref{fig:figures-lab5_2_b_resultado-png}. A resposta do sistema apresenta comportamento esperado dado o método de Ziegler-Nichols.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab5_2_b_resultado.png}
+    \caption{Resposta ao degrau unitário do sistema com o controlador projetado.}
+    \label{fig:figures-lab5_2_b_resultado-png}
+\end{figure}
+
+\end{document}

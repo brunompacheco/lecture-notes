@@ -1,0 +1,155 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+
+\title{Relatório 7}
+\author{Bruno M. Pacheco\\
+DAS 5142 - Sistemas Dinâmicos}
+ 
+\maketitle
+
+\exercise{E1}
+
+\subexercise{a)}
+
+Podemos modelar os sistema proposto através da seguinte equação:
+\begin{align*}
+    & \dot{h}(t) = \frac{500}{\pi\left( Dh - h^2 \right) }u(t) - \frac{A_2\sqrt{2gh} }{\pi\left( Dh - h^2 \right) } \\
+    & 0\le h(t)\le 100
+.\end{align*}
+
+Linearizando esse sistema em torno de um ponto de operação $\overline{h}$, temos \[
+h(t) = \overline{h} + \Delta h(t)
+,\] ou seja, reduzimos o sistema à sua variação linear $\Delta h(t)$ em torno do ponto de equilíbrio. Encontramos $\overline{u}$ sabendo que, para um dado ponto de operação $\overline{h}$, é verdade que \[
+\frac{d h(t)}{dt}\Bigr|_{(\overline{h},\overline{u})} = 0
+.\] Para a dinâmica do modelo, vemos que
+\begin{align*}
+    \dot{h}(t) &= \Delta \dot{h}(t) = \frac{\delta \Delta \dot{h}}{\delta h}\Bigr|_{(\overline{h},\overline{u})}\Delta h(t) + \frac{\delta \Delta \dot{h}}{\delta u}\Bigr|_{(\overline{h},\overline{u})}\Delta u(t) \\
+    a &= \frac{\delta \Delta \dot{h}}{\delta h}\Bigr|_{(\overline{h},\overline{u})} = \frac{-A_2g}{\pi\left( D\overline{h}- \overline{h}^2 \right)\sqrt{2g\overline{h}}}\\
+    b &= \frac{\delta \Delta \dot{h}}{\delta u}\Bigr|_{(\overline{h},\overline{u})} = \frac{500}{\pi\left( D \overline{h}- \overline{h}^2 \right) } \\
+.\end{align*}
+
+Assim, vemos que o sistema resultante pode ser modelado no domínio da frequência complexa por \[
+    \frac{\Delta H(s)}{U(s)} = \frac{b}{s-a} = \frac{k}{\tau s + 1}
+,\] onde $k=\frac{-b}{a}$ e $\tau = \frac{-1}{a}$.
+
+Essa linearização foi implementada no \emph{Simulink} conforme pode ser visto na figura \ref{fig:figures-lab7_simulink_MA-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_simulink_MA.png}
+    \caption{Implementação do sistema linearizado e não linear no \emph{Simulink}.}
+    \label{fig:figures-lab7_simulink_MA-png}
+\end{figure}
+
+[ADICIONAR IMPLEMENTAÇÃO DO CONTROLADOR] (destacar tuning do ganho de anti-windup)
+
+Para o projeto do controlador nos pontos de operação, utilizou-se a ferramenta \emph{rltool} do Matlab. Assim, chegou-se aos valores do controlador conforme a tabela \ref{tab:ganhos-PI}.
+
+\begin{table}[H]
+    \centering
+    \caption{Ganhos dos controladores PI projetados para os pontos de operação $\overline{h}$.}
+    \label{tab:ganhos-PI}
+    \begin{tabular}{c | c | c}
+	$\overline{h}$ & $K_c$ & $K_i$ \\
+	\hline 
+	10 & 2,2129 & 0,2154 \\
+	50 & 6,7742 & 0,1770 \\
+	90 & 2,0389 & 0,1887
+    \end{tabular}
+\end{table}
+
+O controlador com esses ganhos foi implementado no \emph{simulink}. A implementação do sistema em malha fechada pode ser observada na figura \ref{fig:figures-lab7_simulink_MF-png}. Nota-se que ambos os sistemas original e linearizado foram implementados.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_simulink_MF.png}
+    \caption{Implementação do sistema em malha fechada com o controlador PI.}
+    \label{fig:figures-lab7_simulink_MF-png}
+\end{figure}
+
+Simulou-se a resposta de ambos os sistemas implementados à degraus entre os pontos de operação. O resultado pode ser observado na figura \ref{fig:figures-lab4_1_resposta_simulink}.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.32\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab7_PI_10.png}
+	\caption{$\overline{h} = 10$.}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab7_PI_50.png}
+	\caption{$\overline{h} = 50$.}
+    \end{subfigure}
+    \begin{subfigure}{0.32\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab7_PI_90.png}
+	\caption{$\overline{h} = 90$.}
+    \end{subfigure}
+    \caption{Resposta dos sistemas em malha fechada à troca de ponto de operação.}
+    \label{fig:figures-lab4_1_resposta_simulink}
+\end{figure}
+
+\subexercise{b)}
+
+A partir do equacionamento não linear do sistema, desejamos encontrar um FLC. Assim, temos
+\begin{align*}
+    & \dot{h}(t) = \frac{500u(t) - A_2\sqrt{2gh} }{\pi\left( Dh - h^2 \right) } = v(t)\\
+,\end{align*}
+onde $v(t)$ é a saída do controlador linear desejado. Assim, podemos determinar a nova entrada para a planta como \[
+    u(t) = \frac{v(t)\pi\left( Dh - h^2 \right) + A_2\sqrt{2gh} }{500}
+,\] o que resulta em um novo sistema \[
+\dot{h}(t) = v(t) + \frac{A_2\sqrt{2gh(t)} - A_2\sqrt{2gh(t)}  }{\pi\left( Dh(t) h^2(t) \right) } = v(t)
+,\] considerando que a identificação de $A_2$ é perfeita.
+
+Para a implementação do controle, podemos entender $u(t)$ como \[
+    u(t) = f(h) + g(h)v(t)
+,\] onde
+\begin{align*}
+    f(h) &= \frac{A_2\sqrt{2gh} }{500} \\
+    g(h) &= \frac{\pi\left( Dh - h^2 \right) }{500}
+.\end{align*}
+Além disso, para garantirmos que o acionamento se mantém nos níveis aceitos pelo sistema propaga-se a saturação para $v(t)$, de forma que \[
+    \frac{-f(h)}{g(h)} < v(t) < \frac{100-f(h)}{g(h)}
+.\] 
+
+A partir disso, implementou-se o controle linearizante conforme visível na figura \ref{fig:figures-lab7_FLC-png}. Destaca-se o uso de valores aproximados para os limites de saturação para evitar erros numéricos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_FLC.png}
+    \caption{Controle linearizante implementado no Simulink.}
+    \label{fig:figures-lab7_FLC-png}
+\end{figure}
+
+Para o controle, implementou-se a lei de controle \[
+v(t) = \dot{h}_r + K_0e(t)
+,\] que foi implementada junto à planta conforme visível na figura \ref{fig:figures-lab7_FLC_simulink-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_FLC_simulink.png}
+    \caption{Implementação do sistema em malha fechada com controlador.}
+    \label{fig:figures-lab7_FLC_simulink-png}
+\end{figure}
+
+Assim, a resposta do sistema pode ser observada na figura \ref{fig:figures-lab7_b_result-png}. Um ajuste fino do ganho $K_0$ foi realizado mas, pelo baixo impacto, optou-se por mantê-lo unitário. O aprimoramento da resposta é claro quando comparado à figura \ref{fig:figures-lab4_1_resposta_simulink}, com um tempo de acomodação significativamente maior e sem nenhum sobressinal.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_b_result.png}
+    \caption{Resposta do sistema à variação na referência.}
+    \label{fig:figures-lab7_b_result-png}
+\end{figure}
+
+\subexercise{c)}
+
+Para analisar a robustez do sistema, fixamos o parâmetro $A_2$ do ponto de vista do controlador linearizante e variamos o valor real desse parâmetro na planta. A resposta do sistema nesse cenário pode ser observada na figura \ref{fig:figures-lab7_c_resposta-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_c_resposta.png}
+    \caption{Resposta do sistema com variação do parâmetro $A_2$ da planta.}
+    \label{fig:figures-lab7_c_resposta-png}
+\end{figure}
+
+\end{document}

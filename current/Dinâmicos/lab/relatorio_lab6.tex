@@ -1,0 +1,140 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+
+\title{Relatório 6}
+\author{Bruno M. Pacheco\\
+DAS 5142 - Sistemas Dinâmicos}
+ 
+\maketitle
+
+\exercise{E1}
+
+Para o sistema \[
+\begin{cases}
+    \dot{x}_1 = -x_1^{3} - x_2 \\
+    \dot{x}_2 = x_1 - x_2^{3}
+\end{cases}
+\] o ponto $\overline{x}_1=\overline{x}_2=0$ é claramente um ponto de equilíbrio. Assim, linearizamos o sistema em torno desse ponto, obtendo o sistema \[
+\bm{\dot{x}} = A\bm{x}
+\] onde \[
+A = \begin{bmatrix} -3x_1^2 & -1 \\ 1 & -3x_2^2 \end{bmatrix} \bigr|_{\overline{\bm{x}}} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} 
+\] possui autovalores complexos $\lambda = \pm j$, portanto não conseguimos avaliar a estabilidade do sistema.
+
+Definimos então uma função de Lyapunov para o sistema \[
+    V(\bm{x}) = \frac{1}{2}\|\bm{x}\| = \frac{1}{2}\left( x_1^2 + x_2^2 \right) 
+    \], uma função bastante trivial para o sistema. Graficamente, analisamos seu comportamento utilizando o software \emph{MatLab}. Suas curvas de superfície podem ser observadas na figura \ref{fig:figures-lab4_1_resposta_simulink}. Vemos que a função parece ser negativa definida.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab6_1_lyapunov.png}
+	\caption{Função de Lyapunov utilizada.}
+    \end{subfigure}
+    \begin{subfigure}{0.45\textwidth}
+	\includegraphics[width=\textwidth]{figures/lab6_1_dot_lyapunov.png}
+	\caption{Derivada em relação ao tempo da função de Lyapunov.}
+    \end{subfigure}
+    \caption{Comportamento da função de Lyapunov utilizada em relação aos estados.}
+    \label{fig:figures-lab4_1_resposta_simulink}
+\end{figure}
+
+Assim, analisamos a função matematicamente para confirmar a nossa intuição. Temos \[
+\dot{V}\left( \bm{x} \right)  = \nabla V \cdot f\left( \bm{x} \right)
+\], onde $f( \bm{x}) = \dot{\bm{x}}$ é a função que caracteriza o sistema. Temos que \[
+\nabla V = \begin{bmatrix} x_1 & x_2 \end{bmatrix} 
+\] e, assim, \[
+\dot{V}\left( \bm{x} \right) = -x_1^{4} - x_2x_1 + x_1x_2 - x_2^{4} = -x_1^{4} - x_2^{4}
+\], que é claramente negativa definida para o ponto de equilíbrio do sistema. Portanto, podemos concluir que o ponto de equilíbrio é assintoticamente estável.
+
+Verificamos o resultado através do software \emph{pplane8}. Os resultados são vistos na figura \ref{fig:figures-lab6_1_pplane-png}. Vemos que o sistema converge para o ponto de equilíbrio de todas as direções.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab6_1_pplane.png}
+    \caption{Espaço de estados do primeiro sistema.}
+    \label{fig:figures-lab6_1_pplane-png}
+\end{figure}
+
+\exercise{E2}
+
+Dado o sistema \[
+\begin{cases}
+    \dot{x}_1 = x_1\left( x_1^2+x_2^2-1 \right) -x_2 \\
+    \dot{x}_2 = x_2\left( x_1^2+x_2^2 -1 \right) +x_1
+\end{cases}
+\], encontramos o único ponto de equilíbrio que é o ponto de equilíbrio trivial.
+
+Podemos linearizar o sistema no ponto de equilíbrio, de tal fora que ele se torne \[
+\bm{\dot{x}} = A\bm{x}
+\], onde $A$ é a matriz jacobiana do sistema não linear avaliada no ponto de equilíbrio, ou seja, \[
+A = \begin{bmatrix} \left( x_1^2+x_2^2 -1 \right) + 2x_1^2 & x_1\left( 2x_2 \right)  -1 \\ x_2\left( 2x_1 \right) +1 & \left( x_1^2+x_2^2 -1 \right) + 2x_2^2  \end{bmatrix} = \begin{bmatrix} -1 & -1 \\ 1 & -1 \end{bmatrix} 
+\] o que implica em autovalores \[
+det\left( \lambda I - A \right) \implies \lambda = -1 \pm j
+\], portanto o equilíbrio é estável.
+
+Ainda assim, utilizando a função de Lyapunov \[
+V\left( \bm{x} \right) =\frac{1}{2} \|\bm{x}\|
+\] validamos a estabilidade do sistema. Podemos determinar a função \[
+\dot{V}\left( \bm{x} \right) = x_1^2\left( x_1^2+x_2^2 -1 \right) -x_1x_2 + x_2^2\left( x_1^2+x_2^2 -1 \right) + x_1x_2 = \left( x_1^2 + x_2^2 \right) \left( x_1^2+x_2^2 -1 \right)
+\], que é negativa somente quando $\|\bm{x}\|<1$. Assim, concluímos que o ponto de equilíbrio é localmente estável, somente dentro do círculo unitário.
+
+Verificamos nosso resultado em relação à característica de $\dot{V}\left( \bm{x} \right) $ de forma gráfica. O resultado pode ser observado na figura \ref{fig:figures-lab6_2_dot_lyapunov-png}. Observamos que a função de fato só se torna negativa dentro do circulo unitário.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab6_2_dot_lyapunov.png}
+    \caption{Derivada da função de Lyapunov utilizada no segundo sistema.}
+    \label{fig:figures-lab6_2_dot_lyapunov-png}
+\end{figure}
+
+Validamos nosso resultado através do software \emph{pplane}. O resultado pode ser observado na figura \ref{fig:figures-lab6_2_pplane-png}. Vemos que o sistema converge para o ponto de equilíbrio a partir do circulo unitário, enquanto a tendência dos estados, anotada pelas flechas no gráfico, mostram que o sistema diverge para estados fora do círculo unitário.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab6_2_pplane.png}
+    \caption{Espaço de estados do segundo sistema}
+    \label{fig:figures-lab6_2_pplane-png}
+\end{figure}
+
+\exercise{E3}
+
+Dado o sistema \[
+\begin{cases}
+    \dot{x}_1 = x_1x_2 \\
+    \dot{x}_2 = -x_1^2 - x_2^{3}
+\end{cases}
+\], vemos que, claramente, o ponto de equilíbrio trivial é o único do sistema.
+
+Agora, utilizando \[
+    V\left( \bm{x} \right) = \frac{1}{2}\|\bm{x}\|
+\] podemos observar que \[
+\dot{V}\left( \bm{x} \right) = x_1^2x_2 - x_1^2x_2-x_2^{4} = - x_2^{4}
+\], portanto negativa semi-definida, uma vez que é nula para todos os pontos $\bm{x} = \begin{bmatrix} x_1 & 0 \end{bmatrix}^{T}$. Ou seja, podemos concluir somente a estabilidade do sistema. Podemos verificar esse resultado de forma gráfica através da figura \ref{}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab6_3_dot_lyapunov.png}
+    \caption{Derivada da função de Lyapunov utilizada no terceiro sistema.}
+    \label{fig:figures-lab6_3_dot_lyapunov-png}
+\end{figure}
+
+Entretanto, analisando o sistema para a condição encontrada, temos que
+\begin{align*}
+& \lim_{x_2 \to 0} \dot{x}_2 = 0 \\
+& \implies \lim_{x_2 \to 0} -x_1^2 - x_2^{3} = 0 \\
+& \implies \lim_{x_2 \to 0} x_1 = 0
+\end{align*}
+, ou seja, o sistema converge para o ponto de equilíbrio e, portanto, é assintoticamente estável.
+
+Verificamos esse resultado utilizando o software \emph{simulink} para simular a resposta do sistema com 4 condições iniciais diferentes, conforme na figura \ref{fig:figures-lab6_3_pplane-png}. Vemos que o sistema converge para o ponto de equilíbrio em todos os casos, conforme esperado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab6_3_state_space.png}
+    \caption{Espaço de estados do terceiro sistema com algumas trajetórias simuladas.}
+    \label{fig:figures-lab6_3_pplane-png}
+\end{figure}
+
+\end{document}
