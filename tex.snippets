@@ -143,7 +143,7 @@ snippet fig "Figure environment" b
 endsnippet
 
 snippet it "List item" b
-\item $0
+\item$0
 endsnippet
 
 snippet enum "Enumerate" bA
@@ -225,6 +225,7 @@ snippet // "Fraction" iA
 \\frac{$1}{$2}$0
 endsnippet
 
+context "math()"
 snippet / "Fraction" i
 \\frac{${VISUAL}}{$1}$0
 endsnippet
@@ -296,7 +297,7 @@ snippet == "equals" iA
 &= $1 \\\\
 endsnippet
 
-snippet != "equals" iA
+snippet != "different" iA
 \neq 
 endsnippet
 
@@ -730,6 +731,18 @@ priority 100
 context "math()"
 snippet "([a-zA-Z])bar" "bar" riA
 \overline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet "til" "tilde" riA
+\widetilde{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])til" "tilde" riA
+\widetilde{`!p snip.rv=match.group(1)`}
 endsnippet
 
 priority 10
