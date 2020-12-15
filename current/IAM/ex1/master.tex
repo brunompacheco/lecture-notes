@@ -1,0 +1,16 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+
+\title{EMC5258 - Introdução à Automação da Manufatura - Exercício 1}
+
+\begin{document}
+
+\maketitle
+
+A peça foi desenhada na versão 2017 do software SolidWorks, assim como disponibilizado pela UFSC através do seu terminal acadêmico de softwares. Primeiro definiu-se um bloco base com as dimensões totais da peça, ao qual foram adicionadas as 3 features presentes no desenho original: um furo cego, um pocket e um slot. O furo foi adicionado utilizando a função própria de furo do SolidWorks ("Assistente de furação"), mas com uma customização das opções disponíveis, i.e., ao invés de utilizar um dos modelos de broca disponíveis. Para o pocket e o slot não foi encontrada uma função específica, utilizando-se, então, a ferramenta de corte extrudado para o pocket e a ferramenta de corte por varredura para o slot.
+
+Assim, gerou-se o arquivo STEP e verificou-se a ausência de referências às features desenhadas. Resultado esperado para o pocket e o slot, já que não possuíam funções próprias, mas abaixo do esperado para o caso do hole, uma vez que a função para tal é pré-definida. Isso nos leva a acreditar que o modelo gerado é puramente geométrico, sem informações de mais alto nível, dificultando a execução dos processos subsequentes. A ausência de informações tecnológicas das form features implica na necessidade de interferência humana nos processos subsequentes como, por exemplo, em um sistema CAPP, para apontar os processos de manufatura necessários a partir das informações geométricas.
+
+Ressalta-se que, na abertura do arquivo STEP, o SolidWorks executa uma rotina de reconhecimento de features. Ainda assim, o resultado não compreende todas as características originais, por exemplo, o slot gerado através de um corte por varredura é reconhecido como um corte-extrusão, ou seja, perde-se informação mesmo mantendo-se dentro do sistema.
+
+\end{document}
