@@ -1,0 +1,85 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{N2}
+\author{Bruno M. Pacheco\\
+DAS 5401 - Aspectos de Segurança}
+ 
+\maketitle
+ 
+\exercise{1}
+
+\subexercise{I}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{N2_Q1.png}
+    \caption{Curva de confiabilidade.}
+    \label{fig:}
+\end{figure}
+
+\subexercise{II}
+
+\[
+    10000 \left( 10 R(1440)\right)  = 10000 \left( 1- e^{-10^{-5}1440}\right)  \cong 143 \text{ unidades}
+\] 
+
+\subexercise{III}
+
+\[
+    \frac{R(5760)}{R(4320)} = \frac{0,9440}{0,9577} \cong 98,57 \text{ \% de chance}
+\] 
+
+\exercise{2}
+
+Sabemos que a probabilidade de falha de cada um dos motores pode ser modelada pelas funções
+\begin{align*}
+    F_1(t) &= 1 - e^{-10^{-3}t} \\
+    F_2(t) &= 1 - e^{-10^{-4}t} \\
+.\end{align*}
+
+Assim, podemos calcular a confiabilidade do equipamento como \[
+    F_s(t) = F_1(t)F_2(t) \implies R_s(t) = 1-F_s(t)
+.\] 
+
+Suponde que $\lambda_1$ e $\lambda_2$ são valores de falhas por hora, a probabilidade do equipamento funcionar por 6 meses é \[
+    R_s(4320) \cong 65,39 \text{ \%}
+.\] 
+
+\exercise{3}
+
+Podemos determinar a confiabilidade do equipamento como \[
+    R(t) = e^{-10^{-5}t}
+.\] Assim, \[
+MTTF = \int_0^{\infty}R(t)dt = 10^5 \text{ horas}
+.\] 
+
+\[
+MTBF = MTTF + MTTR = 101500 \text{ horas}
+.\]  
+
+Considerando \emph{up time} como MTBF e \emph{down time} como MTTR, temos a disponibilidade \[
+A = \frac{MTBF}{MTBF + MTTR} = 98,54 \text{ \%}
+.\] 
+
+O número de unidades que irão falhar em 6 meses de uso é \[
+    100 \left( 1 - R(6\cdot 30\cdot 24) \right) \cong 4 \text{ unidades.} 
+\] 
+
+\exercise{4}
+
+Podemos modelar a probabilidade de falha do sistema como \[
+    F(t) = (1 - e^{-\lambda t})^2
+\] e a confiabilidade como \[
+R(t) = 1- F(t)
+.\] Assim, \[
+R(600) \cong 99,66 \text{ \%}
+,\] com \[
+MTBF = \frac{1}{\lambda}\left( 1 + \frac{1}{2} \right) = 15000 \text{ horas}
+.\] 
+
+
+
+\end{document}
