@@ -1,0 +1,18 @@
+\lecture{23}{19.11.2020}{Cinemática Inversa Numérica}
+
+A soluções analíticas funcionam bem para robôs de cadeia cinemática simples. Quando temos estruturas complexas, punhos não-esféricos, manipuladores redundantes ou uma alta relação não-linear entre variáveis do espaço de juntas e cartesiano, \emph{utiliza-se como solução da cinemática inversa a integração no tempo da cinemática diferencial}.
+
+Na cinemática diferencial direta, temos \[
+    \bm{v} = J \dot{\bm{q}}
+,\] sendo $\bm{q}$ os parâmetros das juntas e $\bm{v}$ as velocidades do atuador. Assim, podemos obter \[
+\bm{q}(t) = \bm{q}_0 + \int_{t_0}^{t} J^{-1} \bm{v}
+.\] Dessa forma, basta aplicar um método numérico de integração.
+
+Utilizando o método de Euler, aproximando a operação de diferença de forma linear, isto é, \[
+\bm{v} = \frac{\bm{s}(t) - \bm{s}(t-\Delta t)}{\Delta t}
+.\] De forma discreta, \[
+\bm{s}(t) = \bm{s}_i
+.\] Assim, definimos \[
+\bm{q}_{i+1} = \bm{q}_i + J^{-1}\left( \bm{q}_i \right) \left( \bm{s}_d -\bm{s}_i \right) 
+,\] onde $\bm{s}_d$ é a posição desejada. Essa equação é repetida enquanto $\bm{s}_d - \bm{s}_i$ for significativo.
+

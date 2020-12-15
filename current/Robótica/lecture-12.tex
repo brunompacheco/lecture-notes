@@ -1,0 +1,15 @@
+\lecture{12}{08.10.2020}{Parâmetros de Denavit-Hartenberg}
+
+Dado um sistema construído conforme D-H, podemos parametrizá-lo pelas distâncias e ângulos entre os eixos.
+
+\begin{description}
+    \item[$a_i$] é a distância entre os eixos $z_i$ e $z_{i-1}$ (juntas $i$ e $i+1$) através da normal comum 
+    \item[$\alpha_i$] é o ângulo de $z_{i-1}$ para $z_i$ em torno de $x_i$
+    \item[$d_i$] é a coordenada $z$ (distância em $z$) da origem $O_i$ em relação ao sistema de coordenadas $O_{i-1}x_{i-1}y_{i-1}z_{i-1}$ (ponto em que a normal comum cruza o eixo $z_{i-1}$)
+    \item[$\theta_i$] é o ângulo de $x_{i-1}$ para $x_i$ em torno de $z_{i-1}$
+\end{description}
+
+Com os 4 parâmetros de D-H, podemos caracterizar a transformação da junta $i$ para a junta $i-1$ através da transformação \[
+    A_i^{i-1} = \begin{bmatrix} \cos\theta_i & -\sin\theta_i \cos\alpha_i & \sin\theta_i \sin\alpha_i & a_i \cos\theta_i \\ \sin\theta_i & \cos\theta_i\cos\alpha_i & -\cos\theta_i\sin\alpha_i & a_i\sin\theta_i \\ 0 & \sin\alpha_i & \cos\alpha_i & d_i \\ 0&0&0&1 \end{bmatrix} 
+\] 
+

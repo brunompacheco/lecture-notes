@@ -1,0 +1,55 @@
+\lecture{10}{01.10.2020}{}
+
+Dados $n$ sistemas de coordenadas e as matrizes $A_i^{i-1}$ que relacionam ("levam") o sistema $i$ com o sistema $i-1$, um ponto $\widetilde{P}_n$ pode ser expresso em relação ao sistema de coordenadas $O_0-x_0y_0z_0$ por meio da relação \[
+\widetilde{P}_0 = \left( \prod_{i=1}^{n} A_i^{i-1}\right) \widetilde{P}_n
+\].
+
+\section*{Cinemática Direta}
+
+Dado um robô com vários elos, cada um com sua origem, e um efetuador na extremidade com sistema de coordenadas própria e posição conhecida (relativa ao sistema de coordenadas próprio), queremos encontrar a posição do atuador em relação a base, que é alterada pelos atuadores.
+
+Cada atuador caracteriza a matriz homogênea relativa ao seu sistema de coordenadas através de um ângulo $\theta$, no caso de juntas de revolução, ou um deslocamento $d$, no caso de juntas prismáticas. Podemos, de forma geral, caracterizar esses parâmetros pelas coordenadas generalizadas $q$, ou seja, no caso de um motor 3R, podemos caracterizar a posição e orientação do efetuador através dos 3 parâmetros de seus atuadores em um vetor $\bm{q}$ de 3 dimensões.
+
+\begin{definition}
+    Chamamos de \emph{Cinemática Direta} o problema de determinar a posição de um efetuador em função das coordenadas generalizadas de um robô.
+\end{definition}
+
+Veja que \emph{Cinemática Inversa} é o problema definido de forma trivial a partir da definição acima.
+
+\subsection*{Convenção de Denavit-Hartenberg}
+
+É um método sistemático para resolver o problema da cinemática direta.
+
+\subsubsection*{Localização dos sistemas de coordenadas locais}
+
+Lembrando que quem possui sistema de coordenadas de referência são os elos!
+
+\begin{enumerate}
+    \item Enumeram-se os elos e juntas
+	\begin{itemize}
+	    \item Elo 0 é sempre a base
+		\item Juntas são enumeradas a partir da base, começando em 1
+		\item Junta $i$ fica entre o elo $i$ e o elo $i-1$
+	\end{itemize}
+    \item Determinam-se os eixos das juntas
+	\begin{itemize}
+	    \item Para o eixo de ação da junta $i$, associa-se $z_{i-1}$, ou seja, o eixo $z$ do elo anterior
+	\end{itemize}
+    \item Para o efetuador (elo $n$), define-se o eixo $z_n$ de forma livre
+	\begin{itemize}
+	    \item É interessante colocá-lo convenientemente em relação à ação do efetuador
+	    \item Em relação à sua orientação, recomenda-se colocar paralelo ou perpendicular à ação do efetuador
+	\end{itemize}
+    \item Determinam-se os normais comuns
+	\begin{itemize}
+	    \item O eixo normal comum entre duas juntas é aquele que é ortogonal a ambas e intersecte-as
+		\item Para juntas $i$ e $i-1$, associa-se $x_{i-1}$ para o normal comum
+		    \item No caso do efetuador, utiliza-se o eixo $z_n$
+	\end{itemize}
+    \item Calculam-se a origem e o eixo $y$ de cada sistema de coordenada
+	\begin{itemize}
+		\item Podemos determinar a origem dos sistemas de coordenadas pelo cruzamento entre $z_{i-1}$ e $x_{i-1}$ 
+		\item Da mesma forma, podemos determinar o eixo $y$ dos sistemas de coordenadas através do produto vetorial dos outros dois eixos: $y_{i-1} = z_{i-1}\times x_{i-1}$ (regra da mão direita)
+	\end{itemize}
+\end{enumerate}
+

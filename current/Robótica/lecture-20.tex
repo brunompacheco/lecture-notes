@@ -1,0 +1,71 @@
+\lecture{20}{10.11.2020}{Cinemática Inversa}
+
+Cinemática inversa é o problema de, dado uma posição e uma orientação do efetuador, encontrar os parâmetros do robô.
+
+A cinemática inversa é mais complexa do que a cinemática direta pois:
+\begin{itemize}
+    \item O sistema de equações é não-linear, e.g., robô 2R \[
+    \begin{cases}
+        x = l_1 \cos \theta_1 + l_2 \cos \theta_1 + \theta_2 \\
+	y = l_2 \sin\theta_1 + l_2 \sin\theta_1+\theta_2
+    \end{cases}
+    ;\] 
+    \item Normalmente, não existem soluções fechadas, sendo necessário resolver numericamente;
+    \item O cálculo da cinemática inversa requer intuição geométrica para encontrar equacionamentos relevantes;
+    \item Podem existir múltiplas soluções, ou seja, para uma mesma posição e orientação do efetuador, múltiplas combinações de parâmetros existem (cotovelo para cima ou para baixo).
+\end{itemize}
+
+\begin{note}
+    Robôs de cadeia aberta possuem cinemática direta simples mas cinemática inversa complexa. Robôs de cadeia fechada possuem cinemática direta complexa mas cinemática inversa simples.
+\end{note}
+
+\section*{Resolução do problema da cinemática inversa pelo método geométrico}
+
+A cinemática inversa não possui uma abordagem determinística como o D-H para a cinemática direta. Assim, vemos alguns robôs-exemplo para compreender como se aborda o problema.
+
+Primeiro, nos restringimos à cinemática inversa da posição do efetuador somente, ignorando a orientação.
+
+Para um robô com somente 1 DoF, com um atuador rotativo parametrizado por $\theta_1$, e um elo de comprimento $l_1$, definido pelas equações (cinemática direta) \[
+\begin{cases}
+    P_x = l_1\cos\theta \\
+    P_y = l_1 \sin\theta
+\end{cases}
+,\] podemos calcular a cinemática inversa a partir de
+\begin{align*}
+    \sin \theta_1 = \frac{P_y}{l_1} \\
+    \cos\theta_1 = \frac{P_x}{l_1}
+    \implies \theta_1 = atan2\left( \frac{P_y}{l_1}, \frac{P_x}{l_1} \right) 
+,\end{align*}
+com a restrição \[
+P_x^2 + P_y^2 = l_1^2
+.\] 
+
+Agora, adicionando uma junta prismática de parâmetro $d_2$ ao robô do exemplo corrente, temos uma parametrização \[
+\begin{cases}
+    P_x = d_2\cos\theta_1 \\
+    P_y = d_2 \sin\theta_1
+\end{cases}
+,\] o que possui a mesma resolução \[
+\theta = atan2\left( \frac{P_y}{d_2}, \frac{P_x}{d_2} \right) = atan2\left( P_y, P_x \right)
+\] agora com \[
+d_2^2 = P_x^2 + P_y^2
+.\] Entretanto, temos duas soluções para $d_2$, uma delas com $d_2<0$.
+
+Para um robô com os atuadores invertidos, isso é, primeiro a junta prismática $d_1$ e depois a junta rotativa $\theta_2$, parametrizado por \[
+\begin{cases}
+    P_x = d_1 + l_2\cos\theta_2 \\
+    P_y = l_2 \sin\theta_2
+\end{cases}
+,\] podemos encontrar a solução para $\theta_2$ através de
+\begin{align*}
+    \sin\theta_2 &= \frac{P_y}{l_2} \\
+    \cos\theta_2 &= \frac{P_x - d_1}{l_2} \\
+    \implies \theta_2 &= atan2\left( P_y, P_x - d_1 \right) 
+.\end{align*}
+Já para $d_1$, podemos encontrar um equacionamento a partir do triângulo retângulo formado no elo do efetuador
+\begin{align*}
+    \left( P_x - d_1 \right) ^2 + P_y^2 &= l_2^2 \\
+    \implies d_1^2 - 2P_x d_1 + \left( P_x^2 + P_y^2 - l_2^2 \right) &= 0
+,\end{align*}
+ou seja, formando um polinômio de segundo grau.
+

@@ -1,0 +1,31 @@
+\lecture{22}{17.11.2020}{Cinemática Inversa Espacial}
+
+Um manipulador espacial é constituído de um braço e um punho esférico.
+
+\section*{Manipulador antropomórfico com punho esférico}
+
+Para trabalhar com esse tipo de robô, consideramos o ponto de cruzamento dos três eixos do punho esférico como o ponto de trabalho $\bm{P_w}$. Assim, geramos um desacoplamento da solução, em que o braço é responsável pela posição, e o punho pela orientação.
+
+Tendo a matriz homogênea do efetuador em relação à base e ao ponto de trabalho, podemos determinar o ponto de trabalho a partir da posição do efetuador como \[
+    T_w^{0} = \begin{bmatrix} \bm{R_w}^{0} & \bm{P_w^{0}} \\ \bm{0} & 1 \end{bmatrix} = T_e^{0}\left( T_e^{w} \right) ^{-1}
+,\] assim, conseguimos as equações do braço em relação ao ponto de trabalho.
+
+Agora, podemos reduzir o sistema ao plano $\pi$ que contém $\bm{P_w}$ e as juntas. Dessa forma, definimos $\theta_1$. Os demais parâmetros são encontrados de forma análoga ao robô 2R. Para ficar ainda mais similar ao estudado, podemos resolver com uma referência na junta 2.
+
+Temos, então, $\theta_1$, $\theta_2$ e $\theta_3$. Sabemos que \[
+T_e^{0} = A_1^{0}A_2^{1}A_3^2A_4^3A_5^4A_6^5T_e^6
+,\] sendo \[
+T_e^6 = T_e ^w
+,\] e que $A_1^0$, $A_2^1$ e $A_3^2$ são funções de $\theta_1$, $\theta_2$ e $\theta_3$, enquanto $A_4^3$, $A_5^4$ e $A_6^5$ são funções de $\theta_4$, $\theta_5$ e $\theta_6$. Assim, podemos escrever \[
+T_e^{0} = T_3^0T_6^3T_e^6
+,\] sendo que a única matriz desconhecida é $T_6^3$, uma vez que $T_e^6$ é relação do efetuador ao ponto de trabalho, conhecida previamente.
+
+Pensando somente nas rotações,
+\begin{align*}
+    R_e^0 &= R_1^0R_6^3R_e^6 \\
+    => R_6^3 &= \left(R_3^0\right)^TR_e^0\left( R_e^6 \right)^T
+,\end{align*}
+que nos permite encontrar os parâmetros que faltam através da comparação da matriz literal e da matriz numérica, similar ao caso da cinemática direta.
+
+Veja que têm-se soluções com cotovelo para cima ou para baixo e com o punho para cima ou para baixo, ou seja, 4 soluções resultante das combinações.
+

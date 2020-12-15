@@ -1,0 +1,33 @@
+\lecture{15}{20.10.2020}{Cinemática Diferencial}
+
+Lembrando que: \emph{o objetivo da cinemática diferencial direta é mapear as velocidades disjuntas nas velocidades lineares e angulares no atuador}.
+
+\begin{eg}
+    Para um robô 3R (3 juntas rotativas em um plano bidimensional) com elos de comprimento $l_i$. Temos que, se $\theta_i$ é o ângulo da junta $i$ com a normal comum do elo anterior, \[
+    P_x = l_1\cos\left( \theta_1 \right) + l_2\cos\left( \theta_1  + \theta_2\right) + l_3\cos\left( \theta_1 + \theta_2 + \theta_3 \right) 
+    \] e \[
+    P_y = l_1\sin\left( \theta_1 \right) + l_2\sin\left( \theta_1  + \theta_2\right) + l_3\sin\left( \theta_1 + \theta_2 + \theta_3 \right) 
+    ,\] assim o que nos resta determinar é o ângulo $\phi$ do efetuador que é, trivialmente, a soma dos ângulos das juntas. Ou seja, temos a cinemática direta. Temos isso a partir da matriz homogênea \[
+    A_3^{0} = \begin{bmatrix} R_z\left( \theta_1 + \theta_2 + \theta_3\right)  & \bm{P} \\ \bm{0} & 1\end{bmatrix} 
+    .\]
+
+    Agora, sabendo que os parâmetros $\theta_i$ são os parâmetros de D-H, podemos encontrar a Jacobiana através das derivadas dessas funções, \[
+	\begin{bmatrix} \dot{P_x} \\ \dot{P_y} \\ \omega \end{bmatrix} = \begin{bmatrix} \frac{\partial P_x}{\partial \theta_1} & \frac{\partial P_x}{\partial \theta_2} & \frac{\partial P_x}{\partial \theta_3} \\ \frac{\partial P_y}{\partial \theta_1} & \frac{\partial P_y}{\partial \theta_2} & \frac{\partial P_y}{\partial \theta_3} \\ \frac{\partial \phi}{\partial \theta_1} & \frac{\partial \phi}{\partial \theta_2} & \frac{\partial \phi}{\partial \theta_3}   \end{bmatrix} \begin{bmatrix} \dot{\theta}_1 \\ \dot{\theta}_2 \\ \dot{\theta_3} \end{bmatrix} 
+    .\] 
+
+    Agora, veja que para o caso $\theta_1 = \theta_2=\theta_3$, temos que a matriz se torna \[
+	\begin{bmatrix} \dot{P_x} \\ \dot{P_y} \\ \omega \end{bmatrix} = \begin{bmatrix} 0 & 0 & 0 \\ l_1+l_2+l_3 & l_2+l_3 & l_3 \\ 1 & 1 & 1 \end{bmatrix} \begin{bmatrix} \dot{\theta}_1 \\ \dot{\theta}_2 \\ \dot{\theta_3} \end{bmatrix} 
+    .\] De forma similar, para o caso $\theta_1=-\theta_2=\frac{\pi}{2}$ e $\theta_3=0$, temos \[
+	\begin{bmatrix} \dot{P_x} \\ \dot{P_y} \\ \omega \end{bmatrix} = \begin{bmatrix} -l_1 & 0 & 0 \\ l_2+l_3 & l_2+l_3 & l_3 \\ 1 & 1 & 1 \end{bmatrix} \begin{bmatrix} \dot{\theta}_1 \\ \dot{\theta}_2 \\ \dot{\theta_3} \end{bmatrix} 
+    \] 
+\end{eg}
+
+De forma mais genérica, podemos escrever a jacobiana como \[
+    \begin{bmatrix} \bm{\dot{P}} \\ \bm{\omega} \end{bmatrix} = \begin{bmatrix} J_{P_1} & \ldots & J_{P_n} \\ J_{\phi_1} & \ldots & J_{\phi_n} \end{bmatrix} \begin{bmatrix} \dot{q}_1 \\ \vdots \\ \dot{q}_n \end{bmatrix} 
+.\] Se desejamos encontrar as funções dos parâmetros de D-H para uma dada trajetória, então precisamos do problema inverso, ou seja, \[
+     \begin{bmatrix} \dot{q}_1 \\ \vdots \\ \dot{q}_n \end{bmatrix} = J^{-1}  \begin{bmatrix} \bm{\dot{P}} \\ \bm{\omega} \end{bmatrix}
+,\] ou seja, se o Jacobiano não for invertível para um determinado ponto no espaço, não conseguimos definir a dinâmica inversa, o que acontece no caso de uma \emph{singularidade}. Ou seja, singularidade $\implies det\left( J \right) =0 \implies$ impossível de determinar cinemática diferencial inversa.
+
+Também existem problemas nas redondezas da singularidade, pois o Jacobiano possui um determinante muito pequeno e, assim, acaba resultando em uma inversa que gera variações muito grandes para os parâmetros de D-H.
+
+

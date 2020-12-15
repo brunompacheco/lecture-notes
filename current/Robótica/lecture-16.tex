@@ -1,0 +1,38 @@
+\lecture{16}{22.10.2020}{Jacobiano Geométrico}
+
+Pode-se também determinar o Jacobiano de forma \emph{geométrica}. Ou seja, sabendo que \[
+\bm{v}=\begin{bmatrix} \bm{\dot{P}} \\ \bm{\omega} \end{bmatrix} = \begin{bmatrix} J_{P_1} & \ldots & J_{P_n} \\ J_{\phi_1} & \ldots & J_{\phi_n} \end{bmatrix} \begin{bmatrix} \dot{q}_1 \\ \vdots \\ \dot{q}_n \end{bmatrix} 
+,\] queremos determinar as matrizes $J_*$ de forma geométrica.
+
+\subsubsection*{Juntas prismáticas}
+
+Dada um robô com uma junta prismática $i$, temos associado o eixo $z_{i-1}$, que dita a direção da movimentação $d_i$ desse atuador. Dessa forma, podemos afirmar que o deslocamento do efetuador será paralela ao eixo $z_{i-1}$ com mesma magnitude, ou seja, \[
+J_{P_i}\dot{q}_i = z_{i-1}\dot{d}_i \implies J_{P_i} = z_{i-1}
+.\]
+
+Já para a velocidade angular, não temos influência da atuação da junta prismática, ou seja, \[
+J_{\phi_i}\dot{q}_i = 0
+.\] 
+
+\subsubsection*{Juntas de revolução}
+
+Dado um robô com uma junta de revolução $i$, temos associado o eixo $z_{i-1}$, que orienta a direção da rotação resultante da atuação $\theta_i$ desse atuador. A velocidade angular do efetuador se dará na mesma direção do eixo $z_{i-1}$ com mesma magnitude \[
+J_{\phi_i}\dot{q}_i = z_{i-1}\dot{\theta}_i = z_{i-1}\omega_i \implies J_{\phi_i} = z_{i-1}
+.\] 
+
+Já para a velocidade linear, a contribuição do atuador se dará através do produto vetorial entre a rotação na junta e o vetor distância entre o efetuador e a junta, ou seja, \[
+\bm{\dot{P}} = \bm{\omega}_i \times \bm{r}_{i-1,n}
+.\] Agora veja que \[
+\bm{r}_{i-1,n} = \bm{P}_n - \bm{P}_{i-1}
+,\] todos em relação à base. Assim, temos \[
+J_{P_i}\dot{q}_i = \left( z_{i-1}\times \left( \bm{P}_n - \bm{P}_{i-1} \right)  \right) \dot{\theta}_i \implies J_{P_i} = z_{i-1}\times \left( \bm{P}_n - \bm{P}_{i-1} \right)
+.\] 
+
+
+\begin{note}
+    Lembrando que, para ambas as juntas, temos \[
+    z_{i-1} = R_{i-1}^{0}z_0
+    .\] 
+\end{note}
+
+

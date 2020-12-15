@@ -1,0 +1,16 @@
+\lecture{24}{24.11.2020}{Estática para Robôs}
+
+Queremos entender, dado uma força e um momento no efetuador, quais as forças nos atuadores prismáticos e os torques nos atuadores rotatórios. É válido estudar estática uma vez que é aplicável também para trajetórias lentas ($\frac{\partial v}{\partial t} \cong 0$), consideradas quasi-estáticas.
+
+\section*{Modelo para forças estáticas}
+
+Tendo um robô de cadeia aberta aplicando uma força $\bm{F}_e$ pelo efetuador, precisamos calcular as forças $\bm{F}_i$ resultantes de cada atuador no efetuador através de \[
+\bm{F}_e = \sum \bm{F}_i
+.\] Podemos calcular $F_i$ de forma trivial para atuadores prismáticos. Para atuadores rotativos, utilizamos a relação \[
+\bm{\tau_i} = \bm{r}_i \times \bm{F}_i
+,\] onde $\bm{r}_i$ é a distância do atuador para o efetuador e $\bm{\tau}_i$ é o torque aplicado pelo atuador.
+
+Podemos determinar as forças relativas aos atuadores como \[
+    \text{\textbf{T}} = \begin{bmatrix} \bm{\tau}_i \\ \bm{F}_i \end{bmatrix} = J^{T} \bm{F} = J^{T} \begin{bmatrix} \bm{F}_e \\ \bm{M}_e \end{bmatrix} 
+.\] 
+

@@ -1,0 +1,50 @@
+\lecture{21}{12.11.2020}{Cinemática Inversa (continuação)}
+
+Para um robô constituído de duas juntas rotativas parametrizadas por $\theta_1$ e $\theta_2$, temos \[
+\begin{cases}
+    P_x = l_1\cos\theta_1 + l_2 \cos\theta_1+\theta_2 \\
+    P_y = l_1\sin\theta_1 + l_2 \sin\theta_1+\theta_2 \\
+    \phi_z = \theta_1 + \theta_2
+\end{cases}
+,\] queremos encontrar
+\begin{align*}
+\theta_1 = f_1\left( P_x, P_y \right) \\
+\theta_2 = f_2\left( P_x, P_y \right) 
+.\end{align*}
+Sendo $r$ a distância do efetuador à base, temos \[
+    r^2 = P_x^2 + P_y^2 \\
+\] e, pela lei dos cossenos, \[
+r^2 = l_1^2+l_2^2 -2l_1l_2\cos\beta 
+,\] onde $\beta = \pi-\theta_2$. Agora, podemos computar \[
+\sin\beta = \pm\sqrt{1-\cos^2\beta} 
+,\] que nos permite calcular \[
+\beta = atan2\left( \sin\beta, \cos\beta \right) 
+.\] Note que o sinal de $\beta$ equivale a escolha de cotovelo para cima ou para baixo.
+
+Para $\theta_1$, podemos aplicar a lei dos cossenos para o ângulo $\varphi$ adjacente à $\theta_1$ \[
+    l_2^2 = l_1^2 + r^2 - 2l_1r\cos\varphi
+,\] que, de forma similar ao $\theta_2$, nos permite calcular \[
+\varphi = atan2\left( \sin\varphi, \cos\varphi \right) 
+\] e, portanto, \[
+\theta_1 = atan2\left( P_y, P_x \right) -\varphi
+.\] 
+
+Agora, adicionando a orientação $\phi_z$ e trabalhando com um robô 3R, podemos abordar o problema como uma redução para o problema do robô 2R acima. Veja que \[
+\begin{cases}
+    \bm{P} = \begin{bmatrix} P_x \\ P_y \end{bmatrix} = \begin{bmatrix} 
+    l_1\cos\theta_1 + l_2\cos\left( \theta_1 +\theta_2 \right) +l_3\cos\left( \theta_1 + \theta_2 + \theta_3 \right) \\
+    l_1\sin\theta_1 + l_2\sin\left( \theta_1 +\theta_2 \right) +l_3\sin\left( \theta_1 + \theta_2 + \theta_3 \right)
+\end{bmatrix} \\
+\phi_z = \theta_1 + \theta_2 + \theta_3
+\end{cases}
+.\] Definindo um ponto de trabalho $\bm{P_w}$ no atuador 3, temos \[
+\bm{P_w} + l_3\begin{bmatrix} \cos\phi \\ \sin\phi \end{bmatrix} = \bm{P}
+,\] ou seja, \[
+\begin{cases}
+    P_{w_x} = P_x - l_3\cos\phi = l_1 \cos\theta_1 + l_2\cos\left( \theta_1 + \theta_2 \right) \\
+    P_{w_y} = P_x - l_3\sin\phi = l_1 \sin\theta_1 + l_2\sin\left( \theta_1 + \theta_2 \right) \\
+\end{cases}
+,\] problema idêntico ao resolvido acima.
+
+A abordagem para o caso plano é a de tentar reduzir o problema para um caso mais simples.
+

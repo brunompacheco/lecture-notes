@@ -1,0 +1,34 @@
+\lecture{9}{29.09.2020}{Degeneração de RPY e Transformações Homogêneas}
+
+\subsection*{Degeneração do RPY}
+
+A degeneração do sistema RPY acontece quando $\vartheta \in \left\{  \frac{\pi}{2}, \frac{-\pi}{2} \right\}$, pois acontece de os outros dois ângulos implicarem em rotações no mesmo eixo. Quando $\vartheta = \frac{\pi}{2}$, acontece dos ângulos implicarem em rotações opostas (mesma direção, sentidos opostos), enquanto quando  $\vartheta = \frac{-\pi}{2}$, as rotações são idênticas em direção e sentido.
+
+\section*{Transformação Homogênea}
+
+Temos a posição denotada por um vetor de coordenadas referenciadas a um sistema de coordenadas fixo  \[
+P = \begin{bmatrix} P_x \\ P_y \\ P_z \end{bmatrix} 
+\]. A rotação é denotada pela projeção dos vetores unitários fixos ao corpo sobre o sistema de coordenadas de referência.
+
+Normalmente, quando se trabalha com um corpo, temos as informações de todos os pontos do corpo em relação à uma referência fixa ao corpo. Dado um movimento qualquer em que se conhece as operações relativas à referência do objeto, queremos saber a \emph{transformação} ocorrida relativa à referência da base. Ou seja, dados dois sistemas de coordenadas $O_0$ e $O_1$ e a posição $P_1$ de um corpo em relação ao segundo sistema de coordenadas, queremos encontrar a posição $P_0$ desse corpo em relação ao primeiro sistema de coordenadas. Podemos compreender a referência 1 como a referência do corpo após uma operação e a referência 0 como a referência da base.
+
+Denotamos \[
+    P_0 = O_1^{0} + (P_1)_0
+\] em que $O_1^{0}$ é a posição do sistema $O_1$ em relação ao sistema $O_0$ e \[
+(P_1)_0 = R_1^{0}P_1
+\], ou seja, a rotação do sistema de coordenadas $O_1$ em relação ao sistema $O_0$ aplicada ao ponto $P_1$.
+
+Podemos encontrar a operação inversa através de \[
+P_1 = \left( R_1^{0}\right)^{T}P_0 - \left( R_1^{0}\right)^{T}O_1^{0}
+\].
+
+Em um sistema que envolve muitas referências, \emph{e.g.}, um braço robótico com vários elos, essa operação se torna trabalhosa. Podemos facilitar esse processo utilizando uma \emph{representação por matrizes homogêneas}. Estendemos os vetores e matrizes para acomodar as operações em uma única operação matricial. Estendemos primeiro a posição do objeto \[
+    \widetilde{P} = \begin{bmatrix} P \\ \bm{1} \end{bmatrix} 
+\], o que nos permite representar as operações prévias como \[
+\begin{bmatrix} P_0 \\ \bm{1} \end{bmatrix} = \begin{bmatrix} R_1^{0} & O_1^{0} \\ \bm{0}_{1\text{x}3} & 1 \end{bmatrix} \begin{bmatrix} P_1 \\ 1 \end{bmatrix} 
+\]. Denotamos o operador matricial composto por $A_1^{0}$, portanto, podemos escrever \[
+\widetilde{P}_0 = A_1^{0}\widetilde{P}_1
+\]. Da mesma forma, a operação inversa pode ser encontrada de forma trivial como \[
+A_0^{1} = \begin{bmatrix} \left( R_1^{0} \right) ^{T} & -\left( R_1^{0} \right) ^{T}O_1^{0} \\ \bm{0}_{1\text{x}3} & 1 \end{bmatrix} 
+\].
+

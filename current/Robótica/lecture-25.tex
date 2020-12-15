@@ -1,0 +1,26 @@
+\lecture{25}{26.11.2020}{Introdução à Geração de Trajetórias}
+
+O principal objetivo da geração de trajetórias é facilitar o controle de posição, velocidade, aceleração. Uma movimentação para uma posição desejada, através da cinemática inversa, resulta em uma mudança brusca dos parâmetros dos atuadores, ou seja, um esforço muito grande.
+
+Uma trajetória lida com as variações da posição, velocidade e aceleração ao longo do tempo, no espaço de juntas. A partir de uma posição inicial, deseja-se atingir uma posição final através de posições intermediárias. Calcula-se a posição e velocidade para essas posições para que sejam suaves.
+
+Se esse trabalho de definição e cálculo de cinemática inversa é feita no momento de execução, chama-se online. Se é feito previamente, chama-se offline.
+
+Trajetórias ponto-a-ponto são geradas quando não importa o caminho, mas o ponto inicial e final. Assim, a trajetória se resume a deslocamentos "diretos" de um ponto para o seguinte.
+
+Trajetórias contínuas são geradas através de interpolação numérica das posições e orientações desejadas, gerando curvas parametrizadas. Naturalmente, são caracterizadas pela ordem da interpolação.
+
+Normalmente, utilizamos funções de terceira ordem para a geração de trajetórias, resultando em uma velocidade continua e uma aceleração descontínua mas bem controlada. Dessa forma, a trajetória torna-se \[
+q(t) = a_3t^3 + a_2t^2 + a_1t + a_0
+.\] Pode-se encontrar esses coeficientes através das condições iniciais e finais desejadas para a posição e velocidade.
+
+\section*{Perfil de velocidade trapezoidal}
+
+Muito comum é impor um perfil de velocidade trapezoidal, ou seja, sendo $t_i =0$, a posição varia de forma constante, salvo por um período $t_c$ de aceleração e desaceleração (constantes). Veja que nessa situação, a aceleração do sistema é constante (em módulo) durante os períodos de aceleração e desaceleração e tem valor \[
+\ddot{q}_{max} = \frac{\dot{q}_{max}}{t_c}
+.\]
+
+Normalmente definimos o período de aceleração a partir da aceleração máxima suportada pelo robô, integrando a curva da velocidade. Chegamos em \[
+t_c = \frac{t_f}{2} -\sqrt{\frac{\ddot{q}_{max}t_f^2 - 4\Delta q}{4 \ddot{q}_{max}}} 
+.\] 
+

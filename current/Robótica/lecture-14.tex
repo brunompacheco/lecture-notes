@@ -1,0 +1,38 @@
+\lecture{14}{15.10.2020}{Cinemática Diferencial}
+
+Cinemática diferencial é o próximo passo: estudo da propagação das velocidades em um robô.
+
+Definimos a velocidade vetorial de um ponto através de vetores unitários. De forma genérica como \[
+\bm{v} = \begin{bmatrix} \dot{x} \\ \dot{y} \\ \dot{z} \end{bmatrix} = \|\bm{v}\|\bm{\dot{u}}
+,\] em que $\bm{\dot{u}}$ é um vetor unitário.
+
+Assim, dado um vetor $\bm{q}$ dos parâmetros de D-H, o problema da cinemática direta diferencial é o mapeamento $\bm{\dot{q}} \to \bm{v}$, onde $\bm{v}$ é a velocidade no efetuador, ou seja, \[
+\bm{\dot{q}} = \begin{cases}
+    \dot{\theta} \\ \dot{d}
+\end{cases}  \to \bm{v} = \begin{cases}
+    \dot{p} \\ \omega
+\end{cases} 
+,\] sendo $p$ as posições do efetuador e $\omega$ a sua velocidade angular. Esse mapeamento é feito através do Jacobiano.
+
+\begin{eg}
+    Em um robô RPRR em um espaço bidimensional, temos \[
+    \bm{q} = \begin{bmatrix} \theta_1 \\ d_2 \\ \theta_3 \\ \theta_4 \end{bmatrix} \implies \dot{\bm{q}} = \begin{bmatrix} \dot{\theta}_1 \\ \dot{d}_2 \\ \dot{\theta}_3 \\ \dot{\theta}_4 \end{bmatrix} 
+    .\]
+
+    Ao mesmo tempo, o efetuador possui velocidade descrita por \[
+    \bm{v} = \begin{bmatrix} \dot{p}_x \\ \dot{p}_y \\ \omega \end{bmatrix} 
+    .\] 
+
+    Fazemos o mapeamento através da matriz jacobiana $J$ de forma que \[
+    \bm{v} = J \bm{\dot{q}}
+    .\] 
+\end{eg}
+
+\subsection*{Singularidade}
+
+Singularidade acontece quando em uma posição, existe a redução das possibilidades de movimento do efetuador. Ou seja, independente da atuação feita nas juntas, não é possível se deslocar nas direções e sentidos antes possíveis. Podemos analisar isso através da Jacobiana, que indica uma redução das dimensões da imagem da transformação pelo seu \emph{rank}.
+
+\subsection*{Redundância}
+
+Quando o robô possui juntas que permitem o mesmo movimento do atuador, possibilitando mais posturas para uma mesma posição. Isso possibilita, \emph{e.g.}, evitar colisões nos trajetos.
+
