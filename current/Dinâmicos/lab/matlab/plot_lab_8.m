@@ -7,7 +7,7 @@ plot(out.x_1.data, out.x_2.data, 'blue');
 hold off;
 
 figure;
-plot(out.x_1);
-hold on;
 plot(out.u);
+hold on;
+plot(out.x_1);
 hold off;

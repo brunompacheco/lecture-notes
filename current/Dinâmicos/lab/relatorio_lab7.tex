@@ -43,8 +43,6 @@ Essa linearização foi implementada no \emph{Simulink} conforme pode ser visto 
     \label{fig:figures-lab7_simulink_MA-png}
 \end{figure}
 
-[ADICIONAR IMPLEMENTAÇÃO DO CONTROLADOR] (destacar tuning do ganho de anti-windup)
-
 Para o projeto do controlador nos pontos de operação, utilizou-se a ferramenta \emph{rltool} do Matlab. Assim, chegou-se aos valores do controlador conforme a tabela \ref{tab:ganhos-PI}.
 
 \begin{table}[H]
@@ -150,6 +148,32 @@ Para analisar a robustez do sistema, fixamos o parâmetro $A_2$ do ponto de vist
     \includegraphics[width=0.8\textwidth]{figures/lab7_c_resposta.png}
     \caption{Resposta do sistema com variação do parâmetro $A_2$ da planta.}
     \label{fig:figures-lab7_c_resposta-png}
+\end{figure}
+
+Vê-se que com uma variação do parâmetro $A_2$ a erro não é mais anulado, ou seja, já não mais se atinge a referência em regime permanente.
+
+\subexercise{d)}
+
+Além de incluir uma ação integral no controlador, podemos atuar estimando $A_2$ a partir do modelo do sistema, ou seja, sabendo o comportamento do sistema, podemos, a partir do conhecimento da entrada e da saída, estimar o parâmetro desconhecido. Dessa forma, podemos estimar \[
+    \hat{A_2} = K_2 \left( h(t) - \hat{h}(t) \right) 
+,\] onde $\hat{h}(t)$ é a nossa estimativa do estado do sistema a partir de um observador.
+
+A implementação do observador pode ser observada na figura \ref{fig:lab7_obs-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_obs.png}
+    \caption{Implementação do observador.}
+    \label{fig:figures-lab7_obs-png}
+\end{figure}
+
+A reposta do sistema com o observador pode ser observada na figura \ref{asdf}. Podemos notar que o sistema corrige a sua estimativa do parâmetro $A_2$ com erro 0 em regime permanente, o que resulta novamente em uma anulação no erro em regime permanente da saída controlada.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7_obs_plot.png}
+    \caption{Resposta do sistema com observador à variação do parâmetro $A_2$.}
+    \label{asdf}
 \end{figure}
 
 \end{document}

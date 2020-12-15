@@ -587,14 +587,76 @@ y_r < \frac{\sqrt{10}^3}{6} \cong 5,27
 
 \exercise{16}
 
-Para a não linearidade do sistema, primeiro observamos que é uma função ímpar, portanto precisamos calcular somente o parâmetro $B$ de sua aproximação. Assim, calculamos
+Podemos aproximar a função $\phi(x)$ por \[
+    \phi(x) = C_0 + \sum_{k=1}^{\infty} A_k\cos k\omega t + B_k \sin k\omega t
+.\] Como $\phi$ é uma função ímpar, $A_k = 0 \forall k$, portanto precisamos calcular somente o parâmetro $B$ de sua aproximação. Assim, considerando o ponto de equilíbrio com $y_r = 0$, calculamos
 \begin{align*}
     \Phi(t) &\cong B_1\sin\left( \omega t \right) \\
-    B_1 &= \frac{1}{\pi}\int_0^{2\pi}\Phi\left( x_3 \right) \sin\left( \tau\right) d\tau ; \tau = \omega t \\
-    x_3(t) &= A\sin\left( \omega t \right)  \\
-    \implies B_1 &= \frac{1}{4}A^3 \\
-    \implies N(A) &= \frac{\Phi(t)}{x_3(t)} = \frac{1}{4}A^2
+    B_1 &= \frac{1}{\pi}\int_0^{2\pi}\Phi\left( A\sin\tau \right) \sin\left( \tau\right) d\tau ; \tau = \omega t \\
+	&= \frac{1}{\pi}\frac{A^3}{3}\int_0^{2\pi}\sin ^{4}\tau d\tau \\
+	&= \frac{A^3}{3\pi}\frac{3\pi}{4} = \frac{A^3}{4}
 .\end{align*}
+Portanto, $\phi$ pode ser aproximado pelo ganho \[
+    N(A) = \frac{B_1}{A} = \frac{A^2}{4}
+.\] 
+
+Através do diagrama de blocos montado, concluímos que a função de transferência em malha aberta do sistema pode ser representada, sem a não-linearidade, por \[
+    G(s) = \frac{k\left( s+5 \right) }{3s\left( s + \frac{10}{3} \right) }
+.\] Assim, encontramos os ciclos limites através da equação \[
+G(j\omega) = -\frac{1}{N(A)} = \frac{-4}{A^2}
+.\] 
+
+\exercise{17}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{lista1_17.png}
+    \caption{Diagrama de Nyquist de $G(j\omega)$.}
+    \label{fig:lista1_17-png}
+\end{figure}
+
+Pelo diagrama de Nyquist, podemos observar que não há interseção entre $G(j\omega)$ e a inversa da aproximação da não linearidade, portanto a equação \[
+    K*G(j\omega) = \frac{-1}{N(A)}
+\] não possui solução, ou seja, não existe ciclo limite.
+
+\exercise{18}
+
+\subexercise{a}
+
+A relação entrada-saída do sistema pode ser descrita como \[
+Y(s) = \beta X(s) = \beta \frac{\alpha}{s} U(s)
+,\] considerando o atraso, \[
+\frac{Y_e(s)}{U(s)} = \frac{\alpha \beta}{s}e^{-sL} = G(s)
+.\] O relé pode ser descrito pela função \[
+N(A) = \frac{4}{\pi A}
+.\] Podemos encontrar um ciclo limite pela equação que aponta a instabilidade do sistema, i.e., \[
+1+N(A)G(s) = 0
+,\] portanto, \[
+G(j\omega) = -\frac{\pi A}{4}
+.\] Abordamos essa equação através da magnitude e da fase de ambos os lados da equação
+\begin{align*}
+    & \varphi \left( -\frac{\pi A}{4} \right) = -\pi \\
+    & \varphi \left( G(j\omega) \right) = -\frac{\pi}{2} - \omega L \\
+    \implies & \omega_c = \frac{\pi}{2L}
+\end{align*}
+\begin{align*}
+    \|-\frac{\pi A}{4}\| = \frac{\pi A}{4} \\
+    \|G(j\omega)\| = \frac{\alpha \beta}{\omega} \\
+    \implies A_c = \frac{4 \alpha \beta}{\pi \omega_c} = \frac{8 \alpha \beta L}{\pi^2}
+.\end{align*}
+
+\subexercise{b}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{lista1_18b.png}
+    \caption{Diagrama polar do sistema com a inversa da função descritiva representada pela flecha.}
+    \label{fig:lista1_18b-png}
+\end{figure}
+
+Note que a interseção encontrada é a interseção da esquerda, mais próxima do ponto -1, que é a do ciclo limite. Vemos isso com \[
+    A_c = \frac{8}{\pi^2} \cong 0,81 \implies \frac{-1}{N(A)} = -0,64
+,\] coincidindo com o gráfico.
 
 \exercise{19}
 
@@ -979,6 +1041,24 @@ o que resulta nas igualdades \[
 
 \exercise{29}
 
+Primeiro, vemos que, de fato, no equilíbrio, \[
+\begin{cases}
+    \dot{x}_2 = 0 \implies x_1 = -\mu x_2 - x_2^3 \\
+    \dot{x_1} = 0 \implies -\mu^2 x_2 -\mu x_2^3 - x_2 -\mu x_2^3 -x_2^4
+\end{cases} 
+,\] portanto $(0,0)$ é uma solução, logo, um ponto de equilíbrio.
+
+Agora, temos que a jacobiana do sistema \[
+J = \begin{bmatrix} 
+    \mu +x_2^2 & -1 +2x_1x_2 \\
+    1 & \mu +3x_2^2
+\end{bmatrix} 
+,\] avaliada no ponto de equilíbrio \[
+J(0,0) = \begin{bmatrix} \mu & -1 \\ 1 & \mu \end{bmatrix} 
+\] possuirá autovalores da forma \[
+\lambda = \mu \pm \sqrt{-1} 
+,\] portanto temos claramente no ponto $\mu=0$ uma bifurcação de Hopf, onde $\mu<0$ implica em um equilíbrio estável e $\mu>0$ em um equilíbrio instável.
+
 Para viabilizar a análise do sistema, realiza-se a troca de coordenadas retangulares para polares conforme \[
     \begin{cases}
         x_1 = r\cos\theta \\
@@ -1015,43 +1095,9 @@ Dessa forma, chega-se ao sistema \[
     \dot{\theta} = 1 \\
     \dot{r} = \mu r + r^3\sin^2\theta
 \end{cases}
-.\] 
-
-Agora, para analisar o equilíbrio do sistema original, temos que analisar o sistema em coordenadas polar de forma que \[
-    \begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} 
-    \dot{r}\cos\theta -\dot{\theta}r\sin\theta \\
-    \dot{r}\sin\theta + \dot{\theta}r\cos\theta
-\end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}  \\
-,\] o que nos permite concluir que, para $\theta \neq n\frac{\pi}{2} : n\in \Z$,
-\begin{align*}
-    &\dot{r} = r \frac{\sin\theta}{\cos\theta} = -r \frac{\cos\theta}{\sin\theta} \\
-    \implies& r\left( \frac{\sin\theta}{\cos\theta} + \frac{\cos\theta}{\sin\theta} \right) = 0 \\
-    \implies& r \frac{1}{\sin\theta\cos\theta} = 0 \\
-    \implies& r = 0
-.\end{align*}
-Note que, como a magnitude é 0, não importa o ângulo $\theta$.
-
-Para $\theta=n\pi$, temos, \[
-    \begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} 
-    \dot{r}  \\
-    r
-\end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}  \\
-.\]
-
-Já para $\theta = n\pi - \frac{\pi}{2}$, temos \[
-    \begin{bmatrix} \dot{x}_1 \\ \dot{x}_2 \end{bmatrix} = \begin{bmatrix} 
-    -r \\
-    \dot{r}\sin\theta
-\end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}  \\
-.\]
-
-Analisamos então o equilíbrio $(0,0)$ que representa o ponto $r=0$ em coordenadas polares. Para o novo sistema, temos a jacobiana \[
-    J = \begin{bmatrix} 0 & 0 \\ r^32\sin\theta\cos\theta & \mu + 2r^2\sin^2\theta \end{bmatrix} 
-,\] portanto, \[
-A = \begin{bmatrix} 
-    0 & 0 \\ 0 & \mu
-\end{bmatrix} 
-,\] que possui autovalores $0$ e $\mu$. Ou seja, em $\mu = 0$ existe uma bifurcação de Hopf.
+.\] Vemos, então, que o sistema possui equilíbrios tal que \[
+r \left( \mu + r^2\sin^2\theta \right)  = 0
+.\] Assim, como $\sin^2\theta > 0$, o equilíbrio só vai existir para $\mu<0$, caracterizando uma bifurcação de Hopf sub-crítica.
 
 \exercise{30}
 

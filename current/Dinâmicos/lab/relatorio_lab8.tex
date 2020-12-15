@@ -13,6 +13,99 @@ DAS 5142 - Sistemas Dinâmicos}
 
 \subexercise{a)}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1a_state_1.png}
+    \caption{Espaço de estados para $k_1 = k_2 = 1$.}
+    \label{fig:figures-lab8_1a_state-png}
+\end{figure}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1a_time_1.png}
+    \caption{Comportamento da saída e do sinal de controle para $k_1 = k_2 = 1$.}
+    \label{fig:figures-lab8_1a_state-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1a_state_2.png}
+    \caption{Espaço de estados para $k_1 = k_2 = 1$.}
+    \label{fig:figures-lab8_1a_state-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1a_time_2.png}
+    \caption{Comportamento da saída e do sinal de controle para $k_1 = 1$ e $k_2 = 2$.}
+    \label{fig:figures-lab8_1a_state-png}
+\end{figure}
+
+Notamos que como o aumento de $k_2$ afeta a inclinação da reta, ele controla a velocidade de convergência para o ponto de equilíbrio.
+
+
+\subexercise{b}
+
+Temos \[
+    \nabla \sigma = \begin{bmatrix} -k_1 & -k_2 \end{bmatrix} 
+\] e 
+\begin{align*}
+    f^{+} = \begin{bmatrix} x_2 \\ 1 \end{bmatrix} \\
+    f^{-} = \begin{bmatrix} x_2 \\ -1 \end{bmatrix} \\
+,\end{align*}
+portanto, a região de deslizamento se dá em
+\begin{align*}
+    L_f^{+} \sigma = -k_1x_2 -k_2 \implies L_f^{+}\sigma <0 \forall x_2> \frac{-k_2}{k_1}\\
+    L_f^{-} \sigma = -k_1x_2 +k_2 \implies L_f^{-} > 0 \forall  x_2 < \frac{k_2}{k_1} \\
+    \implies \left( L_f^{+} \sigma \right) \left( L_f^{-} \sigma \right) \le 0 \forall x_2 \in \left\{ -\frac{k_2}{k_1}, \frac{k_2}{k_1} \right\} 
+.\end{align*}
+
+\subexercise{c}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1c_state_1.png}
+    \caption{Espaço de estados para $k_1 = k_2 = 1$.}
+    \label{fig:figures-lab8_1c_state-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1c_time_1.png}
+    \caption{Comportamento da saída e do sinal de controle para $k_1 = k_2 = 1$.}
+    \label{fig:figures-lab8_1c_state-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1c_state_2.png}
+    \caption{Espaço de estados para $k_1 = 1$ e $k_2 = 2$.}
+    \label{fig:figures-lab8_1c_state-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1c_time_2.png}
+    \caption{Comportamento da saída e do sinal de controle para $k_1 = 1$ e $k_2 = 2$.}
+    \label{fig:figures-lab8_1c_state-png}
+\end{figure}
+
+Com o relê com histerese (de $\pm 0,2$), vemos uma diminuição da frequência de atuação do sinal de controle mas uma oscilação também na saída. Ambas essas características são influenciadas pelo ganho $k_2$ como visível nas figuras.
+
+\subexercise{d}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1d_state.png}
+    \caption{Trajetória dos estados do sistema com função regularizadora no lugar da histerese.}
+    \label{fig:figures-lab8_1d_state-png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab8_1d_time.png}
+    \caption{Resposta no tempo do sistema com função regularizadora no lugar da histerese.}
+    \label{fig:figures-lab8_1d_state-png}
+\end{figure}
 
 \end{document}
