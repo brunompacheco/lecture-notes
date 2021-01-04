@@ -1,0 +1,33 @@
+\lecture{1}{04.01.2021}{}
+
+\section*{Ronda do Guarda na Praça?}
+
+Um guarda caminha por uma praça quadrada em 5 posições distintas. 4 delas nos vértices e a quinta no centro da praça. A cada instante de tempo, o guarda se desloca somente para as posições adjacentes, ou seja, ele não se desloca nunca de um vértice para o vértice oposto em um instante de tempo. Todas as posições tem igual probabilidade de serem alcançadas a partir de qualquer outra posição. O guarda também sempre muda de posição. Assim, distribuindo as posições em sentido horário ao longo dos vértices e a posição 5 para o centro, podemos observar que \[
+    \mathbb{P}\left( X_{t+1}=i | X_t=5 \right) = \frac{1}{4}, i \in \left\{ 1,2,3,4 \right\} 
+\] e também \[
+\mathbb{P}\left( X_{t+1}=j | X_t = 1 \right) = \frac{1}{3}, j \in \left\{ 2,4,5 \right\} 
+.\] 
+
+Agora, definamos \[
+p(t) = \mathbb{P}\left( X_t = 5 \right) 
+.\] Temos, então, \[
+p\left( t+1 \right) = \frac{1}{3}\left( 1-p(t) \right) 
+.\] Agora, se escolhemos \[
+a(t) = \left( -3 \right) ^{T}p(t)
+,\] temos
+\begin{align*}
+    a(t+1) &= \frac{\left( -3 \right)^{t+1}}{3}\left( 1-p(t) \right) = -\left( -3 \right) ^{t} + a(t) \\
+	   &\implies a(t+1)-a(t) = -\left( -3 \right) ^{t} \\
+	   &\implies a(T) = a(0) - \sum_{t=0}^{T-1} (-3)^{t} \\
+	   &\implies a(T) = a(0) + \frac{\left(-3  \right)^{T}-1 }{4}
+.\end{align*}
+Em $p(t)$, \[
+    p(T) = \left( -3 \right) ^{-T}p(0) + \frac{1-\left( -3 \right) ^{-T}}{4} = \frac{1}{4} + \left( p(0)-\frac{1}{4} \right) \left( -3 \right) ^{-T}
+.\] 
+
+Veja que \[
+\lim_{t \to \infty} p(t) = \frac{1}{4}
+\] e que a convergência se dá de forma exponencial.
+
+
+
