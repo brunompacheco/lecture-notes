@@ -1,0 +1,74 @@
+\lecture{1}{04.01.2021}{Introdução ao Machine Learning}
+
+\section*{Introdução}
+
+"Aprendizado de máquina é a ciência (e a arte) da programação de computadores para que eles possam aprender com os dados" (Aurélien Géron, 2017)
+
+"Definimos aprendizado de máquina como um conjunto de métodos que podem detectar automaticamente padrões nos dados e, em seguida, os padrões descobertos para prever dados futuros ou para executar outros tipos de tomada de decisão" (Kevin P. Murphy)
+
+"Aprendizado de máquina é o campo de estudo que da aos computadores a habilidade de aprender sem serem explicitamente programados" (Adaptação de Arthur Samuel, 1959)
+
+O aprendizado é útil geralmente quando envolve muita configuração manua ou longas listas de regras ou quando não existe uma boa solução analítica.
+
+\section*{Modelando o aprendizado supervisionado}
+
+Por uma abordagem determinística, temos uma função desconhecida $f:\mathcal{X}\to \mathcal{Y}$, na qual $\mathcal{X}$ é o espaço dos dados de entrada e $\mathcal{Y}$ os dados de saída. Geralmente representamos o conjunto de dados por \[
+    D = \left\{ (x^{(1)},y^{(1)}), \ldots, (x^{(N)},y^{(N)}) \right\} \subset  \mathcal{X}\times \mathcal{Y}
+,\] um conjunto de pares associados do espaço de entrada e o espaço de saída. Queremos encontrar uma função $g:\mathcal{X}\to \mathcal{Y}$ que explica os dados gerados por $f$, chamada de \emph{hipótese}. Denotamos por $\mathcal{H}$ o conjunto de hipóteses, que consiste em todas as possíveis funções que podem explicar os dados gerados por $f$.
+
+\begin{eg}
+    Dado um problema de classificação binária $f:R^{d}\to \left\{  -1,-1 \right\} $, podemos definir o conjunto de hipóteses a partir de uma separação linear \[
+	\mathcal{H} = \left\{ sign\left( w^{T}x + \theta \right) : w \in \R^{d}, \theta \in \R \right\} 
+    ,\] onde $w$ representa os pesos das features e $\theta$ o bias.
+\end{eg}
+
+\section*{Perspectiva do Machine Learning}
+
+\begin{description}
+    \item[Realismo] Ciência cria teorias que visam descrever com veracidade (ou aproximadamente) as entidades (observáveis e inobserváveis) e os fenômenos que ocorrem no universo;
+    \item[Instrumentalismo] As teorias científicas são instrumentos para descrever fenômenos observados, não necessariamente retratam o mundo real.
+\end{description}
+
+Claramente, pela nossa definição, machine learning adota uma abordagem instrumentalista.
+
+\begin{description}
+    \item[Design] O modelo é construído a partir de especificações, visando descrever o problema;
+    \item[Aprendizado] O modelo é construído a partir dos dados, tendo por finalidade explicar satisfatoriamente os dados fornecidos.
+\end{description}
+
+\section*{Tipos de aprendizado de máquina}
+
+Classificação típica a partir do aprendizado:
+\begin{description}
+    \item[Aprendizado Supervisionado] Quando a amostra possui um \emph{rótulo} associado.
+    \item[Aprendizado Não-supervisionado] Quando a amostra não possui um rótulo associado.
+    \item[Aprendizado por reforço] Não há um conjunto de dados, mas um \emph{agente} em um \emph{ambiente} no qual ações geram recompensas ou penalidades. O agente deve aprender uma \emph{política} para tomar suas ações.
+\end{description}
+
+Uma outra classificação possível é de algoritmos baseados em \emph{instâncias}, que comparam uma nova instância com as utilizadas para o treinamento através de uma medida de similaridade, e algoritmos baseados em \emph{modelo}, que constroem um modelo a partir dos dados de treinamento e utilizam esse para realizar a predição.
+
+\section*{Viabilidade do Aprendizado}
+
+Machine learning nunca é viável para uma abordagem \emph{determinística}, uma vez que nunca é possível afirmar nada fora dos dados de treinamento. Entretanto, é viável para uma abordagem \emph{probabilística}, ou seja, assumindo que os dados de treinamento são \textbf{iid} (independentemente e identicamente distribuídos).
+
+Denotamos o erro de uma hipótese $g$ no conjunto de dados de treinamento como $E_{in}\left( g \right)$ (erro amostral) e nos dados fora desse como $E_{out}\left( g \right)$ (erro de generalização).
+
+\begin{definition}
+    (Desigualdade de Hoeffing) \[
+	\mathbb{P}\left[ E_{in}(g) - E_{out}\left( g \right) >\epsilon \right] \le 2 M e^{-2\epsilon^2N}, g \in \left\{ 1,\ldots,M \right\} 
+    .\] 
+
+    (Desigualdade de Vapnik-Chervonenkis) Dado $\delta>0$, com probabilidade  $1-\delta$ vale  \[
+    E_{out}\left( g \right) \le E_{in}\left( g \right) + \sqrt{\frac{8}{N}\ln TODO} 
+    .\] 
+\end{definition}
+
+Quanto maior a complexidade do conjunto de hipóteses $\mathcal{H}$, mais difícil será garantir $E_{in}\left( g \right) \cong E_{out}\left( g \right) $, sob a luz das definições anteriores. Note que as desigualdades \emph{não levam em consideração a complexidade de $f$}.
+
+\subsection*{Viabilidade do aprendizado na prática}
+
+Queremos que $E_{out}\left( g \right) \cong 0$. Na prática, buscamos $E_{in}\left( g \right) \cong E_{out}\left( g \right)$ e $E_{in}\left( g \right) \cong 0$.
+
+Separando o conjunto de dados amostrados $\mathcal{D}$ em dados de treino $\mathcal{D}_{train}$ e dados de teste $\mathcal{D}_{test}$, podemos assumir que, se uma hipótese TODO.
+
+
