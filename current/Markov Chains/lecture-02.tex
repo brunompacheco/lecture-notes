@@ -1,0 +1,100 @@
+\lecture{2}{06.01.2021}{}
+
+\section*{Fundamentos da Teoria de Probabilidade}
+
+\subsection*{Espaços de probabilidade}
+
+Um espaço de probabilidade é uma tripla $\left( \Omega, \mathcal{F}, \mathbb{P} \right) $, onde $\Omega$ é o espaço amostral, $\mathcal{F}$ é uma $\sigma$-álgebra e $ \mathbb{P}$ é a função probabilidade. Uma $\sigma$-álgebra $\mathcal{F}$ é tal que 
+\begin{itemize}
+    \item  \[
+    \O\in \mathcal{F}
+    \] 
+    \item \[
+    A \in \mathcal{F} \implies A^{C} \in \mathcal{F}
+    \] 
+    \item \[
+	    \left( A_i ; i\in \N \right) \in \mathcal{F} \implies \cup A_i \in  \mathcal{F}
+    \] 
+    \item \[
+	    \lim inf A_n := \cup \cap A_n ; \lim sup A_m := \cap_n \cup_{m\ge n} A_m
+    \]. Para uma sequência ${A_n} $ disjunta, queremos que \[
+    \mathbb{P}\left( \cup A_n \right) = \sum_{n} \mathbb{P}\left( A_n \right) 
+\] (característica da $\sigma$-álgebra)
+\end{itemize}
+
+Ou seja, uma $\sigma$-álgebra é fechada para a operação de complemento e para a união. Com isso, conseguimos que a álgebra também seja fechada para interseção [? TODO]. Definimos a probabilidade sobre uma álgebra para que tenhamos as operações fundamentais sobre as probabilidades: a independência (dois eventos são independentes se a probabilidade da interseção for igual ao produto das probabilidades); e a 
+
+\begin{eg}
+    Dado $\left( E,d \right) $ um espaço métrico; $\mathcal{B}\left( E \right) $ uma $\sigma$-álgebra de Borel, ou seja, a menor $\sigma$-álgebra contendo todos os conjuntos abertos. Lembre a definição de conjunto aberto: $A\subset E: \forall x\in A \exists r>0 \text{tq} B\left( r, x \right) \subset A $.
+\end{eg}
+\begin{eg}
+    Quando consideramos $\Omega = \left\{ 0,1 \right\}^{\N} $ e uma distância $d\left( x,y \right) =\sum_{n} \frac{1}{2^{n}}|x_i-y_i|$. Dessa forma, modelamos, por exemplo, lançamentos de moedas, definindo a probabilidade \[
+    \mathbb{P}\left( x_1=a_1,\ldots,x_n=a_n \right) = \frac{1}{2^{n}}
+    ,\] ou seja, a probabilidade de um subconjunto de $\Omega$ de forma justa. Neste caso, $\left( \Omega, \mathcal{B}\left( \Omega \right) , \mathbb{P} \right) $ é um espaço de probabilidade. Se modificamos a definição de probabilidade para \[
+    \mathbb{P}\left( x_1=a_1,\ldots,x_n=a_n \right)  = \prod_{i=1}^{n} p\left( a_i \right)  
+,\] onde $p(0) + p(1) = 1$, o que nos permite modelar um lançamento de moedas injusto, cuja tendência é definida por $p(.)$.
+\end{eg}
+\begin{eg}
+    Dado $\Omega = \left\{ 1,2,\ldots,6 \right\}^{\N}$ com a mesma distância do exemplo anterior, podemos escolher a probabilidade \[
+    \mathbb{P}\left( x_1=a_1,\ldots,x_n=a_n \right) =\frac{1}{6^{n}}
+    ,\] que modela lançamentos de dados.
+\end{eg}
+\begin{eg}
+    Definamos o \emph{espaço produto} $\Omega = \times_{i\in \N} \Omega_i$ onde $\left( \Omega_i, \mathcal{F}_i, \mathbb{P}_i \right) $ são espaços de probabilidade. Assim, definimos \[
+    \mathbb{P}\left( A_1\times \ldots\times A_n \right) = \prod_{i=1}^{n} \mathbb{P}\left( A_i \right)  
+    ,\] que modela uma sequência de variáveis aleatórias diferentes.
+\end{eg}
+
+\subsection*{Variáveis aleatórias}
+
+Dado um espaço de probabilidade $\left( \Omega, \mathcal{F}, \mathbb{P} \right) $ e um espaço métrico $\left( E, d \right) $. Sabemos que no espaço métrico, temos a $\sigma$-álgebra de Borel. Uma função $X:\Omega \to E$ é uma variável aleatória se \[
+X^{-1}\left( A \right) \in \mathcal{F} \forall A\in \mathcal{B}\left( E \right) 
+.\] É suficiente considerar essa condição para conjuntos $A$ abertos.
+
+A lei de uma variável aleatória $X$ é a probabilidade $\mu_X$ definida em $\mathcal{B}\left( E \right) $ dada por \[
+\mu_X\left( A \right) := \mathbb{P}\left( X^{-1}\left( A \right)  \right) =: \mathbb{P}\left( X\in A \right) 
+.\] 
+
+\begin{eg}
+    $X$ tem lei uniforme em $\left[ 0,1 \right] $ se \[
+	\mu_X\left( (a,b) \right) = b-a \forall 0\le a\le b\le 1
+    .\]
+\end{eg}
+\begin{eg}
+    $X~Bern\left( p \right) $ se $ \mathbb{P}\left( X=1 \right) =1- \mathbb{P}\left( X=0 \right) =p$, como no caso do lançamento de moeda. Claramente, $p \in [0,1] $ é necessário.
+\end{eg}
+\begin{eg}
+    $X ~ Geom\left( \theta \right) $ se $X:\Omega \to \N_0=\left\{ 0,1,\ldots \right\} $ e \[
+    \mathbb{P}\left( X=l \right) = \left( 1-\theta \right) \theta^{l}
+    ,\] sendo $\theta\in \left[ 0, 1 \right) $.
+\end{eg}
+\begin{eg}
+    Seja $X:\Omega\to \R$ uma variável aleatória. A \emph{função de distribuição} de $X$ é a função $F_x:\R\to \left[ 0,1 \right] $ dada por \[
+    F_X\left( x \right) := \mathbb{P}\left( X\le x \right) 
+    .\] Aqui, vemos que \[
+    \mathbb{P}\left( x<X\le y \right) = F_X(y) - F_X(x)
+,\] ou seja, $F_X$ caracteriza $\mu_X$. Veja, também, que a função $F_X$ é càdlàg (\emph{continue à droit avec des limits à gauche}). Podemos, também, definir a \emph{inversa generalizada} de $F_X$, denotada por $F_X^{-1}$, é bem definida e também càdlàg.
+\end{eg}
+
+\begin{prop}
+    Dada $F$ uma função de distribuição e $Z ~ Unif\left( \left[ 0,1 \right]  \right) $. Seja \[
+    X:= F^{-1}\left( Z \right) 
+    ,\] então $X$ tem função de distribuição $F$.
+\end{prop}
+
+A partir disso, podemos gerar nossa variável aleatória $X$ a partir de um número aleatório qualquer $Z$ no intervalo $\left[ 0,1 \right] $ através da função de distribuição $F$.
+
+\begin{problem}
+    Seja $Z ~ Unif\left( \left[ 0,1 \right]  \right) $. Então, $\forall p \in \left[ 0,1 \right] $, \[
+    X:= \mathbb{P}\left( Z\le p \right) \implies X ~ Bern\left( p \right) 
+    .\]
+\end{problem}
+\begin{problem}
+    Seja $E$ enumerável e seja $p: E\to \left[ 0,1 \right] $ uma probabilidade. Seja $\left\{ x_n ; n\in \N \right\} $ uma enumeração de $E$ e seja \[
+    a_n = \sum_{i=1}^{n} p\left( x_i \right) 
+    .\] Seja $Z ~ Unif\left( \left[ 0,1 \right]  \right) $ e definamos \[
+    X := \sum_{i=1}^{\infty} \mathbb{P}\left( a_{n-1}\le Z < a_n\right) x_n ; X = x_1 \text{se} Z = 1
+    .\] Então, $X$ tem lei $p$.
+\end{problem}
+
+
