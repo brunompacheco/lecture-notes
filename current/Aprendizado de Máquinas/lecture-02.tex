@@ -1,0 +1,109 @@
+\lecture{2}{05.01.2021}{Machine Learning Tour}
+
+\section*{k-NN}
+
+A intuição é de que uma nova instância pode ser classificada de acordo com a classificação dos $k$ vizinhos mais próximos, daí o nome: \emph{k-Nearest Neighbors}. Os $k$ vizinhos votam na classificação da nova instância, sendo necessário um critério para definir a classificação no caso de um empate para $k$ par. Também é possível definir pesos para os votos de acordo com a distância dos vizinhos para a nova instância.
+
+Esse é um algoritmo que depende essencialmente da definição de \emph{distância} na forma de uma função $d\left( x',x^{(i)} \right) $, onde $x'$ é a instância a ser classificada e  $x^{(i)}$ é uma instância no conjunto de treinamento.
+
+Prós:
+\begin{itemize}
+    \item Algoritmo bastante simples e fácil de implementar;
+    \item Ele é altamente interpretável, i.e., as decisões são justificáveis;
+    \item É bastante versátil (regressão e classificação) e dentro de outros algoritmos (e.g., SMOTE).
+\end{itemize}
+Contras:
+\begin{itemize}
+    \item k-NN é sensível à escala dos dados, portanto é sempre necessário realizar \emph{scaling};
+    \item É altamente impactado pela maldição da dimensionalidade;
+    \item Utiliza muita memória pois armazena todas as instâncias;
+    \item Ele não fornece uma estimativa de probabilidade;
+    \item É sensível a ruído, principalmente o 1-NN.
+\end{itemize}
+
+\section*{Regressão Logística}
+
+Baseada na função logística: \[
+\sigma(t) = \frac{1}{1+\exp^{-t}}
+.\] A ideia é que a imagem da função seja interpretada como a probabilidade da instância pertencer à classe positiva. Para isso, definimos essa probabilidade como \[
+\hat{p} = \sigma\left( x\cdot w + b \right) 
+,\] onde $w$ são os pesos das features e $b$ é o viés. Para a classificação binária, utilizamos o classificador de Bayes, i.e., \[
+\hat{p} > 0,5 \implies \hat{y} = 1
+.\] 
+
+Dado um conjunto de dados, otimizamos uma penalidade (loss function).
+
+Para problemas de classificação multidimensionais, podemos utilizar uma abordagem \emph{One-Versus-Rest} ou uma regressão logística multinomial, i.e., Softmax. Softmax aprende os pesos e vieses para cada classe de uma só vez. Define-se um \emph{Softmax score} para cada classe $j$ de forma \[
+    s_j(x) = x\cdot w_j + b_j
+.\] Assim, a função softmax é definida como \[
+\hat{p}_j(x) = \frac{e^{s_j(x)}}{\sum_{j=1}^{N} e^{s_j(x)}}
+.\] Assim, \[
+\hat{y} = arg max_j \hat{p}_j
+.\] Os pesos e vieses são resultantes da otimização da log-loss.
+
+Prós:
+\begin{itemize}
+    \item Fácil de implementar, dado um algoritmo de otimização;
+    \item Treinamento eficiente;
+    \item Poucos hiperparâmetros;
+    \item É um modelo paramétrico, então há uma economia de memória;
+    \item Geralmente, vale a pena começar pela regressão logística.
+\end{itemize}
+Contras:
+\begin{itemize}
+    \item É um modelo linear generalizado;
+    \item Sem regularização [OU PENALIZAÇÃO? TODO] ele falha completamente em dados linearmente separáveis.
+\end{itemize}
+
+\section*{Árvore de Decisão}
+
+Secciona o espaço de entrada através de comparações de valores de referência para as dimensões, de forma hierárquica.
+
+Um algoritmo basante utilizado é o CART:
+\begin{enumerate}
+    \item Selecione uma feature $k$ 
+    \item Crie uma partição que minimize a função custo \[
+	    J(k, t_k) = \frac{m_L}{m}G_L + \frac{m_R}{m}G_R
+	,\] onde $t_k$ é um \emph{threshold}, $m$ denota o número de features, $G$ é a medida de impureza (gini ou entropia), e $L/R$ denotam os lados da separação.
+\end{enumerate}
+Veja que o CART é um algoritmo guloso (\emph{greedy}). Uma solução sub-ótima é encontrada, uma vez que a árvore ótima é NP-completo. Ainda assim, possui uma velocidade de predição muito alta ($\log n$).
+
+Prós:
+\begin{itemize}
+    \item Altamente interpretável;
+    \item Regressão ou classificação.
+\end{itemize}
+Contras:
+\begin{itemize}
+    \item Sensível a pequenas variações nos dados de treinamento;
+    \item Como usa separações ortogonais, é sensível a rotações dos dados;
+    \item Os mesmos dados podem ser treinados em diferentes árvores;
+    \item Fácil de overfit.
+\end{itemize}	
+
+\section*{Random Forest}
+
+\emph{Ensemble} de árvores de decisão. As decisões das árvores são unidas utilizando, por exemplo, votação. O melhor cenário possível é ter árvores diversificadas, com preditores independentes e erros não correlacionados. Mesmo modelos muito "fracos", quando possuem erros não correlacionados, a capacidade de predição do ensemble se torna significativamente maior.
+
+A estratégia da random forest para atingir essa diversidade dos preditores é de utilizar subconjuntos aleatórios das features para cada árvore.
+
+A principal característica da Random Forest em relação a árvore de decisão é a \emph{troca de overfitting por bias}.
+
+Prós:
+\begin{itemize}
+    \item Consegue lidar com padrões não-lineares, da mesma forma que árvores de decisão;
+    \item Eficiente;
+    \item Consegue lidar de forma automática com dados faltantes;
+    \item Bastante útil para fazer seleção de features;
+    \item Bastante versátil: regressão, classificação ou até mesmo como parte de outros algoritmos (e.g., detecção de outliers).
+\end{itemize}
+Contras:
+\begin{itemize}
+    \item Difícil de interpretar, especialmente com um grande número de estimadores;
+    \item Ainda propenso ao overfitting;
+    \item Muito hiperparâmetros;
+    \item Pode se tornar lento com muitos estimadores.
+\end{itemize}
+
+
+
