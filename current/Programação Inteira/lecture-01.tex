@@ -1,0 +1,60 @@
+\lecture{1}{01.02.2020}{Introduction to mathematical optimization}
+
+\section*{Introduction}
+
+Optimization is an aread o applied mathematics concerned with the computation of optimal values for decision variables that induce optimal performance and satisfy contraints of a mathematical model. So it is a key point to have a good model for the resolution of a problem using optimization.
+
+The problem of modeling is the representation of reality, a need of the modern society, that arises from the impossibility of dealing directly with the subject due to cost or safety reasons. Models must be well structured and representative. The model must extract the essence of the subject.
+
+\begin{definition}
+    Models are simplified representations of the real-world that preserve, for certain situations and assumptions, a proper equivalence.
+\end{definition}
+
+The main features of the model are its representation capacity and the simplification of reality. The representation capacity must be validated in order to verify its accuracy.
+
+A formulation translates the model into a formal language. There is a necessary separation between the problem formulation and the solutions. That is, they must be done without the influence of the other (do not overfit). So the problem formulation defines what must be done and which are the restrictions, while the solutions defines how it might be achieved.
+
+So, in the optimization framework, the models aim to maximize a criterion of performance, such as the manufacturin of a product given inputs, subject to restrictions determining operating conditions. The language used to express such optimization problems is called mathematical programming.
+
+An optimization problem is composed of
+\begin{description}
+    \item[Decision Variables] the parameters whose values will be \\
+    \item[Objective Function] is a function on the decision variable that must be minimized (or maximized); \\
+    \item[Restrictions] define the feasible domain for the functions and solutions.
+\end{description}
+
+\begin{definition}
+    A general optimization problem is composed of a vector $\bm{x}\in \R^{n}$ of the variables (or unknowns) and a function $f:\R^{n}\to \R$ which maps the variables into the cost. Plus, there are the restrictions, which are formulated as a set of function $h_i$ and $g_j$ such that \[
+	\begin{cases}
+	    h_i\left( \bm{x} \right) = 0 \\
+	    g_j\left( \bm{x} \right) \le 0
+	\end{cases}
+    .\] 
+
+    This can be stated as
+    \begin{align*}
+        \min_{\bm{x}} \quad & f\left( \bm{x} \right) \
+        \textrm{s.t.} \quad & \bm{h}\left( \bm{x} \right) = \bm{0} \
+          & \bm{g}\left( \bm{x} \right) \le \bm{0}
+    .\end{align*}
+\end{definition}
+
+Exceptions to the general formulations exist. For example, there are problems without an objective function. Also, there are problems with multiple objectives, such as max profit and maximize quality, which imply a trade-off.
+
+\subsection*{Linear Programming}
+
+These are a subset of the general formulation in which all the components are affine, that is
+\begin{itemize}
+    \item $f\left( \bm{x} \right) = \bm{c}^{T}\bm{x} $
+    \item $\bm{h}\left( \bm{x} \right) = A\bm{x}$ (same for $\bm{g}$ )
+\end{itemize}
+so our formulation becomes
+\begin{align*}
+    \min_{\bm{x}} \quad & \bm{c}^{T}\bm{x} \\
+    \textrm{s.t.} \quad & A\bm{x} = \bm{0}
+.\end{align*}
+
+\section*{Integer Programming}
+
+This formulation arises when problems use discrete variables.
+
