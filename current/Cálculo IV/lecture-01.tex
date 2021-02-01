@@ -1,0 +1,90 @@
+\lecture{1}{01.02.2021}{Introdução}
+
+\section*{Introdução à disciplina}
+
+O foco será em integração, de forma similar ao que foi feito com a diferenciação no H-Cálculo III.
+
+Esta disciplina será muito mais próxima da bibliografia:
+\begin{itemize}
+    \item E. Lima, Análise Real, volumes 2 e 3; \\
+    \item M. Spivak, Cálculo em Variedades.
+\end{itemize}
+Além disso, também teremos Zakon, Mathematical Analysis como uma referência auxiliar.
+
+Programa:
+\begin{enumerate}
+    \item Integração em $\R^{n}$ (à Riemann)
+	\begin{itemize}
+	    \item O objeto de integração são funções em certos conjuntos especiais do $\R^{n}$
+	\end{itemize}
+    \item Formas alternadas
+	\begin{itemize}
+	    \item Conceito algébrico (álgebra linear)
+	    \item São objetos naturais para que possamos estender a integração para subvariedades
+	\end{itemize}
+    \item Integração em subvariedades
+	\begin{enumerate}
+	    \item Revisão de subvariedades e (um pouco de) diferenciabilidade
+	    \item Formas diferenciais, que são formas alternadas definidas dentro desse escopo
+	    \item Teorema de Stokes para formas diferenciais
+		\begin{itemize}
+		    \item Nos permite remeter ao cálculo vetorial
+		    \item Teoremas de Green, Gauss e Stokes
+		\end{itemize}
+	\end{enumerate}
+\end{enumerate}
+
+\subsection*{Avaliação}
+
+3 provas, talvez 4. Também serão aplicadas listas de exercícios, uma entrega por semana. Alguns exercícios extra, mas não avaliativos. As listas somam até 1 ponto na média final.
+
+\section*{Integração em $\R^{n}$}
+
+Utilizaremos $\R^{n}$ como usualmente, assumindo, geralmente, $n\ge 2$, apesar de muitos dos resultados serem válidos para $n=1$.
+
+\begin{definition}
+    (n-bloco) Um \emph{n-bloco} em $\R^{n}$ é um conjunto da forma \[
+    B = \left[ a_1,b_1 \right] \times \ldots\times \left[ a_n, b_n \right] 
+    \] com $a_i\le b_i \text{ } i=1,\ldots,n$.
+\end{definition}
+
+Veja que um 1-bloco define um intervalo compacto em $\R$, um 2-bloco representa um retângulo e um 3-bloco define um paralelepípedo. Ou seja, um n-bloco é uma região análoga a essas formas para um espaço $\R^{n}$ qualquer.
+
+Assumimos uma norma qualquer, sabendo que para $\R^{n}$ elas definem a mesma topologia. Vemos que n-blocos definem conjuntos fechados [TODO: Verificar]. Além disso, podemos ver que também são compactos.
+
+\subsection*{Integração à Riemann}
+
+A definição usual, básica de integração, é dada para um função $f:[a,b]\to \R$ que tem que ser limitada em seu domínio. Assim, definíamos a operação e as propriedades relacionadas à integração. De forma análoga faremos para $\R^{n}$.
+
+Fixe $B\subset \R^{n}$ um n-bloco definido como na definição. O seu \emph{volume} é \[
+vol\left( B \right) =v\left( B \right) = \prod_{i=1}^{n} \left( b_i - a_i \right)  
+,\] ou seja, o produto entre a diferença das extremidades dos intervalos, tal qual no sentido usual da palavra. Fixe uma função $f:B\to \R$ definida no n-bloco, ou seja, limitada ($f\left( B \right) \subset \left[ \alpha, \beta \right] \subset \R$).
+
+No caso unidimensional, partimos o domínio da função e calculamos a área dos retângulos menores (que tocam o mínimo da função) e dos retângulos maiores (que tocam o máximo da função) para cada partição, tendo que se esses valores convergem arbitrariamente, eles convergem para a integral daquela função naquele intervalo fechado. Da mesma forma, faremos para dimensões maiores.
+
+Para o caso bidimensional (do domínio de $f$), temos uma intuição análoga, de encontrar o volume definido "em baixo" da função. Entretanto, a ideia de gerar partições não é tão direta quanto no caso unidimensional, uma vez que não existe uma direção única para "caminhar".
+
+\begin{note}
+    (H-Cálculo I) Lembrando que uma \emph{partição} de $\left[ a,b \right] \subset \R$ é $P=\left\{ t_0<\ldots<t_k \right\}, t_0,\ldots,t_k \in \left[ a,b \right] $ sendo $t_0=a$ e $t_k=b$. Ou seja, a partição "quebra" um intervalo em subintervalos $\left[ t_{i-1}, t_i \right] \subset \left[ a,b \right] \forall i\in \left\{ 1,\ldots,k \right\} $.
+\end{note}
+
+Uma partição de um 2-bloco é o produto cartesiano de partições dos intervalos $\left[ a_i,b_i \right]$. Veja que dessa forma temos sub-blocos do 2-bloco original.
+
+\begin{definition}
+    Uma \emph{Partição} de $B=\left[ a_1,b_1 \right]\times \ldots\times \left[ a_n,b_n \right]  $ é um $P=P_1\times \ldots\times P_n$, onde $P_i$ é partição de $\left[ a_i,b_i \right] \forall i=1,\ldots,n$.
+    
+    Um \emph{sub-bloco} de $P$ é um n-bloco de forma $B' = \left[ t_{j_1 -1},t_{j_1} \right] \times \ldots\times \left[ t_{j_n-1}, t_{j_n} \right] $ onde cada um desses intervalos é subintervalo da partição $P_{j}$ correspondente.
+\end{definition}
+
+\begin{definition}
+    (Somas sups. e infs. associadas a partições) $f: B\to \R$ (limitada). Seja $P=P_1\times \ldots\times P_n$ uma partição de B. A \emph{soma superior} (resp. \emph{inferior}) (de $f$ com respeito a $P$), \[
+	S\left( f,P \right) := \sum_{B'\in \mathcal{C}\left( P \right) } M_{B'}vol\left( B' \right) 
+    \] [resp. \[
+	s\left( f,P \right) := \sum_{B'\in \mathcal{C}\left( P \right) } m_{B'}vol\left( B' \right) 
+    ]\] onde $\mathcal{C}\left( P \right) $ é o conjunto dos sub-blocos de $P$ e $M_{B'} = sup\left\{ f(x): x\in B' \right\} $ [$m_{B'}=inf\left\{ f(x):x\in B' \right\} $].
+\end{definition}
+
+De cara, temos que $s\left( f,P \right) \le S\left( f,P \right)$.
+
+Podemos falar, agora, sobre refinamento de uma partição, que é uma nova partição que contém a partição original. Com isso, podemos mostrar que as somas superiores são limtadas inferiormente e as somas inferiores são limitadas superiormente.
+
