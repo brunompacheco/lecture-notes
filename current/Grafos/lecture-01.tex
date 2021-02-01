@@ -1,0 +1,49 @@
+\lecture{1}{01.02.2021}{Definições iniciais e representações computacionais}
+
+\section*{Definições}
+
+Grafos são uma forma de representação focada na relação entre entidades. Um grafo representa as entidades através de vértices e as relações através de arestas ou arcos. Um arco é uma aresta com direcionamento.
+
+A partir disso, podemos também definir um grafo \emph{não dirigido e não valorado}, que é uma grafo que relaciona seus vértices por arestas e não atribui peso ou valor a essas. Podemos representar esse grafo de duas formas: um conjunto dos vértices e um conjunto, cujos elementos são subconjuntos binários do conjunto dos vértices (pode repetir o elemento), que representa as arestas; uma matriz binária em que as linhas e colunas são os vértices e o valor não nulo é a presença de uma aresta entre os dois vértices.
+
+Um grafo orientado/dirigido, que utiliza arcos, pode ser representado similarmente ao caso do não dirigido, mas que utiliza pares ordenados ao invés de subconjuntos para representar as arestas. Quanto a representação matricial, as linhas tornam-se as origens dos arcos e as colunas os destinos. Nota-se que, para grafos não dirigido, basta uma matriz triangular, o que não é verdade para grafos orientados.
+
+Grafos valorados, que podem ser direcionados ou não, atribui um custo, ou um valor, para as arestas. A representação formal requer uma função que mapeie as arestas para os custos. A representação matricial se torna, ao invés de binária, real, em que o o valor de cada elemento representa o custo. A definição de que custo indica a ausência de aresta normalmente é o infinito, mas pode variar pela aplicação.
+
+\begin{definition}
+    Um \emph{Grafo} é um par $G=\left( V,E \right) $, onde  $V$ é o conjunto dos vértices e $E \subset 2^{V} $ é o conjunto das arestas.
+
+    Um \emph{Grafo Direcionado} é um par $G'=\left( V,E \right) $ similar ao caso não direcionado mas com $E \subset V\times V$.
+
+    Um \emph{Grafo Valorado}, que pode ser direcionado ou não, é um trio $G=\left( V, E, w \right) $, onde $w:E\to \R$ é a função que atribui um custo para cada aresta.
+\end{definition}
+
+Existem, ainda, outras representações, como os hipergrafos, por exemplo, que utilizam hiperarestas. Essas, são arestas que mapeiam a relação entre mais de dois vértices. Existe também os multigrafos, que representam multiplas relações entre dois vértices.
+
+\subsection*{Características}
+
+Podemos caracterizar os vértices e arestas de diversas formas.
+
+\begin{definition}
+    Dado um grafo $G=\left( V,E \right) $, dois vértices $x,y \in V$ tais que $x\neq y$ são \emph{adjacentes} se e somente se $\left\{ x,y \right\} \in  E$.
+\end{definition}
+
+\begin{definition}
+    Dado um grafo $G=\left( V,E \right) $, o \emph{Grau} de um vértice $x \in V$ é definido pela quantidade de vértices adjacentes e é representado como $d\left( x \right)$ ou $d_x$.
+\end{definition}
+
+Para grafos direcionados, podemos distinguir ainda o grau por saintes e entrantes, ou seja, $d_x^{+}$ contabiliza arestas direcionadas \emph{para} $x$ enquanto $d_x^{-}$ faz o mesmo para arestas direcionadas \emph{de} $x$.
+
+\begin{definition}
+    Para um grafo não ordenado $G=\left( V,E \right) $, a \emph{Vizinhança} $N(v)$ de um vértice $v \in V$ representa os vértices adjacentes a $v$.
+
+    Para um grafo ordenado  $G'=\left( V',E' \right) $, temos os \emph{Sucessores} $N^{+}(u)$ de um vértice $u\in V'$, que é composta de todos os vértices conectados à $u$ por arestas saintes de $u$, enquanto os \emph{Antecessores} $N^{-}(u)$ são os vértices conectados a $u$ por arestas entrantes em $u$. Assim, a vizinhança de $u$ pode ser definida por $N(u) = N^{+}(u) \cup N^{-}(u)$.
+\end{definition}
+
+\begin{definition}
+    Um grafo $G=\left( V,E \right)$ é \emph{Completo} se $E = V\times V$.
+\end{definition}
+
+\section*{Representação computacional}
+
+Para não precisarmos alocar a matriz inteira para um grafo, que se torna pouco eficiente para grafos com poucas arestas frente o número de vértices, podemos utilizar uma lista de adjacências, ou seja, um vetor de listas encadeadas.
