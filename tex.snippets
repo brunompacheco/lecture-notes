@@ -717,6 +717,14 @@ snippet bigfun "Big function" iA
 .\end{align*}
 endsnippet
 
+snippet opt "Optimization problem statement" i
+\begin{align*}
+    \\${1:min}_{${2:\bm{x}}} \quad & ${3:f\left( \bm{x} \right)} \\\\
+    \textrm{s.t.} \quad & ${4:\bm{h}\left( \bm{x} \right) = \bm{0}} \\\\
+      & ${5:\bm{g}\left( \bm{x} \right) \le \bm{0}}
+${6:.}\end{align*}
+endsnippet
+
 snippet cvec "column vector" iA
 \begin{bmatrix} ${1:x}_${2:1}\\\\ \vdots\\\\ $1_${2:n} \end{bmatrix}
 endsnippet
