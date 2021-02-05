@@ -1,0 +1,226 @@
+\lecture{2}{03.02.2021}{Introdução}
+
+Definindo, então, o exposto no final da última aula.
+
+\begin{definition}
+    Dizemos que uma partição $Q=Q_1\times \ldots\times Q_m$ de $A$ \emph{refina} uma partição $P=P_1\times \ldots\times P_n$ se $\exists Q_j \text{tq} P_i\subset Q_j \forall P_i$. Dizemos $P\subset Q$.
+\end{definition}
+
+Dados $Q, P$ como na definição, podemos também encontrar que os sub-blocos $B'$ de $Q$ estão contidos nos blocos $B$ de $P$. Ainda mais, podemos ver que \[
+    vol\left( B \right) = \sum_{B_1\in Z_Q\left( B \right)  } vol\left( B' \right)
+.\]  [TODO: REVISAR NO SPIVAK]
+
+\begin{prop}
+    Se $Q,P$ são partições de $A$ e $Q$ refina $P$, então \[
+    s\left( f, Q \right) \ge s\left( f,P \right) 
+    \] e \[
+    S\left( f,Q \right) \le S\left( f,P \right) 
+    .\] 
+\end{prop}
+\begin{proof}
+    Temos que \[
+        S\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } M_B vol\left( B \right) 
+    \] e 
+    \begin{align*}
+	S\left( f, Q \right) &=\sum_{B'\in \mathcal{Q}} M_{B'} vol\left( B' \right) \\
+			     &= \sum_{B\in \mathcal{B}\left( P \right) } \left( 
+				 \sum_{B'\in Z\left( B \right) } M_{B'} vol\left( B' \right) 
+			     \right) \\
+			     &\le \sum_{B\in \mathcal{B}\left( P \right) } \left( 
+				 \sum_{B'\in Z\left( B \right) } vol\left( B' \right) 
+			     \right) \\
+			     &= \sum_{B\in \mathcal{B}\left( P \right) } M_B vol\left( B \right)  = S\left( f, P \right) 
+    .\end{align*}
+\end{proof}
+
+\begin{corollary}
+    $\forall P,Q$ partições de $A$, \[
+    s\left( f, P \right) \le S\left( f,Q \right) 
+    .\] 
+\end{corollary}
+\begin{proof}
+    Tome
+    \begin{align*}
+	& R = \left( P_1\cup Q_1 \right) \times \ldots\times \left( P_n\cup Q_n \right) \\
+	&\implies P,Q \subset R
+    ,\end{align*}
+    logo $R$ refina as duas, ou seja, \[
+    s\left( f,P \right) \le s\left( f,R \right) \le S\left( f,R \right) \le S\left( f,Q \right) 
+    .\] 
+\end{proof}
+
+Portanto, podemos concluir que \[
+s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \right\} 
+\] é limitada superiormente.
+
+\begin{definition}
+    A \emph{integral inferior} (resp. \emph{superior}) de $f$ em $A$ \[
+	\underline{\int}_A f := sup\text{ }s\left( f \right) 
+,\] (resp. \[
+	\overline{\int}_A f := inf\text{ }S\left( f \right) 
+    \]).
+\end{definition}
+
+\begin{observe}
+    Integral inferior é < integral superior
+\end{observe}
+
+\begin{eg}
+    Seja \[
+    f\left( x \right) = \begin{cases}
+	1 &, x=\left( x_1,\ldots,x_n \right) : x_i\in \Q \forall i \\
+	0
+    \end{cases}
+    .\]
+    Seja $P$ partição de $A:\forall B $ sub-bloco, então
+    \begin{align*}
+	& M_B = 1 \text{ e }m_B=0 \\
+	&\implies S\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } vol\left( B \right)= vol \left( A \right) \\
+	&\implies \overline{\int}_A f = 1
+    .\end{align*}
+    Para o caso inferior, a integral é 0.
+\end{eg}
+
+\begin{definition}
+    $f:A\to \R^{n}$ limitada é \emph{integrável} se \[
+	\underline{\int}_A f = \overline{\int}_A f = \int_A f
+    ,\] que é chamada \emph{integral de $f$ em $A$}.
+\end{definition}
+
+\begin{prop}
+    $f:A\to \R$ limitada é integrável $\iff \forall \epsilon>0 \exists P $partição de $A$ tal que  \[
+    S\left( f, P_\epsilon \right) - s\left( f,P_\epsilon \right) <\epsilon \tag{*}
+    .\] 
+\end{prop}
+\begin{proof}
+    ($\implies$) Suponha $f$ integrável. Então $\exists P_1$ de $A$ tal que \[
+    s\left( f, P_1 \right) < \int_A f + \frac{\epsilon}{2}
+    .\] Da mesma forma, $\exists P_2$ de $A$ tal que \[
+    \int_A f - \frac{\epsilon}{2} < s\left( f, P_2 \right) \le s\left( f,P_\epsilon \right) \le S\left( f,P_\epsilon \right) \le S\left( f,P_1 \right) <\int_A f + \frac{\epsilon}{2}
+    \] onde $P_\epsilon$ é qualquer partição que refina $P_1$ e $P_2$. \[
+    \implies S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) \le \epsilon
+    .\] 
+
+    ( $ < =$ ) Se vale (*) $\forall \epsilon$ e alguma $P_\epsilon$. Se  $f$ não é integrável, poderíamos tomar \[
+	\epsilon = \frac{1}{2}\left( \overline{\int}_A f - \underline{\int}_A f \right) > 0
+    .\] Escolhendo $P_\epsilon$ satisfazendo (*), \[
+    s\left( f, P_\epsilon \right) \le \underline{\int}_A f \le \overline{\int}_A f\le S\left( f, P_\epsilon \right) 
+    ,\] portanto \[
+    2\epsilon \le S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) 
+\] [TODO: finalizar eq anterior] uma contradição.
+\end{proof}
+\begin{corollary}
+    Se $f:A\to \R$ é contínua, então $f$ é integrável.
+\end{corollary}
+\begin{proof}
+    Seja $f:A\to \R$ contínua, então $f$ é limitada por Weierstrass. Adote em $\R^{n}$ a norma \[
+    \|.\|_{max} = \|.\|
+    \] do máximo.
+    Como $A$ é um compacto, $f$ é uniformemente contínua.
+    Seja fixado $\epsilon > 0$. Escolha $\delta > 0$ tal que $\forall x,y \in A$ \[
+	\|x-y\|<\delta \implies \|f\left( x \right) -f\left( y \right) \|<\epsilon
+    .\] 
+    \begin{observe}
+        Em um bloco degenerado, qualquer função é integrável com \[
+        \int_A f = 0
+        .\] 
+    \end{observe}
+    Escolha, em cada $\left[ a_i,b_i \right], i=1,\ldots,n $ uma partição $P_i$ de modo que \[
+    \|P_i\| < \delta
+    ,\] ou seja, com que a norma de cada subintervalo seja menor que $\delta$. Tome $P = P_1\times \ldots\times P_n$. Seja $B \in \mathcal{B}\left( P \right) $. Como $f|_B$ é ainda contínua, por Weierstrass $\exists x_B,y_B\in B$ tal que
+    \begin{align*}
+	f\left( y_B \right) &= M_B \\
+	f\left( x_B \right) = m_B
+    .\end{align*}
+    Por outro lado, \[
+    \|x_B - y_B\| = max\left\{ |\left( x_B \right)_j - \left( y_B \right)_j | : j = 1,\ldots,n \right\} 
+    ,\] mas como $P$ foi escolhida de forma que os intervalos que constituem as partições sejam menores do que $\delta$, então \[
+    |\left( x_B \right)_j - \left( y_B \right)_j | < \delta \forall j=1,\ldots,n
+    \] logo \[
+    \|x_B - y_B\| < \delta
+    .\] Assim, vemos que \[
+    M_B - m_B = \|f\left( y_B \right) -f\left( x_B \right) \|< \frac{\epsilon}{vol\left( A \right) }
+    .\] Portanto, \[
+    S\left( f, P \right) - s\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B - mB \right) vol\left( B \right) <\frac{\epsilon}{vol\left( A \right) } \sum_{B\in \mathcal{B}\left( P \right) } vol\left( B \right) = \epsilon
+    .\] $f$ é integrável.
+\end{proof}
+
+De forma direta, podemos ver que as funções constantes são integráveis e \[
+\int_A f_c = c . vol\left( A \right) 
+.\] 
+
+\begin{theorem}
+    (Propriedades aritméticas da integração) Seja $A$ um bloco, $f, g: A\to \R$ integráveis e $c\in \R$. Então, vale o seguinte
+    \begin{enumerate}
+	\item $f+g:A\to \R$, $f+g(x) = f(x) + g(x)$ é integrável e \[
+	\int_A \left( f+g \right) = \int_A f + \int_A g
+	;\] 
+	\item $c.f: A \to R$, é integrável e  \[
+	\int_A \left( c.f \right) = c. \int_A f
+	;\] 
+	\item Se $f(x) \le g(x) \forall x \in A$, então \[
+	\int_A f \le \int_A g
+	.\] 
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    (1) Seja $P$ uma partição de $A$. Seja $B\in \mathcal{B}\left( P \right) $. $\forall  x\in B$
+    \begin{align*}
+	& m_B^{f} + m_B^{g} \le  f+g \left( x \right) =f(x) + g(x) \le M_B^{f} + M_B^{g}\\
+	&\implies m_B^{f} + m_B^{g} \le m_B^{(f+g)} \\
+	&\implies M_B^{(f+g)}\le M_B^{f} + M_B^{g}
+    .\end{align*}
+    Veja que com a soma desses componentes com o volume dos blocos já nos leva às somas superiores e inferiores. Chegar em \[
+    s\left( f,P \right) +s\left( g,P \right) \le s\left( f+g, P \right) 
+    \] e \[
+    S\left( f+g,P \right) \le S\left( f,P \right) +S\left( g,P \right) 
+    .\] Seja $\epsilon>0$. Escolha $P_\epsilon$ tal que \[
+    S\left( f,P_\epsilon \right) - s\left( f,P_\epsilon \right) < \frac{\epsilon}{2} \tag{*}
+    \] e \[
+    S\left( g,P_\epsilon \right) -s\left( g,P_\epsilon \right) <\frac{\epsilon}{2}
+    .\] Então \[
+    S\left( f+g, P_\epsilon \right) - s\left( f+g, P_\epsilon \right)  \le S\left( f,P_\epsilon \right) +S\left( g,P_\epsilon \right) - s\left( f,P_\epsilon \right) -s\left( g, P_\epsilon \right) < \epsilon
+    .\] Assim, provamos que $f+g$ é integrável.
+    De (*) \[
+    s\left( f,P \right) + s\left( g,P \right)  \le \int_A \left( f+g \right) \le S\left( f,P \right) + S\left( g,P \right) \tag{**}
+    .\] Dadas partições $P=P_1\times \ldots\times P_n$ e $Q=Q_1\times \ldots\times Q_n$, com $P\cup Q = \left( P_1\cup Q_1 \right) \times \ldots\times \left( P_n\cup Q_n \right) $, então \[
+    s\left( f,P \right) +s\left( g,Q \right) \le s\left( f, P\cup Q \right) + s\left( g, P\cup Q \right) \le^{(**)} \int_A\left( f+g \right) \le  S\left( f,P\cup Q \right) + S\left( g,P\cup Q \right) \le S\left( f,P \right) +S\left( g,Q \right) 
+    \] de onde podemos chegar em \[
+    \int_A \left( f+g \right) \le \int_A f + \int_A g
+    .\] Fazendo as mesmas operações, chegamos na inequação oposta, ou seja, \[
+    \int_A \left( f+g \right) \ge  \int_A f + \int_A g
+    .\] 
+
+    (2) 3 casos
+
+    $c>0$:  $P$ partição de $A$. 
+    \begin{align*}
+	m_B^{c.f} &= inf\left\{ c.f(x): x\in B \right\} \\
+		  &= c.sup\left\{ f(x): x\in B \right\} \\
+		  &= c.M_B^{f} \\
+	M_B^{c.f} &= c.m_B^{f} \\
+    ,\end{align*}
+    ou seja,
+    \begin{align*}
+	S\left( c.f, P \right) &= c.s\left( f,P \right) \\
+	s\left( c.f, P \right) &= c.S\left( f,P \right) \\
+    .\end{align*}
+    Assim, podemos ver que \[
+	\overline{\int}_A c.f = c.\underline{\int}_A f
+    \] e \[
+	\underline{\int}_A c.f = c.\overline{\int}_A f
+    ,\] logo, $c.f$ é integrável e \[
+    \int_A c.f = c.\int_A f
+    .\] 
+
+    (3) $f(x) \le g(x), \forall x\in A$. $\forall B\in \mathcal{B}\left( P \right) $, onde $P$ é uma partição de $A$,
+    \begin{align*}
+	m_B^{f}&\le m_B^{g} \\
+	M_B^{f} &\le M_B^{g}
+    ,\end{align*}
+    que nos permite estabelecer a mesma relação para as somas superiores e inferiores, que desencadeia em  \[
+    \int_A f\le \int_A g
+    .\] 
+\end{proof}
+
+

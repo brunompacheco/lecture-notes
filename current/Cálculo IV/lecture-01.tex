@@ -44,7 +44,7 @@ Utilizaremos $\R^{n}$ como usualmente, assumindo, geralmente, $n\ge 2$, apesar d
 
 \begin{definition}
     (n-bloco) Um \emph{n-bloco} em $\R^{n}$ é um conjunto da forma \[
-    B = \left[ a_1,b_1 \right] \times \ldots\times \left[ a_n, b_n \right] 
+    A = \left[ a_1,b_1 \right] \times \ldots\times \left[ a_n, b_n \right] 
     \] com $a_i\le b_i \text{ } i=1,\ldots,n$.
 \end{definition}
 
@@ -56,9 +56,9 @@ Assumimos uma norma qualquer, sabendo que para $\R^{n}$ elas definem a mesma top
 
 A definição usual, básica de integração, é dada para um função $f:[a,b]\to \R$ que tem que ser limitada em seu domínio. Assim, definíamos a operação e as propriedades relacionadas à integração. De forma análoga faremos para $\R^{n}$.
 
-Fixe $B\subset \R^{n}$ um n-bloco definido como na definição. O seu \emph{volume} é \[
-vol\left( B \right) =v\left( B \right) = \prod_{i=1}^{n} \left( b_i - a_i \right)  
-,\] ou seja, o produto entre a diferença das extremidades dos intervalos, tal qual no sentido usual da palavra. Fixe uma função $f:B\to \R$ definida no n-bloco, ou seja, limitada ($f\left( B \right) \subset \left[ \alpha, \beta \right] \subset \R$).
+Fixe $A\subset \R^{n}$ um n-bloco definido como na definição. O seu \emph{volume} é \[
+vol\left( A \right) =v\left( A \right) = \prod_{i=1}^{n} \left( b_i - a_i \right)  
+,\] ou seja, o produto entre a diferença das extremidades dos intervalos, tal qual no sentido usual da palavra. Fixe uma função $f:A\to \R$ definida no n-bloco, ou seja, limitada ($f\left( A \right) \subset \left[ \alpha, \beta \right] \subset \R$).
 
 No caso unidimensional, partimos o domínio da função e calculamos a área dos retângulos menores (que tocam o mínimo da função) e dos retângulos maiores (que tocam o máximo da função) para cada partição, tendo que se esses valores convergem arbitrariamente, eles convergem para a integral daquela função naquele intervalo fechado. Da mesma forma, faremos para dimensões maiores.
 
@@ -71,17 +71,17 @@ Para o caso bidimensional (do domínio de $f$), temos uma intuição análoga, d
 Uma partição de um 2-bloco é o produto cartesiano de partições dos intervalos $\left[ a_i,b_i \right]$. Veja que dessa forma temos sub-blocos do 2-bloco original.
 
 \begin{definition}
-    Uma \emph{Partição} de $B=\left[ a_1,b_1 \right]\times \ldots\times \left[ a_n,b_n \right]  $ é um $P=P_1\times \ldots\times P_n$, onde $P_i$ é partição de $\left[ a_i,b_i \right] \forall i=1,\ldots,n$.
+    Uma \emph{Partição} de $A=\left[ a_1,b_1 \right]\times \ldots\times \left[ a_n,b_n \right]  $ é um $P=P_1\times \ldots\times P_n$, onde $P_i$ é partição de $\left[ a_i,b_i \right] \forall i=1,\ldots,n$.
     
-    Um \emph{sub-bloco} de $P$ é um n-bloco de forma $B' = \left[ t_{j_1 -1},t_{j_1} \right] \times \ldots\times \left[ t_{j_n-1}, t_{j_n} \right] $ onde cada um desses intervalos é subintervalo da partição $P_{j}$ correspondente.
+    Um \emph{sub-bloco} de $P$ é um n-bloco de forma $B = \left[ t_{j_1 -1},t_{j_1} \right] \times \ldots\times \left[ t_{j_n-1}, t_{j_n} \right] $ onde cada um desses intervalos é subintervalo da partição $P_{j}$ correspondente.
 \end{definition}
 
 \begin{definition}
-    (Somas sups. e infs. associadas a partições) $f: B\to \R$ (limitada). Seja $P=P_1\times \ldots\times P_n$ uma partição de B. A \emph{soma superior} (resp. \emph{inferior}) (de $f$ com respeito a $P$), \[
-	S\left( f,P \right) := \sum_{B'\in \mathcal{C}\left( P \right) } M_{B'}vol\left( B' \right) 
+    (Somas sups. e infs. associadas a partições) $f: A\to \R$ (limitada). Seja $P=P_1\times \ldots\times P_n$ uma partição de A. A \emph{soma superior} (resp. \emph{inferior}) (de $f$ com respeito a $P$), \[
+	S\left( f,P \right) := \sum_{B\in \mathcal{B}\left( P \right) } M_{B}vol\left( B \right) 
     \] [resp. \[
-	s\left( f,P \right) := \sum_{B'\in \mathcal{C}\left( P \right) } m_{B'}vol\left( B' \right) 
-    ]\] onde $\mathcal{C}\left( P \right) $ é o conjunto dos sub-blocos de $P$ e $M_{B'} = sup\left\{ f(x): x\in B' \right\} $ [$m_{B'}=inf\left\{ f(x):x\in B' \right\} $].
+	s\left( f,P \right) := \sum_{B\in \mathcal{B}\left( P \right) } m_{B}vol\left( B \right) 
+    ]\] onde $\mathcal{B}\left( P \right) $ é o conjunto dos sub-blocos de $P$ e $M_{B} = sup\left\{ f(x): x\in B \right\} $ [$m_{B}=inf\left\{ f(x):x\in B \right\} $].
 \end{definition}
 
 De cara, temos que $s\left( f,P \right) \le S\left( f,P \right)$.
