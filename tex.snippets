@@ -332,11 +332,6 @@ snippet matrix "auto matrix" iA
 endsnippet
 
 context "math()"
-snippet () "left( right)" iA
-\left( ${1:${VISUAL}} \right) $0
-endsnippet
-
-context "math()"
 snippet bm "vector" i
 \bm{$1}$0
 endsnippet
@@ -399,12 +394,12 @@ snippet part "d/dx" w
 endsnippet
 
 context "math()"
-snippet sq "\sqrt{}" iA
+snippet sr "\sqrt{}" iA
 \sqrt{${1:${VISUAL}}} $0
 endsnippet
 
 context "math()"
-snippet sr "^2" iA
+snippet sq "^2" iA
 ^2
 endsnippet
 
@@ -731,13 +726,25 @@ endsnippet
 
 priority 10
 context "math()"
-snippet "bar" "bar" riA
+snippet "ubar" "bar under" riA
+\underline{$1}$0
+endsnippet
+
+priority 100
+context "math()"
+snippet "([a-zA-Z])ubar" "bar under" riA
+\underline{`!p snip.rv=match.group(1)`}
+endsnippet
+
+priority 10
+context "math()"
+snippet "obar" "bar over" riA
 \overline{$1}$0
 endsnippet
 
 priority 100
 context "math()"
-snippet "([a-zA-Z])bar" "bar" riA
+snippet "([a-zA-Z])obar" "bar over" riA
 \overline{`!p snip.rv=match.group(1)`}
 endsnippet
 
