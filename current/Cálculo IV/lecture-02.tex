@@ -7,14 +7,16 @@ Definindo, então, o exposto no final da última aula.
 \end{definition}
 
 Dados $Q, P$ como na definição, podemos também encontrar que os sub-blocos $B'$ de $Q$ estão contidos nos blocos $B$ de $P$. Ainda mais, podemos ver que \[
-    vol\left( B \right) = \sum_{B_1\in Z_Q\left( B \right)  } vol\left( B' \right)
-.\]  [TODO: REVISAR NO SPIVAK]
+    vol\left( B \right) = \sum_{B' \in Z_Q\left( B \right)  } vol\left( B' \right)
+,\] onde $Z_Q\left( B \right) $ define o conjunto dos sub-blocos de $B$ de acordo com a partição $Q$ (que necessariamente refina a partição que gerou $B$).
 
 \begin{prop}
     Se $Q,P$ são partições de $A$ e $Q$ refina $P$, então \[
     s\left( f, Q \right) \ge s\left( f,P \right) 
     \] e \[
     S\left( f,Q \right) \le S\left( f,P \right) 
+    ,\] ou, utilizando a desigualdade já estabelecida, \[
+     s\left( f,P \right) \le s\left( f, Q \right) \le S\left( f,Q \right) \le S\left( f,P \right) 
     .\] 
 \end{prop}
 \begin{proof}
@@ -41,7 +43,7 @@ Dados $Q, P$ como na definição, podemos também encontrar que os sub-blocos $B
 \begin{proof}
     Tome
     \begin{align*}
-	& R = \left( P_1\cup Q_1 \right) \times \ldots\times \left( P_n\cup Q_n \right) \\
+	& R = \left( P_1\cup Q_1 \right) \times \ldots\times \left( P_n\cup Q_n \right) = P + Q \\
 	&\implies P,Q \subset R
     ,\end{align*}
     logo $R$ refina as duas, ou seja, \[
@@ -62,23 +64,27 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
 \end{definition}
 
 \begin{observe}
-    Integral inferior é < integral superior
+    \[
+    \underline{\int}_A f \le  \overline{\int}_A f
+    .\] 
 \end{observe}
 
 \begin{eg}
     Seja \[
     f\left( x \right) = \begin{cases}
 	1 &, x=\left( x_1,\ldots,x_n \right) : x_i\in \Q \forall i \\
-	0
+	0 &, \text{do contrário}
     \end{cases}
     .\]
     Seja $P$ partição de $A:\forall B $ sub-bloco, então
     \begin{align*}
 	& M_B = 1 \text{ e }m_B=0 \\
-	&\implies S\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } vol\left( B \right)= vol \left( A \right) \\
+	&\implies S\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } 1 . vol\left( B \right)= vol \left( A \right) \\
 	&\implies \overline{\int}_A f = 1
-    .\end{align*}
-    Para o caso inferior, a integral é 0.
+    ,\end{align*}
+    enquanto, de forma análoga, \[
+    \underline{\int}_A f = 0
+    .\] 
 \end{eg}
 
 \begin{definition}
@@ -96,18 +102,24 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
     ($\implies$) Suponha $f$ integrável. Então $\exists P_1$ de $A$ tal que \[
     s\left( f, P_1 \right) < \int_A f + \frac{\epsilon}{2}
     .\] Da mesma forma, $\exists P_2$ de $A$ tal que \[
-    \int_A f - \frac{\epsilon}{2} < s\left( f, P_2 \right) \le s\left( f,P_\epsilon \right) \le S\left( f,P_\epsilon \right) \le S\left( f,P_1 \right) <\int_A f + \frac{\epsilon}{2}
-    \] onde $P_\epsilon$ é qualquer partição que refina $P_1$ e $P_2$. \[
-    \implies S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) \le \epsilon
-    .\] 
+    \int_A f - \frac{\epsilon}{2} < s\left( f, P_2 \right) 
+    .\] Agora, podemos escolher $P_\epsilon$ que refine ambas $P_1$ e $P_2$ (sua existência é garantida), de forma que
+    \begin{align*}
+	& s\left( f, P_2 \right) \le s\left( f,P_\epsilon \right) \le S\left( f,P_\epsilon \right) \le S\left( f,P_1 \right) \\
+	& \implies \int_A f - \frac{\epsilon}{2} \le s\left( f,P_\epsilon \right) \le S\left( f,P_\epsilon \right) \le \int_A f + \frac{\epsilon}{2} \\
+	& \implies S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) \le \epsilon
+    .\end{align*}
 
-    ( $ < =$ ) Se vale (*) $\forall \epsilon$ e alguma $P_\epsilon$. Se  $f$ não é integrável, poderíamos tomar \[
+    ($\impliedby$) Se vale (*) $\forall \epsilon$ e alguma $P_\epsilon$, então suponha  $f$ não integrável. Então poderíamos tomar \[
 	\epsilon = \frac{1}{2}\left( \overline{\int}_A f - \underline{\int}_A f \right) > 0
-    .\] Escolhendo $P_\epsilon$ satisfazendo (*), \[
-    s\left( f, P_\epsilon \right) \le \underline{\int}_A f \le \overline{\int}_A f\le S\left( f, P_\epsilon \right) 
-    ,\] portanto \[
-    2\epsilon \le S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) 
-\] [TODO: finalizar eq anterior] uma contradição.
+    .\] Escolhendo $P_\epsilon$ satisfazendo (*), pela definição das integrais como sup/inf das somas inferiores/superiores,
+    \begin{align*}
+	& s\left( f, P_\epsilon \right) \le \underline{\int}_A f \le \overline{\int}_A f\le S\left( f, P_\epsilon \right) \\
+	&\implies \overline{\int}_A f - \underline{\int}_A f \le S\left( f, P_\epsilon \right) - \underline{\int}_A f \le S\left( f, P_\epsilon \right) -s\left( f, P_\epsilon \right)
+    ,\end{align*}
+     portanto \[
+	S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) \ge 2\epsilon
+    ,\] uma contradição com (*).
 \end{proof}
 \begin{corollary}
     Se $f:A\to \R$ é contínua, então $f$ é integrável.
@@ -118,31 +130,33 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
     \] do máximo.
     Como $A$ é um compacto, $f$ é uniformemente contínua.
     Seja fixado $\epsilon > 0$. Escolha $\delta > 0$ tal que $\forall x,y \in A$ \[
-	\|x-y\|<\delta \implies \|f\left( x \right) -f\left( y \right) \|<\epsilon
+	\|x-y\|<\delta \implies \|f\left( x \right) -f\left( y \right) \|<\frac{\epsilon}{vol\left( A \right) }
     .\] 
+
     \begin{observe}
         Em um bloco degenerado, qualquer função é integrável com \[
         \int_A f = 0
         .\] 
     \end{observe}
-    Escolha, em cada $\left[ a_i,b_i \right], i=1,\ldots,n $ uma partição $P_i$ de modo que \[
+
+    Escolha uma partição $P=\prod_{i=1}^{n} P_i  $ de modo que \[
     \|P_i\| < \delta
     ,\] ou seja, com que a norma de cada subintervalo seja menor que $\delta$. Tome $P = P_1\times \ldots\times P_n$. Seja $B \in \mathcal{B}\left( P \right) $. Como $f|_B$ é ainda contínua, por Weierstrass $\exists x_B,y_B\in B$ tal que
     \begin{align*}
 	f\left( y_B \right) &= M_B \\
-	f\left( x_B \right) = m_B
+	f\left( x_B \right) &= m_B
     .\end{align*}
     Por outro lado, \[
-    \|x_B - y_B\| = max\left\{ |\left( x_B \right)_j - \left( y_B \right)_j | : j = 1,\ldots,n \right\} 
+    \|y_B - x_B\| = max\left\{ |\left( y_B \right)_j - \left( x_B \right)_j | : j = 1,\ldots,n \right\} 
     ,\] mas como $P$ foi escolhida de forma que os intervalos que constituem as partições sejam menores do que $\delta$, então \[
-    |\left( x_B \right)_j - \left( y_B \right)_j | < \delta \forall j=1,\ldots,n
+    |\left( y_B \right)_j - \left( x_B \right)_j | < \delta \forall j=1,\ldots,n
     \] logo \[
-    \|x_B - y_B\| < \delta
+    \|y_B - x_B\| < \delta
     .\] Assim, vemos que \[
     M_B - m_B = \|f\left( y_B \right) -f\left( x_B \right) \|< \frac{\epsilon}{vol\left( A \right) }
-    .\] Portanto, \[
-    S\left( f, P \right) - s\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B - mB \right) vol\left( B \right) <\frac{\epsilon}{vol\left( A \right) } \sum_{B\in \mathcal{B}\left( P \right) } vol\left( B \right) = \epsilon
-    .\] $f$ é integrável.
+    ,\] para todo $B\in \mathcal{B}\left( P \right) $. Portanto, \[
+    S\left( f, P \right) - s\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B - m_B \right) vol\left( B \right) <\frac{\epsilon}{vol\left( A \right) } \sum_{B\in \mathcal{B}\left( P \right) } vol\left( B \right) = \epsilon
+    ,\] o que nos garante, pela proposição anterior, que $f$ é integrável.
 \end{proof}
 
 De forma direta, podemos ver que as funções constantes são integráveis e \[
@@ -170,35 +184,33 @@ De forma direta, podemos ver que as funções constantes são integráveis e \[
 	&\implies m_B^{f} + m_B^{g} \le m_B^{(f+g)} \\
 	&\implies M_B^{(f+g)}\le M_B^{f} + M_B^{g}
     .\end{align*}
-    Veja que com a soma desses componentes com o volume dos blocos já nos leva às somas superiores e inferiores. Chegar em \[
-    s\left( f,P \right) +s\left( g,P \right) \le s\left( f+g, P \right) 
-    \] e \[
+    Veja que com a soma desses componentes com o volume dos blocos já nos leva às somas superiores e inferiores. Ou seja, temos que
+    \begin{align*}
+	s\left( f+g, P \right) &= \sum_{B\in \mathcal{B}\left( P \right)} m_B^{(f+g)} vol\left( B \right) \\ 
+			       &\ge \sum_{B\in \mathcal{B}\left( P \right)} \left( m_B^{f}+m_B^{g} \right) vol\left( B \right) = s\left( f, P \right) + s\left( g, P \right) 
+    .\end{align*}
+    De forma análoga, \[
     S\left( f+g,P \right) \le S\left( f,P \right) +S\left( g,P \right) 
-    .\] Seja $\epsilon>0$. Escolha $P_\epsilon$ tal que \[
-    S\left( f,P_\epsilon \right) - s\left( f,P_\epsilon \right) < \frac{\epsilon}{2} \tag{*}
-    \] e \[
-    S\left( g,P_\epsilon \right) -s\left( g,P_\epsilon \right) <\frac{\epsilon}{2}
-    .\] Então \[
-    S\left( f+g, P_\epsilon \right) - s\left( f+g, P_\epsilon \right)  \le S\left( f,P_\epsilon \right) +S\left( g,P_\epsilon \right) - s\left( f,P_\epsilon \right) -s\left( g, P_\epsilon \right) < \epsilon
-    .\] Assim, provamos que $f+g$ é integrável.
-    De (*) \[
-    s\left( f,P \right) + s\left( g,P \right)  \le \int_A \left( f+g \right) \le S\left( f,P \right) + S\left( g,P \right) \tag{**}
-    .\] Dadas partições $P=P_1\times \ldots\times P_n$ e $Q=Q_1\times \ldots\times Q_n$, com $P\cup Q = \left( P_1\cup Q_1 \right) \times \ldots\times \left( P_n\cup Q_n \right) $, então \[
-    s\left( f,P \right) +s\left( g,Q \right) \le s\left( f, P\cup Q \right) + s\left( g, P\cup Q \right) \le^{(**)} \int_A\left( f+g \right) \le  S\left( f,P\cup Q \right) + S\left( g,P\cup Q \right) \le S\left( f,P \right) +S\left( g,Q \right) 
-    \] de onde podemos chegar em \[
-    \int_A \left( f+g \right) \le \int_A f + \int_A g
-    .\] Fazendo as mesmas operações, chegamos na inequação oposta, ou seja, \[
-    \int_A \left( f+g \right) \ge  \int_A f + \int_A g
+    .\]
+    Agora podemos trabalhar as integrais de $f+g$
+    \begin{align*}
+	\underline{\int}_A \left( f+g \right)  &= sup \left\{ s\left( f+g,P \right)  \right\} \\
+			       &\ge sup \left\{ s\left( f,P \right)  \right\} + sup \left\{ s\left( g,P \right)  \right\} = \underline{\int}_A f + \underline{\int}_A g
+    \end{align*}
+    e \[
+	\overline{\int}_A \left( f+g \right) \le  \overline{\int}_A f + \overline{\int}_A g
+    .\] Assim, pela integrabilidade de $f$ e $g$ e pela desigualdade já estabelecida entre as integrais inferiores e superiores, \[
+    \int_A f + \int_A g \le \underline{\int}_A \left( f+g \right) \le \overline{\int}_A \left( f+g \right) \le \int_A f + \int_A g
+    ,\] ou seja, não só $f+g$ é integrável como sua integral é \[
+    \int_A \left( f+g \right) = \int_A f + \int_A g
     .\] 
 
-    (2) 3 casos
-
-    $c>0$:  $P$ partição de $A$. 
+    (2) Para o caso $c<0$, temos que, dada uma partição $P$ de $A$,
     \begin{align*}
 	m_B^{c.f} &= inf\left\{ c.f(x): x\in B \right\} \\
 		  &= c.sup\left\{ f(x): x\in B \right\} \\
 		  &= c.M_B^{f} \\
-	M_B^{c.f} &= c.m_B^{f} \\
+	M_B^{c.f} &= c.m_B^{f}
     ,\end{align*}
     ou seja,
     \begin{align*}
@@ -210,6 +222,20 @@ De forma direta, podemos ver que as funções constantes são integráveis e \[
     \] e \[
 	\underline{\int}_A c.f = c.\overline{\int}_A f
     ,\] logo, $c.f$ é integrável e \[
+    \int_A c.f = c.\int_A f
+    .\] 
+    Para $c\ge 0$ isso se dá de forma análoga, partindo de 
+    \begin{align*}
+	m_B^{c.f} &= inf\left\{ c.f(x): x\in B \right\} \\
+		  &= c.inf\left\{ f(x): x\in B \right\} \\
+		  &= c.m_B^{f} \\
+	M_B^{c.f} &= c.M_B^{f}
+    ,\end{align*}
+    vemos que \[
+	\overline{\int}_A c.f = c.\overline{\int}_A f
+    \] e \[
+	\underline{\int}_A c.f = c.\underline{\int}_A f
+    ,\] logo, $c.f$ é integrável novamente e \[
     \int_A c.f = c.\int_A f
     .\] 
 
