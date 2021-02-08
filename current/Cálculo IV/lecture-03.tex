@@ -1,0 +1,197 @@
+\lecture{3}{08.02.2021}{}
+
+Temos a notação \[
+\mathcal{R}\left( A \right) = \left\{ f:A\to \R / f \text{ integrável} \right\} 
+.\] Agora, podemos dizer que $\mathcal{C}\left( A \right) \subset \mathcal{R}\left( A \right) $, uma vez que $\mathcal{R}\left( A \right) $ é um espaço vetorial com operações ponto a ponto.
+
+Também podemos definir a operação
+\begin{align*}
+    \mathcal{I}: \mathcal{R}\left( A \right)  &\longrightarrow \R \\
+    f &\longmapsto \mathcal{I}(f) = \int_A f
+\end{align*}
+que é linear.
+
+Agora, utilizando a norma \[
+    \|f\|_{\infty} = sup\left\{ |f\left( x \right) | : x\in A \right\} 
+,\] temos que \[
+\|\mathcal{I}\left( f \right) \| = \left| \int_A f \right| \le \int_A \left| f \right| 
+.\] 
+
+\section*{Conjuntos de medida nula}
+
+\begin{definition}
+    Um conjunto $X\subset \R^{n}$ tem \emph{medida (de Lebesgue) nula} se $\forall \epsilon>0$, se $\{B_n\}_{n\in \N}$ coleção de n-blocos (ou vazios) tal que
+    \begin{itemize}
+        \item $X \subset \cup_{n\in \N}B_n$; e
+	\item $\sum_{n\in \N} vol\left( B_n \right) < \epsilon$.
+    \end{itemize}
+    Nesse caso, escrevemos $med X = 0$.
+\end{definition}
+
+Alguns exemplos:
+\begin{eg}
+    1) $X=\O$ tem medida nula
+\end{eg}
+\begin{eg}
+    2) $X = \{x_0\}$, com $x_0\in \R^{n}$, tem medida nula. Basta escolher um n-bloco que tenha intervalos constituintes centrados nos componentes de $x_0$ e com tamanho que totalize um volume menor que $\epsilon$. Ou seja, dado $\epsilon>0$ e $x_0 = \left( x_0^{1},\ldots,x_0^{n} \right) $, ponha 
+    \begin{align*}
+    & B_1 = \left[ x_0^{1}-\frac{\frac{\epsilon^{\frac{1}{n}}}{2}}{2}, x_0^{1}+\frac{\frac{\epsilon^{\frac{1}{n}}}{2}}{2}  \right] \times \ldots \\
+    .\end{align*}
+    É fácil ver que esse n-bloco tem volume menor que $\epsilon$ e contém $x_0$.
+\end{eg}
+
+\begin{prop}
+    Seja $\left\{ X_k \right\}_{k\in \N}$ conjunto de subconjuntos de $\R^{n}$ com $med_{\R^{n}}X_k = 0 \forall k\in \N$. Então \[
+    med\left( \cup _{k}X_k \right) = 0
+    .\] 
+\end{prop}
+
+\begin{proof}
+    Seja $\epsilon>0$. $\forall k\in \N$, escolha $\left\{ B_l^{(k)} \right\}_{l\in \N}$ de n-blocos, com $X_k \subset  \cup _{l\in \N}B_l^{(k)}$ e \[
+    \sum_{l\in \N} vol\left( B_l^{(k)} \right) < \frac{\epsilon}{2^{k}}
+    .\] 
+
+    Agora $\left\{ B_l^{(k)} \right\}_{k,l \in \N}$ é coleção enumerável de n-blocos, \[
+    X:= \cup _{k\in \N}X_k \subset \cup _{l,k\in \N}B_l^{(k)}
+    .\]
+
+    Veja que \[
+    \sum_{k} \sum_{l} vol\left( B_l^{(k)} \right) = \sum_{k} \frac{\epsilon}{2^{k}} \to  \epsilon
+\] [TODO: REVISAR] 
+\end{proof}
+
+\begin{eg}
+    3) $\Q\subset \R$ tem medida nula: $\Q = \cup_{k\in \N}\left\{ r_k \right\} $, onde fixamos uma enumeração $\Q=\left\{ r_1,r_2,\ldots \right\}$. Como $med \left\{ r_k \right\} = 0 \forall k\in \N$, então, pela proposição acima, \[
+    med \Q = 0.
+    \] 
+
+    Mais geralmente, qualquer conjunto enumerável $X \subset \R^{n}$ tem medida nula.
+\end{eg}
+
+\begin{eg}
+    4) Se $X \subset  \R^{n}$ tem medida nula, então $int\left( X \right) = \O$ (interior vazio).
+
+    Fixe $x_0 \in X$ e suponha que $\exists \epsilon_o>0$ tal que $B_{\epsilon_0}\left( x_0 \right) \subset X$.
+
+    Sabemos que, dados $\left[ a,b \right] \subset \R$, $a<b$. Seja $\left\{ \left[ a_i,b_i \right]  \right\} _{i\in \N}$ tal que \[
+    \cup _i \left[ a_i, b_i \right] not \subset \left[ a,b \right] 
+    \]  \[
+    \implies \sum_{i\in \N} \left[ a_i, b_i \right] \ge b-a
+.\] [TODO: Demonstração no Spivak] 
+
+    Dados $\left\{ B_k \right\} $ n-blocos com $X\subset \cup _{k\in \N}B_k$ \[
+    \implies \sum_{k\in \N} vol B_k \ge \left( 2 \epsilon_0 \right) ^{n} 
+    .\] 
+\end{eg}
+
+\begin{note}
+    Veja que a recíproca é claramente falsa:
+    $\R\ \Q\subset \R$ tem $int\left( \R\ \Q \right) =\O$ mas se $med\left( \R \ \Q \right) = 0$, então teríamos $med \R = med\left( \left( \R \ \Q \right) \cup \Q \right) = 0$, uma contradição.
+
+    Isso também nos mostra que todo aberto não-vazio que contém um conjunto de medida nula não pode possuir medida nula [TODO: REVISAR].
+\end{note}
+
+\begin{eg}
+    5) $X =  \R^{n} \times \left\{ 0_{\R^{m}} \right\} \subset \R^{n+m}$ possui medida nula.
+
+    Claramente não conseguimos cobrir com uma quantidade finita de blocos.
+    \begin{observe}
+	Considere $P = (p_1,\ldots,p_n) \in \Z^{n}$ e n-blocos da forma \[
+        B_p^{(n)} = \left[ p_1, p_1+1 \right] \times \ldots\times \left[ p_n, p_n+1 \right] 
+        ,\] então \[
+        \cup_{p\in \Z^{n}}B_p^{(n)} = \R^{n}
+        .\] Estamos cobrindo $\R^{n}$ com n-blocos delimitados pelos inteiros.
+    \end{observe}
+    Fixe $\epsilon>0$. Fixe uma enumeração $P^{1},\ldots,P^{l},\ldots$ de $\Z^{n}$. Defina \[
+    B_l = B^{(n)}_{p_l} \times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]\times \ldots\times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]
+    .\] Então, claramente, \[
+    X \subset  \cup _l B_l
+    .\] Agora, veja que \[
+    vol_{\R^{n+m}}B_l = \left( vol_{\R^{n}} \right) \frac{\epsilon}{2^{l+1}} = \sum_{l} vol_{\R^{n+m}}B_l = \frac{\epsilon}{2} < \epsilon
+    .\] 
+\end{eg}
+
+\begin{prop}
+    (ver Teorema 3, sec. 2, p. 151, "Análise Real", vol. 2, E. Lima)
+
+    Para $X\subset \R^{n}$, são equivalentes:
+    \begin{itemize}
+        \item $med X = 0$;
+	\item $\forall \epsilon>0$, $\exists $ n-blocos abertos $B^{k} := \left( a^{k}_1,b_1^{k} \right)\times \ldots\times \left( a^{k}_n,b_n^{k} \right) $ com $X\subset \cup _k B^{k}$, \[
+	\sum_{k\in \N} vol B^{k} < \epsilon
+	;\] 
+	\item $\forall \epsilon>0$, $\exists $ n-cubos fechados, da forma \[
+	B^{k}= \left[ a_1^{k},b_1^{k} \right] \times \ldots\times \left[ a_n^{k},b_n^{k} \right]
+	\] com $b_i^{k} - a_i^{k}=L \forall i \in \left\{ 1,\ldots,k \right\} $, tal que $X\subset \cup _{k\in \N}B^{k}$ e \[
+	\sum_{k\in \N} \left( L^{k} \right) ^{n} < \epsilon
+	;\] 
+	\item Mesmo do anterior, mas com n-cubos abertos.
+    \end{itemize}
+
+    \begin{observe}
+	Para que consigamos mostrar a equivalência entre o uso de blocos/cubos abertos e fechados, basta que, partindo de um elemento fechado, definamos um elemento aberto estendendo o conjunto com um valor $\delta > 0$ arbitrário, então, como o volume é contínuo, então podemos fazer com que $\delta$ seja tão pequeno quanto queiramos, fazendo com que o volume do aberto vá para o volume do fechado conforme $\delta\to 0$. Ou seja, restringimos o volume do fechado para que seja menor que $\frac{\epsilon}{2}$. por exemplo, e estendendo o volume com um $\delta$ tal que o volume do aberto seja $\frac{3\epsilon}{4}$. A volta é mais fácil, uma vez que podemos tomar o fecho dos abertos, que preserva o volume.
+
+	Para a equivalência entre blocos e cubos, primeiro vemos que blocos com dimensões racionais podem ser partidos em cubos. Então, utilizamos a mesma ideia acima, estendendo os blocos de forma arbitrariamente pequena para que suas dimensões sejam racionais.
+    \end{observe}
+\end{prop}
+
+\begin{prop}
+    Seja $f : X\subset \R^{n}\to \R^{n}$ Lipschitz. Se $med X = 0$, então $med f\left( X \right) = 0$.
+\end{prop}
+\begin{proof}
+    Fixe $\|.\|$ como a norma do máximo em $\R^{n}$. Fixe $\epsilon>0$. Suponha que $\exists c>0$, tal que $\|f\left( x \right) -f\left( y \right) \| \le  c \|x-y\| \forall x, y \in X$. Seja $\hat{C}_k$, $k\in \N$ n-cubos, tal que \[
+vol \hat{C}_k = L_k^{n} < \epsilon'
+    \] com $\epsilon'$ a ser escolhido.
+
+    Veja que $x, y \in \hat{C}_k\subset X \implies \|x-y\|\le L_k$. Então \[
+    j=1,\ldots,n\text{, } \left| f_j\left( x \right) f_j\left( y \right)  \right| \le cL_k
+    .\] Fixe, para cada \[
+    \hat{C}_k = \left[ a_1^{(k)}, b_1^{(k)} \right] \times \ldots\times \left[ a_n^{(k)}, b_n^{(k)} \right]
+    ,\] \[
+    a^{(k)} := \left( a_1^{(k)}, \ldots, a_n^{(k)} \right) \in \hat{C}_k\subset X
+    \] \[
+    \implies f_j\left( x \right) \in \left[ f_j\left( a^{(k)} \right) -cL_k, f_j\left( a^{(k)} \right) +cL_k \right] \forall x \in \hat{C}_k
+    ,\] mas isso implica em \[
+    f\left( x \right) \in \prod_{j=1}^{n}  \left[ f_j\left( a^{(k)} \right) -cL_k, f_j\left( a^{(k)} \right) +cL_k \right] =: B_k
+    ,\] ou seja, \[
+    f\left( \hat{C}_k \right) \subset B_k
+    .\] \[
+    f\left( X \right) \subset \cup_{k\in \N} B_k
+    \] \[
+    vol B_k = \left( 2cL_k \right) ^{n} = 2^{n}c^{n} vol \hat{C}_k \implies \sum_{k=1}^{\infty} vol B_k = 2^{n}c^{n}\sum_{k=1}^{\infty} vol \hat{C}_k < \epsilon
+    \] Escolha $\epsilon' < \frac{\epsilon}{2^{n}c^{n}}$, então \[
+    med f\left( X \right) = 0
+.\] [TODO: REVISAR!!!] 
+\end{proof}
+
+\begin{corollary}
+    Seja $f: U\subset \R^{n}\to \R^{m}$ Lipschitz. Se $m>n$, então \[
+    med_\R^{m} f\left( U \right) = 0
+    .\] 
+\end{corollary}
+
+\begin{proof}
+    Defina 
+    \begin{align*}
+        F: U\times \R^{m-n} &\longrightarrow \R^{m} \\
+        \left( x,y \right)  &\longmapsto F\left( x,y \right) = f\left( x \right) 
+    .\end{align*}
+    Note que $U\subset \R^{m}$.
+
+    Dada $c> 0$ tal que \[
+	\|f(x) - f(x')\|_{\R^{m}}\le c \|x-x'\|_{\R^{n}} \text{, }\forall x,x' \in U
+    .\] Tome em $\R^{n},\R^{m}$ a norma da soma. Nesse caso, \[
+    \|F\left( x,y \right) - F\left( x',y' \right) \| = \|f\left( x \right) - f\left( x' \right) \|\le c\|x-x'\|_{\R^{n}} \le c\left( \|x-x'\|_{\R^{n}}+\|y-y'\|_{\R^{m-n}} \right) = c\|\left( x,y \right) -\left( x',y' \right) \|_{\R^{m}}
+    .\] Com isso, temos que $F$ é Lipschitz. Além disso, \[
+    F\left( U\times \left{ 0_{\R^{m-n}} \right}  \right) = f\left( U \right) 
+    .\] Entretanto, como \[
+    U\times \left{ 0_{\R^{m-n}} \right} \subset \R^{n}\times \left{ 0_{\R^{m-n}} \right}
+    \] que tem medida nula em $\R^{m}$.
+\end{proof}
+
+\begin{theorem}
+    Seja $f:U\subset \R^{n}\to \R^{m}$ de classe $C^{1}$ (derivável e todas as derivadas parciais são contínuas em $U$). $U$ é aberto. Se $m>n$, então \[
+    med_{\R^{m}} f\left( U \right) 
+    \] tem medida nula.
+\end{theorem}
+
