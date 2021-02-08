@@ -1,0 +1,54 @@
+\lecture{2}{08.02.2020}{Introduction to Integer Programming and Linear Programming}
+
+\section*{Introduction to Integer Programming}
+
+Problems formulated using discrete variables. This usually arises from problems in which the units of work are not divisible, e.g., amount of human resources.
+
+One case is the 0-1 integer problem, in which the variables are binary, so in $\left\{ 0,1 \right\} ^{n}$.
+
+\section*{Linear Programming}
+
+Based on the problem of finding solutions to a linear system of equations ($Ax = b$), it is natural to extend it to an inequality scenario $Ax \le b$. We can see that each of the equations $a_i^{T}x\le b_i$ can be understood as linear separations of the space of $x$, so $Ax \le b$ defines a polyhedron in that space. Naturally, this expands to a problem which adds up a optimization of a cost function within this polyhedron, that is,
+\begin{align*}
+    \min_{\bm{x}} \quad & f\left( \bm{x} \right) \\
+    \textrm{s.t.} \quad & A \bm{x} \le  \bm{b}
+.\end{align*}
+
+Still, the canonical form is
+\begin{align*}
+    \min_{\bm{x}} \quad & \bm{c}^{T}\bm{x} \\
+    \textrm{s.t.} \quad & A\bm{x}\le b \\
+      & \bm{x}\ge \bm{0}
+\end{align*}
+so we 
+
+Note that this formulation is very general, as it can be manipulated to fit any problem.
+
+\subsection*{Simplex Algorithm}
+
+The simplex algorithm is the basis of branch-and-bound and branch-and-cut algorithms for integer programming problems.
+
+Usually, the problems we deal with, in a linear problem, are of $A\in \R^{m\times n}$ with $n\gg m$, so a fat matrix. If we write \[
+    A = \begin{bmatrix} B & | & N \end{bmatrix} 
+,\] in which $B\in \R^{m\times m}$, we can express \[
+A\bm{x} = B \bm{x}_B + N \bm{x}_N = \bm{b}
+\] so \[
+\bm{x}_B = B^{-1}\left( \bm{b} - N \bm{x}_N \right) 
+.\] 
+
+\subsection*{Duality}
+
+For every problem
+P:\begin{align*}
+    \max_{\bm{x}} \quad & \bm{c}^{T}\bm{x} \\
+    \textrm{s.t.} \quad & A\bm{x} \le \bm{b} \\
+      & \bm{x} \ge 0
+\end{align*}
+there is a dual problem
+D:\begin{align*}
+    \min_{\bm{x}} \quad & \bm{b}^{T}\bm{y} \\
+    \textrm{s.t.} \quad & A^{T}\bm{y}\ge \bm{c} \\
+      & \bm{y} \ge \bm{0}
+.\end{align*}
+
+
