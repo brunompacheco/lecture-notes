@@ -1,0 +1,22 @@
+\lecture{2}{08.02.2021}{Busca em Largura e Profundidade}
+
+Algoritmos de busca procuram solucionar o problema do \emph{caminho mínimo}.
+
+\begin{definition}
+    Dado um grafo $G=\left( V,E \right)$ (dirigido ou não) e vértices $s, v \in V$, o \emph{caminho mínimo} é o menor conjunto de arestas que conectam $s$ a $v$, caso exista.
+\end{definition}
+
+Note que essa definição é facilmente estendível para grafos valorados, nos quais se minimiza a soma dos valores das arestas ao invés do tamanho do conjunto.
+
+\section*{Busca em Largura}
+
+A busca em largura se dá através da exploração por nível, ou seja, da propagação das visitas através dos vizinhos diretos. Assim, dado um vértice $s\in V$, o algoritmo se propaga através das adjacências diretas, até mapear todas as distâncias ou encontrar o vértice $v \in V$ desejado.
+
+Veja que, para grafos dirigidos, deve-se sempre utilizar os vizinhos saintes $N^{+}\left( u \right) $ do vértice $u$ visitado.
+
+A busca em largura só garante o caminho mínimo para grafos \emph{não valorados}.
+
+\subsection*{Complexidade}
+
+As operações relacionadas à fila são executadas todas somente uma vez por vértice, então possuem complexidade $O\left( n \right) $, enquanto a verificação dos vizinhos é executada, no pior caso (grafo totalmente conectado), $n^2$ vezes. Em uma análise mais fina, vemos que essa verificação é executada duas vezes para cada aresta, então $2m$ vezes. Dessa forma, podemos ver que a complexidade do algoritmo é $O\left( n+m \right) $.
+
