@@ -1,0 +1,77 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 1}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410079 - Modelagem para Otimização}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Sendo $p_1,p_2$ as quantidades produzidas de cada produto em um dia, podemos formular a restrição imposta pela máquina 1 como \[
+3\cdot p_1 + 2\cdot p_2 \le 8
+,\] a restrição importa pela máquina 2 como \[
+3\cdot p_1 + 3\cdot p_2 \le 7
+\] e a função objetivo (lucro) como \[
+16\cdot p_1 + 10\cdot p_2
+.\] 
+
+Além disso, temos a restrição de que $p_i = z\cdot \frac{1}{4}$, $z\in \Z$. Para isso, podemos transformar as variáveis como $x_i = 4\cdot p_i$. Dessa forma, $x_i \in \Z \implies p_i$ é da forma desejada.
+
+Portanto, a formulação proposta do problema é
+\begin{align*}
+    \max_{x_1,x_2} \quad & 4x_1 + \frac{5}{2}x_2 \\
+    \textrm{s.t.} \quad & \frac{3}{4}x_1 + \frac{1}{2}x_2 \le 8 \\
+      & \frac{3}{4}x_1 + \frac{3}{4}x_2 \le 7 \\
+      & x_1,x_2 \in \Z^{+}
+.\end{align*}
+
+\exercise{2}
+
+Sejam $q_A, q_B \in \left[ 0,1 \right] $ as quantidades, em fração das 1000 toneladas, das sucatas $A$ e $B$ de alumínio disponíveis. Possuímos restrições nas quantidades de cada um dos componentes descritos das sucatas no produto final, especificamente, a quantidade de alumínio, percentual, deve ser \[
+    0.03 \le 0.06\cdot q_A + 0.03\cdot q_B \le 0.06
+,\] a de silício deve ser \[
+    0.03 \le 0.03\cdot q_A + 0.06\cdot q_B \le 0.05
+\] e a de carbono deve ser \[
+    0.03 \le 0.04\cdot q_A + 0.36\cdot q_B \le 0.07
+.\] Defina então \[
+A = \begin{bmatrix} 0.06 & 0.03 \\ 0.03 & 0.06 \\ 0.04 & 0.36 \end{bmatrix} 
+,\] \[
+\bm{u} = \begin{bmatrix} 0.06 \\ 0.05 \\ 0.07 \end{bmatrix} ; \bm{l} = \begin{bmatrix} 0.03 \\ 0.03 \\ 0.03 \end{bmatrix} 
+.\] Agora podemos reescrever as restrições como
+\begin{align*}
+    A\bm{q} &\le \bm{u} \\
+    A\bm{q} &\ge \bm{l}
+,\end{align*}
+onde $\bm{q} = \begin{bmatrix} q_A \\ q_B \end{bmatrix} $.
+
+Podemos formular o custo total em função das variáveis $q_A$ e $q_B$ como \[
+    f\left( \bm{q} \right) = 1000\cdot \bm{c}^{T} \bm{q}
+,\] onde \[
+\bm{c} = \begin{bmatrix} 100 \\ 80 \end{bmatrix} 
+\] são os custos por tonelada das sucatas.
+
+Assim, o problema de otimização proposto é
+\begin{align*}
+    \min_{\bm{q}} \quad & f\left( \bm{q} \right)  \\
+    \textrm{s.t.} \quad & A\bm{q}\le \bm{u} \\
+      & A\bm{q}\ge \bm{l} \\
+      & \bm{q} \in \left[ 0,1 \right] ^{2}
+.\end{align*}
+
+\exercise{3}
+
+Queremos otimizar a posição $p = (x_o. y_o) \in \R^{2}$ do depósito de forma a minimizar a distância viajada para os clientes localizados em $q_i = \left( x_i, y_i \right), i=1,\ldots,4$. Essas viagens são ponderadas pelo número de fretes $n_i, i-1,\ldots,4$. Esses valores dos clientes são descritos na tabela do enunciado. Assim, a distância total viajada nos fretes para um cliente $i$ qualquer pode ser calculada como \[
+\|p - q_i\|\cdot n_i
+,\] como $\|.\|$ a norma euclidiana. Portanto, a distância total viajada é \[
+f(p) = \sum_{i=1}^{4} \|p - q_i\|\cdot n_i
+,\] ou seja, podemos formular nosso problema como
+\begin{align*}
+    \min_{p} \quad & f\left( p \right)  \\
+    \textrm{s.t.} \quad & p \in \R^{2}
+.\end{align*}
+
+\end{document}
