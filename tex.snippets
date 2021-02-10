@@ -189,6 +189,11 @@ snippet sig "sigma" i
 endsnippet
 
 context "math()"
+snippet eps "epsilon" i
+\epsilon
+endsnippet
+
+context "math()"
 snippet and "logical and" i
 \land 
 endsnippet
@@ -199,12 +204,7 @@ snippet orr "logical or" i
 endsnippet
 
 snippet mk "Math" wA
-$${1}$`!p
-if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
-	snip.rv = ' '
-else:
-	snip.rv = ''
-`$2
+$${1}$$2
 endsnippet
 
 snippet dm "Math" wA
