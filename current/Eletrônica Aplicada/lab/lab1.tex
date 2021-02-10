@@ -1,0 +1,82 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 1}
+\author{Bruno M. Pacheco (16100865)\\
+EEL 7550 - Eletrônica Aplicada}
+ 
+\maketitle
+ 
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+
+Conforme requisitado, o circuito foi montado no LTSPICE como visível na figura \ref{fig:ltspice-1}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab1-ltspice1.png}
+    \caption{Primeiro circuito do roteiro montado no LTSPICE.}
+    \label{fig:ltspice-1}
+\end{figure}
+
+Os resultados dos cálculos e da simulação podem ser observados na tabela \ref{tab:circ-1}.
+
+\begin{table}[h]
+    \centering
+    \caption{Tabela de comparação dos resultados teóricos e simulados.}
+    \label{tab:circ-1}
+    \begin{tabular}{c | c | c | c | c}
+	$V_f$ & $I_{R1}$ (teoria) & $I_{R1}$ (simulação) & $I_{R2}$ (teoria) & $I_{R2}$ (simulação)  \\
+	\hline
+	5V & 0,5 mA & 0,5 mA & 0,185 mA & 0,185185 mA \\
+	12V & 1,2 mA & 1,2 mA & 0,444 mA & 0,444444 mA \\
+	24V & 2,4 mA & 2,4 mA & 0,889 mA & 0,888889 mA
+    \end{tabular}
+\end{table}
+
+\subsection*{Circuito 2}
+
+O circuito foi simulado também conforme na figura \ref{fig:figures-lab1-ltspice2-png}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab1-ltspice2.png}
+    \caption{Segundo circuito do roteiro.}
+    \label{fig:figures-lab1-ltspice2-png}
+\end{figure}
+
+Os resultados obtidos podem ser observados na tabela \ref{}.
+
+\begin{table}[h]
+    \centering
+    \caption{Resultados da simulação do segundo circuito.}
+    \label{tab:circ-2}
+    \begin{tabular}{c | c | c}
+     & Valor teórico & Valor simulado \\
+     \hline
+	$V_f$ & 12 V & 12 V \\
+	$V_1$ & 1,24 V & 1,243 C \\
+	$V_2$ & 10,76 V & 10,757 V \\
+	$V_3$ & 4,30 V & 4,303 V \\
+	$V_4$ & 6,45 V & 6,454 V \\
+	$I_f$ & 0,829 mA & 0,829 mA \\
+	$I_1$ & 0,829 mA & 0,829 mA \\
+	$I_2$ & 0,398 mA & 0,398 mA \\
+	$I_3$ & 0,430 mA & 0,430 mA \\
+	$I_4$ & 0,430 mA & 0,430 mA \\
+	$P_f$ & 10 mW & 9,944 mW \\
+	$P_1$ & 1,028 mW & 1,030 mW \\
+	$P_2$ & 4,282 mW & 4,286 mW \\
+	$P_3$ & 1,849 mW & 1,851 mW \\
+	$P_4$ & 2,773 mW & 2,777 mW \\
+    \end{tabular}
+\end{table}
+
+\section*{Conclusão}
+
+Conforme esperado, o uso de componentes ideais resultou em valores de simulação bastante próximos dos teóricos. Acredita-se que as diferenças são oriundas de erros de arredondamento e/ou erros numéricos.
+
+\end{document}
