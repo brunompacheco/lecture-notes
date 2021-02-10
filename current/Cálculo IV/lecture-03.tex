@@ -20,7 +20,7 @@ Agora, utilizando a norma \[
 \section*{Conjuntos de medida nula}
 
 \begin{definition}
-    Um conjunto $X\subset \R^{n}$ tem \emph{medida (de Lebesgue) nula} se $\forall \epsilon>0$, se $\{B_n\}_{n\in \N}$ coleção de n-blocos (ou vazios) tal que
+    Um conjunto $X\subset \R^{n}$ tem \emph{medida (de Lebesgue) nula} se $\forall \epsilon>0$, é possível encontrar $\{B_n\}_{n\in \N}$ coleção de n-blocos (ou vazios) tal que
     \begin{itemize}
         \item $X \subset \cup_{n\in \N}B_n$; e
 	\item $\sum_{n\in \N} vol\left( B_n \right) < \epsilon$.
@@ -35,33 +35,43 @@ Alguns exemplos:
 \begin{eg}
     2) $X = \{x_0\}$, com $x_0\in \R^{n}$, tem medida nula. Basta escolher um n-bloco que tenha intervalos constituintes centrados nos componentes de $x_0$ e com tamanho que totalize um volume menor que $\epsilon$. Ou seja, dado $\epsilon>0$ e $x_0 = \left( x_0^{1},\ldots,x_0^{n} \right) $, ponha 
     \begin{align*}
-    & B_1 = \left[ x_0^{1}-\frac{\frac{\epsilon^{\frac{1}{n}}}{2}}{2}, x_0^{1}+\frac{\frac{\epsilon^{\frac{1}{n}}}{2}}{2}  \right] \times \ldots \\
+    & B_1 = \left[ x_0^{1}-\frac{\left(  \frac{\epsilon}{2}\right) ^{\frac{1}{n}}}{2}, x_0^{1}+\frac{\left(  \frac{\epsilon}{2}\right) ^{\frac{1}{n}}}{2}  \right] \times \ldots \\
     .\end{align*}
-    É fácil ver que esse n-bloco tem volume menor que $\epsilon$ e contém $x_0$.
+    Então, \[
+    vol \left( B_1 \right) = \left( \left(  \frac{\epsilon}{2}\right)^{\frac{1}{n}} \right)^{n} = \frac{\epsilon}{2} < \epsilon
+    ,\] portanto, $med X = 0$.
 \end{eg}
 
 \begin{prop}
-    Seja $\left\{ X_k \right\}_{k\in \N}$ conjunto de subconjuntos de $\R^{n}$ com $med_{\R^{n}}X_k = 0 \forall k\in \N$. Então \[
-    med\left( \cup _{k}X_k \right) = 0
+    Seja $\left\{ X_k \right\}_{k\in \N}$ conjunto de subconjuntos de $\R^{n}$ com \[
+    med_{\R^{n}}X_k = 0 , \forall k\in \N
+    .\] Então \[
+    med\left( \bigcup_{k\in \N} X_k \right) = 0
     .\] 
 \end{prop}
 
 \begin{proof}
-    Seja $\epsilon>0$. $\forall k\in \N$, escolha $\left\{ B_l^{(k)} \right\}_{l\in \N}$ de n-blocos, com $X_k \subset  \cup _{l\in \N}B_l^{(k)}$ e \[
+    Seja $\epsilon>0$. $\forall k\in \N$, escolha $\left\{ B_l^{(k)} \right\}_{l\in \N}$ de n-blocos, com \[
+    X_k \subset  \bigcup_{l\in \N}B_l^{(k)}
+    \]  e \[
     \sum_{l\in \N} vol\left( B_l^{(k)} \right) < \frac{\epsilon}{2^{k}}
-    .\] 
+    ,\] ou seja, dado que todo $X_k$ tem medida nula, pegamos os n-blocos que contém seus elementos e indexamos esses conjuntos de n-blocos.
 
-    Agora $\left\{ B_l^{(k)} \right\}_{k,l \in \N}$ é coleção enumerável de n-blocos, \[
-    X:= \cup _{k\in \N}X_k \subset \cup _{l,k\in \N}B_l^{(k)}
-    .\]
+    Veja que $\left\{ B_l^{(k)} \right\}_{k,l \in \N}$ é uma coleção enumerável de n-blocos tal que \[
+    X:= \bigcup_{k\in \N}X_k \subset \bigcup _{l,k\in \N}B_l^{(k)}
+    .\] Assim, só nos basta provar que eles possuem volume somado menor que $\epsilon$.
 
     Veja que \[
-    \sum_{k} \sum_{l} vol\left( B_l^{(k)} \right) = \sum_{k} \frac{\epsilon}{2^{k}} \to  \epsilon
-\] [TODO: REVISAR] 
+    \sum_{k\in \N} \sum_{l\in \N} vol\left( B_l^{(k)} \right) < \sum_{k\in N} \frac{\epsilon}{2^{k}} = \epsilon\sum_{k\in N} \frac{1}{2^{k}}
+.\] Entretanto, a série $\sum_{n=1}^{\infty} \frac{1}{2^{n}} \to 1$, então podemos afirmar que \[
+\epsilon\sum_{k\in N} \frac{1}{2^{k}} < \epsilon
+,\] ou seja, \[
+\sum_{k,l \in  \N} vol\left( B_l^{(k)} \right) < \epsilon
+.\] 
 \end{proof}
 
 \begin{eg}
-    3) $\Q\subset \R$ tem medida nula: $\Q = \cup_{k\in \N}\left\{ r_k \right\} $, onde fixamos uma enumeração $\Q=\left\{ r_1,r_2,\ldots \right\}$. Como $med \left\{ r_k \right\} = 0 \forall k\in \N$, então, pela proposição acima, \[
+    3) $\Q\subset \R$ tem medida nula: $\Q = \cup_{k\in \N}\left\{ r_k \right\} $, onde fixamos uma enumeração $\Q=\left\{ r_1,r_2,\ldots,r_k,\ldots \right\}$. Como $med \left\{ r_k \right\} = 0, \forall k\in \N$, então, pela proposição acima, \[
     med \Q = 0.
     \] 
 
@@ -71,44 +81,42 @@ Alguns exemplos:
 \begin{eg}
     4) Se $X \subset  \R^{n}$ tem medida nula, então $int\left( X \right) = \O$ (interior vazio).
 
-    Fixe $x_0 \in X$ e suponha que $\exists \epsilon_o>0$ tal que $B_{\epsilon_0}\left( x_0 \right) \subset X$.
+    Se $X$ fosse tal que $int\left( X \right) \neq \O$, então $\exists A\subset X$, sendo $A$ um n-bloco. Temos que qualquer cobertura enumerável $A\subset \cup B_i$ de n-blocos é tal que \[
+    \sum_{i\in \N} vol B_i \ge vol A
+    .\] Logo, $med A \neq 0 \implies med X \neq 0$.
 
-    Sabemos que, dados $\left[ a,b \right] \subset \R$, $a<b$. Seja $\left\{ \left[ a_i,b_i \right]  \right\} _{i\in \N}$ tal que \[
-    \cup _i \left[ a_i, b_i \right] not \subset \left[ a,b \right] 
-    \]  \[
-    \implies \sum_{i\in \N} \left[ a_i, b_i \right] \ge b-a
-.\] [TODO: Demonstração no Spivak] 
-
-    Dados $\left\{ B_k \right\} $ n-blocos com $X\subset \cup _{k\in \N}B_k$ \[
-    \implies \sum_{k\in \N} vol B_k \ge \left( 2 \epsilon_0 \right) ^{n} 
-    .\] 
+    Para uma demonstração mais minuciosa, ver E. Lima, Curso de Análise vol. 2, Cap. VI, seção 2, proposição C.
 \end{eg}
 
 \begin{note}
     Veja que a recíproca é claramente falsa:
-    $\R\ \Q\subset \R$ tem $int\left( \R\ \Q \right) =\O$ mas se $med\left( \R \ \Q \right) = 0$, então teríamos $med \R = med\left( \left( \R \ \Q \right) \cup \Q \right) = 0$, uma contradição.
+    $\R \setminus \Q\subset \R$ tem $int\left( \R\setminus \Q \right) =\O$ mas se $med\left( \R \setminus \Q \right) = 0$, então teríamos $med \R = med\left( \left( \R \setminus \Q \right) \cup \Q \right) = 0$ (uma vez que ambos possuem medida nula), uma contradição.
 
-    Isso também nos mostra que todo aberto não-vazio que contém um conjunto de medida nula não pode possuir medida nula [TODO: REVISAR].
+    Isso também nos mostra que todo aberto não-vazio que contém um conjunto de medida nula não pode possuir medida nula [TODO: ???].
 \end{note}
 
 \begin{eg}
     5) $X =  \R^{n} \times \left\{ 0_{\R^{m}} \right\} \subset \R^{n+m}$ possui medida nula.
 
     Claramente não conseguimos cobrir com uma quantidade finita de blocos.
+
     \begin{observe}
 	Considere $P = (p_1,\ldots,p_n) \in \Z^{n}$ e n-blocos da forma \[
-        B_p^{(n)} = \left[ p_1, p_1+1 \right] \times \ldots\times \left[ p_n, p_n+1 \right] 
+        B_P^{(n)} = \left[ p_1, p_1+1 \right] \times \ldots\times \left[ p_n, p_n+1 \right] 
         ,\] então \[
-        \cup_{p\in \Z^{n}}B_p^{(n)} = \R^{n}
+        \bigcup_{P\in \Z^{n}}B_P^{(n)} = \R^{n}
         .\] Estamos cobrindo $\R^{n}$ com n-blocos delimitados pelos inteiros.
     \end{observe}
+
     Fixe $\epsilon>0$. Fixe uma enumeração $P^{1},\ldots,P^{l},\ldots$ de $\Z^{n}$. Defina \[
-    B_l = B^{(n)}_{p_l} \times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]\times \ldots\times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]
-    .\] Então, claramente, \[
-    X \subset  \cup _l B_l
-    .\] Agora, veja que \[
-    vol_{\R^{n+m}}B_l = \left( vol_{\R^{n}} \right) \frac{\epsilon}{2^{l+1}} = \sum_{l} vol_{\R^{n+m}}B_l = \frac{\epsilon}{2} < \epsilon
-    .\] 
+    B_l = B^{(n)}_{P_l} \times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]\times \ldots\times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]
+    ,\] ou seja, uma extensão do bloco como na observação com intervalos de medida controlada por $\epsilon$. Então, claramente, \[
+    X \subset  \bigcup _l B_l
+    .\] Agora, veja que 
+    \begin{align*}
+	& vol_{\R^{n+m}}B_l = \left(  vol_{\R^{n}} B_{P_l}^{(n)}\right)  \left( \frac{\epsilon}{2^{l}} \right) = \frac{\epsilon}{2^{l}} \\
+	& \implies \sum_{l} vol_{\R^{n+m}}B_l = \sum_{l} \frac{\epsilon}{2^{l}} < \epsilon
+    .\end{align*}
 \end{eg}
 
 \begin{prop}
@@ -136,32 +144,41 @@ Alguns exemplos:
 \end{prop}
 
 \begin{prop}
-    Seja $f : X\subset \R^{n}\to \R^{n}$ Lipschitz. Se $med X = 0$, então $med f\left( X \right) = 0$.
+    Seja $f : X\subset \R^{n}\to \R^{n}$ Lipschitz. Se $med X = 0$, então $med\left(  f\left( X \right)\right)   = 0$.
 \end{prop}
 \begin{proof}
-    Fixe $\|.\|$ como a norma do máximo em $\R^{n}$. Fixe $\epsilon>0$. Suponha que $\exists c>0$, tal que $\|f\left( x \right) -f\left( y \right) \| \le  c \|x-y\| \forall x, y \in X$. Seja $\hat{C}_k$, $k\in \N$ n-cubos, tal que \[
-vol \hat{C}_k = L_k^{n} < \epsilon'
-    \] com $\epsilon'$ a ser escolhido.
+    Fixe $\|.\|$ como a norma do máximo em $\R^{n}$. Fixe $\epsilon>0$. Tome $c>0$ a constante de Lipschitz de $f$, de forma que $\|f\left( x \right) -f\left( y \right) \| \le  c \|x-y\| \forall x, y \in X$. Seja $\hat{C}_k$, $k\in \N$ n-cubos (os intervalos constituintes possuem mesmo tamanho, neste caso, $L_k$), tal que \[
+    \hat{C}_k \subset X, \forall k\in \N
+    \] e \[
+    vol \hat{C}_k = L_k^{n} < \epsilon'
+    \] com $\epsilon'$ a ser escolhido, mas arbitrário uma vez que $med X = 0$.
 
     Veja que $x, y \in \hat{C}_k\subset X \implies \|x-y\|\le L_k$. Então \[
-    j=1,\ldots,n\text{, } \left| f_j\left( x \right) f_j\left( y \right)  \right| \le cL_k
+    j=1,\ldots,n\text{, } \left| f_j\left( x \right) - f_j\left( y \right)  \right| \le cL_k
     .\] Fixe, para cada \[
     \hat{C}_k = \left[ a_1^{(k)}, b_1^{(k)} \right] \times \ldots\times \left[ a_n^{(k)}, b_n^{(k)} \right]
     ,\] \[
     a^{(k)} := \left( a_1^{(k)}, \ldots, a_n^{(k)} \right) \in \hat{C}_k\subset X
     \] \[
+    x_j\in \left[ a_j^{(k)}-L_k, a_j^{(k)}+L_k \right] , \forall x\in \hat{C}_k
+    \]  \[
     \implies f_j\left( x \right) \in \left[ f_j\left( a^{(k)} \right) -cL_k, f_j\left( a^{(k)} \right) +cL_k \right] \forall x \in \hat{C}_k
     ,\] mas isso implica em \[
     f\left( x \right) \in \prod_{j=1}^{n}  \left[ f_j\left( a^{(k)} \right) -cL_k, f_j\left( a^{(k)} \right) +cL_k \right] =: B_k
     ,\] ou seja, \[
     f\left( \hat{C}_k \right) \subset B_k
     .\] \[
-    f\left( X \right) \subset \cup_{k\in \N} B_k
-    \] \[
-    vol B_k = \left( 2cL_k \right) ^{n} = 2^{n}c^{n} vol \hat{C}_k \implies \sum_{k=1}^{\infty} vol B_k = 2^{n}c^{n}\sum_{k=1}^{\infty} vol \hat{C}_k < \epsilon
-    \] Escolha $\epsilon' < \frac{\epsilon}{2^{n}c^{n}}$, então \[
+    f\left( X \right) \subset \bigcup_{k\in \N} B_k
+    .\] Agora veja que 
+    \begin{align*}
+    & vol B_k = \left( 2cL_k \right) ^{n} = 2^{n}c^{n} vol \hat{C}_k < 2^{n}c^{n}\epsilon' \\ 
+    & \implies \sum_{k=1}^{\infty} vol B_k = 2^{n}c^{n}\sum_{k=1}^{\infty} vol \hat{C}_k = 2^{n}c^{n}\sum_{k=1}^{\infty} \epsilon'
+    .\end{align*}
+    Como $\epsilon'$ é um valor arbitrário pela medida nula de $X$, podemos escolhê-lo como $\epsilon' < \frac{\epsilon}{2^{k+n}c^{n}}$, então \[
+    \sum_{k=1}^{\infty} vol B_k < 2^{n}c^{n}\sum_{k=1}^{\infty}\frac{\epsilon}{2^{k+n}c^{n}} = \epsilon
+    ,\] ou seja, \[
     med f\left( X \right) = 0
-.\] [TODO: REVISAR!!!] 
+.\] 
 \end{proof}
 
 \begin{corollary}
@@ -176,17 +193,24 @@ vol \hat{C}_k = L_k^{n} < \epsilon'
         F: U\times \R^{m-n} &\longrightarrow \R^{m} \\
         \left( x,y \right)  &\longmapsto F\left( x,y \right) = f\left( x \right) 
     .\end{align*}
-    Note que $U\subset \R^{m}$.
 
-    Dada $c> 0$ tal que \[
+    Tome $c> 0$ tal que \[
 	\|f(x) - f(x')\|_{\R^{m}}\le c \|x-x'\|_{\R^{n}} \text{, }\forall x,x' \in U
     .\] Tome em $\R^{n},\R^{m}$ a norma da soma. Nesse caso, \[
-    \|F\left( x,y \right) - F\left( x',y' \right) \| = \|f\left( x \right) - f\left( x' \right) \|\le c\|x-x'\|_{\R^{n}} \le c\left( \|x-x'\|_{\R^{n}}+\|y-y'\|_{\R^{m-n}} \right) = c\|\left( x,y \right) -\left( x',y' \right) \|_{\R^{m}}
-    .\] Com isso, temos que $F$ é Lipschitz. Além disso, \[
-    F\left( U\times \left{ 0_{\R^{m-n}} \right}  \right) = f\left( U \right) 
+    \|F\left( x,y \right) - F\left( x',y' \right) \|_{\R^{m}} = \|f\left( x \right) - f\left( x' \right) \|_{\R^{m}} \le c\|x-x'\|_{\R^{n}}
+    .\] mas \[
+    c\|x-x'\|_{\R^{n}} \le c\left( \|x-x'\|_{\R^{n}}+\|y-y'\|_{\R^{m-n}} \right) = c\|\left( x,y \right) -\left( x',y' \right) \|_{\R^{m}}
+    ,\] ou seja, \[
+    \|F\left( x,y \right) - F\left( x',y' \right) \|_{\R^{m}} \le c\|\left( x,y \right) -\left( x',y' \right) \|_{\R^{m}}
+    ,\] i.e., $F$ é Lipschitz.
+
+    Além disso, \[
+    F\left( U\times \left\{ 0_{\R^{m-n}} \right\}  \right) = f\left( U \right) 
     .\] Entretanto, como \[
-    U\times \left{ 0_{\R^{m-n}} \right} \subset \R^{n}\times \left{ 0_{\R^{m-n}} \right}
-    \] que tem medida nula em $\R^{m}$.
+    U\times \left\{ 0_{\R^{m-n}} \right\} \subset \R^{n}\times \left\{ 0_{\R^{m-n}} \right\}
+    \] que tem medida nula em $\R^{m}$, $U\times \left\{ 0_{\R^{m-n}} \right\}$ tem medida nula em $\R^{m}$ e, portanto, \[
+     med_{\R^{m}}f\left( U \right)  = med_{\R^{m}}F\left( U\times \left\{ 0_{\R^{m-n}} \right\} \right) = 0
+    .\] 
 \end{proof}
 
 \begin{theorem}
