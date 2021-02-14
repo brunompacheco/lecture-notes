@@ -1,0 +1,317 @@
+\lecture{4}{10.02.2021}{}
+
+\section*{(Digressão) Propriedade de Lindelöf}
+
+Primeiro, precisamos definir o que é uma base de um espaço métrico.
+\begin{definition}
+    Seja $\left( M,d \right) $ um espaço métrico. Uma coleção $\mathcal{B}$ de abertos é \emph{base} de $\tau_d$ (topologia de $M$) se $\forall U\in \tau_d$, $\forall x\in U$, $\exists B\in \mathcal{B}$ tal que \[
+    x \in B \subset U
+    .\] Ou seja, todo aberto pode ser escrito como união de elementos da base.
+\end{definition}
+
+\begin{note}
+    Veja que essa definição pode ser vista como uma generalização da ideia de bolas abertas.
+\end{note}
+
+\begin{prop}
+    Seja $\left( M, d \right) $ um espaço métrico. São equivalentes:
+    \begin{enumerate}
+        \item $\left( M, d \right) $ é \emph{separável}, i.e., $\exists  X\subset M$ enumerável tal que $\overline{X}=M$;
+	\item $\left( M, d \right) $ é \emph{segundo-contável}, i.e., $\exists \mathcal{B}$ \emph{base} enumerável para a topologia do espaço $\tau_d$;
+	\item $\left( M, d \right) $ é um espaço de \emph{Lindelöf}:  $\forall X\subset M$ e $\forall \{U_\lambda\}_{\lambda \in \Lambda}$ cobertura aberta de $X$, $\exists \Lambda ' \subset \Lambda$ enumerável tal que \[
+	X \subset \bigcup_{\lambda'\in \Lambda'} U_{\lambda'}
+	.\] 
+    \end{enumerate}
+\end{prop}
+\begin{proof}
+    (1) $\implies$ (2)
+    Seja $X=\{x_1,\ldots,x_k,\ldots\} \subset M$ conjunto enumerável denso em $M$, ou seja, $\forall x \in M$, $x\in X$ ou $x \in \partial\left( X \right)$, portanto, $\overline{X}=M$. Considere \[
+    \mathcal{B} = \left\{ B_{\frac{1}{l}}^{d}\left( x_k \right) : k,l\in \N \right\} 
+    ,\] que é enumerável.
+
+    Queremos mostrar que $\mathcal{B}$ é uma base para $\left( M,d \right) $. Seja $U$ aberto e $x\in U$. Seja $\epsilon>0$ tal que \[
+    B_{\epsilon}\left( x \right) \subset U
+    .\] Tome $l_0>\frac{2}{\epsilon}$, $l_0\in \N$. Veja que \[
+    B_{\frac{1}{l_0}}\left( x \right) \cap X \neq \O
+    ,\] uma vez que $X$ é denso. Portanto, $\exists k_0\in \N$ tal que $x_{k_0}\in X\cap B_{\frac{1}{l_0}}\left( x \right) $, $\implies x\in B_{\frac{1}{l_0}}\left( x_{k_0} \right)$. 
+
+    $z\in B_{\frac{1}{l_0}}\left( x_{k_0} \right) $ \[
+    \implies d\left( z,x \right) \le d\left( z, x_{k_0} \right) +d\left( x_{k_0},x \right) <\frac{1}{l_0} + \frac{1}{l_0} = \frac{2}{l_0} < \epsilon
+    \] \[
+    \implies z\in B_{\epsilon}\left( x \right) \subset U, \forall z\in B_{\frac{1}{l_0}}\left( x_{k_{0}} \right)
+    \] logo, \[
+    B_{\frac{1}{l_0}}\left( x_{k_{0}} \right) \subset B_\epsilon\left( x \right) \subset U
+    ,\] $\mathbb{QED}$.
+
+    (2) $\implies$ (3)
+    Seja $\mathcal{B} = \{B_k\} _{k\in \N}$ base enumerável. Seja $X\subset M$ e $\left\{ U_{\lambda} \right\} _{\lambda\in \Lambda}$ cobertura aberta de $X$. Primeiro, se $X=\O $, nada há a provar. Então, podemos supor $X\neq \O $, $\forall x\in X$, escolha $\lambda_x \in \Lambda$ tal que $x\in U_{\lambda_x}$. Escolha $B_{k_x}\in \mathcal{B}$ tal que \[
+    x\in B_{k_x}\subset U_{\lambda_x}
+    .\]
+    Defina \[
+    \N' := \{k\in \N : \exists x\in X \text{ com } k=k_x\} 
+    .\] Veja que, como $\N'\subset \N$, $\N'$ é enumerável. Então, $\forall m\in \N'$, escolha $\lambda_m\in \Lambda$ tal que \[
+    B_m\subset U_{\lambda_m}
+    .\] Por construção, $X\subset \bigcup_{m\in \N'} U_{\lambda_m}$, uma cobertura enumerável de $X$.
+
+    (3)$\implies$(1)
+    Claramente, $\forall k\in \N$ \[
+    E_k = \{B_{\frac{1}{k}}\left( x \right) : x\in M\} 
+    \] cobre $M$. \[
+    \exists  X_k = \{x_{k_1}, x_{k_2},\ldots,x_{k_l},\ldots\} \subset M
+    \] com \[
+    M = \bigcup_{l\in \N} B_{\frac{1}{k}}\left( x_{k_l} \right) 
+    .\] 
+    Considere agora \[
+    X = \{x_{k_l} > k,l \in \N\} 
+    .\] Afirmamos que $X$ é denso em $M$. $z\in M$, então $\epsilon>0$, escolha $k_0>\frac{2}{\epsilon}$. Seja $l_0\in \N$ com \[
+    z\in B_{\frac{1}{k_0}}\left( x_{k_0 l_0} \right) 
+    .\] \[
+    x_{k_0 l_0} \in B_{\frac{1}{k_0}}\left( z \right)\subset B_{\frac{\epsilon}{2}} \left( z \right)\subset B_{\epsilon} \left( z \right) 
+    .\] 
+\end{proof}
+
+\begin{corollary}
+    $\R^{n}$ satisfaz (1) e, portanto, todas.
+\end{corollary}
+
+\begin{proof}
+    \[
+    \Q^{n} = \{\left( q_1,\ldots,q_n \right) : q_i \in \Q\} 
+    \] é enumerável e denso em $\R^{n}$, logo separável.
+\end{proof}
+
+Por fim, temos que qualquer subconjunto de $\R^{n}$ satisfaz essas condições, ou seja, é Lindelöf.
+
+\section*{Funções Lipschitz e medida nula}
+
+\begin{definition}
+    $f: X\subset \R^{n} \to \R^{m}$ é \emph{localmente Lipschitz} se $\forall x_0\in X$, $\exists \epsilon>0$ e $k_0>0$ tal que \[
+    \|f\left( x \right) -f\left( y \right) \|\le k_0\cdot \|x-y\|, \forall x,y\in B_{\epsilon}\left( x_0 \right) 
+    .\] 
+\end{definition}
+
+\begin{prop}
+    Seja $f: X\subset \R^{n} \to  \R^{m}$ localmente Lipschitz com $m>n$. Então \[
+    med_{\R^{m}}f\left( X \right) =0
+    .\] 
+\end{prop}
+
+\begin{proof}
+    Como $f$ é localmente Lipschitz, $\forall x\in X$, $\exists \epsilon_x > 0$ e $k_x > 0$ tal que \[
+    \|f\left( z \right) -f\left( y \right) \|\le k_x \|z-y\|, \forall z,y \in B_{\epsilon_x}\left( x \right) 
+    .\] Veja que \[
+    \{B_{\epsilon_x}\left( x \right) \} _{x\in X}
+    \] é uma cobertura aberta de $X$ e, como visto, $X\subset \R^{n} \implies X$ é Lindelöf. Portanto, $\exists \{x_1,\ldots,x_l,\ldots\} \subset X$ uma enumeração de $\{B_{\epsilon_x}\left( x \right) \} _{x\in X}$, definida \[
+    \{B_l := B_{\epsilon_{x_l}}\left( x_l \right)\} _{l\in \N}
+    \]  com \[
+    X \subset \bigcup_{l\in \N} B_l
+    .\] Isso nos mostra que \[
+    f\left( X \right) = f\left( X\cap \bigcup_{l\in \N} B_l \right) = f\left( \bigcup_{l\in \N} \left( X\cap B_l \right)  \right) \subset \bigcup_{l\in \N} f\left( X\cap B_l \right) 
+    ,\] mas $f|_{X\cap B_l}$ é Lipschtiz e, portanto, $f\left( X\cap B_l \right) $ tem medida nula, logo sua união também tem medida nula, ou seja \[
+    med_{\R^{m}}f\left( X \right) = 0
+    .\] 
+\end{proof}
+
+\begin{corollary}
+    Dada $f:U\subset \R^{n}\to \R^{m}$, com $U$ aberto, de classe $C^{1}$ e $m>n$, então \[
+    med_{\R^{m}}f\left( U \right) = 0
+    .\] 
+\end{corollary}
+\begin{proof}
+    Basta checar que $f$ é localmente Lipschitz. Seja $x_0\in U$. Fixe $e_0>0$ tal que \[
+    \overline{B}_{\epsilon_0}\left( x_0 \right) \subset U
+    .\] 
+
+	(Desigualdade do valor médio) $\forall x,y \in B_{\epsilon_0}\left( x_0 \right) $, \[
+	    \|f\left( x \right) -f\left( y \right) \|\le (sup_{t\in \left[ 0,1 \right] }\|Df_{t\cdot x+\left( 1-t \right) \cdot y}\|) \|x-y\|
+	.\] 
+
+    Mas
+    \begin{align*}
+        F: z\in \overline{B}_{\epsilon_0}\left( x_0 \right)  &\longrightarrow \|Df_z\|\in \R 
+    .\end{align*}
+    é limitada, ou seja, $\forall x,y \in B_{\epsilon_0}\left( x_0 \right), \exists m>0$ tal que  \[
+    \|f\left( x \right) -f\left( y \right) \| \le  m \|x-y\|
+    .\] Como isso é válido $\forall x_0 \in U$, $f$ é localmente Lipschitz.
+\end{proof}
+
+\begin{corollary}
+    Seja $M\subset \R^{m}$ subvariedade de classe $C^{k}$ ($k\ge 1$), com dimensão $n<m$, tem medida nula em $\R^{m}$.
+\end{corollary}
+
+\begin{proof}
+    Por $M$ ser uma subvariedade de dimensão $n$, $\forall x\in M$, existe uma parametrização $\phi : U_0 \subset \R^{n}\to \R^{m}$ mergulho de classe $C^{k}$ com $x\in \phi\left(  U_0\right) \subset M  $. Veja que $\phi\left( U_0 \right) $ é um aberto em $M$, ou seja,  \[
+    \phi\left( U_0 \right) = M\cap U_x
+    ,\] para algum $U_x$ aberto de $\R^{m}$. Veja que $\{U_x\} _{x\in M}$ é claramente uma cobertura aberta de $M$. Como já sabemos que $\R^{m}$ é Lindelöf, $\exists \left\{ x_1,\ldots,x_l \right\} \subset M$ enumerável tal que \[
+    M = \bigcup_{i\in \N} M\cap U_{x_i}
+    .\] Como $\phi\left( U_0 \right) $ tem medida nula, $M\cap U_{x_i}$ tem medida nula, então $M$ tem medida nula.
+\end{proof}
+
+\section*{Oscilação de funções}
+
+Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
+
+\begin{definition}
+    Seja $f:X\subset \R^{n}\to \R$. Dado $x_0\in X$ e $\delta > 0$, ponha \[
+	o\left( f, x_0, \delta \right) := sup \{\left| f\left( x \right) -f\left( y \right)  \right| : x,y \in B_\delta \left( x_0 \right) \cap X\} 
+    .\] Chamamos essa função de oscilação de raio  $\delta$.
+\end{definition}
+
+\begin{observe}
+    Veja que \[
+    o\left( f, x_0, \delta \right) = sup \left\{ f\left( x \right) : x\in B_{\delta}\left( x_0 \right) \cap X \right\}  - inf \left\{ f\left( y \right) : y\in B_\delta \left( x_0 \right) \cap X \right\} 
+    .\] Ou seja, isso mensura o quanto a função $f$ varia dentro da bola definida por $\delta$.
+
+    Definamos \[
+    M\left( f, x_0, \delta \right) := sup \left\{ f\left( x \right) : x\in B_{\delta}\left( x_0 \right) \cap X \right\}
+    \] e \[
+    m\left( f, x_0, \delta \right) := inf \left\{ f\left( y \right) : y\in B_\delta \left( x_0 \right) \cap X \right\} 
+    .\] Agora, dados $x, y \in  B_\delta \left( x_0 \right) \cap X$, digamos $f\left( x \right) \le f\left( y \right) $. Então \[
+    m\left( f,x_0,\delta \right) \le f\left( x \right) \le f\left( y \right) \le M\left( f,x_0,\delta \right) 
+    \] \[
+    \implies \left| f\left( x \right) -f\left( y \right)  \right| \le M\left( f,x_0,\delta \right) - m\left( f,x_0,\delta \right)
+    \] \[
+    o\left( f,x_0,\delta \right) \le M\left( f,x_0,\delta \right) - m\left( f,x_0,\delta \right)
+    .\] Suponha $o\left( f,x_0,\delta \right) < M\left( f,x_0,\delta \right)-m\left( f,x_0,\delta \right)$, então \[
+    o\left( f,x_0,\delta \right) + m\left( f,x_0,\delta \right) < M\left( f,x_0,\delta \right)
+    \] \[
+    \implies \exists x' \in B_\delta \left( x_0 \right) \cap X
+    \] com \[
+    o\left( f,x_0,\delta \right) + m\left( f,x_0,\delta \right) < f\left( x' \right) 
+    \] \[
+    \implies m\left( f,x_0,\delta \right) < f\left( x' \right) -o\left( f,x_0,\delta \right)
+    \] \[
+    \implies \exists y' \in B_\delta \left( x_0 \right) \cap X
+    \] com \[
+    m\left( f,x_0,\delta \right)\le f\left( y' \right) <f\left( x' \right) -o\left( f,x_0,\delta \right)
+    \] \[
+    \implies o\left( f,x_0,\delta \right) < \left| f\left( x' \right) - f\left( y' \right)   \right| 
+    ,\] uma contradição.
+\end{observe}
+
+\begin{observe}
+    Veja que, pela definição \[
+    o\left( f,x_0,\delta \right) = sup \left\{ \left| f\left( x \right) -f\left( y \right)  \right| : x,y \in  X\cap B_\delta \left( x_0 \right)  \right\} 
+    ,\] dado $0<\delta'<\delta$ \[
+    \implies o\left( f,x_0,\delta' \right) \le o\left( f,x_0,\delta \right)
+    ,\] ou seja, essa é uma função monotônica em $\delta$.
+\end{observe}
+
+\begin{definition}
+    A \emph{oscilação} de $f$ em $x_0\in X$ é \[
+    \mathcal{O}\left( f,x_0 \right) := inf \left\{ o\left( f, x_0,\delta \right): \delta>0 \right\}
+    .\] 
+\end{definition}
+
+\begin{prop}
+    $f: X\subset \R^{n}\to \R$ é contínua em $x_0 \in X$ sse $\mathcal{O}\left( f, x_0 \right) =0$.
+\end{prop}
+
+\begin{proof}
+    ($\implies$)
+    Tome $\epsilon>0$. Pela continuidade de $f$, $\exists \delta > 0$ tal que \[
+	z\in X, \|z-x_0\|<\delta \implies \left| f\left( z \right) -f\left( x_0 \right)\right|  < \frac{\epsilon}{2} 
+    ,\] então, $\forall z,y \in  X \cap B_\delta\left( x_0 \right) $, \[
+    \implies \left| f\left( z \right) -f\left( y \right)  \right| \le  \left| f\left( z \right) -f\left( x_0 \right)  \right| + \left| f\left( x_0 \right) -f\left( y \right)  \right| < \epsilon
+    \] \[
+    \implies \mathcal{O}\left( f, x_0 \right) \le o\left( f, x_0, \delta \right) <  \epsilon
+    .\] Como $\epsilon$ é arbitrário e pela definição de $\mathcal{O}\left( \cdot , \cdot  \right) $, \[
+    \mathcal{O}\left( f, x_0 \right) = 0
+    .\] 
+
+    ( $\impliedby $ ) 
+    Seja $\epsilon>0$. Claramente $\mathcal{O}\left( f,x_0 \right) <\epsilon$ e, portanto,  \[
+    \implies\exists \delta>0 \text{ tal que } o\left( f,x_0,\delta \right) < \epsilon
+    .\] Veja que \[
+    \left| f\left( x \right) -f\left( y \right)  \right| \le o\left(  f,x_0,\delta\right) , \forall x,y \in B_{\delta}\left( x_0 \right) \cap X
+    ,\] inclusive se $y=x_0$, ou seja, \[
+    \implies \forall x\in X, \|x-x_0\| < \delta \implies \left| f\left( x \right) -f\left( x_0 \right)  \right| <\epsilon
+    ,\] ou seja, $f$ é contínua em $x_0$.
+\end{proof}
+
+\begin{prop}
+    $f:X\subset \R^{n}\to \R$. $\forall \epsilon>0$, \[
+    C_{\epsilon} := \{x\in X : \mathcal{O}\left( f, x \right) \ge \epsilon\} 
+    \] é fechado em $X$.
+\end{prop}
+
+\begin{proof}
+    Basta mostrar que \[
+    X \setminus C_{\epsilon} = \{x\in X : \mathcal{O}\left( f, x \right) <\epsilon\} 
+    \] é aberto em $X$.
+
+    Seja $x_0\in X\setminus C_{\epsilon}$. Como \[
+	\mathcal{O}\left( f,x_0 \right) <\epsilon
+    ,\] fixe $\delta_0 > 0$ tal que \[
+    o\left( f, x_0, \delta_0 \right) < \epsilon
+    .\] Como $x_0$ é arbitrário, basta mostrar que uma bola arbitrariamente pequena $B_{\frac{\delta_0}{2}}\left( x_0 \right) \cap X \subset X\setminus C_\epsilon$. Tome $x\in B_{\frac{\delta_0}{2}}\left( x_0 \right) \cap X$. Dados $z,y \in B_{\frac{\delta_0}{2}}\left( x \right) \cap X$, \[
+    \|z-x_0\| \le \|z-x\|+\|x-x_0\| < \delta_0
+    .\] O mesmo vale para $y$, \[
+    \|y-x_0\| < \delta_0
+    .\] Portanto, $y,z \in  B_{\delta_0}\left( x_0 \right) \cap X$ \[
+    \implies \left| f\left( y \right) -f\left( z \right)  \right| \le o\left( f, x_0, \delta_0 \right) 
+    \] \[
+    \mathcal{O}\left( f,x \right) \le o \left(  f, x, \frac{\delta_0}{2}\right) \le o\left(  f, x_0,\delta_0\right)  < \epsilon
+    ,\] portanto \[
+    x\in X\setminus C_\epsilon \implies B_{\frac{\delta_0}{2}}\left( x_0 \right) \cap X \subset X\setminus C_{\epsilon}
+    ,\] logo,  \[
+    X \setminus C_{\epsilon}
+    \]  é aberto em $X$.
+\end{proof}
+
+\section*{Conteúdo nulo}
+
+\begin{definition}
+    $X\subset \R^{n}$ tem \emph{conteúdo nulo} se $\forall \epsilon>0$, $\exists B_1,\ldots, B_k$ n-blocos fechados tal que \[
+    X\subset B_1\cup \ldots\cup B_k
+    \] e \[
+    \sum_{i=1}^{k} vol B_i < \epsilon
+    .\] 
+\end{definition}
+
+\begin{note}
+    As equivalências dos elementos (n-blocos abertos/fechados, n-cubos abertos/fechados) vale também para a definição de conteúdo nulo.
+\end{note}
+
+\begin{observe}
+    \begin{enumerate}
+        \item $X$ tem conteúdo nulo $\implies X$ tem medida nula;
+	\item $X$ tem conteúdo nulo $\implies X$ é limitado (isso mostra que a recíproca de (1) é falsa, vide $\Q$, que não é limitado e tem medida nula);
+
+	    N-blocos são claramente limitados. Uma união finita de conjuntos limitados é um conjunto limitado. Um sub-conjunto de um conjunto limitado é limitado.
+
+	\item $X$ tem conteúdo nulo $\implies \overline{X}$ é compacto (por Heine-Borel, um conjunto é compacto sse é fechado e limitado, então essa é um implicação direta de (2)) e tem conteúdo nulo (a união dos n-blocos fechados é compacto, que deve cobrir $\overline{X}$);
+
+	    Veja que $X=\Q \cap \left[ 0,1 \right] $ tem medida nula, é limitado, mas $\overline{X} = \left[ 0,1 \right] $ não tem medida nula, logo, não tem conteúdo nulo $\implies X$ não tem conteúdo nulo;
+	\item Todo conjunto finito tem conteúdo nulo, mas o contrário não é verdade: conjuntos de conteúdo nulo não precisam ser compactos nem finitos;
+    \end{enumerate}
+\end{observe}
+
+\begin{eg}
+    $X=\left\{ \frac{1}{k}:k\in \N \right\} $ tem conteúdo nulo.
+
+    Tome $\epsilon > 0$. Considere $B_1:= \left[ -\frac{\epsilon}{4}, \frac{\epsilon}{4} \right] $. Seja $k_0 \in  \N$ com $k_0>\frac{4}{\epsilon} \implies \forall k\ge k_0$ \[
+    \frac{1}{k} < \frac{\epsilon}{4} \implies \frac{1}{k} \in B_1
+\] $X\setminus B_1$ é finito, logo, de conteúdo nulo: $\exists B_2,\ldots,B_l$ n-blocos tal que \[
+X\setminus B_1 \subset  B_2 \cup \ldots\cup B_l
+\] com \[
+\sum_{i=2}^{l} vol B_i < \epsilon
+.\]
+\end{eg}
+
+\begin{prop}
+    Se $X\subset \R^{n}$ é compacto e tem medida nula, então $X$ tem conteúdo nulo.
+\end{prop}
+
+\begin{proof}
+    Seja $\epsilon>0$. Temos $\{B_i\} _{i\in \N}$ de n-blocos \textbf{abertos} (possível pela já provada equivalência entre a definição de medida nula através de n-blocos abertos e fechados) com \[
+    X \subset \bigcup_{i\in \N} B_i
+    \] e \[
+    \sum_{i\in \N} vol B_i < \epsilon
+    .\] $X$ compacto implica que $\exists B_{i_1},\ldots,B_{i_l} \in \{B_i\} _{i\in \N}$ subcobertura \[
+    X \subset B_{i_1} \cup \ldots\cup B_{i_l}
+    \] e \[
+    \sum_{j=1}^{l} vol B_{i_j} < \epsilon
+    .\] 
+\end{proof}
+
