@@ -1,0 +1,437 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 1}
+\author{Bruno M. Pacheco (16100865)\\
+H-Cálculo IV}
+ 
+\maketitle
+ 
+\exercise{3-1}
+
+Seja $\epsilon>0$, tome $P = P_1\times P_2$ uma partição de $X=\left[ 0,1 \right] \times \left[ 0,1 \right] $ com $P_1=\{0,\frac{1}{2}-\epsilon, \frac{1}{2},1\} $. Então, \[
+\mathcal{B}\left( P \right) = B^{(1)}\cup B^{(\epsilon)}\cup B^{(2)}
+,\] onde $B^{(1)}=\{B^{(1)}_i=\left[ 0,\frac{1}{2}-\epsilon \right] \times \left[ t_{2_i},t_{2_{i+1}} \right]\}$, $B^{(2)}=\{B^{(2)}_i=\left[ \frac{1}{2}, 1 \right] \times \left[ t_{2_i},t_{2_{i+1}} \right]\}$ e $B^{(\epsilon)}=\{B^{(\epsilon)}_i=\left[ \frac{1}{2}-\epsilon, \frac{1}{2} \right] \times \left[ t_{2_i},t_{2_{i+1}} \right]\}$, sendo $ \left[ t_{2_i},t_{2_{i+1}} \right] \text{ subintervalo de }P_2 $.
+
+Assim, \[
+M_{B^{(1)}_i}=m_{B^{(1)}_i} = 0, \forall B^{(1)}_i\in B^{(1)}
+\] e \[
+M_{B^{(2)}_i}=m_{B^{(2)}_i} = 1, \forall B^{(2)}_i\in B^{(2)}
+,\] mas \[
+M_{B^{(\epsilon)}_i}= 1 \text{ e }m_{B^{(\epsilon)}_i} = 0, \forall B^{(\epsilon)}_i\in B^{(\epsilon)}
+.\] Também, é fácil ver que
+\begin{align*}
+    \sum_{B^{(1)}_i\in B^{(1)}} vol\left( B^{(1)}_i \right) &= \frac{1}{2} - \epsilon \\
+    \sum_{B^{(2)}_i\in B^{(2)}} vol\left( B^{(2)}_i \right) &= \frac{1}{2} \\
+    \sum_{B^{(\epsilon)}_i\in B^{(\epsilon)}} vol\left( B^{(\epsilon)}_i \right) &= \epsilon
+.\end{align*}
+
+Portanto,
+\begin{align*}
+    S\left( f,P \right) = &\sum_{B^{(1)}_i\in B^{(1)}} M_{B^{(1)}_i} vol\left( B^{(1)}_i \right) + \\
+			  &\sum_{B^{(\epsilon)}_i\in B^{(\epsilon)}} M_{B^{(\epsilon)}_i} vol\left( B^{(\epsilon)}_i \right) + \\
+&\sum_{B^{(2)}_i\in B^{(2)}} M_{B^{(2)}_i} vol\left( B^{(2)}_i \right)\\
+    =& \frac{1}{2} + \epsilon
+,\end{align*}
+enquanto, de forma similar, \[
+s\left( f,P \right) = \frac{1}{2}
+.\] 
+
+Agora, como $\epsilon$ pode ser arbitrariamente pequeno, \[
+    \overline{\int}_A f = \underline{\int}_A f = \frac{1}{2}
+,\] logo, $f$ é integrável como se desejava demonstrar.
+
+\exercise{3-2}
+
+Seja $X=\left\{ x_1,\ldots,x_N \right\} \subset A$ o conjunto dos pontos em que $g$ difere de $f$, i.e., \[
+x_i\in X \iff g\left( x_i \right) \neq f\left( x_i \right) 
+.\] 
+
+Seja $\epsilon>0$, escolha $P_\epsilon$ partição de $A$ tal que \[
+    \forall x_i \in X, \exists! B_i\in \mathcal{B}\left( P_\epsilon \right) \text{ tal que } x_i\in  B_i \subset B_{\left( \frac{\epsilon}{N} \right)^{\frac{1}{n}}}\left( x_i \right) 
+.\] Note que $B_{\left( \frac{\epsilon}{N} \right)^{\frac{1}{n}}}\left( x_i \right) $ é uma bola de raio $\left( \frac{\epsilon}{N} \right)^{\frac{1}{n}}$ em torno de $x_i$, não um n-bloco como $B_i$. Definamos, então, $\mathcal{B}'\subset \mathcal{B}\left( P_\epsilon \right) $ o conjunto do n-blocos $B_i$ que satisfazem a condição acima.
+
+Assim,
+\begin{align*}
+    S\left( g,P_\epsilon \right) &=\sum_{B\in \mathcal{B}\left( P_\epsilon \right) } M_B^{g} vol\left( B \right) \\
+			&= S\left( f, P_\epsilon \right) - \sum_{B_i\in \mathcal{B}' } M_{B_i}^{f} vol\left( B_i \right) + \sum_{B_i\in \mathcal{B}' } M_{B_i}^{g} vol\left( B_i \right) \\
+			&< S\left( f, P_\epsilon \right) + \epsilon\sum_{B_i\in \mathcal{B}' } \left| M_{B_i}^{g} - M_{B_i}^{f} \right|
+,\end{align*}
+uma vez que $B_i \subset B_{\left( \frac{\epsilon}{N} \right)^{\frac{1}{n}}}\left( \cdot  \right)  \implies vol B_i < \frac{\epsilon}{N} $. Note que $M_B^{f}$ e $M_B^{f}$ denotam o supremo das respectivas funções no n-bloco $B$. De forma análoga,
+\begin{align*}
+    s\left( g,P_\epsilon \right) > s\left( f, P_\epsilon \right) - \epsilon\sum_{B_i\in \mathcal{B}' } \left| m_{B_i}^{g} - m_{B_i}^{f} \right|
+.\end{align*}
+Como $\epsilon$ pode ser arbitrariamente pequeno, \[
+\inf S\left( g \right) = \inf S\left( f \right) 
+\] e, da mesma forma \[
+\sup s\left( g \right) = \sup s\left( f \right) 
+,\] ou seja, \[
+\overline{\int}_A g = \underline{\int}_A g = \int_A f
+.\] 
+
+\exercise{3-4}
+
+($\implies$)
+Tome $\epsilon>0$. Pela integrabilidade de $f$, sabemos que $\exists Q$ partição de $A$ que refina $P$ tal que  \[
+S\left( f, Q \right) -s\left( f, Q\right) < \epsilon
+.\] 
+Agora tome $Q' = \{t\in Q : t \in S\} $, ou seja, uma "restrição" da partição $Q$ ao n-bloco $S$. Então, é fácil ver que $\mathcal{B}\left( Q' \right) \subset \mathcal{B}\left( Q \right) $ e \[
+B'\in \mathcal{Q'} \implies B'\subset S
+.\] Então,
+\begin{align*}
+    S\left( f,Q \right) &= \sum_{B\in \mathcal{B}\left( Q \right) } M_B vol B \\
+			&= \sum_{B\in \mathcal{B}\left( Q \right)\setminus\mathcal{B}\left( Q' \right)  } M_B vol B + \sum_{B'\in \mathcal{B}\left( Q' \right) } M_{B'} vol B' \\
+			&= S\left( f|_{S} , Q'\right) + \sum_{B\in \mathcal{B}\left( Q \right)\setminus\mathcal{B}\left( Q' \right)  } M_B vol B
+\end{align*}
+e, de forma análoga, \[
+			s\left( f,Q \right) = s\left( f|_{S} , Q'\right) + \sum_{B\in \mathcal{B}\left( Q \right)\setminus\mathcal{B}\left( Q' \right)  } m_B vol B
+.\] Portanto, \[
+S\left( f, Q \right) -s\left( f, Q\right) = S\left( f|_{S}, Q' \right) - s\left( f|_{S}, Q' \right) +\sum_{B\in \mathcal{B}\left( Q \right)\setminus\mathcal{B}\left( Q' \right)  } \left( M_B - m_B \right) vol B  < \epsilon
+\] \[
+\implies S\left( f|_{S}, Q' \right) - s\left( f|_{S}, Q' \right) < \epsilon
+,\] ou seja, $f|_{S}$ é integrável.
+
+($\impliedby$)
+Seja $\{S_i\} _{i=1,\ldots,N}$ uma enumeração dos n-blocos de $\mathcal{B}\left( P \right) $, ou seja, \[
+\bigcup_{i=1}^{N}S_i = \mathcal{B}\left( P \right) 
+.\] Seja $\epsilon>0$. Então, pela integrabilidade de $f|_{S_i}, i=1,\ldots,N$, é possível escolher $\left\{ Q_i \right\} _{i=1,\ldots,N}$ partições de forma que \[
+S\left( f|_{S_i},Q_i \right) - s\left( f|_{S_i},Q_i \right) < \frac{\epsilon}{N}  , i=1,\ldots,N
+.\] Note que $Q=\bigcup_{i=1}^{N}Q_i$ é uma partição de $A$ e, ainda mais, $Q\subset P$.
+
+Agora, veja que \[
+\mathcal{B}\left( Q \right) = \bigcup_{i=1}^{N}\mathcal{B}\left( Q_i \right) 
+,\] portanto
+\begin{align*}
+    S\left( f,Q \right) &= \sum_{B\in \mathcal{B}\left( Q \right) } M_B^{f} vol B \\
+			&= \sum_{i=1}^{N} \sum_{B\in \mathcal{B}\left( Q_i \right) } M_B^{f|_{S_i}} vol B \\
+			&= \sum_{i=1}^{N} S\left( f|_{S_i}, Q_i \right)
+\end{align*}
+e, de forma análoga, \[
+s\left( f, Q \right) = \sum_{i=1}^{N} s\left( f|_{S_i}, Q_i \right)
+.\] 
+Com efeito, \[
+S\left( f, Q \right) - s\left( f,Q \right) = \sum_{i=1}^{N} \left( S\left( f|_{S_i}, Q_i \right) - s\left( f|_{S_i}, Q_i \right)\right) < \epsilon
+.\] 
+
+\exercise{3-8}
+
+Defina $B' = \left[ a_1,b_1 \right] \times \ldots\times \left[ a_n,b_n \right] $. Se $a_i<b_i, i=1,\ldots,n$, então $\exists \epsilon_0>0$ de forma que \[
+b_i - a_i > \epsilon_0^{\frac{1}{n}}, i=1,\ldots,n
+.\] Sendo assim, \[
+vol B' > \epsilon_0
+.\] Agora veja que se $B_1,\ldots,B_k$ são tais que \[
+B' \subset B_1\cup \ldots\cup B_k
+,\] então \[
+\sum_{i=1}^{k} vol B_i > vol B' > \epsilon_0 > 0
+.\] 
+
+\exercise{3-9}
+
+\subexercise{a}
+
+Seja $X\subset \R^{n}$ um conjunto com conteúdo nulo. Então, $\exists B_1,\ldots,B_k$ n-blocos fechados de forma que \[
+X\subset \bigcup_{i=1} ^{k}B_i
+.\] Claramente, n-blocos são limitados. Isso pode ser verificado utilizando a norma do máximo, sendo a distância entre quaisquer dois elementos do  n-bloco majorada pelo tamanho de seu maior intervalo. Também temos que a união de conjuntos limitados é também um conjunto limitado. Assim sendo, $X\subset B_1\cup \ldots\cup B_k$ é um conjunto limitado. Portanto, como $med X = 0 \implies X$ é limitado, então $X$ não limitado $\implies med X \neq 0$.
+
+\subexercise{b}
+
+Primeiro, claramente $\N\subset \R$ é fechado. Agora, $\forall i\in \N$, defina \[
+B_i = \left[  i-\frac{\epsilon}{2^{i+1}}, i+\frac{\epsilon}{2^{i+1}}\right] 
+.\] Assim, \[
+\N\subset \bigcup_{i\in \N} B_i
+\] e \[
+\sum_{i\in \N} vol B_i = \sum_{i\in \N} \frac{\epsilon}{2^{i}} < \epsilon
+.\]
+
+Entretanto, $\N$ não é limitado e, portanto, não tem conteúdo zero.
+
+\exercise{3-10}
+
+\subexercise{a}
+
+Seja $C$ um conjunto de conteúdo nulo. Então $\forall \epsilon>0, \exists B_1,\ldots,B_k$ n-blocos fechados tais que \[
+C \subseteq B_1\cup \ldots\cup B_k
+\] e \[
+\sum_{i=1}^{k} vol B_i < \epsilon
+\]  Como a união de n-blocos fechados é também um conjunto fechado, necessariamente \[
+\overline{C} \subseteq B_1\cup \ldots\cup B_k
+,\] uma vez que o fecho de um conjunto é o menor fechado que contém o conjunto. Assim, vemos que \[
+\partial C \subseteq B_1\cup \ldots\cup B_k
+\] e, portanto, $\partial C$ tem conteúdo nulo.
+
+\subexercise{b}
+
+Tome $X=\Q\cap \left[ 0,1 \right] \subset\R$. Claramente $X$ é limitado, uma vez que $X\subset \left[ 0,1 \right] $. Ainda mais, $X$ tem medida nula pois $\Q$ tem medida nula e $X\subset \Q$. Agora, sabemos que \[
+int X = \O \text{ e } \overline{X} = \left[ 0,1 \right] 
+.\] Assim, \[
+\partial X = \overline{X} \setminus int X = \left[ 0,1 \right] 
+,\] que não possui medida nula.
+
+\exercise{3-11}
+
+Pelo enunciado, temos o conjunto $A\subset \left[ 0,1 \right] $ formado pela união dos intervalos abertos $\left( a_i, b_i \right) $ de forma que cada número racional no intervalo $\left( 0,1 \right)$ está contido em algum intervalo $\left( a_i, b_i \right) $. Do problema 1-18, sabemos que $\partial A = \left[ 0,1 \right] - A$.
+
+Suponha que $\partial A$ tem medida nula e $\sum_{i=1}^{\infty} \left( b_i - a_i \right) < 1$. Tome \[
+0<\epsilon < 1 - \sum_{i=1}^{\infty} \left( b_i - a_i \right)
+.\] Escolha, então, $\{B_i\} _{i\in \N}$ de forma que \[
+\partial A \subseteq \bigcup_{i\in \N} B_i
+\] e \[
+\sum_{i\in \N} vol B_i < \epsilon
+.\] Então, como $\left[ 0,1 \right] = \partial A \cup A$, \[
+\left[ 0,1 \right] \subseteq A \cup \bigcup_{i\in \N} B_i 
+.\] Portanto, \[
+vol \left[ 0,1 \right] \le \sum_{i=1}^{\infty} \left( b_i - a_i \right) + \sum_{i\in \N} vol B_i < 1
+,\] uma contradição.
+
+\exercise{3-12}
+
+(Problema 1-30)
+Sejam $x_1,\ldots,x_{n} \in \left[ a,b \right] $ distintos. Suponha, sem perda de generalidade, que $a=x_0<x_1<\ldots<x_n<x_{n+1}=b$. Veja que, como $f$ é crescente, \[
+f\left( x_{i-1} \right) \le f\left( x_i \right) \le f\left( x_{i+1} \right) , i=1,\ldots,n
+.\] Agora, veja que $\forall \delta>0$ tal que $\delta <\min \left\{ x_{i+1}-x_i, x_i - x_{i-1} \right\}$ \[
+x,y\in B_\delta\left( x_i \right) \implies \left| f(x)-f(y) \right| \le  f\left( x_{i+1} \right) - f\left( x_{i-1} \right)
+,\] $i=1,\ldots,n$. Ou seja, \[
+o\left( f,x_i \right) \le f\left( x_{i+1} \right) -f\left( x_{i-1} \right) 
+.\] Então 
+\begin{align*}
+    \sum_{i=1}^{n} o\left( f, x_i \right) &\le  \sum_{i=1}^{n} \left( f\left( x_{i+1} \right) - f\left( x_{i-1} \right)  \right) \\
+					  &= f\left( x_{n+1} \right) - f\left( x_n \right) + f\left( x_1 \right)  - f\left( x_0 \right) \\
+					  &\le  f\left( b \right) - f\left( a \right) \tag{*}
+.\end{align*}
+
+Veja que \[
+\sum_{i=1}^{n} o\left( f,x_i \right) < f\left( b \right) -f\left( a \right) 
+\] não acontece para toda função $f$ crescente, vide a função \[
+f\left( x \right) = \begin{cases}
+    f\left( b \right) &, x>x_j \\
+    f\left( a \right) &, x\le x_j
+\end{cases}
+\] que, para $x_1,\ldots,x_j,\ldots,x_n \in \left[ a,b \right] $, possui \[
+\sum_{i=1}^{n} o\left( f,x_i \right) = o\left( f, x_j \right) = f\left( b \right) - f\left( a \right) 
+.\]
+
+Queremos, então, mostrar que o conjunto $F=\left\{ x: f\text{ é descontínua em }x \right\}$ tem medida nula. Primeiro, defina o conjunto \[
+O_n = \left\{ x : o\left( f,x \right) > \frac{f\left( b \right) -f\left( a \right) }{n} \right\} 
+.\] Veja que o conjunto $O_n$ não deverá ter mais do que $n-1$ elementos, uma vez que, do contrário, \[
+\sum_{x\in O_n} o\left( f,x \right) > f\left( b \right) -f\left( a \right) 
+,\] impossível por (*). Agora, sabemos que $x\in \left[ a,b \right] $ tal que $f$ é descontinua em $x \iff \exists \epsilon>0$ tal que $o\left( f,x \right) > \epsilon$. Assim, vemos que $\forall x\in F, \exists N\in \N$ tal que $x\in O_N$, portanto \[
+F \subseteq \bigcup_{n\in \N} O_n
+\] . Como todo $O_n$ é finito, possui medida nula e, portanto, a união possui também medida nula, logo, $F$ possui medida nula.
+
+\exercise{3-14}
+
+Tome $P_0$ partição de $A$ de forma que \[
+\{x:f\cdot g\left( x \right) = 0\} \subseteq P_0
+.\] Pelo exercício 3-4, provar a integrabilidade de $f\cdot g$ é o mesmo que provar a integrabilidade de $f\cdot g$ em cada n-bloco $S\subseteq \mathcal{B}\left( P_0 \right) $. Para tanto, segmentamos a análise em dois casos que são exaustivos e mutualmente exclusivos.
+
+($f\cdot g\left( x \right) \ge 0, \forall x\in S$)
+Nesse caso, veja que, $\forall B\in \mathcal{B}\left( P \right) $, onde $P$ é uma partição de $S$, \[
+    M_B^{f\cdot g} \le  M_B^{f} \cdot M_B^{g} \\
+\] e \[
+    m_B^{f\cdot g} \ge  m_B^{f} \cdot m_B^{g} \\
+.\] Agora seja $\epsilon>0$ arbitrário. Como ambas as funções são integráveis, podemos tomar $\epsilon_0 < \sqrt{\epsilon} $ de forma que
+\begin{align*}
+    & S\left( f,P \right) - s\left( f,P \right) < \epsilon_0 \\
+    & S\left( g,P \right) - s\left( g,P \right) < \epsilon_0
+.\end{align*}
+Agora, veja que
+\begin{align*}
+    \left( S\left( f,P \right) - s\left( f,P \right) \right) \left( S\left( g,P \right) - s\left( g,P \right) \right) &\ge \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B^{f}M_B^{g} + m_B^{f}m_B^{g} - M_B^{f}m_B^{g} - m_B^{f}M_B^{g} \right) vol B \tag{*} \\
+															 &\ge \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B^{f}M_B^{g} - m_B^{f}M_B^{g} \right) vol B \\
+															 &\ge \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B^{f}M_B^{g} - m_B^{f}m_B^{g} \right) vol B \\
+															 &\ge  \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B^{f\cdot g} - m_B^{f\cdot g} \right) vol B \\
+															 &= S\left( f\cdot g, P \right) - s\left( f\cdot g, P \right) 
+.\end{align*}
+Portanto, \[
+S\left( f\cdot g, P \right) - s\left( f\cdot g, P \right) < \epsilon_0^2 < \epsilon
+,\] ou seja, $f\cdot g\left( x \right) \ge 0, \forall x\in S \implies f\cdot g$ é integrável em $S$.
+
+($f\cdot g\left( x \right) \le 0, \forall x\in S$)
+Sem perda de generalidade, suponha $f\left( x \right) \ge 0, g\left( x \right) \le 0, \forall x\in S$. De forma análoga, $\forall B\in \mathcal{B}\left( P \right) $, onde $P$ é uma partição de $S$,
+\begin{align*}
+    M_B^{f\cdot g} \le  m_B^{f} \cdot M_B^{g} \\
+    m_B^{f\cdot g} \ge   M_B^{f} \cdot m_B^{g}
+.\end{align*}
+Veja que
+\begin{align*}
+    M_B^{f}M_B^{g} + m_B^{f}m_B^{g} &> m_B^{f}M_B^{g} \\
+    M_B^{f}m_B^{g} + m_B^{f}M_B^{g} &> M_B^{f}m_B^{g}
+\end{align*}
+e (*) ainda é válida, portanto
+\begin{align*}
+    \left( S\left( f,P \right) - s\left( f,P \right) \right) \left( S\left( g,P \right) - s\left( g,P \right) \right) &\ge   \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B^{f\cdot g} - m_B^{f\cdot g} \right) vol B \\
+															 &= S\left( f\cdot g, P \right) - s\left( f\cdot g, P \right) 
+.\end{align*}
+Ou seja, $\forall \epsilon>0$, escolhemos $\epsilon_0$ da mesma forma que no caso anterior e chegamos na mesma conclusão: $f\cdot g$ é integrável em S.
+
+\exercise{3-15}
+
+Seja $\epsilon > 0$. Tome $B_1,\ldots,B_k$ n-blocos fechados de forma que \[
+C\subseteq B_1\cup \ldots\cup B_k
+\] e \[
+\sum_{i=1}^{k} vol B_i < \epsilon
+.\] Escreva \[
+B_i = \prod_{j=1}^{n} \left[ a^{(i)}_j, b^{(i)}_j \right] , i=1,\ldots,k
+.\] Então, defina o n-bloco \[
+A = \prod_{j=1}^{n} \left[ \min\left\{ a^{(i)}_j :i=1,\ldots,k\right\}, \max\left\{ b^{(i)}_j :i=1,\ldots,k\right\}  \right]  
+.\] Veja que \[
+B_i \subseteq A, i=1,\ldots,k \implies B_1\cup \ldots\cup B_k \subseteq A  
+,\] ou seja, $C \subseteq A$.
+
+Como $C\subset A$ e $A$ é claramente limitado, então $C$ é limitado. Como visto no exercício 3-10.a, $\partial C$ tem conteúdo nulo, então também possui medida nula. Portanto, $C$ é Jordan-mensurável.
+
+Agora, tome uma partição $P$ de $A$ de forma que $B_i \in \mathcal{B}\left( P \right) , i=1,\ldots,k$. Veja que \[
+\forall B \in \mathcal{B}\left( P \right) \setminus \{B_i\} _{i=1,\ldots,k}, M_B = m_B = 0
+,\] enquanto \[
+M_{B_i} = 1, m_{B_i} \in \left\{ 0,1 \right\} 
+.\] Assim, temos
+\begin{align*}
+    S\left( \chi_C, P \right) &= \sum_{B \in \mathcal{B}\left( P \right) } M_B vol B \\
+    &= \sum_{i=1}^{k} vol B_i < \epsilon
+\end{align*}
+e \[
+    0 \le s\left( \chi_C, P \right) \le \sum_{i=1}^{k} vol B_i < \epsilon
+.\] Como $\epsilon$ é arbitrário \[
+\overline{\int}_A \chi_C = \underline{\int}_A \chi_C = 0
+.\] 
+
+\exercise{3-16}
+
+Similar ao exercício 3-10.b, tome $C = \Q\cap \left[ 0,1 \right] $. Como já visto, $C$ possui medida nula e é limitado. Agora seja $A$ um n-bloco (neste caso, um intervalo fechado) tal que $C \subseteq A$ e $P$ uma partição de $A$. Então, $\forall B\in \mathcal{B}\left( P \right), B\cap C \neq \O $ da mesma forma que $B \cap A\setminus C \neq \O$. Portanto, \[
+M_B^{\chi_C} = 1\text{ e } m_B^{\chi_C}=0, \forall B\in \mathcal{B}\left( P \right) 
+,\] ou seja, 
+\begin{align*}
+    S\left( f, P \right) &= \sum_{B\in \mathcal{B}\left( P \right) } vol B = vol A \\
+    s\left( f,P \right) &= 0 \\
+.\end{align*}
+Como $P$ foi escolhida de forma arbitrária, \[
+\overline{\int}_A \chi_C = vol A \neq \underline{\int}_A \chi_C = 0
+.\]
+
+\exercise{3-17}
+
+Seja $P$ uma partição de $A$. Seja $\epsilon > 0$, então escolha $\left\{ B_i \right\} _{i\in \N}$ de forma que \[
+C \subseteq \bigcup_{i\in \N} B_i
+\] e \[
+\sum_{i\in \N} vol B_i < \epsilon
+.\] Então, veja que, $\forall B\in \mathcal{B}\left( P \right) $, \[
+m_B^{\chi_C} = 1 \implies \exists i_0\in \N \text{ tal que } B \subseteq B_{i_0}
+,\] mas como \[
+vol B_{i_0} < \sum_{i\in \N} vol B_i < \epsilon
+,\] isso implicaria em $B$ ser um conjunto de conteúdo nulo, o que contradiz os resultados do exercício 3-8. Assim, concluímos que \[
+m_B^{\chi_C} = 0, B \in \mathcal{B}\left( P \right) \implies s\left( \chi_C, P \right) = 0
+\] \[
+\implies \underline{\int}_A \chi_C = 0 \implies \int_A \chi_C = 0
+.\]
+
+\exercise{3-18}
+
+Tome $\epsilon > 0$ e $n\in \N^*$. Então, $\exists P$ partição de $A$ de forma que \[
+S\left( f, P  \right) - s\left( f, P \right) < \frac{\epsilon}{n}
+.\] 
+Como $\int_A f=0$ e $f$ é não-negativa, \[
+s\left( f, P \right) = 0
+,\] portanto \[
+S\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } M_B vol B  < \frac{\epsilon}{n}
+.\] Agora defina $O_n = \{x : f\left( x \right) > \frac{1}{n}\} $. Tome $B_1,\ldots,B_{k} \in \mathcal{B}\left(P  \right) $ de forma que $B_i \cap O_n \neq \O, i=1,\ldots,k$. Claramente, \[
+O_n \subseteq \bigcup_{i=1} ^{k} B_i
+.\] Veja então que $M_{B_i} > \frac{1}{n}, i=1,\ldots,k$ e, assim,
+\begin{align*}
+    \frac{1}{n} \sum_{i=1}^{k} vol B_i &< \sum_{i=1}^{k} M_{B_i} vol B_i \\
+				       &< \sum_{B\in \mathcal{B}\left( P \right) } M_B vol B \\
+				       &= S\left( f, P \right) < \frac{\epsilon}{n}
+,\end{align*}
+ou seja, \[
+\sum_{i=1}^{k} vol B_i < \epsilon
+\] e, portanto, $O_n$ tem conteúdo nulo.
+
+Defina $F = \{x : f\left( x \right) \neq 0\}$. Veja que, $\forall x \in F \exists N\in \N^{*}$ tal que $x\in O_N$. Assim, \[
+F \subseteq \bigcup_{n\in \N^{*}} O_n
+\] e, como $O_n$ tem conteúdo nulo e, portanto, medida nula, sua união também possui medida nula, logo $F$ possui medida nula.
+
+\exercise{3-19}
+
+Pelo enunciado, $U\subset \left[ 0,1 \right] $\[
+U = \bigcup_{i\in \N} \left( a_i, b_i \right) 
+\] de forma que $\Q \subset U$, $med U \neq 0$ e \[
+\sum_{i\in \N} \left( b_i - a_i \right) < 1
+.\] 
+
+Sabemos que \[
+\partial U = \left[ 0,1 \right] - U
+\] e \[
+med \partial U \neq 0
+.\] 
+
+Suponha $f$ integrável. Tome $0<\epsilon < 1-\sum_{i\in \N} \left( b_i - a_i \right) $. Escolha uma partição $P$ de $\left[ 0,1 \right] $ de forma que \[
+S\left( f,P \right) - s\left( f,P \right) < \epsilon
+\] . Defina então \[
+B' = \{B : B\in \mathcal{B}\left( P \right) \text{ e } B \subseteq U\} 
+.\] Por definição, \[
+\bigcup_{B\in B'} \subseteq U
+.\] Assim, como $vol\left( B_i\cap B_j \right) = 0, B_i, B_j \in B'$, \[
+\sum_{B\in B'} vol B \le \sum_{i\in \N} vol\left( a_i, b_i \right) < 1- \epsilon
+.\] 
+
+Agora, veja que, $\forall B\in B'$, $M_B = m_B = 1$, enquanto $\forall B\in \mathcal{B}\left( P \right) \setminus B'$, $M_B = 1$, uma vez que $\Q\cap B \neq \O$, e $m_B=0$, visto que $\exists x\in B$ tal que $x\in \left[ 0,1 \right] \setminus U=\partial U$. Assim, podemos ver que \[
+S\left( f,P \right) = \sum_{B\in \mathcal{B}\left( P \right) } M_B vol B = \sum_{B \in \mathcal{B}\left( P \right) } vol B = vol \left[ 0,1 \right] = 1
+\] e \[
+s\left( f,P \right) = \sum_{B \in B'} 1 vol B + \sum_{B\in \mathcal{B}\left( P \right) \setminus B'} 0 vol B = \sum_{B\in B'} vol B
+,\] ou seja, 
+\begin{align*}
+& S\left( f,P \right)  - s\left( f,P \right) < \epsilon  \\
+& \implies 1 - \sum_{B\in B'} vol B < \epsilon \\
+& \implies \sum_{B\in B'} vol B > 1 - \epsilon
+,\end{align*}
+uma contradição.
+
+\exercise{3-20}
+
+Defina $O_n = \{x : o\left( f, x \right) > \frac{f\left( b \right) -f\left( a \right) }{n}\} $. Veja que, $\forall \epsilon_0 > 0, \exists N_0\gg\frac{f\left( b \right) -f\left( a \right) }{\epsilon_0}$ de forma que \[
+o\left( f, x \right) \ll \epsilon_0, \forall x \in \left[ a,b \right] \setminus O_{N_0}
+.\] Portanto, todo n-bloco $B \subseteq \left[ a,b \right] \setminus O_{N_0}$ admite uma partição $Q_B$ de forma que \[
+S\left( f|_B,Q_B \right) - s\left( f|_B, Q_B \right) < \epsilon_0
+,\] ou seja, \[
+\sum_{B_B \in \mathcal{B}\left( Q_B \right) } \left( M_{B_B}-m_{B_B} \right) vol B_B < \epsilon_0
+.\] 
+
+Fixe, então, $\epsilon > 0$ e escolha $N\gg \frac{2\left(  f\left( b \right) -f\left( a \right) \right) }{\epsilon}$ análogo ao anterior. Como já vimos que todo conjunto $O_n$ é finito, podemos escolher n-blocos $B_1,\ldots,B_k$ de forma que $O_N\subseteq B_1,\ldots,B_k$ e \[
+\sum_{i=1}^{k} vol B_i < \frac{\epsilon}{2\left(  f\left( b \right) - f\left( a \right) \right) }
+.\] Escreva $B^{'} = \{ B_1, \ldots, B_k\}$. Tome $P$ uma partição de $\left[ a,b \right] $ de forma que $B^{'} \subseteq \mathcal{B}\left( P \right) $. Assim, \[
+\sum_{B\in B^{'}} \left( M_B - m_B \right) vol B < \sum_{B \in B^{'}} \left( f\left( b \right) -f\left( a \right)  \right) vol B < \frac{\epsilon}{2} \tag{$*$}
+.\] Agora, tome uma partição $Q \supseteq P$ de forma que, definindo $B^{''} := \{B : B \subseteq \left[ a,b \right] \setminus O_N\} \subseteq \mathcal{B}\left( Q \right)$, \[
+\sum_{B\in B^{''}} \left( M_B - m_B \right) vol B < \frac{\epsilon}{2} \tag{$**$}
+.\] Portanto, como
+\begin{align*}
+    S\left( f,Q \right) -s\left( f,Q \right) &= \sum_{B\in \mathcal{B}\left( Q \right) } \left( M_B - m_B \right) vol B \\
+    &= \sum_{B\in B^{'}} \left( M_B - m_B \right) vol B + \sum_{B\in B^{''}} \left( M_B - m_B \right) vol B
+,\end{align*}
+($*$) e ($**$) nos dão que \[
+S\left( f,Q \right) -s\left( f,Q \right) < \epsilon
+.\] 
+
+\exercise{3-21}
+
+
+($\implies$)
+Seja $C$ Jordan-mensurável. Veja que $\mathcal{S}_2 \subseteq \mathcal{S}_1$, ou seja, queremos provar que \[
+\sum_{S\in \mathcal{S}} vol S < \epsilon
+\] onde \[
+\mathcal{S} = \{S : S\cap C \neq \O, S\cap A\setminus C \neq \O\} \subseteq \mathcal{B}\left( P \right) 
+.\] Veja que $\partial C$ é limitado e fechado, portanto, por Heine-Borel, é compacto. Além disso, como $C$ é Jordan-mensurável, $\partial C$ tem medida nula. Logo, $C$ tem conteúdo nulo. Então podemos escolher $B_1,\ldots,B_k $ n-blocos de forma que \[
+\partial C \subseteq B_1\cup \ldots\cup B_k
+\] e \[
+\sum_{i=1}^{k} vol B_i < \epsilon
+.\] Agora, escolha uma partição $P$ de $A$ de forma que $B_1,\ldots,B_k \in \mathcal{B}\left( P \right) $. Assim, é fácil ver que $\mathcal{S} = \{B_1,\ldots,B_k\} $, logo \[
+\sum_{S\in \mathcal{S}} vol S = \sum_{i=1}^{k} vol B_i < \epsilon
+.\] 
+
+($\impliedby$)
+Se assumimos que $\forall \epsilon>0, \exists P$ partição de $A$ de forma que \[
+\sum_{S\in \mathcal{S}} vol S < \epsilon
+,\] então é fácil ver que $\mathcal{S}$ é uma cobertura finita de n-blocos para $\partial C$, logo $\partial C$ possui conteúdo nulo e, por consequência, medida nula. Além disso, $A$ é limitado $\implies C\subseteq A$ é limitado. Portanto, $C$ é Jordan-mensurável.
+
+
+\end{document}
