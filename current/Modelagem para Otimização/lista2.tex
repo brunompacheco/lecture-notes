@@ -1,0 +1,48 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 2}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410079 - Modelagem para Otimização}
+ 
+\maketitle
+ 
+As implementações seguem no arquivo anexo.
+
+\exercise{1}
+
+A implementação proposta na lista anterior,
+\begin{align*}
+    \max_{x_1,x_2} \quad & 4x_1 + \frac{5}{2}x_2 \\
+    \textrm{s.t.} \quad & \frac{3}{4}x_1 + \frac{1}{2}x_2 \le 8 \\
+      & \frac{3}{4}x_1 + \frac{3}{4}x_2 \le 7 \\
+      & x_1,x_2 \in \Z^{+}
+,\end{align*}
+foi implementada utilizando as ferramentas do Gurobipy.
+
+\exercise{2}
+
+Foi adicionada uma restrição ao problema de otimização proposto na lista anterior, que apesar de descrita não foi formulada, referente à soma dos componentes de $\bm{q}$. Então, o problema agora formula-se
+\begin{align*}
+    \min_{\bm{q}} \quad & f\left( \bm{q} \right)  \\
+    \textrm{s.t.} \quad & A\bm{q}\le \bm{u} \\
+      & A\bm{q}\ge \bm{l} \\
+      & \bm{q} \in \left[ 0,1 \right] ^{2} \\
+      & q_A + q_B = 1
+.\end{align*}
+
+\exercise{3}
+
+Por limitações do Gurobipy, a formulação foi modificada para fazer uso de uma variável auxiliar, 
+\begin{align*}
+    \min_{\bm{p}, \bm{z}} \quad & \bm{z}^{T}\bm{z}\cdot n_i  \\
+    \textrm{s.t.} \quad & \bm{z}_i = \bm{p} - \bm{q_i} , \forall i=1,\ldots,4\\
+			& p \in \R^{2}
+.\end{align*}
+Além disso, não mais otimizamos a norma do vetor, que retornaria a distância entre os pontos de interesse, mas sim seu produto interno. Isso pois assim mantemos somente operações lineares e \[
+z_0\text{ t.q. } z_0^{T}z_0 \le z^{T}z, \forall z \implies \|z_0\| \le \|z\|, \forall z
+,\] ou seja, otimizando o produto interno otimizamos também a norma.
+
+\end{document}
