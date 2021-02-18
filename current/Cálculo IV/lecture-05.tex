@@ -1,0 +1,203 @@
+\lecture{5}{15.02.2021}{Teorema de Riemann-Lebesgue}
+
+\section*{Teorema de Riemann-Lebesgue}
+
+\begin{definition}
+    (Número de Lebesgue) Seja $\left( M,d \right) $ um espaço métrico. Seja $C=\{U_\lambda\} _{\lambda \in \Lambda}$ uma cobertura aberta de $M$ tal que \[
+    M = \bigcup_{\lambda \in  \Lambda} U_\lambda
+    .\] Um número $\delta >0$ é dito \emph{número de Lebesgue} de $C$ se $\forall X\subseteq M$, $X\neq \O$ \[
+    diam X = \sup \left\{ d\left( x,y \right) : x.y\in X \right\} < \delta \implies \exists \lambda \in \Lambda \text{ t.q. } X\subseteq U_\lambda
+    .\] 
+\end{definition}
+\begin{lemma}
+    Se $\left( M,d \right) $ é um espaço métrico compacto, qualquer cobertura aberta tem número de Lebesgue.
+\end{lemma}
+\begin{proof}
+    Suponha que $\{U_\lambda\} _{\lambda\in \Lambda}$ é uma cobertura aberta de $\left( M,d \right) $ sem número de Lebesgue: $\forall n\in \N$, $\frac{1}{n}$ não é um número de Lebesgue. Então $\exists X_n\subseteq M$, $X_n \neq \O$ de forma que \[
+    diam X_n < \frac{1}{n}
+    \] mas com \[
+    X_n \cap \left( M\setminus U_\lambda \right) \forall \lambda \in \Lambda
+    .\] Escolha para cada $n\in \N, x_{n}\in X_n$. Dessa forma \[
+    \left( x_n \right) _{n\in \N}\subseteq M
+    .\] A menos de passar para uma subsequência, podemos assumir que a sequência converge \[
+    x_n \to x_0 \ni U_{\lambda_0}
+    \] para algum $\lambda_0 \in \Lambda$.
+    Seja $\epsilon>0$ tal que \[
+    B_{2\epsilon}\left( x_0 \right) \subseteq U_{\lambda_0}
+    .\] Tome $n_0\in \N$ tal que \[
+    X_{n_0}\in B_{\epsilon}\left( x_0 \right) 
+    \] e $ n_0 > \frac{1}{\epsilon} \implies \frac{\epsilon}{n_0} < \epsilon$. Portanto, $\forall x\in X_{n_0}$, \[
+    d\left( x,x_0 \right) \le d\left( x, x_{n_0} \right) + d\left( x_{n_0}, x_0 \right) 
+    \] mas \[
+    d\left( x, x_{n_0} \right) \le diam X_{n_0} < \epsilon
+    \] e \[
+    d\left( x_{n_0}, x_0 \right) < \epsilon
+    \] logo \[
+    d\left( x,x_0 \right) < 2\epsilon \implies x\in B_{2\epsilon}\left( x_0 \right) \subseteq U_{\lambda_0}
+    \] uma contradição.
+\end{proof}
+
+\begin{lemma}
+    Seja $f:A\subseteq\R^{n}\to \R$ limitada, com $A$ n-bloco. Suponha que $\exists \epsilon>0$ tal que \[
+    o\left( f, x \right) < \epsilon, \forall x\in A
+    .\] Nesse caso, $\exists P$ partição de $A$ tal que \[
+    S\left( f,P \right) -s\left( f, P \right) < \epsilon . vol A
+    .\] 
+\end{lemma}
+\begin{proof}
+    (Vamos trabalhar com a norma do máximo em $\R^{n}$)
+    Para cada $x\in A$, $\exists \delta_x > 0$ tal que \[
+    o\left( f, x, \delta_x \right) = M\left( f,x,\delta_x \right) -m\left( f,x,\delta_x \right) < \epsilon
+.\] Veja que \[
+\{B_{\delta_x}\left( x \right) \} _{x\in A}
+\] é uma cobertura aberta de $A$, um espaço métrico compacto com métrica induzida pela norma.
+Pelo Lema anterior (TODO: Adicionar referência), sabemos que pode-se escolher $\delta > 0$ o número de Lebesgue para essa cobertura. Escolha uma partição $P_\delta=P_1\times \ldots\times P_n$ de $A$ com $\left| P_i \right| < \frac{\delta}{2}$ (essa norma é a maior diferença entre os intervalos induzidos pela partição) \[
+\implies diam B < \delta, \forall B\in \mathcal{B}\left( P_\delta \right) 
+\] \[
+\implies B\subseteq B_{\delta_x}\left( x \right) \cap A
+\] para algum $x\in A$.
+Então \[
+S\left( f,P_\delta \right) - s\left( f, P_\delta \right) = \sum_{B\in \mathcal{B}\left( P_\delta \right) } \left( M_B - m_B \right) vol B < \epsilon \sum_{B\in \mathcal{B}\left( P_\delta \right) } vol B = \epsilon vol A
+.\] 
+\end{proof}
+
+\begin{theorem}
+    (Riemann-Lebesgue) Se $f:A\to \R$ ($A$ um n-bloco) é uma função limitada, $f$ é integrável \emph{sse} \[
+    D_f := \{x\in A: f\text{ não é contínua em }x\} 
+    \] tem medida nula.
+\end{theorem}
+
+\begin{proof}
+    ($\impliedby$) Suponha $D_f$ com medida nula. Fixe $\epsilon>0$. Considere \[
+	D_\epsilon := \{x\in A : o\left( f,x \right) \ge \epsilon\} \subseteq D_f
+    ,\] logo, $D_\epsilon$ tem medida nula. Além disso, $D_\epsilon$ é fechado em $A$, um compacto, portanto $D_\epsilon$ é compacto. Assim, concluímos que $D_\epsilon$ tem conteúdo nulo. Portanto, $\exists B_1,\ldots,B_k$ n-blocos abertos de forma que \[
+	D_\epsilon \subseteq B_1\cup \ldots\cup B_k
+    \] e \[
+	\sum_{i=1}^{k} vol B_i < \epsilon
+    .\] Pelo lema 1 (TODO), escolha uma partição $P$ de $A$ de forma que $\forall B\in \mathcal{B}\left( P \right) $, ou \[
+    B\cap D_\epsilon = \O \text{, formando o conjunto $S_1\left( P \right) $}
+    \] ou \[
+    B \subseteq B_i\text{, formando o conjunto $S_2\left( P \right) $}
+    \] para algum $i\in \{1,\ldots,k\}$. Agora veja que \[
+    S\left( f, P \right) - s\left( f,P \right) \le \sum_{B\in S_1\left( P \right)	 } \left( M_B - m_B \right) vol B + \sum_{B\in S_2\left( P \right)	 } \left( M_B - m_B \right) vol B
+    .\] Escreva \[
+    M = \sup \{\left| f\left( x \right)  \right| : x\in A\} \ge 0
+    ,\] uma vez que $f$ é limitada. Além disso, $\forall x\in A$, $-M \le f\left( x \right) \le M$. Assim, \[
+    S\left( f, P \right) - s\left( f,P \right) \le 2M \sum_{B\in S_1\left( P \right)	 } vol B+ \sum_{B\in S_2\left( P \right)	 } \left( M_B - m_B \right) vol B
+    .\] Como \[
+    \bigcup_{B\in S_2\left( P \right) } B \subseteq B_1\cup \ldots\cup B_k
+    ,\] então \[
+    \sum_{B\in S_2\left( P \right) } vol B < \epsilon
+    .\] Mas para cada n-bloco $B\in S_2\left( P \right) $, temos \[
+    o\left( f, x \right) < \epsilon, \forall x\in B
+    \] uma vez que $B\cap D_\epsilon = \O$. Assim, podemos aplicar o lema 2 e encontrar uma partição $Q_B$ de $B$ de forma que \[
+    \sum_{B'\in \mathcal{B}\left( Q_B \right) } \left( M_{B'} - m_{B'} \right) vol B' < \epsilon vol B
+    .\] Refinamos a partição $P$ para uma nova partição $Q$ de modo que os subblocos de $Q$ coincidem com os de $P$ para os que intersectam os $B_i$s ou são os $B\in \mathcal{Q_B}$. Portanto
+    \begin{align*}
+	S\left( f, P \right) - s\left( f,P \right) &\le 2M \sum_{B\in S_1\left( Q \right)	 } vol B+ \sum_{B\in S_2\left( Q \right)	 } \left( M_B - m_B \right) vol B \\
+						   &\le  2M\epsilon + \epsilon \sum_{B\in S_2\left( P \right) } vol B \\
+						   &\le \epsilon \left( 2M + vol A \right) 
+    .\end{align*}
+    Como os fatores não dependem de $\epsilon$, mas sim das características do problema, podemos afirmar que podemos fazer a diferença arbitrariamente pequena. Portanto, $f$ é integrável.
+
+    ($\implies$)
+    Suponha $f$ integrável. $\forall k\in \N$, \[
+    D_{\frac{1}{k}} = \left\{  x\in A : o\left( f,x \right) \ge \frac{1}{k}\right\}  \implies D_f = \bigcup_{k\in \N} D_{\frac{1}{k}}
+    .\] Então, basta provar que \[
+    med D_{\frac{1}{k}} = 0, k\in \N
+    .\] Fixe $k_0\in \N$. Seja $\epsilon>0$. Sabemos também que $D_{\frac{1}{k}}$ é fechado em $A$ e, portanto, compacto. Seja $P$ uma partição de $A$ de modo que \[
+    S\left( f,P \right)  - s\left( f,P \right)  < \frac{\epsilon}{k_0}
+    .\] Seja \[
+    S_{k_0} = \left\{ B\in \mathcal{B}\left( P \right) : B\cap D_{\frac{1}{k_0}}\neq \O \right\} 
+    .\] Agora, vemos que \[
+    \sum_{B\in S_{k_0}} \left( M_B - m_B \right) vol B \le S\left( f,P \right) -s\left( f,P \right) < \frac{\epsilon}{k_0}
+    \] ao mesmo tempo que \[
+    M_B - m_B \ge \frac{1}{k_0}
+    .\] Portanto, \[
+    \frac{1}{k_0}\sum_{B\in S_{k_0}} vol B \le \sum_{B\in S_{k_0}} \left( M_B-m_b \right) vol B < \frac{\epsilon}{k_0}
+    \] ou seja, $S_{k_0}$ é uma cobertura de $D_{\frac{1}{k_0}}$, i.e., \[
+    D_{\frac{1}{k_0}}\subseteq \bigcup_{B\in S_{k_0}} B
+    \] por construção e \[
+    \sum_{B\in S_{k_0}} vol B < \epsilon
+    .\] Logo $D_{\frac{1}{k_0}}$ tem conteúdo nulo, portanto $D_f$ tem medida nula.
+\end{proof}
+
+\begin{eg}
+    $f: \left[ 0,1 \right] \to \R$ definida como \[
+    f\left( x \right) = \begin{cases}
+	0 &, \text{ se }x\in \left( \R\setminus\Q \right) \cap \left( 0,1 \right) \\
+	\frac{1}{q} &, \text{ se } x = \frac{p}{q} \in \left[ 0,1 \right] , p,q \in \Z^{+}, q>0, p,q \text{ primos entre si}
+    \end{cases}
+.\] (Spivak) $f$ é contínua nos irracionais e descontínua em $\Q \cap \left[ 0,1 \right] $. $f$ é integrável e \[
+\int_{\left[ 0,1 \right] }f = \sup \left\{ s\left( f,P \right)  : P \text{ partição}\right\} = 0
+.\] 
+\end{eg}
+
+\section*{Integração em domínios irregulares}
+
+\begin{definition}
+    Seja $X\subseteq\R^{n}$ conjunto qualquer. A \emph{função indicadora} de $X$ ou \emph{função característica} de $X$
+    \begin{align*}
+        \chi_X: \R^{n} &\longrightarrow \R \\
+        x &\longmapsto \chi_X(x) = \begin{cases}
+	    1 &, \text{ se }x\in X \\
+	    0 &, \text{ se }x\notin X
+        \end{cases}
+    .\end{align*}
+\end{definition}
+
+\begin{intuition}
+    Nossa situação desejada é de um n-bloco $A$ que contém o domínio $X$ da nossa função, de forma que podemos olha para a função característica de $X$ restrita a $A$, ou seja
+    \begin{align*}
+        \chi_X: A &\longrightarrow \R \\
+        x &\longmapsto \chi_X(x) = \begin{cases}
+	    1 &, \text{ se }x\in X \\
+	    0 &, \text{ se }x\notin X
+        \end{cases}
+    .\end{align*}
+    Veja que essa função é limitada.
+\end{intuition}
+
+\begin{prop}
+    Seja $A$ um n-bloco, $\overline{C}\subseteq int A$ e $\chi_C:A\to \R$. Então, são equivalentes:
+    \begin{enumerate}
+        \item $\chi_C$ é integrável
+	\item $\partial C$ tem medida nula
+	\item $\partial C$ tem conteúdo nulo
+    \end{enumerate}
+\end{prop}
+
+\begin{proof}
+    A equivalência entre (2) e (3) é imediata uma vez que $\partial C$ é um conjunto fechado por definição (interseção de dois fechados) e $\partial C \subseteq A$, sendo $A$ um compacto, então $\partial C$ é um compacto. Portanto, basta provar (1)$\iff$(2).
+
+    Vamos provar que \[
+    D_{\chi_C} = \partial C
+    .\] Seja $x\not\in \partial C$, $x\in A$. Sabemos que \[
+    \overline{C} = \partial C \cup \left( int C \right) 
+,\] portanto, (a) $x\not\in \overline{C}$ ou (b) $x\in int C$.
+
+(a)$\implies \exists \delta>0$ tal que $B_{\delta}\left( x \right) \cap C = \O$ \[
+\implies \forall y\in B_{\delta}\left( x \right) \cap A, \chi_C\left( y \right) = 0
+,\] portanto $\left| \chi_C\left( y \right) - \chi_C\left( x \right)  \right| =0$, logo $\chi_C$ é contínua em $x \implies x\not\in D_{\chi_C}$ .
+
+(b)$\implies \exists \delta>0$ tal que $B_\delta\left( x \right) \subseteq C$ \[
+\forall y\in B_\delta\left( x \right) \cap A, \chi_C\left( y \right) = 0
+,\] portanto $\left| \chi_C\left( y \right) -\chi_C\left( x \right)  \right| =0$, logo $x\not\in D_{\chi_C}$.
+
+Assim, vemos que $D_{\chi_C}\subseteq\partial C$.
+
+Por outro lado, seja $x_0\in \partial C$. Escolha $\delta_0>0$ tal que \[
+B_{\delta_0}\left( x_0 \right) \subseteq A
+.\] Tome $\epsilon = \frac{1}{2}$. Então $\forall 0<\delta < \delta_0$\[
+B_{\delta}\left( x_0 \right) \cap C = \O \text{ e }B_{\delta}\left( x_0 \right) \cap \left( A\setminus C \right) \neq \O
+.\] Portanto, tome $y\in B_{\delta}\left( x_0 \right) \cap C$ e $z\in B_{\delta}\left( x_0 \right) \cap \left( A\setminus C \right)$. Então \[
+\left| \chi_C\left( y \right) -\chi_C\left( x_0 \right)  \right| = 1
+\] ou \[
+\left| \chi_C\left( z \right) -\chi_C\left( x_0 \right)  \right| = 1
+,\] portanto $\chi_C$ não é contínua em $x_0$. Logo \[
+\partial C \subseteq D_{\chi_C}
+\] \[
+\implies \partial C = D_{\chi_C}
+.\] Resultado segue de Riemann-Lebesgue.
+\end{proof}
+
