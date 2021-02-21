@@ -9,23 +9,23 @@
     diam X = \sup \left\{ d\left( x,y \right) : x.y\in X \right\} < \delta \implies \exists \lambda \in \Lambda \text{ t.q. } X\subseteq U_\lambda
     .\] 
 \end{definition}
-\begin{lemma}
+\begin{lemma}\label{lemma:lebesgue-1}
     Se $\left( M,d \right) $ é um espaço métrico compacto, qualquer cobertura aberta tem número de Lebesgue.
 \end{lemma}
 \begin{proof}
     Suponha que $\{U_\lambda\} _{\lambda\in \Lambda}$ é uma cobertura aberta de $\left( M,d \right) $ sem número de Lebesgue: $\forall n\in \N$, $\frac{1}{n}$ não é um número de Lebesgue. Então $\exists X_n\subseteq M$, $X_n \neq \O$ de forma que \[
     diam X_n < \frac{1}{n}
     \] mas com \[
-    X_n \cap \left( M\setminus U_\lambda \right) \forall \lambda \in \Lambda
+    X_n \cap \left( M\setminus U_\lambda \right) \neq \O, \forall \lambda \in \Lambda
     .\] Escolha para cada $n\in \N, x_{n}\in X_n$. Dessa forma \[
     \left( x_n \right) _{n\in \N}\subseteq M
     .\] A menos de passar para uma subsequência, podemos assumir que a sequência converge \[
-    x_n \to x_0 \ni U_{\lambda_0}
+    x_n \to x_0 \in  U_{\lambda_0}
     \] para algum $\lambda_0 \in \Lambda$.
     Seja $\epsilon>0$ tal que \[
     B_{2\epsilon}\left( x_0 \right) \subseteq U_{\lambda_0}
     .\] Tome $n_0\in \N$ tal que \[
-    X_{n_0}\in B_{\epsilon}\left( x_0 \right) 
+    X_{n_0}\subseteq B_{\epsilon}\left( x_0 \right) 
     \] e $ n_0 > \frac{1}{\epsilon} \implies \frac{\epsilon}{n_0} < \epsilon$. Portanto, $\forall x\in X_{n_0}$, \[
     d\left( x,x_0 \right) \le d\left( x, x_{n_0} \right) + d\left( x_{n_0}, x_0 \right) 
     \] mas \[
@@ -37,7 +37,7 @@
     \] uma contradição.
 \end{proof}
 
-\begin{lemma}
+\begin{lemma}\label{lemma:lebesgue-2}
     Seja $f:A\subseteq\R^{n}\to \R$ limitada, com $A$ n-bloco. Suponha que $\exists \epsilon>0$ tal que \[
     o\left( f, x \right) < \epsilon, \forall x\in A
     .\] Nesse caso, $\exists P$ partição de $A$ tal que \[
@@ -51,14 +51,19 @@
 .\] Veja que \[
 \{B_{\delta_x}\left( x \right) \} _{x\in A}
 \] é uma cobertura aberta de $A$, um espaço métrico compacto com métrica induzida pela norma.
-Pelo Lema anterior (TODO: Adicionar referência), sabemos que pode-se escolher $\delta > 0$ o número de Lebesgue para essa cobertura. Escolha uma partição $P_\delta=P_1\times \ldots\times P_n$ de $A$ com $\left| P_i \right| < \frac{\delta}{2}$ (essa norma é a maior diferença entre os intervalos induzidos pela partição) \[
+Pelo lema \ref{lemma:lebesgue-1}, sabemos que pode-se escolher $\delta > 0$ o número de Lebesgue para essa cobertura. Escolha uma partição $P_\delta=P_1\times \ldots\times P_n$ de $A$ com $\left| P_i \right| < \frac{\delta}{2}$ (essa norma é a maior diferença entre os intervalos induzidos pela partição) \[
 \implies diam B < \delta, \forall B\in \mathcal{B}\left( P_\delta \right) 
 \] \[
 \implies B\subseteq B_{\delta_x}\left( x \right) \cap A
 \] para algum $x\in A$.
-Então \[
-S\left( f,P_\delta \right) - s\left( f, P_\delta \right) = \sum_{B\in \mathcal{B}\left( P_\delta \right) } \left( M_B - m_B \right) vol B < \epsilon \sum_{B\in \mathcal{B}\left( P_\delta \right) } vol B = \epsilon vol A
-.\] 
+Então
+\begin{align*}
+    S\left( f,P_\delta \right) - s\left( f, P_\delta \right) &= \sum_{B\in \mathcal{B}\left( P_\delta \right) } \left( M_B - m_B \right) vol B \\
+							     &<  \sum_{B\in \mathcal{B}\left( P_\delta \right) } \left( M\left( f,x,\delta_x \right) -m\left( f,x,\delta_x \right)  \right)  vol B \\
+							     &<  \sum_{B\in \mathcal{B}\left( P_\delta \right) } \epsilon vol B = \epsilon vol A
+,\end{align*}
+onde $\delta_x$ é relativo ao aberto que contém o n-bloco $B$, para cada $B$.
+
 \end{proof}
 
 \begin{theorem}
@@ -74,7 +79,7 @@ S\left( f,P_\delta \right) - s\left( f, P_\delta \right) = \sum_{B\in \mathcal{B
 	D_\epsilon \subseteq B_1\cup \ldots\cup B_k
     \] e \[
 	\sum_{i=1}^{k} vol B_i < \epsilon
-    .\] Pelo lema 1 (TODO), escolha uma partição $P$ de $A$ de forma que $\forall B\in \mathcal{B}\left( P \right) $, ou \[
+	.\] Pelo lema \ref{lemma:lebesgue-1}, sabendo que $\delta$ é o número de lebesgue da cobertura $B_1,\ldots,B_k$, podemos escolher partição $P$ de $A$ de forma que $\forall B\in \mathcal{B}\left( P \right) $ tal que $B\cap D_\epsilon \neq \O \implies diam B < \delta$. Assim, para cada n-blocos $B$, temos \[
     B\cap D_\epsilon = \O \text{, formando o conjunto $S_1\left( P \right) $}
     \] ou \[
     B \subseteq B_i\text{, formando o conjunto $S_2\left( P \right) $}
@@ -82,23 +87,24 @@ S\left( f,P_\delta \right) - s\left( f, P_\delta \right) = \sum_{B\in \mathcal{B
     S\left( f, P \right) - s\left( f,P \right) \le \sum_{B\in S_1\left( P \right)	 } \left( M_B - m_B \right) vol B + \sum_{B\in S_2\left( P \right)	 } \left( M_B - m_B \right) vol B
     .\] Escreva \[
     M = \sup \{\left| f\left( x \right)  \right| : x\in A\} \ge 0
-    ,\] uma vez que $f$ é limitada. Além disso, $\forall x\in A$, $-M \le f\left( x \right) \le M$. Assim, \[
-    S\left( f, P \right) - s\left( f,P \right) \le 2M \sum_{B\in S_1\left( P \right)	 } vol B+ \sum_{B\in S_2\left( P \right)	 } \left( M_B - m_B \right) vol B
+    ,\] possível uma vez que $f$ é limitada. Além disso, $\forall x\in A$, $-M \le f\left( x \right) \le M$. Assim, \[
+    S\left( f, P \right) - s\left( f,P \right) \le \sum_{B\in S_1\left( P \right)	 } \left( M_B - m_B \right) vol B + 2M \sum_{B\in S_2\left( P \right)	 } vol B
     .\] Como \[
     \bigcup_{B\in S_2\left( P \right) } B \subseteq B_1\cup \ldots\cup B_k
     ,\] então \[
     \sum_{B\in S_2\left( P \right) } vol B < \epsilon
-    .\] Mas para cada n-bloco $B\in S_2\left( P \right) $, temos \[
+    .\] Mas para cada n-bloco $B\in S_1\left( P \right) $, temos \[
     o\left( f, x \right) < \epsilon, \forall x\in B
-    \] uma vez que $B\cap D_\epsilon = \O$. Assim, podemos aplicar o lema 2 e encontrar uma partição $Q_B$ de $B$ de forma que \[
+    \] uma vez que $B\cap D_\epsilon = \O$. Assim, podemos aplicar o lema \ref{lemma:lebesgue-2} a cada n-bloco $B\in S_2\left( P \right) $ e encontrar uma partição $Q_B$ de $B$ de forma que \[
     \sum_{B'\in \mathcal{B}\left( Q_B \right) } \left( M_{B'} - m_{B'} \right) vol B' < \epsilon vol B
-    .\] Refinamos a partição $P$ para uma nova partição $Q$ de modo que os subblocos de $Q$ coincidem com os de $P$ para os que intersectam os $B_i$s ou são os $B\in \mathcal{Q_B}$. Portanto
+    .\] Refinamos a partição $P$ para uma nova partição $Q$ de modo que os subblocos de $Q$ coincidem com os de $P$ para os que intersectam os $B_i$s ou são os $B\in \mathcal{B}\left( Q_B \right) $. Portanto
     \begin{align*}
-	S\left( f, P \right) - s\left( f,P \right) &\le 2M \sum_{B\in S_1\left( Q \right)	 } vol B+ \sum_{B\in S_2\left( Q \right)	 } \left( M_B - m_B \right) vol B \\
-						   &\le  2M\epsilon + \epsilon \sum_{B\in S_2\left( P \right) } vol B \\
-						   &\le \epsilon \left( 2M + vol A \right) 
+	S\left( f, P \right) - s\left( f,P \right) &\le \sum_{B\in S_1\left( P \right)	 } \left( M_B - m_B \right) vol B + 2M \sum_{B\in S_2\left( P \right)	 } vol B \\
+						   &< \left( 2M + \epsilon \right) \sum_{B\in \mathcal{B}\left( Q \right) } vol B
     .\end{align*}
-    Como os fatores não dependem de $\epsilon$, mas sim das características do problema, podemos afirmar que podemos fazer a diferença arbitrariamente pequena. Portanto, $f$ é integrável.
+    Agora basta tomar uma partição $Q' \supseteq Q $ de forma que \[
+    \sum_{B\in \mathcal{B}\left( Q' \right) } vol B < \frac{\epsilon}{2M + \epsilon}
+    .\] 
 
     ($\implies$)
     Suponha $f$ integrável. $\forall k\in \N$, \[
@@ -188,13 +194,13 @@ Assim, vemos que $D_{\chi_C}\subseteq\partial C$.
 
 Por outro lado, seja $x_0\in \partial C$. Escolha $\delta_0>0$ tal que \[
 B_{\delta_0}\left( x_0 \right) \subseteq A
-.\] Tome $\epsilon = \frac{1}{2}$. Então $\forall 0<\delta < \delta_0$\[
-B_{\delta}\left( x_0 \right) \cap C = \O \text{ e }B_{\delta}\left( x_0 \right) \cap \left( A\setminus C \right) \neq \O
+.\] Tome $\epsilon = \frac{1}{2}$. Veja que $\forall 0<\delta < \delta_0$\[
+B_{\delta}\left( x_0 \right) \cap C \neq  \O \text{ e }B_{\delta}\left( x_0 \right) \cap \left( A\setminus C \right) \neq \O
 .\] Portanto, tome $y\in B_{\delta}\left( x_0 \right) \cap C$ e $z\in B_{\delta}\left( x_0 \right) \cap \left( A\setminus C \right)$. Então \[
 \left| \chi_C\left( y \right) -\chi_C\left( x_0 \right)  \right| = 1
 \] ou \[
 \left| \chi_C\left( z \right) -\chi_C\left( x_0 \right)  \right| = 1
-,\] portanto $\chi_C$ não é contínua em $x_0$. Logo \[
+,\] ou seja, ambos são maiores que $\epsilon$, portanto $\chi_C$ não é contínua em $x_0$. Logo \[
 \partial C \subseteq D_{\chi_C}
 \] \[
 \implies \partial C = D_{\chi_C}
