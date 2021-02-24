@@ -1,0 +1,83 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 1}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+ 
+\maketitle
+
+\section*{Objetivo}
+ 
+Os experimentos executados visam desenvolver familiaridade e experiência com o uso de amplificadores operacionais em montagem de circuitos comparadores e amplificadores.
+ 
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+
+TODO
+
+\subsection*{Circuito 2}
+
+Conforme instruído, o circuito foi montado como na figura \ref{fig:figures-lab2-2-circuito-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab2-2-circuito.png}
+    \caption{Segundo circuito do roteiro.}
+    \label{fig:figures-lab2-2-circuito-png}
+\end{figure}
+
+\subsubsection*{a)}
+
+O resultado da simulação pode ser verificado na figura \ref{fig:figures-lab2-2-a-png}. Conforme visível através do cursor, a tensão de saída respeita, aproximadamente, a relação teórica \[
+V_{out}= \left( 1+\frac{3k3}{1k} \right)V_{in} = 8,6 V_p
+\] 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab2-2-a.png}
+    \caption{Formas de onda da tensão de entrada \emph{V(ch1)} e tensão de saída \emph{V(ch2)}.}
+    \label{fig:figures-lab2-2-a-png}
+\end{figure}
+
+\subsubsection*{b)}
+
+Para o valor de ganho desejado, precisamos que \[
+\frac{R_2}{R_1} = 2 \implies R_2 = 2k\Omega
+.\] Podemos ver no resultado, através da figura \ref{fig:figures-lab2-2-b-png}, que a relação teórica é uma boa aproximação.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab2-2-b.png}
+    \caption{Formas de onda do segundo circuito após ajuste de $R_2$.}
+    \label{fig:figures-lab2-2-b-png}
+\end{figure}
+
+\subsubsection*{c)}
+
+Para determinar o valor real de saturação da saída, o resistor $R_2$ foi incrementado para que se tornasse visível uma saturação na forma de onda monitorada, conforme visível na figura \ref{fig:figures-lab2-2-c-png}. Pelo valor encontrado, podemos calcular o valor da resistência pela relação dos valores de pico \[
+    V_{out} = 10,90 = \left( 1 +\frac{R_2}{1k}\right) 2 \implies R_2 = 4k45 \Omega
+.\] 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab2-2-c.png}
+    \caption{Saturação da saída do circuito.}
+    \label{fig:figures-lab2-2-c-png}
+\end{figure}
+
+\subsubsection*{d)}
+
+Com um sinal de entrada de $2 V_{pp}$ dificilmente o amplificador entraria em uma zona de não linearidade do ganho, então manteria a relação teórica entrada-saída verificada na parte a). Com isso, os resultados de b) se mantém, uma vez que o ganho deriva dessa relação. Finalmente, a resposta de c) provavelmente mudaria uma vez que a tensão de saída, para um mesmo ganho, seria muito menor, ou seja, temos uma margem maior de ganho sem que haja distorção do sinal de saída.
+
+\section*{Conclusão}
+
+TODO: Circuito 1
+
+A simulação do arranjo como amplificador de sinal mostrou uma proximidade do componente simulado com o componente teórico quanto à relação entrada-saída, ainda que a faixa de saturação do sinal de saída seja muito menor do que no componente teórico.
+
+\end{document}
