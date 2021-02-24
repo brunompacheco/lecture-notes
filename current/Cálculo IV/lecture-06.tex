@@ -1,0 +1,278 @@
+\lecture{6}{17.02.2021}{}
+
+\section*{Conjuntos Jordan-mensuráveis}
+
+Essa definição demarcará praticamente o nosso espaço de integração.
+
+\begin{definition}
+    $C\subseteq\R^{n}$ limitado e com $med_{\R^{n}}\partial C = 0$ é dito ser \emph{Jordan-mensurável} ou \emph{J-mensurável}.
+\end{definition}
+
+\begin{note}
+    Para a definição de J-mensurabilidade, o conjunto analisado não precisa conter sua fronteira.
+\end{note}
+
+\begin{eg}
+    $C = \Q\cap \left[ 0,1 \right] $ não é J-mensurável. $\partial C = \left[ 0,1 \right] $ que não tem medida nula.
+\end{eg}
+
+\begin{eg}
+    $U\subseteq\R^{n}$ aberto tal que \[
+    \partial U = \bigcup_{k\in \N} Im\left( g_k\left( X \right)  \right) 
+    ,\] onde
+    \begin{align*}
+        g_k: X\subseteq\R^{m} &\longrightarrow \R^{n} \\
+        x &\longmapsto g_k(x)
+    \end{align*}
+    são funções Lipschitz com $m<n$.
+
+    Um caso particular é $\partial U$ uma união enumerável de subvariedades de dimensão $n-1$. Tome como sub-exemplo uma bola de acordo com a distância euclidiana \[
+    U = B_{r}^{eucl.}\left( x_0 \right) , x_0\in \R^{n}, r>0
+    .\] Nesse caso, \[
+    \partial U = S_r\left( x_0 \right) = \left\{ x\in \R^{n} : \|x-x_0\|_{eucl.} = r \right\} 
+    \] que tem medida nula.
+\end{eg}
+
+\begin{eg}
+    Todo n-bloco é J-mensurável. Basta ver que seu fecho são suas "faces", ou seja, seus limites são hiperplanos, portanto, subvariedades. Assim, conseguimos caracterizar seu fecho como união de imagens de funções Lipschitz.
+\end{eg}
+
+\begin{prop}
+    Se $X, Y \subseteq\R^{n}$ são J-mensuráveis, então
+    \begin{enumerate}
+        \item $X\cup Y$ é J-mensurável \\
+	\item $X\cap Y$ é J-mensurável \\
+	\item $X\subseteq Y \implies Y\setminus X $ é J-mensurárvel.
+    \end{enumerate}
+\end{prop}
+
+\begin{demo}
+    (2) Tome $x \in \partial \left( X\cap Y \right) $. Então, $\forall U \ni x$ aberto \[
+    U\cap \left( X\cap Y \right) \neq  \O \implies U\cap X \neq \O\text{ e }U\cap Y\neq \O
+    \] e \[
+    U\cap \R^{n}\setminus\left( X\cap Y \right) \neq  \O
+    .\] Mas \[
+    \R^{n}\setminus\left( X\cap Y \right) = \left( \R^{n}\setminus X \right) \cup \left( \R^{n} \setminus Y \right) 
+    .\] Então \[
+    U\cap \left( \R^{n}\setminus X \right) \cup \left( \R^{n} \setminus Y \right) \neq \O
+    \] e, portanto, $x\in \partial X \cup \partial Y$. Com isso, temos que \[
+    \partial \left( X\cap Y \right) \subseteq \partial X \cup \partial Y
+    ,\] logo, tem medida nula. Assim, $X\cap Y $ é J-mensurável, uma vez que é claramente limitado por ser subconjunto dos dois conjuntos limitados. 
+
+    (1) Veja que é sempre verdade que \[
+    \chi_{X\cup Y} = \chi_X + \chi_Y - \chi_{X\cap Y}
+    .\] Além disso, \[
+    D_{\chi_{X\cap Y}} = \partial \left( X\cap Y \right) \subseteq\partial X \cup \partial Y = D_{\chi_X} \cup D_{\chi_Y}
+    ,\] logo $D_{\chi_{X\cap Y}}$ tem medida nula, ou seja, $\chi_{X\cap Y}$ é integrável. Portanto, $\chi_{X\cup Y}$ é integrável, logo \[
+    \partial \left( X\cup Y \right) = D_{\chi_{X\cup Y}}
+    \] tem medida nula. Assim, $X\cup Y$ é J-mensurável, uma vez que é claramente limitado.
+
+    (3) Claramente $Y\setminus X$ é limitada, uma vez que está contida em $Y$. Agora, veja que \[
+    \partial \left( Y\setminus X \right) \subseteq \partial X \cup \partial Y
+    ,\] logo, possui medida nula. Assim, vemos que $Y\setminus X$ é J-mensurável.
+\end{demo}
+
+\begin{problem}
+    Sejam $f,g: A\to \R$ integráveis tais que $f\le g$. Então o conjunto \[
+    \hat{C} = \left\{ \left( x,y \right) \in \R^{n+1}: x\in A, f\left( x \right) \le y \le g\left( x \right)  \right\} 
+.\] Verifique que $\hat{C}$ é J-mensurável (em $\R^{n+1}$).
+
+Dica: o conjunto $\hat{C}$ é a região entre os gráficos de $g$ e $f$. Ainda assim, \emph{podem haver descontinuidades em $f, g$}. Tome $L >0$ tal que $-L < \min \left\{ \inf \left\{ f\left( x \right)  \right\} , \inf\left\{ g(x) \right\}  \right\} $ e $L > \max\left\{ \sup \left\{ g\left( x \right)  \right\}  \right\} $, ou seja, um $L$ que seja grande o suficiente para limitar superior- e inferiormente $\hat{C}$. Mostre que \[
+\partial \hat{C} \subseteq \left( \left( \partial A \cup  D_f\right)  \times \left[ -L,L \right]  \right) \cup \left( \left(  \partial A \cup D_g\right)  \times \left[ -L,L \right]  \right) \cup Graph\left( f \right) \cup Graph\left( g \right) 
+.\] Então, cheque os lemas:
+\begin{lemma}
+    O gráfico de uma função integrável $f$, $graph \left( f \right) $ tem medida nula em $\R^{n+1}$.
+    (manipule com caracterização de integrabilidade em termos de partições $S\left( f, P \right) - s\left( f, P\right) <\epsilon$)
+\end{lemma}
+\begin{lemma}
+    Se $C\subseteq \R^{n}$ tem $med_{\R^{n}} C=0$, então \[
+    med_{\R^{n+m}}\left( C\times X \right) = 0, \forall X\subseteq\R^{m}
+    .\] 
+\end{lemma}
+\end{problem}
+
+\section*{Integrabilidade em Conjuntos J-Mensuráveis}
+
+\begin{definition}
+    Se $C$ é J-mensurável e $\overline{C} \subseteq int A$, com A n-bloco, o \emph{volume} de $C$ é \[
+    vol\left( C \right) \coloneqq \int_A \chi_C
+    .\]
+\end{definition}
+
+\begin{problem}
+    Mostre que essa definição não depende de $A$, i.e., para dois n-blocos distintos que cumpram com o estabelecido, o valor do volume não se altera.
+\end{problem}
+
+Veja que essa noção de volume é restrita a conjuntos J-mensuráveis. Assim, essa noção não faz sentido para conjuntos não limitados, por exemplo.
+
+\begin{definition}
+    Se $X\subseteq Y \subseteq \R^{n}$ e $f:X \to \R$, a \emph{extensão por zero} de $f$ é a função $\hat{f}: Y \to  \R$ tal que
+    \begin{enumerate}
+        \item $\hat{f}|_X = f$
+	\item $\hat{f}\left( x \right) = 0, \forall x\in Y\setminus X$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    Seja $C\subseteq \R^{n}$ J-mensurável e $f:C\to \R$ função limitada. Seja $A \subseteq\R^{n}$ n-bloco com $\overline{C}\subseteq int A$ e seja $\hat{f}: A\to \R$ extensão por zero de $f$. Definimos que $f$ é \emph{integrável} se $\hat{f}$ o for; em caso afirmativo, a \emph{integral de $f$ em $C$} é \[
+    \int_C f \coloneqq \int_A \hat{f}
+    .\] 
+\end{definition}
+
+\begin{problem}
+    \begin{enumerate}
+	\item Verifique que a definição não depende de $A$ (dado $A$, teremos uma única extensão por zero, dado um segundo n-bloco, na interseção o conjunto das descontinuidades são iguais e fora é zero, ou seja, o conjunto das descontinuidades está na interseção e não muda independente do n-bloco escolhido; verificar que o valor da integrabilidade não se altera).
+	\item $f,g: C \to \R$, sendo $C \subseteq\R^{n}$ J-mensurável, ambas funções integráveis, então 
+	    \begin{enumerate}
+	        \item $f+g$ é integrável e \[
+	        \int_C \left( f+g \right)  = \int_C f + \int_C g
+	        \] 
+	    \item $\lambda\in \R$, $\lambda f : C \to \R$ (operações ponto a ponto) é integrável e \[
+	    \int_C \lambda f = \lambda \int_C f
+	    \] 
+	    \item $\left| f \right| :C\to \R$ é integrável e \[
+	    \int_C \left| f \right| \ge \left| \int_C f \right| 
+	\] (veja que para $C$ n-bloco, $D_{\left| f \right| } \subseteq D_f$; uso de $\left| |a| - |b| \right| \le \left| a-b \right| $)
+	    \end{enumerate}
+	\item $C = C_1 \dot{U}\ldots \dot{U} C_k$ J-mensuráveis disjuntos dois a dois, então verifique que $f$ é integrável em $C \iff f|_{C_i}$ é integrável $i=1,\ldots,k$ e, em caso afirmativo, \[
+	\int_C f = \sum_{i=1}^{k} \int_{C_i}f|_{C_i}
+	.\] 
+    \end{enumerate}
+\end{problem}
+
+\begin{prop}
+    Sejam $C\subseteq \R^{n}$ J-mensurável e $f:C\to \R^{n}$ limitada. Então $f$ é integrável $\iff D_f = \left\{ x \in C : f\text{ não é contínua em }x \right\} $ tem medida nula.
+\end{prop}
+
+\begin{demo}
+    Tome $A\subseteq\R^{n}$ n-bloco com $\overline{C}\subseteq int A$. Seja $\hat{f}:A\to \R$ extensão por zero de $f$. Por Riemann-Lebesgue, $\hat{f}$ é integrável $\iff D_{\hat{f}}$ tem medida nula. Agora, tome $x\in A\setminus \overline{C}, \forall  U_x \ni x$ aberto é verdade que $U_x \subseteq A\setminus \overline{C}$, ou seja, $x\in D_{\hat{f}}$. Tome $z\in int C$, então $\hat{f}\left( z \right) = f\left( z \right) $, logo, $ z\in D_f \iff D_{\hat{f}}$. Assim, vemos que \[
+    D_f \subseteq D_{\hat{f}}
+    .\] Portanto, $f$ integrável $\implies D_{\hat{f}}$ possui medida nula $\implies D_f$ tem medida nula.
+
+    Agora, de forma análoga, tome $ y\in \partial C$, então $\forall U_y \ni y$ aberto $\exists y_1,y_2 \in U_y$ de forma que $y_1\in C, y_2\in A\setminus C$, ou seja, $\hat{f}\left( y_1 \right) = 0$ e $\hat{f}\left( y_2 \right) = f\left( y_2 \right) $, que não necessariamente é 0, portanto $y$ pode ser um ponto de descontinuidade de $\hat{f}$, ou seja, \[
+    D_{\hat{f}}\subseteq D_f \cup \partial C
+.\] Assim, se $D_f$ tem medida nula ($\partial C$ tem medida nula pois $C$ é J-mensurável) então $D_{\hat{f}}$ tem medida nula $\implies f$ é integrável.
+\end{demo}
+
+\begin{remark}
+    Se $\widetilde{f}:U\subseteq\R^{n} \to \R$ é $C^{\infty}$, $U$ aberto, sendo $C\subseteq U $ J-mensurável,  \[
+    f := \widetilde{f}|_C  = \widetilde{f} \cdot \chi_C
+    .\] 
+\end{remark}
+
+\section*{Teorema de Fubini}
+
+Nos permite fazer contas com integrais.
+
+\begin{theorem}
+    (Teorema de Fubini) Sejam $A\subseteq\R^{n}$ e $B\subseteq\R^{m}$ blocos. Seja 
+    \begin{align*}
+        f: A\times B\subseteq\R^{n+m} &\longrightarrow \R \\
+        \left( x,y \right)  &\longmapsto f\left( x,y \right)
+    \end{align*}
+    integrável. $\forall x\in A$, considere
+    \begin{align*}
+        \varphi_x: B &\longrightarrow \R \\
+        y &\longmapsto \varphi_x(y) = f\left( x,y \right) 
+    .\end{align*}
+    Defina também \[
+    \mathcal{L}\left( x \right) = \underline{\int}_B \varphi_x \text{ e }\mathcal{U} = \overline{\int}_B \varphi_x
+    .\] Então,
+    \begin{align*}
+        \mathcal{L}, \mathcal{U}: A &\longrightarrow \R \\
+        x &\longmapsto \mathcal{L}\left( x \right) , \mathcal{U}(x)
+    \end{align*}
+    são integráveis e \[
+    \int_{A\times B} f = \int_A \mathcal{L} = \int_A \mathcal{U}
+    .\] 
+    
+    Podemos escrever \[
+    \int_{A\times B} f = \int_{A\times B} f\left( x,y \right) dx dy = \int_A \left[ \underline{\int}_B f\left( x,y \right) dy \right] dx = \int_A \left[ \overline{\int}_B f\left( x,y \right) dy \right] dx
+    .\] Em particular, se $f$ é contínua, \[
+    \int_{A\times B} f\left( x,y \right) dx dy = \int_A \left[ \int_B f\left( x,y \right) dy \right] dx
+    .\] 
+\end{theorem}
+
+\begin{proof}
+    Note que qualquer partição $P$ de $A\times B$ é da forma $P=P_A \times P_B$, com $P_A, P_B$ partições de $A$ e $B$, respectivamente. Seja $S \in \mathcal{B}\left( P \right) $, $S=S_A \times S_B$. Então, como $vol (S) = vol\left( S_A \right) vol\left( S_B \right) $, podemos escrever
+    \begin{align*}
+	S\left( f,P \right) &= \sum_{S_A\in \mathcal{B}\left( P_A \right) } \sum_{S_B\in \mathcal{B}\left( P_B \right) } M_{S_A\times S_B}^{f} vol_{\R^{n}}\left( S_A \right) vol_{\R^{m}}\left( S_B \right) \\
+	&= \sum_{S_A\in \mathcal{B}\left( P_A \right) } \left[ \sum_{S_B\in \mathcal{B}\left( P_B \right) } M_{S_A\times S_B}^{f}vol\left( S_B \right)  \right] vol\left( S_A \right)
+    .\end{align*}
+    Fixe $S_A$ e $x_0\in S_A$.
+    \begin{align*}
+	M_{S_A\times S_B}^{f} &= \sup \left\{ f\left( x,y \right) : x\in S_A, y\in S_B \right\} \\
+			  &\ge  \sup\left\{ f\left( x_0,y \right) : y\in S_B \right\} \\
+			  &= \sup \left\{ \varphi_{x_0}\left( y \right) : y\in S_B \right\} \\
+			  &= M_{S_B}^{\varphi_{x_0}}
+    .\end{align*}
+    Assim,
+    \begin{align*}
+	\sum_{S_B\in \mathcal{B}\left( P_B \right) } M_{S_A\times S_B}^{f} vol S_B &\ge \sum_{S_B\in \mathcal{B}\left( P_B \right) } M_{S_B}^{\varphi_{x_0}} vol S_B \\
+	&= S\left( \varphi_{x_0}, P_B \right)  \\
+										   &\ge \overline{\int}_B \varphi_{x_0} = \mathcal{U}\left( x_0 \right) 
+    .\end{align*}
+    Como isso é válido $\forall x_0\in S_A$ e, sabemos, $M_{S_A}^{\mathcal{U}} = \sup\left\{ \mathcal{U}\left( x_0 \right) : x_0\in S_A \right\} $,
+    \begin{align*}
+	\left(  \sum_{S_{B}\in \mathcal{B}\left( P_B \right) } M_{S_A\times S_B}^{f}vol S_B \right) vol S_A &\ge M_{S_A}^\mathcal{U} vol S_A \\
+	\implies \sum_{S_A \in \mathcal{B}\left( P_A \right) } \left(  \sum_{S_{B}\in \mathcal{B}\left( P_B \right) } M_{S_A\times S_B}^{f}vol S_B \right) vol S_A &\ge \sum_{S_A \in \mathcal{B}\left( P_A \right)} M_{S_A}^\mathcal{U} vol S_A  \\
+	\implies S\left( f, P \right)  \ge S\left( \mathcal{U}, P_A \right) &
+    .\end{align*}
+    De forma análoga, encontramos \[
+    s\left( f,P \right) \le s\left( \mathcal{L}, P_A \right) 
+    .\] 
+
+    Dessas duas inequações e sabendo que $\mathcal{L} \le \mathcal{U}$, temos que
+    \begin{align*}
+	s\left( f,P \right) &\le s\left( \mathcal{L}, P_A \right) \le S\left( \mathcal{L},P_A \right) \\
+			    &\le S\left(\mathcal{U}, P_A  \right) \le S\left( f,P \right) 
+    \end{align*}
+    e
+    \begin{align*}
+	s\left( f,P \right) &\le s\left( \mathcal{L}, P_A \right)  \\
+			    &\le s\left( \mathcal{U},P_A \right)\le S\left(\mathcal{U}, P_A  \right) \le S\left( f,P \right) 
+    .\end{align*}
+    Assim, $f$ integrável $\implies \mathcal{U}, \mathcal{L}$ integráveis. Ainda mais, \[
+    \int_{A\times B} f \le \int_A \mathcal{L} \le \int_A \mathcal{U} \le \int_{A\times B} f
+    ,\] ou seja, \[
+    \int_A \mathcal{L} = \int_B \mathcal{U} = \int_{A\times B} f
+    .\] 
+\end{proof}
+
+Agora, alguns exemplos de aplicações.
+
+\begin{prop}
+    Seja $C\subseteq\R^{n}$ um conjunto J-mensurável e $f, g : C\to \R$ integráveis com $f\le g$. Então \[
+    \hat{C} = \left\{ \left( x,y \right) \in \R^{n+1}: x\in C, f\left( x \right) \le y\le g\left( x \right)  \right\} 
+    \] é J-mensurável e \[
+    vol \left( \hat{C} \right) = \int_C g - \int_C f
+    .\] 
+\end{prop}
+
+\begin{demo}
+    (Esboço) Se $C$ é J-mensurável, tome $A$ n-bloco com $\overline{C} \subseteq int A$. Tome $L>0$ tal que
+    \begin{align*}
+	L &> \sup\left\{ g\left( x \right) : x\in C \right\} \\
+	L &< \inf \left\{ f\left( x \right) : x\in C \right\} 
+    \end{align*}
+    e defina \[
+    \hat{A} := A\times \left[ -L, L \right] 
+    .\] Então, $\forall \left( x,y \right) \in \hat{C}$, podemos encontrar abertos $U_x \subseteq int A, U_y \subseteq \left( -L, L \right) $ tais que $x\in U_x, y\in U_y$. Veja que $U_x \times U_y \subseteq \hat{A}$ é um aberto e, portanto, $\left( x,y \right) \in int A$, ou seja, \[
+    \hat{C} \subseteq int \hat{A} 
+    .\] Considere \[
+    \chi_{\hat{C}}: \hat{A}\to \R
+    .\] Sejam $\hat{f}, \hat{g}: A\subseteq\R^{n} \to  \R$ as extensões por zero de $f, g$, respectivamente. \[
+    vol \left( \hat{C} \right) := \int_{\hat{A}} \chi_{\hat{C}}
+    .\] Por outro lado, \[
+    \chi_{\hat{C}}\left( x,y \right) = \chi_C\left( x \right) . \chi_{\left[ \hat{f}(x), \hat{g}\left( x \right)  \right] }\left( y \right) 
+    ,\] $\forall \left( x,y \right) \in  \hat{A} \iff \forall x\in A, \forall y\in \left[ -L,L \right] $.
+
+    Agora, via Fubini, \[
+	vol\left( \hat{C} \right) = \int_A \left[ \int_{\left[ -L,L \right] }\chi_{\left[ \hat{f}\left( x \right) , \hat{g}\left( x \right)  \right]} \left( y \right) dy  \right]\chi_{C}\left( x  \right) dx 
+    \] agora \[
+    \int_{\left[ -L,L \right] }\chi_{\left[ \hat{f}\left( x \right) , \hat{g}\left( x \right)  \right]} \left( y \right) dy = \hat{g}\left( x \right) - \hat{f}\left( x \right) 
+    \]  portanto \[
+    vol\left( \hat{C} \right) = \int_A \left( \hat{g}(x) - \hat{f}(x) \right) \chi_C \left( x \right) dx = \int_A \left( \hat{g}(x) -\hat{f}(x) \right) dx = \int_A \hat{g} - \int_A \hat{f} = \int_C g - \int_C f
+    .\] 
+\end{demo}
+
