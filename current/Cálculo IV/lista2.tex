@@ -1,0 +1,111 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 2}
+\author{Bruno M. Pacheco (16100865)\\
+H-Cálculo IV}
+ 
+\maketitle
+ 
+\exercise{1}
+
+\begin{quote}
+Sejam $f,g: A\to \R$ integráveis tais que $f\le g$. Defina o conjunto \[
+\hat{C} = \left\{ ( x,y ) \in  \R^{n+1}: x\in  A, f( x ) \le  y \le  g( x )  \right\} 
+\] Verifique que Ĉ é J-mensurável (em $\R^{n+1}$).
+\end{quote}
+
+Primeiro, vemos que $\hat{C}$ é limitado uma vez que $A$ é limitado e $f,g$ são integráveis, logo, sua imagem é limitada. Ou seja, escolha $L\in \R$ tal que 
+\begin{align*}
+    -L &< \inf\left\{ f\left( x \right) : x\in A \right\} \\
+    L&> \sup \left\{ g\left( x \right) : x\in A \right\} 
+,\end{align*}
+então \[
+\hat{C}\subseteq \hat{A} := A\times \left[ -L,L \right] 
+.\] 
+
+Agora, veja que, por construção, \[
+\partial \hat{C} \subseteq \hat{A} = \left(  \partial A \times \left[ -L,L \right]  \right) \cup \left( int A \times \left[ -L,L \right]  \right) 
+.\] 
+
+Tome $z_0=\left( x_0,y_0 \right) \in \partial \hat{C}$. Seja $x_0 \in int A \setminus \left(  D_f \cup D_g\right) $ e suponha $y_0 \in \left( f\left( x_0 \right) , g\left( x_0 \right)  \right) $. Pela continuidade de $f$ e $g$ em $x_0$ podemos escolher $U_{x_0} \subseteq A$ aberto com $x_0\in U_{x_0}$ tal que \[
+U_{x_0} \cap \left( D_f \cup D_g \right) = \O
+.\] Defina $l = \min\left\{ \left| y_0-f\left( x_0 \right)  \right| , \left| y_0-g\left( x_0 \right)  \right|  \right\} $. Assim $\left( y_0-l,y_0+l \right) \subseteq \left( f\left( x_0 \right) , f\left( x_0 \right)  \right) $. Ou seja, \[
+U = U_{x_0}\times \left( y_0-l,y_0+l \right)
+\] é um aberto, $z_0\in U$ e $U\subseteq \hat{C}$, o que contradiz $z_0\in \partial \hat{C}$. Logo, $y_0\in \left\{ f\left( x_0 \right) , g\left( x_0 \right)  \right\} $ \[
+\implies \left\{ \left( x_0,y_0 \right) \in \partial \hat{C} : x_0\in int A \setminus \left( D_f\cup D_g \right) \right\} \subseteq graph\left( f \right) \cup graph\left( g \right) 
+.\] Portanto, concluímos que \[
+\partial \hat{C} \subseteq \left(  \partial A \times \left[ -L,L \right]  \right) \cup \left(  \left( D_f \cup D_g \right) \times \left[ -L,L \right]  \right) \cup graph\left( f \right) \cup graph\left( g \right)  \tag{$*$}
+.\] Ou seja, nos basta mostrar que cada um desses conjuntos possui medida nula.
+
+Seja $\epsilon>0$. Como $f$ é integrável, escolha $P$ partição de $A$ tal que \[
+S\left( f,P \right) - s\left( f,P \right) < \epsilon
+.\] Assim, 
+\begin{align*}
+    \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B - m_B \right) vol B & <\epsilon
+.\end{align*}
+Defina, então, \[
+\mathcal{B}' := \left\{ B \times \left[ m_{B}, M_{B} \right] : B\in \mathcal{B}\left( P \right)  \right\} 
+.\] Da forma como definimos, fica claro que $graph\left( f \right) \subseteq \cup \mathcal{B}'$. Agora, veja que \[
+\sum_{B'\in \mathcal{B}'} vol B' = \sum_{B\in \mathcal{B}\left( P \right) } vol \left[ m_B,M_B \right] . vol B = \sum_{B\in \mathcal{B}\left( P \right) } \left( M_B-m_B \right)  vol B < \epsilon
+.\] Portanto, $graph\left( f \right) $ possui medida nula. Da mesma forma, $graph\left( g\right) $ possui medida nula.
+
+Agora, veja que para $C\subseteq\R^{n}$ com medida nula, podemos escolher $\left\{ B_i \right\} _{i\in \N}$ de forma que \[
+C \subseteq \bigcup_{i\in \N} B_i
+\] e \[
+\sum_{i\in \N} vol_{\R^{n}} B_i < \frac{\epsilon}{vol_{\R^{m}} X}
+,\] $\forall \epsilon> 0$ e $X\subseteq\R^{m}$. Dessa forma, é fácil ver que $\left\{ B'_i := B_i \times X \right\} $ é uma cobertura de $C\times X$ e \[
+\sum_{i\in \N} vol_{\R^{n+m}} B_i' = \sum_{i\in \N} vol_{\R^{n}}B_i . vol_{\R^{m}} X < \epsilon
+.\] 
+
+Isso nos mostra que, uma vez que $\partial A, D_f$ e $D_g$ tem medida nula, seu produto cartesiano com $\left[ -L, L \right] $ também tem medida nula. Assim, ($*$) nos mostra que $\partial \hat{C}$ possui medida nula e, portanto, $\hat{C}$ é J-mensurável.
+
+\exercise{2}
+
+\begin{quote}
+    Mostre que a definição de volume de um conjunto $C$ J-mensurável não depende do n-bloco $A$.
+\end{quote}
+
+Tome $A_1, A_2$ n-blocos tais que $\overline{C}\subseteq int A_1$ e $\overline{C}\subseteq int A_2$. Tome $P_1$ partição de $A_1$ e $P_2$ partição de $A_2$. Defina
+\begin{align*}
+    Q_1 &= P_1 \cup \left( C\cap P_2 \right) \\
+    Q_2&= P_2 \cup \left( C\cap P_1 \right)
+\end{align*}
+e veja que refinam $P_1$ e $P_2$ respectivamente. Assim,
+\begin{align*}
+    S\left( \chi_C^{A_1}, P_1 \right) \ge S\left( \chi_C^{A_1}, Q_1 \right) &= \sum_{B\in \mathcal{B}\left( Q_1 \right) } M_B^{\chi_C^{A_1}} vol B \\
+    &= \sum_{B\in \mathcal{B}\left( Q_1 \right) : B\cap C \neq \O} vol B
+.\end{align*}
+Mas, por construção, \[
+\left\{ B\in \mathcal{B}\left( Q_1 \right) : B\cap C\neq \O \right\} = \left\{ B\in \mathcal{B}\left( Q_2 \right) : B\cap C \neq \O \right\} 
+.\] Então
+\begin{align*}
+    \sum_{B\in \mathcal{B}\left( Q_1 \right) : B\cap C \neq \O} vol B &= \sum_{B\in \mathcal{B}\left( Q_2 \right) : B\cap C \neq \O} vol B \\
+    &= \sum_{B\in \mathcal{B}\left( Q_2 \right) } M_B^{\chi_C^{A_2}} vol B \\
+    &= S\left( \chi_C^{A_2}, Q_2 \right) 
+,\end{align*}
+ou seja, como nossas partições foram arbitrária, \[
+\inf S\left( \chi_C^{A_2} \right) \le \inf S\left( \chi_C^{A_1} \right)  \tag{$*$}
+.\] 
+
+De forma análoga,
+\begin{align*}
+    s\left( \chi_C^{A_1}, P_1 \right) \le  s\left( \chi_C^{A_1}, Q_1 \right) &= \sum_{B\in \mathcal{B}\left( Q_1 \right) } m_B^{\chi_C^{A_1}} vol B \\
+    &= \sum_{B\in \mathcal{B}\left( Q_1 \right) : B \subseteq C} vol B \\
+    &= \sum_{B\in \mathcal{B}\left( Q_2 \right) : B \subseteq C} vol B \\
+    &= \sum_{B\in \mathcal{B}\left( Q_2 \right) } m_B^{\chi_C^{A_2}} vol B \\
+    &= s\left( \chi_C^{A_2}, Q_2 \right) 
+\end{align*}
+\[
+\implies \sup s\left( \chi_C^{A_2} \right) \ge \sup s\left( \chi_C^{A_1} \right) 
+.\] Junto com ($*$), temos \[
+\underline{\int}_{A_1}\chi_C^{A_1} \le \underline{\int}_{A_2}\chi_C^{A_2} \le \overline{\int}_{A_2}\chi_C^{A_2}\le \overline{\int}_{A_1}\chi_C^{A_1}
+.\] Pela integrabilidade dessas funções, concluímos que \[
+vol_{A_1}\left( C \right) = vol_{A_2}\left( C \right) 
+.\] 
+
+
+
+\end{document}
