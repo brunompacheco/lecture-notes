@@ -1,0 +1,96 @@
+\lecture{7}{22.02.2021}{Mudança de variável}
+
+Retomamos o assunto da aula anterior com um exemplo concreto.
+
+\begin{eg}
+    Sejam
+    \begin{align*}
+        f: X\subseteq\R^{2} &\longrightarrow \R \\
+        \left( x,y \right)  &\longmapsto f\left( x,y \right)  = x^2+y^2 \\
+        g: X\subseteq\R^2 &\longrightarrow \R \\
+        \left( x,y \right)  &\longmapsto g\left( x,y \right)  = 1
+    ,\end{align*}
+    onde $X = \left\{ \left( x,y \right) \in \R^{2} : x^2+y^2\le 1 \right\} $. Veja que $X$ é J-mensurável pois sua fronteira é uma imersão de uma subvariedade de ordem menor ($\R$), portanto tem medida nula. Assim, $\hat{C} = \left\{ \left( x,y,z \right) \in \R^3 : \left( x,y \right) \in X, f\left( x,y \right) \le z\le g\left( x,y \right)  \right\}$ também é J-mensurável.
+
+    Para calcular o volume
+    \begin{align*}
+	vol \hat{C} &= \int_X 1 - \int_X f \\
+	&= vol_{\R^2}\left( X \right) - \int_X f
+    .\end{align*}
+    Portanto, reduzimos o problema ao cálculo da integral de $f$.
+
+    Para tal, tome um n-bloco $A$ de forma que $\overline{X}\subseteq int A$. Escolhemos $A = \left[ -L,L \right]^2 , L>0$. Podemos agora estender $f$ para $A$ na forma de $\hat{f}$, de forma que \[
+    \int_X f = \int_A \hat{f} \chi_X
+    ,\] ao invés de utilizar a extensão por zero. De forma mais explícita, com vistas de aplicar Fubini,
+    \begin{align*}
+	\int_X f = \int_A \hat{f} \chi_X &= \int_{\left[ -L,L \right] \times \left[ -L,L \right] } \hat{f}\left( x,y \right) \chi_X \left( x,y \right) dx dy \\
+	&= \int_{\left[ -L,L \right] } \left[ \overline{\int}_{\left[ -L,L \right] }\hat{f}\left( x,y \right) \chi_X\left( x,y \right) dx \right] dy \\
+    .\end{align*}
+    Explicitamente, temos \[
+	\hat{f}\left( x,y \right) \chi_X\left( x,y \right) = \left( x^2 + y^2 \right) \chi_{\left[ -\sqrt{1-y^2} , \sqrt{1-y^2}  \right] }\left( x \right) \chi_{[-1,1]}\left( y \right) \tag{$*$}
+    ,\] onde a função $\chi_X$ foi reescrita uma vez que
+    \begin{align*}
+	\left( x,y \right) \in X &\iff x^2+y^2 \le 1 \\
+				 &\iff x^2 \le 1-y^2 \\
+				 &\iff -\sqrt{1-y^2} \le x\le \sqrt{1-y^2} 
+    .\end{align*}
+    Assim, reescrevemos a integral como
+    \begin{align*}
+	\int_A \hat{f} \chi_X &= \int_{\left[ -L,L \right] } \left[ \overline{\int}_{\left[ -L,L \right] } \left( x^2 + y^2 \right) \chi_{\left[ -\sqrt{1-y^2} , \sqrt{1-y^2}  \right] }\left( x \right) dx \right] \chi_{[-1,1]}\left( y \right) dy \\
+	&= \int_{\left[ -1,1 \right] } \left[ \overline{\int}_{\left[ -\sqrt{1-y^2} , \sqrt{1-y^2}  \right] } \left( x^2 + y^2 \right) dx \right]  dy
+    .\end{align*}
+    Agora veja que $x^2 + y^2$ é integrável, uma vez que é contínua em $\left[ -\sqrt{1-y^2} , \sqrt{1-y^2}  \right] $, um intervalo J-mensurável. Assim, podemos substituir a integral superior pela integral, resultando na equação \[
+	\int_A \hat{f} \chi_X= \int_{\left[ -1,1 \right] } \left[ \int_{\left[ -\sqrt{1-y^2} , \sqrt{1-y^2}  \right] } \left( x^2 + y^2 \right) dx \right]  dy
+    ,\] reduzindo o problema efetivamente à integrais de funções em uma dimensão. Desenvolvemos, então, essas integrais:
+    \begin{align*}
+	\int_A \hat{f} \chi_X&= \int_{\left[ -1,1 \right] } \left( \frac{x^3}{3} + xy^2 \right)\Big|_{-\sqrt{1-y^2} }^{\sqrt{1-y^2} } dy \\
+	&= \int_{\left[ -1,1 \right] }\left( \frac{2}{3}\left( 1-y^2 \right)^{\frac{3}{2}} + 2y^2\sqrt{1-y^2} \right) dy
+    .\end{align*}
+    Podemos fazer a substituição trigonométrica $y=\sin \theta, -\frac{\pi}{2}\le \theta \le \frac{\pi}{2}, \implies dy = \cos \theta d\theta$ 
+    \begin{align*}
+	\int_A \hat{f} \chi_X &= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left[ \frac{2}{3}\cos^3\theta + 2\sin^2\theta \cos\theta \right] \cos\theta d\theta \\
+		 &= \int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \left[ \frac{2}{3}\cos^4\theta + 2\sin^2\theta \cos^2\theta \right] d\theta
+    .\end{align*}
+
+    Enquanto isso, o volume
+    \begin{align*}
+	\int_X 1 =\int_A \chi_X &= \int_{\left[ -1,1 \right] } \left[ \int_{\left[ -\sqrt{1-y^2} , \sqrt{1-y^2}  \right] } 1 dx \right]  dy \\
+				&= \int_{-1 }^1  2\sqrt{1-y^2} dy
+    .\end{align*}
+    substituição trigonométrica novamente
+    \begin{align*}
+	\int_X 1 &= 2\int_{-\frac{\pi}{2}}^{\frac{\pi}{2}} \cos^2\theta d\theta \\
+	&= \left( \theta + \sin\theta\cos\theta \right)\Big|_{-\frac{\pi}{2}}^{\frac{\pi}{2}} = \pi
+    .\end{align*}
+\end{eg}
+
+Vemos que mesmo aplicando Fubini, temos um problema mais complicado que deveria. Isso se origina, em particular, pois lidamos com volumes/funções com simetria circular em um sistema de coordenadas retangular.
+
+\section*{Mudança de Variável}
+
+\begin{note}
+    Demonstração completa: Cap. 09 "Análise Real", v. 2.
+\end{note}
+
+A motivação (principal) por trás deste teorema é simplificar o cálculo de integrais.
+
+\begin{intuition}
+    Em 1 dimensão. Para $I,J$ intervalos, 
+    \begin{align*}
+        f: J &\longrightarrow \R \\
+        g: I &\longrightarrow J \\
+    \end{align*}
+    de classe $C^{1}$, $g$ um difeomorfismo crescente (portanto uma bijeção com inversa diferenciável, ou seja, sua derivada não zera em nenhum ponto). Definimos, naturalmente $f\circ g : I\to \R$. Assim, veja que, para $\left[ a,b \right] \subseteq I$\[
+    g\left( \left[ a,b \right] \right) = \left[ c,d \right] = \left[ g\left( a \right) ,g\left( b \right)  \right] 
+    .\] Seja $F: J\to \R$ primitiva de $f$. Pelo teorema fundamental do cálculo, \[
+    \int_c^{d}f\left( t \right) dt = F\left( d \right) -F\left( c \right) 
+    .\] Agora veja que \[
+    \left( F \circ  g \right) ' = \left( F' \circ  g \right) . g' = \left( f \circ  g \right) . g'
+    ,\] portanto \[
+    \int_a^{b} f \circ  g \left( t \right) g'\left( t \right) dt = F \circ  g\left( b \right) - F \circ  g \left( a \right) = F\left( d \right) - F\left( c \right) = \int_c^{d}f\left( t \right) dt
+    \] \[
+    \implies \int_{\left[ c,d \right] } f = \int_{g\left( \left[ a,b \right]  \right) } f = \int_{\left[ a,b \right] } \left( f o g \right) \left| g' \right| '
+    \] que é basicamente o teorema de mudança de variáveis para $\R$.
+\end{intuition}
+
+
