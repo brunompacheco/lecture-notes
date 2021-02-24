@@ -23,7 +23,7 @@ Primeiro, precisamos definir o que é uma base de um espaço métrico.
 	.\] 
     \end{enumerate}
 \end{prop}
-\begin{proof}
+\begin{demo}
     (1) $\implies$ (2)
     Seja $X=\{x_1,\ldots,x_k,\ldots\} \subset M$ conjunto enumerável denso em $M$, ou seja, $\forall x \in M$, $x\in X$ ou $x \in \partial\left( X \right)$, portanto, $\overline{X}=M$. Considere \[
     \mathcal{B} = \left\{ B_{\frac{1}{l}}^{d}\left( x_k \right) : k,l\in \N \right\} 
@@ -68,7 +68,7 @@ Primeiro, precisamos definir o que é uma base de um espaço métrico.
     .\] \[
     x_{k_0 l_0} \in B_{\frac{1}{k_0}}\left( z \right)\subset B_{\frac{\epsilon}{2}} \left( z \right)\subset B_{\epsilon} \left( z \right) 
     .\] 
-\end{proof}
+\end{demo}
 
 \begin{corollary}
     $\R^{n}$ satisfaz (1) e, portanto, todas.
@@ -96,7 +96,7 @@ Por fim, temos que qualquer subconjunto de $\R^{n}$ satisfaz essas condições, 
     .\] 
 \end{prop}
 
-\begin{proof}
+\begin{demo}
     Como $f$ é localmente Lipschitz, $\forall x\in X$, $\exists \epsilon_x > 0$ e $k_x > 0$ tal que \[
     \|f\left( z \right) -f\left( y \right) \|\le k_x \|z-y\|, \forall z,y \in B_{\epsilon_x}\left( x \right) 
     .\] Veja que \[
@@ -110,7 +110,7 @@ Por fim, temos que qualquer subconjunto de $\R^{n}$ satisfaz essas condições, 
     ,\] mas $f|_{X\cap B_l}$ é Lipschtiz e, portanto, $f\left( X\cap B_l \right) $ tem medida nula, logo sua união também tem medida nula, ou seja \[
     med_{\R^{m}}f\left( X \right) = 0
     .\] 
-\end{proof}
+\end{demo}
 
 \begin{corollary}
     Dada $f:U\subset \R^{n}\to \R^{m}$, com $U$ aberto, de classe $C^{1}$ e $m>n$, então \[
@@ -157,7 +157,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     .\] Chamamos essa função de oscilação de raio  $\delta$.
 \end{definition}
 
-\begin{observe}
+\begin{remark}
     Veja que \[
     o\left( f, x_0, \delta \right) = sup \left\{ f\left( x \right) : x\in B_{\delta}\left( x_0 \right) \cap X \right\}  - inf \left\{ f\left( y \right) : y\in B_\delta \left( x_0 \right) \cap X \right\} 
     .\] Ou seja, isso mensura o quanto a função $f$ varia dentro da bola definida por $\delta$.
@@ -187,15 +187,15 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     \] \[
     \implies o\left( f,x_0,\delta \right) < \left| f\left( x' \right) - f\left( y' \right)   \right| 
     ,\] uma contradição.
-\end{observe}
+\end{remark}
 
-\begin{observe}
+\begin{remark}
     Veja que, pela definição \[
     o\left( f,x_0,\delta \right) = sup \left\{ \left| f\left( x \right) -f\left( y \right)  \right| : x,y \in  X\cap B_\delta \left( x_0 \right)  \right\} 
     ,\] dado $0<\delta'<\delta$ \[
     \implies o\left( f,x_0,\delta' \right) \le o\left( f,x_0,\delta \right)
     ,\] ou seja, essa é uma função monotônica em $\delta$.
-\end{observe}
+\end{remark}
 
 \begin{definition}
     A \emph{oscilação} de $f$ em $x_0\in X$ é \[
@@ -207,7 +207,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     $f: X\subset \R^{n}\to \R$ é contínua em $x_0 \in X$ sse $\mathcal{O}\left( f, x_0 \right) =0$.
 \end{prop}
 
-\begin{proof}
+\begin{demo}
     ($\implies$)
     Tome $\epsilon>0$. Pela continuidade de $f$, $\exists \delta > 0$ tal que \[
 	z\in X, \|z-x_0\|<\delta \implies \left| f\left( z \right) -f\left( x_0 \right)\right|  < \frac{\epsilon}{2} 
@@ -227,7 +227,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     ,\] inclusive se $y=x_0$, ou seja, \[
     \implies \forall x\in X, \|x-x_0\| < \delta \implies \left| f\left( x \right) -f\left( x_0 \right)  \right| <\epsilon
     ,\] ou seja, $f$ é contínua em $x_0$.
-\end{proof}
+\end{demo}
 
 \begin{prop}
     $f:X\subset \R^{n}\to \R$. $\forall \epsilon>0$, \[
@@ -235,7 +235,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     \] é fechado em $X$.
 \end{prop}
 
-\begin{proof}
+\begin{demo}
     Basta mostrar que \[
     X \setminus C_{\epsilon} = \{x\in X : \mathcal{O}\left( f, x \right) <\epsilon\} 
     \] é aberto em $X$.
@@ -257,7 +257,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     ,\] logo,  \[
     X \setminus C_{\epsilon}
     \]  é aberto em $X$.
-\end{proof}
+\end{demo}
 
 \section*{Conteúdo nulo}
 
@@ -273,7 +273,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
     As equivalências dos elementos (n-blocos abertos/fechados, n-cubos abertos/fechados) vale também para a definição de conteúdo nulo.
 \end{note}
 
-\begin{observe}
+\begin{remark}
     \begin{enumerate}
         \item $X$ tem conteúdo nulo $\implies X$ tem medida nula;
 	\item $X$ tem conteúdo nulo $\implies X$ é limitado (isso mostra que a recíproca de (1) é falsa, vide $\Q$, que não é limitado e tem medida nula);
@@ -285,7 +285,7 @@ Lidaremos com funções $f:X\subset \R^{n}\to \R$, sem ademais restrições.
 	    Veja que $X=\Q \cap \left[ 0,1 \right] $ tem medida nula, é limitado, mas $\overline{X} = \left[ 0,1 \right] $ não tem medida nula, logo, não tem conteúdo nulo $\implies X$ não tem conteúdo nulo;
 	\item Todo conjunto finito tem conteúdo nulo, mas o contrário não é verdade: conjuntos de conteúdo nulo não precisam ser compactos nem finitos;
     \end{enumerate}
-\end{observe}
+\end{remark}
 
 \begin{eg}
     $X=\left\{ \frac{1}{k}:k\in \N \right\} $ tem conteúdo nulo.
@@ -303,7 +303,7 @@ X\setminus B_1 \subset  B_2 \cup \ldots\cup B_l
     Se $X\subset \R^{n}$ é compacto e tem medida nula, então $X$ tem conteúdo nulo.
 \end{prop}
 
-\begin{proof}
+\begin{demo}
     Seja $\epsilon>0$. Temos $\{B_i\} _{i\in \N}$ de n-blocos \textbf{abertos} (possível pela já provada equivalência entre a definição de medida nula através de n-blocos abertos e fechados) com \[
     X \subset \bigcup_{i\in \N} B_i
     \] e \[
@@ -313,5 +313,5 @@ X\setminus B_1 \subset  B_2 \cup \ldots\cup B_l
     \] e \[
     \sum_{j=1}^{l} vol B_{i_j} < \epsilon
     .\] 
-\end{proof}
+\end{demo}
 

@@ -50,7 +50,7 @@ Alguns exemplos:
     .\] 
 \end{prop}
 
-\begin{proof}
+\begin{demo}
     Seja $\epsilon>0$. $\forall k\in \N$, escolha $\left\{ B_l^{(k)} \right\}_{l\in \N}$ de n-blocos, com \[
     X_k \subset  \bigcup_{l\in \N}B_l^{(k)}
     \]  e \[
@@ -68,7 +68,7 @@ Alguns exemplos:
 ,\] ou seja, \[
 \sum_{k,l \in  \N} vol\left( B_l^{(k)} \right) < \epsilon
 .\] 
-\end{proof}
+\end{demo}
 
 \begin{eg}
     3) $\Q\subset \R$ tem medida nula: $\Q = \cup_{k\in \N}\left\{ r_k \right\} $, onde fixamos uma enumeração $\Q=\left\{ r_1,r_2,\ldots,r_k,\ldots \right\}$. Como $med \left\{ r_k \right\} = 0, \forall k\in \N$, então, pela proposição acima, \[
@@ -100,13 +100,13 @@ Alguns exemplos:
 
     Claramente não conseguimos cobrir com uma quantidade finita de blocos.
 
-    \begin{observe}
+    \begin{remark}
 	Considere $P = (p_1,\ldots,p_n) \in \Z^{n}$ e n-blocos da forma \[
         B_P^{(n)} = \left[ p_1, p_1+1 \right] \times \ldots\times \left[ p_n, p_n+1 \right] 
         ,\] então \[
         \bigcup_{P\in \Z^{n}}B_P^{(n)} = \R^{n}
         .\] Estamos cobrindo $\R^{n}$ com n-blocos delimitados pelos inteiros.
-    \end{observe}
+    \end{remark}
 
     Fixe $\epsilon>0$. Fixe uma enumeração $P^{1},\ldots,P^{l},\ldots$ de $\Z^{n}$. Defina \[
     B_l = B^{(n)}_{P_l} \times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]\times \ldots\times \left[ 0, \left( \frac{\epsilon}{2^{l}} \right)^{\frac{1}{n}} \right]
@@ -136,17 +136,17 @@ Alguns exemplos:
 	\item Mesmo do anterior, mas com n-cubos abertos.
     \end{itemize}
 
-    \begin{observe}
+    \begin{remark}
 	Para que consigamos mostrar a equivalência entre o uso de blocos/cubos abertos e fechados, basta que, partindo de um elemento fechado, definamos um elemento aberto estendendo o conjunto com um valor $\delta > 0$ arbitrário, então, como o volume é contínuo, então podemos fazer com que $\delta$ seja tão pequeno quanto queiramos, fazendo com que o volume do aberto vá para o volume do fechado conforme $\delta\to 0$. Ou seja, restringimos o volume do fechado para que seja menor que $\frac{\epsilon}{2}$. por exemplo, e estendendo o volume com um $\delta$ tal que o volume do aberto seja $\frac{3\epsilon}{4}$. A volta é mais fácil, uma vez que podemos tomar o fecho dos abertos, que preserva o volume.
 
 	Para a equivalência entre blocos e cubos, primeiro vemos que blocos com dimensões racionais podem ser partidos em cubos. Então, utilizamos a mesma ideia acima, estendendo os blocos de forma arbitrariamente pequena para que suas dimensões sejam racionais.
-    \end{observe}
+    \end{remark}
 \end{prop}
 
 \begin{prop}
     Seja $f : X\subset \R^{n}\to \R^{n}$ Lipschitz. Se $med X = 0$, então $med\left(  f\left( X \right)\right)   = 0$.
 \end{prop}
-\begin{proof}
+\begin{demo}
     Fixe $\|.\|$ como a norma do máximo em $\R^{n}$. Fixe $\epsilon>0$. Tome $c>0$ a constante de Lipschitz de $f$, de forma que $\|f\left( x \right) -f\left( y \right) \| \le  c \|x-y\| \forall x, y \in X$. Seja $\hat{C}_k$, $k\in \N$ n-cubos (os intervalos constituintes possuem mesmo tamanho, neste caso, $L_k$), tal que \[
     \hat{C}_k \subset X, \forall k\in \N
     \] e \[
@@ -179,7 +179,7 @@ Alguns exemplos:
     ,\] ou seja, \[
     med f\left( X \right) = 0
 .\] 
-\end{proof}
+\end{demo}
 
 \begin{corollary}
     Seja $f: U\subset \R^{n}\to \R^{m}$ Lipschitz. Se $m>n$, então \[

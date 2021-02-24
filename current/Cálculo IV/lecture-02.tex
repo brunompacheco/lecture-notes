@@ -19,7 +19,7 @@ Dados $Q, P$ como na definição, podemos também encontrar que os sub-blocos $B
      s\left( f,P \right) \le s\left( f, Q \right) \le S\left( f,Q \right) \le S\left( f,P \right) 
     .\] 
 \end{prop}
-\begin{proof}
+\begin{demo}
     Temos que \[
         S\left( f, P \right) = \sum_{B\in \mathcal{B}\left( P \right) } M_B vol\left( B \right) 
     \] e 
@@ -33,7 +33,7 @@ Dados $Q, P$ como na definição, podemos também encontrar que os sub-blocos $B
 			     \right) \\
 			     &= \sum_{B\in \mathcal{B}\left( P \right) } M_B vol\left( B \right)  = S\left( f, P \right) 
     .\end{align*}
-\end{proof}
+\end{demo}
 
 \begin{corollary}
     $\forall P,Q$ partições de $A$, \[
@@ -63,11 +63,11 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
     \]).
 \end{definition}
 
-\begin{observe}
+\begin{remark}
     \[
     \underline{\int}_A f \le  \overline{\int}_A f
     .\] 
-\end{observe}
+\end{remark}
 
 \begin{eg}
     Seja \[
@@ -98,7 +98,7 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
     S\left( f, P_\epsilon \right) - s\left( f,P_\epsilon \right) <\epsilon \tag{*}
     .\] 
 \end{prop}
-\begin{proof}
+\begin{demo}
     ($\implies$) Suponha $f$ integrável. Então $\exists P_1$ de $A$ tal que \[
     s\left( f, P_1 \right) < \int_A f + \frac{\epsilon}{2}
     .\] Da mesma forma, $\exists P_2$ de $A$ tal que \[
@@ -120,7 +120,7 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
      portanto \[
 	S\left( f, P_\epsilon \right) - s\left( f, P_\epsilon \right) \ge 2\epsilon
     ,\] uma contradição com (*).
-\end{proof}
+\end{demo}
 \begin{corollary}
     Se $f:A\to \R$ é contínua, então $f$ é integrável.
 \end{corollary}
@@ -133,11 +133,11 @@ s\left( f \right) = \left\{ s\left( f,P \right) : P \text{ partição de }A \rig
 	\|x-y\|<\delta \implies \|f\left( x \right) -f\left( y \right) \|<\frac{\epsilon}{vol\left( A \right) }
     .\] 
 
-    \begin{observe}
+    \begin{remark}
         Em um bloco degenerado, qualquer função é integrável com \[
         \int_A f = 0
         .\] 
-    \end{observe}
+    \end{remark}
 
     Escolha uma partição $P=\prod_{i=1}^{n} P_i  $ de modo que \[
     \|P_i\| < \delta
