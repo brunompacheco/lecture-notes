@@ -189,6 +189,11 @@ snippet sig "sigma" i
 endsnippet
 
 context "math()"
+snippet phi "variable phi" i
+\varphi $0
+endsnippet
+
+context "math()"
 snippet eps "epsilon" i
 \epsilon
 endsnippet
@@ -314,6 +319,11 @@ endsnippet
 context "math()"
 snippet pmat "pmat" iA
 \begin{pmatrix} $1 \end{pmatrix} $0
+endsnippet
+
+context "math()"
+snippet off "function composition" iA
+\circ $0
 endsnippet
 
 context "math()"
@@ -703,6 +713,11 @@ endsnippet
 
 snippet SI "SI" iA
 \SI{$1}{$2}
+endsnippet
+
+context "math()"
+snippet ffun "function" wA
+$1: $2 \longrightarrow $0
 endsnippet
 
 snippet bigfun "Big function" iA
