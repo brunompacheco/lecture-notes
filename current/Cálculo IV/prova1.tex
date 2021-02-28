@@ -1,0 +1,181 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Prova 1}
+\author{Bruno M. Pacheco (16100865)\\
+H-Cálculo IV}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Escreva $\left\{ q_k \right\} _{k\in \N}$ uma enumeração de $\Q$. Defina, então \[
+E = \left\{ B_k:= \left[ q_k -\frac{1}{2^{k+1}}, q_k+\frac{1}{2^{k+1}}\right]  \right\} 
+.\] Veja que \[
+\R\subseteq \bigcup_{k\in \N} B_k
+\] e \[
+\sum_{k\in \N} vol. B_k = \sum_{k\in \N} \frac{1}{2^{k}} < 1
+.\] Agora, tome $\left\{ B_{k'} \right\} _{k'\in \N}$ uma enumeração de $E^{n}$. Temos, então \[
+\R^{n} \subseteq \bigcup_{k'\in \N} B_{k'}
+\] e \[
+\sum_{k'\in \N} vol. B_{k'} < n
+.\]
+
+Fixe $\epsilon  > 0$. Como $med._{\R^{m}} X = 0$, podemos escolher $\left\{ B_i \right\} _{i\in \N}$ n-blocos em $\R^{m}$ de forma que \[
+X \subseteq \bigcup_{i\in \N} B_i
+\] e \[
+\sum_{i\in \N} vol. B_i < \frac{\epsilon}{n}
+.\]
+
+Agora veja que $\left\{ B_i\times B_{k'} \right\} _{i, k'\in \N}$ é um conjunto enumerável de n-blocos de $\R^{n+m}$ tal que \[
+X\times Y \subseteq \bigcup_{i, k'\in \N} B_i\times B_{k'}
+\] e \[
+\sum_{i, k'\in \N} vol. \left( B_i\times B_{k'} \right) = \sum_{i,k'\in \N} vol. B_i \cdot vol. B_{k'} \le \left(  \sum_{i\in \N} vol. B_i \right)  \left(  \sum_{k'\in \N} vol. B_{k'}\right) < \epsilon
+.\] Ou seja, \[
+med._{\R^{n+m}} X\times Y = 0
+.\] 
+
+\exercise{2}
+
+\subexercise{a)}
+
+Com $n=1$, seja $X=\left[ 0,1 \right] $ e 
+\begin{align*}
+    f: X &\longrightarrow \R \\
+    x &\longmapsto f(x) = \begin{cases}
+	1 &, x\in \Q \\
+	0 &, x\not\in \Q
+    \end{cases}
+.\end{align*}
+
+Veja que \[
+S_f = \Q\cap \left[ 0,1 \right] 
+,\] que tem medida nula. Entretanto, $f$ não é integrável, uma vez que é descontínua em todo os pontos de $X$.
+
+\subexercise{b)}
+
+Como $f$ é integrável, é limitada. Assim, tome $L\in \R$ tal que $-L\le f\left( x \right) \le L, \forall x\in X$. Agora, como $med.S_f = 0$, $\exists E=\left\{ B_i \right\} _{i\in \N}$ tal que \[
+S_f \subseteq\bigcup_{i\in \N} B_i
+\] e \[
+\sum_{i\in \N} vol. B_i < \frac{\epsilon}{L}
+.\] 
+
+Tome $P$ partição de $X$ tal que $E\subseteq\mathcal{B}\left( P \right) $. Veja que $B\in \left(  \mathcal{B}\left( P \right) \setminus E\right) \implies M_B = m_B = 0 $. Dessa forma,
+\begin{align*}
+    S\left( f, P \right) &= \sum_{B\in \mathcal{B}\left( P \right) } M_B vol. B \\
+    &= \sum_{B\in \left( \mathcal{B}\left( P \right) \setminus E \right) } M_B vol. B + \sum_{i\in \N} M_{B_i} vol.B_i \\
+    &\le L \sum_{i\in \N} vol. B_i < \epsilon
+.\end{align*}
+De forma análoga, vemos que \[
+s\left( f,P \right) \ge  -L \sum_{i\in \N} vol. B_i > -\epsilon
+.\] Portanto, \[
+-\epsilon < \int_X f < \epsilon \implies \int_X f = 0
+.\] 
+
+\exercise{3}
+
+Nos restringindo primeiro ao espaço tridimensional, vemos que o princípio de Cavalieri segue a intuição de que, dados dois objetos bem comportados, se quais cortes que eu faça em ambos os objetos implica em vistas de áreas iguais, então esses objetos devem ter o mesmo volume.
+
+Para provar isso, partimos do volume de $X$, ou seja, dado um n-bloco $A = A_n\times A_1 \subseteq\R^{n+1}$ tal que $A_n\in \R^{n}$ e $\overline{X},\overline{Y} \subseteq int A$, \[
+vol. X = \int_{A} \chi_X
+.\] Por Fubini, temos que \[
+\int_{\R^{n+1}} \chi_X = \int_{A_1} \overline{\int_{A_n}} \chi_X\left( x, t \right) dx dt
+.\] Veja que, por definição, para $t\in \R$, $x\in \R^{n}$ \[
+\left( x,t \right) \in X \iff x \in X_t
+.\] Assim, \[
+\int_{A_1} \overline{\int_{A_n}} \chi_X\left( x, t \right) dx dt = \int_{A_1}\overline{\int_{A_n}} \chi_{X_t} \left( x \right) dx dt
+.\] Agora, veja que \[
+vol. X_t = \int_{A_n} \chi_{X_t} = \overline{\int_{A_n}} \chi_{X_t}
+,\] portanto \[
+\int_{A_1}\overline{\int_{A_n}} \chi_{X_t} \left( x \right) dx dt = \int_{A_1} vol. X_t dt
+.\]
+
+Se é verdade que $vol. X_t = vol. Y_t$ e aplicando os passos anteriores de forma análoga para $vol. Y$, temos
+\begin{align*}
+    vol. X &= \int_{A_1} vol. X_t \\
+    &= \int_{A_1} vol. Y_t = vol. Y
+.\end{align*}
+
+\exercise{4}
+
+\subexercise{a)}
+
+Utilizando a distância euclidiana, temos que $B$ pode ser escrito como \[
+B = \overline{B_2}\left( 0,0,0 \right) \cap \left( \R^{2}\times \R^{+} \right) \cap \overline{C_1^{z}\left( 0,0 \right) }
+,\] onde $\overline{B_2}$ é uma bola fechada de raio 2 e $\overline{C_1^{z}}$ é um cilindro fechado de raio 1 em torno do eixo $z$. Dessa forma, \[
+\partial B \subseteq S_2\left( 0,0,0 \right) \cup \left\{ \left( x,y,0 \right) , x,y\in \R \right\} \cup \partial C_1^{z}\left( 0,0 \right) 
+.\] Como esses 3 conjuntos são subvariedades de dimensão 2, vimos que possuem medida nula e, portanto sua união também possui medida nula. Assim, como $B$ é claramente limitado, temos que é J-mensurável.
+
+Um esboço de uma seção do conjunto, que pode ser descrito por uma revolução dessa seção, pode ser visto na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/CalcIV_Q4b.pdf}
+    \caption*{Esboço de uma seção do conjunto.}
+    \label{fig:figures-CalcIV_Q4b-pdf}
+\end{figure}
+
+\subexercise{b)}
+
+Tome $A :=A_x \times A_y\times A_z\subseteq\R^{3} $ um n-bloco com $B\subseteq int. A$. Assim, podemos calcular seu volume como \[
+vol. B = \int_A \chi_B
+.\] 
+
+Por Fubini,  
+\begin{align*}
+    \int_A \chi_B &= \int_{A_x \times A_y} \overline{\int_{A_z}} \chi_B
+.\end{align*}
+Mas veja que \[
+\chi_B\left( x,y,z \right) = \chi_{B_1\left( 0,0 \right)  }\left( x, y \right) \cdot \chi_{\left[ 0, 4-x^2 - y^2 \right] }\left( z \right) 
+,\] logo, também pela continuidade da função constante,
+\begin{align*}
+    \int_{A_x \times A_y} \overline{\int_{A_z}} \chi_B &=  \int_{B_1\left( 0,0 \right) } \overline{\int}_{\left[ 0, 4-x^2-y^2 \right] } 1 \\
+    &=  \int_{B_1\left( 0,0 \right) } \int_{\left[ 0, 4-x^2-y^2 \right] } 1 \\
+    &= \int_{B_1\left( 0,0 \right) } \left( 4-x^2-y^2 \right)
+.\end{align*}
+
+Agora, visando aplicar a mudança de variáveis, defina
+\begin{align*}
+    \varphi : \left( 0,1 \right) \times \left( -\frac{\pi}{2},\frac{\pi}{2} \right)  &\longrightarrow \R^{2} \\
+    \left( r,\theta \right)  &\longmapsto \varphi \left( r,\theta \right)  = \left( r\cos\theta, r\sin\theta \right) 
+.\end{align*}
+Veja que, assim definida, $\varphi $ é um difeomorfismo e \[
+\int_{B_1\left( 0,0 \right) } \left( 4-x^2-y^2 \right) = \int_{\varphi \left( \left( 0,1 \right) \times \left( -\frac{\pi}{2}, \frac{\pi}{2} \right)  \right) } \left( 4-x^2-y^2 \right)
+\] \[
+    J_{\varphi } = \begin{bmatrix} \cos\theta & -r\sin\theta \\ \sin\theta & r\cos\theta \end{bmatrix} \implies \left| J_{\varphi } \right| = \left| r \right| = r
+.\] Portanto,
+\begin{align*}
+    \int_{B_1\left( 0,0 \right) } \left( 4-x^2-y^2 \right) &= \int_0^{1} \int_{\frac{-\pi}{2}}^{\frac{\pi}{2}}  \left( 4-\left( r^2 \cos^2\theta + r^2\sin^2\theta \right)  \right) r d\theta dr \\
+    &= \int_0^{1} \int_{\frac{-\pi}{2}}^{\frac{\pi}{2}} \left( 4 - r^2 \right) r d\theta dr \\
+    &= \pi \int_0^{1}\left( 4r - r^3 \right) dr  \\
+    &= \pi \left( 2r^2 - \frac{r^{4}}{4} \right)\Big|_0^{1} \\
+    &=  \pi\left( 2 - \frac{1}{4} \right) \\
+    &= \frac{7\pi}{4} 
+.\end{align*}
+
+\exercise{5}
+
+Seja $A = A_x \times A_y\times A_z \subseteq\R^{3}$ um n-bloco tal que $\overline{B}\subseteq int A$. Por Fubini, podemos escrever o volume de $B$ como
+\begin{align*}
+    vol.B &= \int_A \chi_B \\
+    &= \int_{A_x} \overline{\int_{A_y}} \overline{\int_{A_z}} \chi_B\left( x,y,z \right) dz dy dx 
+.\end{align*}
+Agora, vemos que \[
+0\le z\le 2x + 2y -1 \implies x+y \ge \frac{1}{2} \implies y \ge \frac{1}{2} - x
+.\] Assim, também pela definição de $B$, temos \[
+\chi_B\left( x,y,z \right) = \chi_{\left[ 0,1 \right] }\left( x \right) \cdot \chi_{\left[ \frac{1}{2}-x, 1 \right] }\left( y \right) \cdot \chi_{\left[ 0, 2x+2y-1 \right] }\left( z \right) 
+.\] Portanto, podemos reescrever 
+\begin{align*}
+    \int_{A_x} \overline{\int_{A_y}} \overline{\int_{A_z}} \chi_B\left( x,y,z \right) dz dy dx &= \int_{A_x}\chi_{\left[ 0,1 \right] }\left( x \right) \overline{\int_{A_y}} \chi_{\left[ \frac{1}{2}-x , 1\right] }\left( y \right)  \overline{\int_{A_z}} \chi_{\left[ 0, 2x+2y-1 \right] }\left( z \right)  dz dy dx \\
+    &= \int_0^{1} \int_{\frac{1}{2}-x}^{1} \int_0^{2x+2y-1} dz dy dx \\
+    &= \int_0^{1} \int_{\frac{1}{2}-x}^{1} \left( 2x + 2y -1 \right) dy dx  \\
+    &= \int_0^{1} \left( \left( 2x-1 \right) \left( \frac{1}{2}+x \right) + \left( -x^2 + x + \frac{3}{4} \right) \right) dx \\
+    &= \int_0^{1} \left( \left( 2x^2-\frac{1}{2} \right) + \left( -x^2 + x + \frac{3}{4} \right) \right) dx \\
+    &= \int_0^{1} \left(  x^2 + x + \frac{1}{4} \right) dx \\
+    &= \left( \frac{x^3}{3} + \frac{x^2}{2} + \frac{x}{4} \right)\Big|_0^{1}  \\
+    &= \frac{13}{12}
+.\end{align*}
+
+\end{document}
