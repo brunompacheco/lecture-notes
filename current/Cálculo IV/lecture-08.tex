@@ -1,0 +1,102 @@
+\lecture{8}{24.02.2021}{}
+
+\begin{previouslyseen}
+    \begin{itemize}
+        \item Definição de integral
+	    \begin{itemize}
+	        \item para n-blocos e proposições
+		\item conjuntos de medida nula (e conteúdo nulo)
+		\item para conjuntos J-mensuráveis
+	    \end{itemize}
+	\item Teorema de Fubini, uma forma de reduzir os problemas para integrais de uma variável
+	\item Mudança de variável
+    \end{itemize}
+\end{previouslyseen}
+
+\begin{eg}
+    (Spivak, pg 73, 3-41, d)
+    
+    Calcular a integral \[
+    \int_{-\infty}^{\infty}e^{-x^2} dx
+    .\] Essa função descreve a curva gaussiana, que caracteriza a distribuição normal de probabilidade. No contexto de probabilidade, surge a função erro \[
+    Err\left( x \right) = \int_0^{x}e^{-t^2} dt
+    ,\] que é uma \emph{função elementar}.
+
+    Definimos \[
+    I_r = \int_{-r}^{r}e^{-x^2}dx
+    .\] Podemos verificar, usando Fubini, que \[
+    I_r^2 = I_r . I_r = \int_{B_r} e^{-\left( x^2+y^2 \right) } dx dy
+    ,\] (TODO: REVISAR NO SPIVAK) onde $B_r = \left[ -r, r \right] ^2$, um n-bloco. Calha que façamos aqui uma mudança de variável. Definamos um disco inscrito no n-bloco. Ou seja, \[
+    C_r = \left( \left( x, y \right) \in \R^2 : x^2 + y^2 \le r^2 \right) 
+    .\] Pela nossa formulação, precisamos de um difeomorfismo no mínimo de classe $C^{1}$, um compacto J-mensurável e uma função composta com o difeomorfismo, \[
+    \int_{\varphi\left( K \right) } f = \int_K \left( f\circ \varphi \right) \left| J_\varphi \right| 
+    \] 
+
+    \begin{align*}
+        \int e^{-x^2-y^2} = \int_{C_r}e^{-x^2-y^2} = \int_0^{2\pi}\int_0^{r}e^{-r^2} e dr d\theta
+    .\end{align*}
+    Com Fubini \[
+    = 2\pi \int_0^{r}e^{-r^2}r dr
+    \] fazendo mais uma mudança de variáveis, $r^2 = u \implies 2r dr = du$ \[
+    = -\pi \int_0^{r^2}e^{-u}du = -\pi e^{-u}\Big|_0^{r^2} = \pi\left( 1-e^{r^2} \right) 
+    \] 
+
+    O argumento é de que, $r\to \infty$ faz com que não haja diferença entre integrar no n-bloco ou no disco inscrito a ele. Veja que é crucial o fato de que a função com a qual estamos trabalhando vai a zero com o aumento de $r$.
+
+    \[
+    I_{\infty} = \int_{-\infty}^{\infty}e^{-x^2} dx
+    \] \[
+    I_{\infty}^2 = \pi \implies I_{\infty} = \sqrt{\pi} 
+    \]
+
+    Assim, definimos a distribuição de probabilidade normal \[
+    \rho\left( x \right) = \frac{e^{-x^2}}{\sqrt{\pi} }
+    ,\] de forma que \[
+    \int_{-\infty}^{\infty} \rho\left( x \right) dx = 1
+    .\] 
+\end{eg}
+
+
+\[
+\varphi : U\subseteq\R^{n}\to V\subseteq\R^{n}
+\] $K\subseteq U$ J-mensurável compacto.
+\begin{align*}
+    f: \varphi\left( K \right)  &\longrightarrow \R
+\end{align*}
+integrável, temos \[
+\int_{\varphi\left( K \right) } f = \int_{K}\left( f\circ \varphi \right) .\left| J_\varphi \right| 
+.\]
+
+Provar por indução sobre $n$.
+
+Para $n=1$. A linha de argumentação é indireta, investigando os difeomorfismos para os quais o resultado vale, chamando-os de \emph{difeomorfismos admissíveis}.
+
+Primeiro, definamos $\varphi_1 : U_1\subseteq\R^{n}\to V_1\subseteq\R^{n}$ e $\varphi_2 : U_2\subseteq\R^{n}\to V_2\subseteq\R^{n}$ admissíveis e mostramos que a sua composição também é admissíveis, ou seja, $\varphi_1\circ \varphi_2 : U_1\subseteq\R^{n}\to V_1\subseteq\R^{n}$. Então, para $K'\subseteq U_2$, \[
+f : \varphi_1\circ \varphi_2 \left( K \right) \to \R
+\] como $\varphi_1$ é admissível \[
+\int_{\varphi_1\circ \varphi_2\left( K \right) } = \int_{\varphi_2\left( K \right) }\left( f\circ \varphi_1 \right) \left| J_{\varphi_1} \right| 
+\] e como $\varphi_2$ também é admissível \[
+= \int_{K}\left( f\circ \varphi_1\circ \varphi_2 \right) \left| J_{\varphi_1}   \right|\left|  J_{\varphi_2} \right| 
+\]  mas \[
+\left| J_{\varphi_1}   \right|\left|  J_{\varphi_2} \right| = \left| det\left( J_{\varphi_1}.J_{\varphi_2} \right)  \right| = \left| det J_{\varphi_1\circ \varphi_2} \right| =: \left| J_{\varphi_1\circ \varphi_2} \right| 
+.\] Portanto, a composição de dois difeomorfismos admissíveis é também admissível.
+
+Isomorfismos lineares são difeomorfismos admissíveis. Ver exercício 3-35, pg. 62, Spivak.
+
+Difeomorfismos "localmente admissíveis" são admissíveis. Veja. Seja um difeomorfismo $\varphi: U\subseteq\R^{n}\to V\subseteq\R^{n}$ tal que $\forall x_0\in U$, $\exists x_0\in U_0 \subseteq U$ \[
+\varphi\left( x_0 \right) : V_0\subseteq V
+\] tal que \[
+\varphi\Big|_{U_0}: U_0 \to V_0
+\] é admissível. Então $\varphi$ é admissível. A ideia da demonstração:
+Tome um compacto $K\subseteq U$. $f:\varphi\left( K \right) \to \R$ integrável. Tome uma cobertura aberta de $K$ de forma que $\varphi$ seja localmente admissível para cada aberto $U_\lambda$ dessa cobertura. Trabalhe o número de Lebesgue dessa cobertura $\delta > 0$, ou seja, o diâmetro abaixo do qual todo conjunto está dentro de algum aberto. \[
+K = \bigcup_{i=1}^{l} K_i, diam K_i < \delta, K_i \subseteq U_\lambda
+\] \[
+\int_{\varphi\left( K \right) }f = \int_{\varphi\left( \bigcup_{i=1} ^{l}K_i \right) } f = \int_{\bigcup_{i=1} ^{l}\varphi\left( K_i \right) } f
+\] como a fronteira entre $K_i, K_j$ tem conteúdo nulo e $\varphi$ preserva essa característica, \[
+= \sum_{i=1}^{l} \int_{\varphi\left( K_i \right) } f
+.\] Agora podemos aplicar o teorema a essa soma \[
+= \sum_{i=1}^{l} \int_{K_i}f\circ \varphi . \left| J_{\varphi} \right| = \int_K f\circ \varphi \left| J_{\varphi} \right| 
+,\] logo $\varphi$ é admissível.
+
+Isso nos dá que precisamos investigar só localmente os difeomorfismos.
+

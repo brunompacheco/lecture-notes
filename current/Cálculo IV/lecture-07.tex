@@ -89,8 +89,47 @@ A motivação (principal) por trás deste teorema é simplificar o cálculo de i
     ,\] portanto \[
     \int_a^{b} f \circ  g \left( t \right) g'\left( t \right) dt = F \circ  g\left( b \right) - F \circ  g \left( a \right) = F\left( d \right) - F\left( c \right) = \int_c^{d}f\left( t \right) dt
     \] \[
-    \implies \int_{\left[ c,d \right] } f = \int_{g\left( \left[ a,b \right]  \right) } f = \int_{\left[ a,b \right] } \left( f o g \right) \left| g' \right| '
+    \implies \int_{\left[ c,d \right] } f = \int_{g\left( \left[ a,b \right]  \right) } f = \int_{\left[ a,b \right] } \left( f \circ  g \right) g' 
     \] que é basicamente o teorema de mudança de variáveis para $\R$.
+
+    Para integrais múltiplas ($\R^{n}$), a fórmula se torna \[
+    \int_{\varphi\left( K \right) } f = \int_K \left( f\circ \varphi \right) \left| det J_{\varphi} \right| 
+    ,\] sendo $\varphi$ um difeomorfismo de classe $C^{1}$ e $f$ somente integrável.
 \end{intuition}
 
+\begin{theorem}
+    (Mudança de Variáveis) Sejam $\varphi : U \to  V$ um difeomorfismo de classe $C^{1}$ entre abertos $U,V \subseteq \R^{m}$, $K\subset U$ um compacto J-mensurável e $f: \varphi\left( K \right)  \longrightarrow \R$ uma função integrável. Então $f\circ \varphi: K \longrightarrow \R$ é integrável e \[
+    \int_{\varphi\left( K \right) } f = \int_K \left( f\circ \varphi \right) \left| det.  \varphi' \right| 
+    .\]
+
+    De forma explícita, \[
+    \int_{\varphi\left( K \right) }f\left( y \right) dy = \int_K f\left( \varphi\left( x \right)  \right) \cdot \left| det. \varphi\left( x \right)' \right| dx
+    .\] 
+\end{theorem}
+
+\begin{proof}
+    Sejam $D_f$ os pontos de descontinuidade de $f$. Veja que \[
+    D_{f\circ \varphi} = \varphi^{-1}\left( D_f \right) 
+    .\] Como $f$ tem medida nula e a inversa de $\varphi$ também é localmente Lipschitz, $D_{f\circ \varphi}$ tem medida nula, ou seja, garantimos a integrabilidade de $f\circ \varphi$.
+\end{proof}
+
+\begin{note}
+    Seja $T$ uma transformação linear, então \[
+    vol T\left( X \right) = \left| det. T \right| \cdot vol X
+    .\] 
+\end{note}
+
+\begin{note}
+    $\forall a,b \in I$\[
+    \|f\left( b \right) - f\left( a \right)  \| \le \left( b-a \right) \cdot \sup \left\{ \|f'\left( x \right) \| : x\in I \right\} 
+    .\] Ainda mais, se $f$ é diferenciável em $I$, então $\exists c\in I$ tal que \[
+    \|f\left( b \right) - f\left( a \right)  \| \le \left( b-a \right) \cdot f'\left( x \right) 
+    .\] 
+\end{note}
+
+\begin{note}
+    \[
+    det\left( \left( f\circ g \right) '\left( x \right)  \right) = det f'\left( g\left( x \right)  \right) \cdot det g'\left( x \right) 
+    .\] 
+\end{note}
 
