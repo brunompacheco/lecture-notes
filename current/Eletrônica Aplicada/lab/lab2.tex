@@ -3,7 +3,7 @@
  
 \begin{document}
  
-\title{Laboratório 1}
+\title{Laboratório 2}
 \author{Bruno M. Pacheco (16100865)\\
 Pedro Y. F. Ceripes (18100681) \\
 EEL 7550 - Eletrônica Aplicada}
@@ -18,8 +18,45 @@ Os experimentos executados visam desenvolver familiaridade e experiência com o 
 
 \subsection*{Circuito 1}
 
-TODO
+Conforme requisitado, foi montado o circuito representado pela figura \ref{fig:figures-lab2-1-circuito-png}.
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/lab2-1-circuito.png}
+    \caption{Primeiro circuito do roteiro.}
+    \label{fig:figures-lab2-1-circuito-png}
+\end{figure}
+
+\subsubsection*{a)}
+
+O resultado da simulação pode ser visualizado na figura \ref{fig:figures-lab2-1-a-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/lab2-1-a.png}
+    \caption{Resultado da simulação do item a.}
+    \label{fig:figures-lab2-1-a-png}
+\end{figure}
+
+\subsubsection*{b)}
+
+O resultado da simulação após a alteração da tensão $V_x$, pode ser vista na figura \ref{fig:figures-lab2-1-b-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{figures/lab2-1-b.png}
+    \caption{Resultado da simulação do item b.}
+    \label{fig:figures-lab2-1-b-png}
+\end{figure}
+
+\subsubsection*{c)}
+
+O circuito é denominado de comparador porque a saída ($CH2$) apresenta apenas dois valores possíveis: $+V_{cc}$ e 0. Nesse sentido, a saída segue as seguintes regras:
+\begin{itemize}
+    \item $CH2=0$, caso a tensão de entrada ($CH1$) seja menor que o valor de referência ($V_x$);
+    \item $CH2=+V_{cc}$, caso a tensão de entrada ($CH1$) seja maior que o valor de referência ($V_x$);
+    \item $CH2=0$, caso a tensão de entrada ($CH1$) seja maior que a tensão de alimentação ($+V_{cc}$).
+\end{itemize}
 \subsection*{Circuito 2}
 
 Conforme instruído, o circuito foi montado como na figura \ref{fig:figures-lab2-2-circuito-png}.
@@ -76,7 +113,7 @@ Com um sinal de entrada de $2 V_{pp}$ dificilmente o amplificador entraria em um
 
 \section*{Conclusão}
 
-TODO: Circuito 1
+Os resultados do circuito comparador apresentou as características desse arranjo, principalmente a alternação entre os dois níveis possíveis de saída a partir dos valores de referência, entrada e alimentação.
 
 A simulação do arranjo como amplificador de sinal mostrou uma proximidade do componente simulado com o componente teórico quanto à relação entrada-saída, ainda que a faixa de saturação do sinal de saída seja muito menor do que no componente teórico.
 
