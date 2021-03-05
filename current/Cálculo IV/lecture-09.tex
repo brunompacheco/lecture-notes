@@ -1,0 +1,188 @@
+\lecture{9}{01.03.2021}{Subvariedades de $\R^{n}$}
+
+Nesta segunda parte da matéria, trataremos de
+\begin{enumerate}
+    \item Subvariedades do $\R^{n}$ (com e sem bordo)
+    \item Formas alternadas
+\end{enumerate}
+
+E, depois, falaremos de integração de formas diferenciais em subvariedades + Teorema de Stokes.
+
+Utilizaremos o Spivak e o Análise Real vol. 3, do Elon, além das notas de aula do Martin Weilandt, que são uma tradução das notas da professora Helga Baum.
+
+\section*{Subvariedades de $\R^{n}$}
+ou "superfícies", via Elon.
+
+O exemplo mais clássico de subvariedade é o gráfico de uma função, ou seja, dada uma função $f: U\subseteq\R^{n} \longrightarrow \R^{m}$, seu gráfico é o conjunto \[
+Graph\left( f \right) = \left\{ \left( x, f\left( x \right)  \right)  \in \R^{m+n} : x\in U\right\} 
+\] de medida nula em $\R^{n+m}$.
+
+\begin{definition}
+    Seja $f: U\subseteq\R^{n} \longrightarrow \R^{m}$, $c\in \R^{m}$ é um \emph{valor regular} sse $x\in f^{-1}\left( c \right) $, \[
+    Df_x: \R^{n} \longrightarrow \R^{m}
+    \] é sobrejetora.
+\end{definition}
+
+Nossa definição de subvariedade aqui será diferente da definição vista em Cálculo III, se aterá somente a subvariedades de $\R^{n}$ (não inclui espaços de Banach), e incluirá o caso com bordo.
+
+\subsection*{Digressão: semi-espaço superior $\mathbb{H}^{n}$}
+
+Fixe $n\in \N^*$. Por definição, \[
+\mathbb{H}^{n} := \left\{ \left( x_1,\ldots,x_n \right) \in \R^{n}: x_n \ge 0 \right\} 
+.\] Além disso, \[
+\partial \mathbb{H}^{n}:= \left\{ \left( x_1,\ldots,x_n \right) \in \R^{n}: x_n = 0 \right\} 
+.\] Veja que essa definição coincide com a definição de fronteira topológica de $\mathbb{H}^{n}$. Também, \[
+int \mathbb{H}^{n} = \left\{ \left( x_1,\ldots,x_n \right) \in \mathbb{H}^{n}: x_n > 0 \right\} 
+.\] Dessa forma, também é válido que $\mathbb{H}^{n}= int \mathbb{H}^{n} \cup \partial \mathbb{H}^{n}$.
+
+Veja que um aberto em $\mathbb{H}^{n}$ é $U\subseteq\mathbb{H}^{n}$ tal que \[
+U = \widetilde{U} \cap \mathbb{H}^{n}
+,\] onde $\widetilde{U}$ é um aberto de $\R^{n}$. Ou seja, isso é $\mathbb{H}^{n}$ munido da topologia induzida por $\R^{n}$. Dessa forma, temos dois tipos de abertos de $\mathbb{H}^{n}$:
+\begin{itemize}
+    \item $U\subseteq int \mathbb{H}^{n}$, logo, $U$ é um aberto de $\R^{n}$;
+    \item $U\cap \partial \mathbb{H}^{n} \neq  \O$, logo, não é um aberto de $\R^{n}$.
+\end{itemize}
+
+\begin{definition}
+    $f: U\subseteq \mathbb{H}^{n} \longrightarrow \R^{m}$, $U$ aberto em $\mathbb{H}^{n}$, é de classe $C^{k}$ se $\forall x_0\in U$, $\exists \widetilde{U}\subseteq\R^{n}$ aberto de $\R^{n}$ com $x_0\in \widetilde{U}$ e $\widetilde{g}: \widetilde{U} \longrightarrow \R^{m}$ de classe $C^{k}$ (no sentido usual) tal que \[
+    \widetilde{U} \cap \mathbb{H}^{n} \subseteq U\text{ e }\widetilde{g}\Big|_{\widetilde{U}\cap \mathbb{H}^{n}} = f\Big|_{\widetilde{U}\cap \mathbb{H}^{n}}
+    .\] 
+\end{definition}
+
+\begin{remark}
+    Seja $g: V\subseteq\R^{n} \longrightarrow \R^{m}$, $V$ aberto de $\R^{n}$, de classe $C^{k}$ no sentido usual; se $U:=V\cap \mathbb{H}^{n}\neq \O$, então \[
+    f:= g\Big|_U: U\subseteq \mathbb{H}^{n} \longrightarrow \R^{n}
+    \] é de classe $C^{k}$ no sentido de $\mathbb{H}^{n}$.
+\end{remark}
+
+\begin{prop}
+    Seja $f: U\subseteq\mathbb{H}^{n} \longrightarrow \R^{m}$ de classe $C^{k}$. Então
+    \begin{enumerate}
+        \item $f$ é contínua;
+	\item se $x_0\in U$, $\widetilde{g}: \widetilde{U}\subseteq\R^{n} \longrightarrow \R^{m}$, $\hat{g}: \hat{U} \subseteq\R^{n} \longrightarrow \R^{m} $ são de classe $C^{k}$ tal que $x_0\in \widetilde{U}\cap \hat{U}$, $\widetilde{U}\cap \mathbb{H}^{n}, \hat{U}\cap \mathbb{H}^{n} \subseteq U$ e \[
+	f\Big|_{\hat{U}\cap \widetilde{U}\cap \mathbb{H}^{n}} =\widetilde{g}\Big|_{\hat{U}\cap \widetilde{U}\cap \mathbb{H}^{n}} = \hat{g}\Big|_{\hat{U}\cap \widetilde{U}\cap \mathbb{H}^{n}}
+	,\] então \[
+	D\widetilde{g}_{x_0} = D\hat{g}_{x_0}
+	.\] 
+    \end{enumerate}
+\end{prop}
+
+\begin{demo}
+    (1) Fixe $x_0\in U$. Seja $\widetilde{g}: \widetilde{U} \subseteq\R^{n} \longrightarrow \R^{m} $ de classe $C^{k}$ com $\widetilde{U}\cap \mathbb{H}^{n}\subseteq U$ e \[
+    \widetilde{g}\Big|_{\widetilde{U}\cap \mathbb{H}^{n}} = f\Big|_{\widetilde{U}\cap \mathbb{H}^{n}}
+.\] $\widetilde{g}$ é contínua (em $x_0$). Portanto $f$ é contínua em $x_0$.
+
+    (2) Escolha $\hat{g}: \hat{U}\subseteq\R^{n} \longrightarrow \R^{m}$ de classe $C^{k}$, $\hat{U}\cap \mathbb{H}^{n}\subseteq U$, \[
+    \hat{g}\Big|_{\hat{U}\cap \mathbb{H}^{n}} = f\Big|_{hat{U}\cap \mathbb{H}^{n}}
+    .\] Desejo provar que \[
+    \frac{\partial \hat{g}_i}{\partial x_j} \left( x_0 \right) = \frac{\partial \widetilde{g}_i}{\partial x_j} \left( x_0 \right) , i=1,\ldots,m ; j=1,\ldots,n
+    .\] Veja que \[
+    \frac{\partial \widetilde{g}_i}{\partial x_j} \left( x_0 \right) := \lim_{t \to 0} \frac{\widetilde{g}_i\left( x_0 + t.e_j\right) -\widetilde{g}\left( x_0 \right)  }{t}
+    .\] Por definição, já temos que \[
+    \widetilde{g}\left( x_0 \right) = \hat{g}\left( x_0 \right) =f\left( x_0 \right) 
+    ,\] portanto, nos basta provar o outro componente, ou seja, a equivalência das funções na vizinhança de $x_0$. Agora, se $x_0\in int \mathbb{H}^{n}$ , então $\exists \epsilon>0$ tal que \[
+    B_\epsilon^{\R^{n}}\left( x_0 \right) \subseteq U\cap int \mathbb{H}^{n}
+    .\]  Como $\widetilde{U}\cap hat{U}$ é aberto de $\R^{n}$, diminuindo $\epsilon$, se necessário, podemos assumir que \[
+    B_\epsilon^{\R^{n}}\left( x_0 \right) \subseteq\widetilde{U}\cap hat{U}\cap \mathbb{H}^{n}\subseteq U
+    .\] Se $0<\left| t \right| <\epsilon $, então, $x_0+t.e_j \in \hat{U}\cap \widetilde{U}\cap \mathbb{H}^{n}$ e, portanto, \[
+    \widetilde{g}_i\left( x_0+t.e_j \right) = f\left( x_0+t.e_j \right) = \hat{g}\left( x_0 + t.e_j \right) 
+    ,\] portanto, não há nada a provar. Assuma, então, $x_0\in U\cap \partial \mathbb{H}^{n}$. Então, $x_0$ é da forma $\left( x_0^{1},\ldots,x_0^{n-1},0 \right) $. Se $j\neq n$, então \[
+    x_0+t.e_j \in \partial \mathbb{H}^{n}
+    .\] Como ambos $\hat{U}, \widetilde{U}$ são abertos, é possível escolher $\delta > 0$ tal que \[
+    \left| t \right| < \delta \implies x_0+ t.e_j\in \hat{U}\cap \widetilde{U}\cap \partial \mathbb{H}^{n} \subseteq U\cap \widetilde{U}\cap \hat{U}
+    ,\] logo, \[
+    f\left( x_0+t.e_j \right) = \widetilde{g}\left( x_0+t.e_j \right) = \hat{g}\left( x_0+t.e_j \right) 
+    \] e, portanto, as derivadas parciais coincidem. Finalmente, considere $j=n$. Por um lado \[
+    \frac{\partial \widetilde{g}_i}{\partial x_n} \left( x_0 \right) = \lim_{t \to 0} \frac{\widetilde{g}_i\left( x_0+t.e_n \right) -\widetilde{g}_i\left(  x_0\right) }{t}
+\] é um limite que existe, uma vez que as funções são de classe $C^{k}$. Além disso, é o mesmo que \[
+= \lim_{t \to 0^{+}} \frac{\widetilde{g}_i\left( x_0+t.e_n \right) -\hat{g}_i\left(  x_0\right) }{t}
+.\] Podemos, então, fazer $t$ pequeno o suficiente de forma que $x_0+t.e_n\in \widetilde{U}\cap \widetilde{V}\cap \mathbb{H}^{n}$. Assim, \[
+\widetilde{g}_i\left( x_0+t.e_n \right) = \hat{g}_i\left( x_0+t.e_n \right)
+.\] Como $\hat{g}$ também é contínua, seu limite existe e o limite à esquerda e à direita coincidem. Portanto, mesmo para $j=n$, as derivadas coincidem.
+\end{demo}
+
+\begin{definition}
+    Seja $f: U\subseteq\mathbb{H}^{n} \longrightarrow \R^{m}$ de classe $C^{k}$. Dado $x_0\in U$ e $\widetilde{g}: \widetilde{U}\subseteq\R^{n} \longrightarrow \R^{m}$ $C^{k}$ com $x_0\in \widetilde{U}$, $\widetilde{U}\cap \mathbb{H}^{n} \subseteq U$ e $\widetilde{g}\Big|_{\widetilde{U}\cap \mathbb{H}^{n}} = f\Big|_{\widetilde{U}\cap \mathbb{H}^{n}}$, então \[
+    Df_{x_0} := D\widetilde{g}_{x_0} : \R^{n} \longrightarrow \R^{m}
+    .\] 
+\end{definition}
+
+Veja que pela proposição anterior, essa definição se mostra independente da função $\widetilde{g}$.
+
+\begin{problem}
+    Sejam $f, g: U\subseteq\mathbb{H}^{n} \longrightarrow \R^{m}$ e $h: U\subseteq \mathbb{H}^{n} \longrightarrow \R$, todas de classe $C^{k}$. Prove que:
+    \begin{enumerate}
+        \item $f+g$ e $f . h$, operações ponto-a-ponto, são de classe $C^{k}$;
+	\item Suponha $\varphi : W\subseteq\mathbb{H}^{m} \longrightarrow \R^{p}$ de classe $C^{k}$ e $f\left( U \right) \subseteq W$. Então $\varphi \circ f: U\subseteq\mathbb{H}^{n} \longrightarrow \R^{p}$ é de classe $C^{k}$.
+    \end{enumerate}
+\end{problem}
+
+\begin{definition}
+    Sejam $U,V$ abertos de $\mathbb{H}^{n}$ e $\varphi : U \longrightarrow V$ bijeção. $\varphi $ é um \emph{difeomorfismo de classe $C^{k}$} se $\varphi : U \longrightarrow \R^{n}$ e $\varphi ^{-1}: V  \longrightarrow \R^{n}$ são de classe $C^{k}$.
+\end{definition}
+
+\begin{theorem}
+    Sejam $U,V \subseteq \mathbb{H}^{n}$ abertos e $\varphi : U \longrightarrow V$ um difeomorfismo de classe $C^{k}$. Então \[
+    \varphi \left( U\cap \partial \mathbb{H}^{n} \right) = V\cap \partial \mathbb{H}^{n}
+    .\] 
+\end{theorem}
+
+\begin{proof}
+    Seja $x\in U\cap int \mathbb{H}^{n}$. Então, podemos tomar um aberto $\widetilde{U} \ni x$ de forma que $\widetilde{U}\subseteq U$ e $\varphi ( \widetilde{U} ) \subseteq V \cap int \mathbb{H}^{n}$, uma vez que $\varphi' $ é um isomorfismo. Ou seja, \[
+    x\in U\cap int \mathbb{H}^{n} \implies \varphi \left( x \right) \not\in V\cap \partial \mathbb{H}^{n}
+    .\] Veja que o mesmo pode ser feito para $\varphi ^{-1}$, ou seja, \[
+    \varphi^{-1} \left( V\cap int \mathbb{H}^{n} \right) \subseteq U\cap int \mathbb{H}^{n}
+    .\] Dessa forma, é fácil ver que 
+    \begin{align*}
+	\varphi \left( U\setminus int \mathbb{H}^{n} \right) \subseteq V\setminus int \mathbb{H}^{n} &\implies \varphi \left( U\cap \partial \mathbb{H}^{n} \right) \subseteq V\cap \partial  \mathbb{H}^{n} \\
+	\varphi^{-1} \left( V\setminus int \mathbb{H}^{n} \right) \subseteq U\setminus int \mathbb{H}^{n} &\implies \varphi^{-1} \left( V\cap \partial \mathbb{H}^{n} \right) \subseteq U\cap \partial  \mathbb{H}^{n} \\
+	 \therefore \varphi \left( U\cap \partial \mathbb{H}^{n} \right) &= V\cap \partial \mathbb{H}^{n}
+    .\end{align*}
+\end{proof}
+
+\subsection*{Subvariedades com bordo}
+
+Utilizamos $\mathbb{H}^{n}$ como espaço de parametrização de subvariedades com bordo.
+
+\begin{definition}
+    (Parametrizações locais) Seja $M\subseteq\R^{n}$. Uma \emph{parametrização local de classe $C^{k}$ e dimensão $m$} de $M$ é uma aplicação $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow \R^{n}$ de classe $C^{k}$ tal que 
+    \begin{enumerate}
+	\item $\forall x\in U_0$ um aberto de $\mathbb{H}^{m}$, $D\varphi _{x}: \R^{m} \longrightarrow \R^{n}$ é injetora (\emph{imersão})
+	\item $\varphi \left( U_0 \right) \subseteq M$ é um \emph{aberto em $M$}, i.e., $\exists \widetilde{U}\subseteq\R^{n}$ aberto tal que $\varphi \left( U_0 \right) =M\cap \widetilde{U}$
+	\item $\varphi : U_0 \longrightarrow \varphi \left( U_0 \right) \subseteq M$ é um homeomorfismo, i.e., uma bijeção contínua com inversa contínua.
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    (Subvariedade de $\R^{n}$) Um conjunto $M\subseteq\R^{n}$ é \emph{subvariedade de dimensão $m$ e classe $C^{k}$} (de $\R^{n}$) se $\forall p\in M, \exists \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ uma parametrização de classe $C^{k}$ e dimensão $m$ com $p\in \varphi \left( U_0 \right) $.
+\end{definition}
+
+Veja que para subvariedade na definição usual, com parametrizações a partir de abertos de $\R^{m}$, podem ser parametrizadas em $\mathbb{H}^{m}$, se utilizando de uma translação para jogar os abertos em $int \mathbb{H}^{m}$.
+
+\begin{definition}
+    Seja $M\subseteq\R^{n}$ uma subvariedade de classe $C^{k}$ e dimensão $m$. Uma parametrização $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ é:
+    \begin{itemize}
+        \item \emph{interior} se $U_0 \subseteq int \mathbb{H}^{m}$;
+	\item \emph{de bordo} se $U_0\cap \partial \mathbb{H}^{m}\neq \O$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}
+    (Borde e interior) Seja $M\subseteq\R^{n}$ uma subvariedade de dimensão $m$ e classe $C^{k}$. O \emph{bordo de $M$} \[
+    \partial M := \left\{ p\in M: \exists \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M \text{ de bordo com }\varphi \left( U_0 \right) \ni p \right\} 
+    .\] O \emph{interior de $M$} \[
+    int M := \left\{ p \in M : \exists \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M \text{ interior com } \varphi \left( U_0 \right) \ni p\right\} 
+    .\] 
+\end{definition}
+
+\begin{theorem}
+    Seja $M$ uma subvariedade de dimensão $m$ e classe $C^{k}$. Então
+    \begin{itemize}
+        \item $\partial M \cap int M = \O$
+	\item $M = int M \dot{\cup } \partial M$
+	\item Para $m\ge 2$, $\partial M$ é uma subvariedade de $\R^{n}$ de classe $C^{k}$ e dimensão $m-1$ e $\partial \left( \partial M \right) = \O$ (uma subvarieadade \emph{sem bordo})
+    \end{itemize}
+\end{theorem}
+
+Trataremos o caso $m=1$ separadamente.
+
