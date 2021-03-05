@@ -48,7 +48,40 @@ figura \ref{fig:figures-lab3-1-a-measurements-png}.
     \label{fig:figures-lab3-1-a-measurements-png}
 \end{figure}
 
+\subsubsection*{c)}
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab3-1-c-measurements.png}
+    \caption{Medidas tomadas com $R_0=0 \Omega$ e $R_1 = 1 k\Omega$.}
+    \label{fig:figures-lab3-1-a-measurements-png}
+\end{figure}
+
+\subsubsection*{d)}
+
+Para determinar a resposta do circuito quanto à frequência de entrada, utilizamos o comando de simulação "AC Analysis", que faz uma varredura ao longo de uma faixa de frequência, levantando o ganho e a fase da saída em relação à entrada. Dessa forma, obtemos a resposta conforme na figura \ref{fig:figures-lab3-1-a-measurements-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab3-1-d.png}
+    \caption{Diagrama de Bode do circuito.}
+    \label{fig:figures-lab3-1-a-measurements-png}
+\end{figure}
+
+Vemos que o circuito tem característica de filtrar altas frequências, portanto, se comporta como um filtro passa-baixa.
+
+\subsection*{Circuito 3}
+
+Destaca-se o uso do gerador de pulso em modo contínuo (sem definir quantidade de pulsos). Também, para garantir uma proximidade do sinal gerado a uma onda quadrada, foi necessário especificar o tempo de subida e descida de forma real, uma vez que deixando como 0 causava uma resposta mais lenta (onda trapezoidal). O circuito montado assim como os resultados podem ser vistos na figura \ref{fig:figures-lab3-3-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab3-3.png}
+    \caption{Circuito e resultado da simulação com as medidas necessárias para o cálculo do \emph{slew rate}.}
+    \label{fig:figures-lab3-3-png}
+\end{figure}
+
+Dessa forma, chegamos em um valor de \emph{slew rate} de aproximadamente $0,32 \frac{V}{\mu s}$, próximo do valor mínimo indicado para a versão LM741A do componente.
 
 \section*{Conclusão}
 
