@@ -1,0 +1,234 @@
+\lecture{10}{03.03.2021}{Exemplos de subvariedades, seus bordos e interiores}
+
+\section*{Exemplos}
+
+Antes de entrar na prova do último teorema da aula passada, veremos alguns exemplos.
+
+\begin{remark}
+    Sejam
+    \begin{align*}
+        \chi: \R^{n} &\longrightarrow \mathbb{H}^{n} \\
+        \left( x_1,\ldots,x_n \right)  &\longmapsto \chi(\left( x_1,\ldots,x_n \right) ) = \left( x_1,\ldots,x_{n-1}, e^{x_n} \right) 
+    \end{align*}
+    e
+    \begin{align*}
+        \chi^{-1}: int \mathbb{H}^{n} &\longrightarrow \R^{n} \\
+        \left( y_1,\ldots,y_n \right)  &\longmapsto \chi^{-1}(\left( y_1,\ldots,y_n \right) ) = \left( y_1,\ldots,y_{n-1},\log y_n \right) 
+    .\end{align*}
+    Veja que $\chi$ é um difeomorfismo de classe $C^{\infty}$ entre abertos de $\R^{n}$. A aplicação de $\chi$ é o mapeamento de $\R^{n}$ em $ int\mathbb{H}^{n}$, ou seja, sem o bordo.
+\end{remark}
+
+\begin{eg}
+    Veremos que $U\subseteq\R^{n}$ aberto é subvariedade de $\R^{n}$ de classe $C^{\infty}$ e dimensão $n$.
+
+    \begin{note}
+        Chamamos de \emph{co-dimensão} de uma subvariedade a diferença entre a sua dimensão e a do espaço em que ela se encontra, ou "$n-m$".
+    \end{note}
+
+    Veja que \[
+    \chi\Big|_{U}: U \longrightarrow V\subseteq int \mathbb{H}^{n}
+    \] é um difeomorfismo de classe $C^{\infty}$ entre abertos de $\R^{n}$.
+
+    Defina \[
+    \varphi := \left( \chi\Big|_U \right) ^{-1} : V \longrightarrow U
+    ,\] que é uma parametrização de $U$ de classe $C^{\infty}$ e dimensão $n$.
+
+    Veja que $\partial U = \O$ (pela definição dada para $\mathbb{H}^{n}$), uma vez que é uma subvariedade tal que todos os seus pontos possuem parametrizações de interior ($\varphi $).
+\end{eg}
+
+\begin{observe}
+    O bordo de uma subvariedade \emph{não é} idêntico à fronteira topológica, ainda que possuam a mesma notação. O mesmo vale para o interior.
+\end{observe}
+
+\begin{eg}
+    $U\subseteq \mathbb{H}^{n}$ aberto, de forma que $U\cap \partial \mathbb{H}^{n}\neq \O$.
+
+    Basta definir a parametrização identidade
+    \begin{align*}
+        \mathbb{I}_U : U &\longrightarrow U \\
+        x &\longmapsto \mathbb{I} (x) = x
+    \end{align*}
+    que é de classe $C^{\infty}$ e dimensão $n$. É $C^{\infty}$ por ser uma restrição de uma aplicação de classe $C^{\infty}$. Além disso, $D\mathbb{I} = \mathbb{I}$, portanto, injetora, ou seja, $\mathbb{I}$ é uma imersão. Mapeia abertos em abertos e é um homeomorfismo (sobre sua imagem). Ou seja, $\mathbb{I}$ é uma parametrização válida em todo $U$.
+
+    Alem disso, $U\cap \partial \mathbb{H}^{n}\subseteq \partial U$, logo, $\partial U \neq \O$.
+\end{eg}
+
+\begin{eg}
+    $f: U\subseteq\R^{n} \longrightarrow \R^{m}$ de classe $C^{k}$, com $1\le k\le \infty$ e $U$ aberto de $\R^{n}$. Ponha \[
+    M = graph\left( f \right) = \left\{ \left( x, f\left( x \right)  \right) \in \R^{n+m} : x\in U \right\} 
+    .\] $M$ é subvariedade de dimensão $m$ e classe $C^{k}$.
+
+    Ponha $U_0 := \chi\left( U \right) \subseteq int \mathbb{H}^{n}$.
+    \begin{align*}
+        \varphi : U_0 &\longrightarrow \R^{n+m} \\
+        z &\longmapsto \varphi (z) = \left( \chi^{-1}\left( z \right) , f\left( \chi^{-1}\left( z \right)  \right)  \right) 
+    .\end{align*}
+    Veja que $\varphi $ é de classe $C^{k}$ e bijeção de $U_0$ sobre $M$, em particular, $\varphi \left( U_0 \right) = M$. Veja que \[
+    \varphi \circ \chi\Big|_U\left( x \right) = \left( x, f\left( x \right)  \right) 
+    .\] \[
+    D\left( \varphi \circ \chi \right) _x \left( v \right) = \left( v, Df_x\left( v \right)  \right) = \left( 0_{\R^{n}}, 0_{\R^{m}} \right) 
+    \] \[
+    \implies v = 0_{\R^{n}}
+    \] logo \[
+    D\varphi _{\chi\left( x \right) } \circ D\chi_{x}
+    \] sendo a segunda um isomorfismo\[
+    \implies D\varphi _{\chi\left( x \right) }
+\] é injetora, logo $\varphi $ é uma imersão e portanto, uma parametrização de dimensão $n$ e classe $C^{k}$.
+
+Veja também que $M = int M$, uma vez que um ponto de $\partial M$ pode ser mapeado em $\partial f(U)$ que vem de $\partial U$, um conjunto vazio.
+\end{eg}
+
+\begin{eg}
+    $U = \left\{ \left( x,y \right) \in \R^{2} : x^2 + y^2 < 1 \text{ e }y\ge 0 \right\} $é aberto de $\mathbb{H}^{2}$. Defina
+    \begin{align*}
+        f: U &\longrightarrow \R \\
+        \left( x,y \right)  &\longmapsto f(\left( x,y \right) ) = y
+    .\end{align*}
+    Veja que $f$ é de classe $C^{\infty}$ e \[
+    graph\left( f \right) = \left\{ \left( x, y, y \right) : \left( x,y \right) \in U \right\} 
+    .\] Queremos ver que $M := graph\left( f \right) $ é uma subvariedade de classe $C^{\infty}$ e dimensão 2 de $\R^{3}$.
+
+    Defina 
+    \begin{align*}
+        \varphi :U\subseteq \mathbb{H}^{2}  &\longrightarrow M  \\
+        \left( x,y \right)  &\longmapsto (\left( x,y \right) ) = \left( x,y,y \right)
+    .\end{align*}
+    Veja que $\varphi $ assim construído é, de fato, uma parametrização, uma vez que é uma função injetora, mapeia abertos em abertos e é um homeomorfismo. Ela é uma restrição de uma função $C^{\infty}$, então também é $C^{\infty}$. Além disso, é de bordo para todos os pontos da forma $\left( x,0,0 \right) $ com $-1<x<1$. Agora, se restringimos a parametrização de forma \[
+    \varphi \Big|_{U\cap \left\{ y>0 \right\} }
+    ,\] então essa é uma parametrização interior para os pontos de $M$ com $y>0$.
+\end{eg}
+
+\begin{eg}
+    \begin{align*}
+        \mathcal{Z}: U &\longrightarrow \R^{3} \\
+        \left( x,y \right)  &\longmapsto \mathcal{Z}(\left( x,y \right) ) = \left( x,y,x^2+y^2 \right) 
+    .\end{align*}
+    $M:= Im \mathcal{Z}$
+
+    Veja que $\mathcal{Z}$ é uma parametrização de classe $C^{\infty}$ e dimensão 2 de $M$.
+\end{eg}
+
+\begin{prop}
+    Seja $f: U\subseteq\R^{n} \longrightarrow \R$ de classe $C^{k}$, $1\le k\le \infty$. Seja \[
+    M = \left\{ x,y \in \R^{n+1} : x\in U, y\le f\left( x \right) \right\} 
+    .\] Então, $M$ é subvariedade de $\R^{n+1}$ de codimensão 0 e \[
+    \partial M = graph\left( f \right)  
+    .\] 
+\end{prop}
+
+\begin{demo}
+    Construa a parametrização como
+    \begin{align*}
+        \varphi : U\times \left[ 0,+\infty \right)  &\longrightarrow \R^{n+1} \\
+        \left( x,z \right)  &\longmapsto \varphi (\left( x,z \right) ) = \left( x, f\left( x \right) -z \right)
+    .\end{align*}
+    Veja que o domínio é um aberto de $\mathbb{H}^{n+1}$. Ainda mais, veja que \[
+    Im\left( \varphi  \right) = M
+    ,\] uma vez que, dado o domínio de $z$, $y=f\left( x \right) - z \le f\left( x \right) $.
+    Podemos estender $\varphi $ para 
+    \begin{align*}
+	\widetilde{\varphi }:  U\times \R   &\longrightarrow \R^{n+1} \\
+         \left( x,z \right) &\longmapsto \varphi \left( x,z \right)  = \left( x, f\left( x \right) -z \right) 
+    ,\end{align*}
+    que é $C^{k}$, então, como $\varphi $ é uma restrição de $\widetilde{\varphi }$, $\varphi $ é de classe $C^{k}$.
+
+    \[
+    D\varphi _{\left( x,z \right) }\left( v,\lambda \right) = \left( v, Df_x \left( v \right) - \lambda \right) 
+    \] logo $D\varphi _{\left( x,z \right) }$ é injetora.
+
+    Também
+    \begin{align*}
+        \varphi ^{-1}: M  &\longrightarrow U\times \left[ 0,\infty \right)  \\
+         \left( x,y \right) &\longmapsto \varphi ^{-1}\left( x,y \right)  = \left( x, f\left( x \right)-y  \right) 
+    \end{align*}
+    é de classe $C^{k}$ por ser restrição, logo contínua.
+
+    Veja que \[
+    \varphi \left( x, 0 \right)  = \left( x, f\left( x \right)  \right) 
+    \] logo \[
+    graph\left( f \right) \subseteq \partial M 
+    .\] 
+
+    Agora, veja que \[
+    \varphi \Big|_{U\times \left( 0,\infty \right) }
+    \] é uma parametrização interior de $M\setminus graph \left( f \right) $, logo \[
+    M\setminus graph\left( f \right) \subseteq int M
+    .\] Portanto, assumindo que $M = \partial M \dot{\cup } int M$, \[
+    \implies \partial M = graph\left( f \right) 
+    .\] 
+\end{demo}
+
+\begin{prop}
+    $f: U\subseteq\R^{n} \longrightarrow \R^{m}$ de classe $C^{k}$. Suponha que $U\cap \partial \mathbb{H}^{n} \neq  \O$ e seja $U_0:= U\cap \mathbb{H}^{n}$. Então \[
+    M := graph\left( f\Big|_{U_0} \right) 
+    \] é subvariedade de $\R^{n+m}$ com \[
+    \partial M = graph\left( f \Big|_{U\cap \partial \mathbb{H}^{n}}\right) 
+    .\]
+\end{prop}
+
+\begin{demo}
+    Defina
+    \begin{align*}
+        \varphi : U_0\subseteq\mathbb{H}^{n} &\longrightarrow \R^{n+m} \\
+        x &\longmapsto \varphi (x) = \left( x, f\left( x \right)  \right)
+    .\end{align*}
+    Dessa forma, \[
+    Im\left( \varphi  \right) = M
+    .\] Além disso, $\varphi $ é uma bijeção sobre $M$ e é de classe $C^{k}$.
+
+    Agora, 
+    \begin{align*}
+        \widetilde{\varphi }: U\subseteq\R^{n} &\longrightarrow \R^{n+1} \\
+        x &\longmapsto \widetilde{\varphi }(x) = \left( x, f\left( x \right)  \right)
+    \end{align*}
+    de forma que \[
+    D\varphi _x\left( v \right) = D \widetilde{\varphi }_x\left( v \right) = \left( v, Df_x\left( v \right)  \right), \forall x\in U_0, \forall v\in \R^{n}
+    .\] 
+
+    Veja que $\varphi ^{-1} = \pi_1\Big|_M$, onde
+    \begin{align*}
+        \pi_1: \R^{n+1} &\longrightarrow \R^{n} \\
+        \left( x,y \right)  &\longmapsto \pi_1(\left( x,y \right) ) = x
+    .\end{align*}
+
+    Logo, $\varphi $ é uma parametrização de classe $C^{k}$ e dimensão $n$.
+
+    Então, verificamos que $\forall x\in U_0\cap \partial \mathbb{H}^{n}$ a função funciona como uma parametrização de bordo, i.e., \[
+    \varphi ^{-1}\left( x, f\left( x \right)  \right) = x
+    .\] Portanto, \[
+    graph\left( f\Big|_{U_0\cap \partial \mathbb{H}^{n}} \right) \subseteq \partial M
+    .\] 
+
+    Da mesma forma, se escolhemos $x \in U_0\cap int \mathbb{H}^{n}$, então \[
+    graph\left( f\Big|_{U_0\cap int \mathbb{H}^{n}} \right) \subseteq int M
+    .\] Como só existem esses dois tipos de pontos, esses conjuntos são disjuntos, então essas são igualdades.
+\end{demo}
+
+\begin{eg}
+    Seja \[
+    M = \left\{ \left( x,y \right) \in \left[ 0,1 \right] ^2 : x > 0 \right\} \setminus \left\{ \left( 0,1 \right) , \left( 1,0 \right) , \left( 1,1 \right)  \right\} 
+    .\] 
+
+    Defina
+    \begin{align*}
+        \varphi_1: \left( 0,1 \right) \times \left( 0,1 \right) \subseteq \mathbb{H}^{2} &\longrightarrow M \\
+        \left( x,y \right)  &\longmapsto \varphi_1(\left( x,y \right) ) = \left( x,y \right) 
+    \end{align*}
+    e
+    \begin{align*}
+	\varphi _2: \left( 0,1 \right) \times \left[ 0,1 \right) \subseteq \mathbb{H}^{2} &\longrightarrow M \\
+        \left( x,y \right)  &\longmapsto 	\varphi _2(\left( x,y \right) ) = \left( 0,1 \right)
+    .\end{align*}
+    Veja que $\varphi _1$ é uma restrição de $\varphi _2$.
+    \begin{align*}
+	\varphi _3: \left( 0,1 \right) \times \left[ 0,1 \right)\subseteq\mathbb{H}^{2} &\longrightarrow M \\
+        \left( x,y \right)  &\longmapsto 	\varphi _3(\left( x,y \right) ) = \left( x, 1-y \right)
+    .\end{align*}
+    \begin{align*}
+	\varphi _4: \left( 0,1 \right) \times \left[ 0,1 \right) &\longrightarrow M \\
+        \left( x,y \right)  &\longmapsto 	\varphi _4(\left( x,y \right) ) = \left( 1-y, x \right)
+    .\end{align*}
+
+    É fácil ver que essas parametrizações são suficientes para mostrar que $M$ é uma subvariedade de dimensão 2 e classe $C^{\infty}$.
+\end{eg}
+
