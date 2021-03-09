@@ -92,18 +92,28 @@ Dessa forma, o nosso resultado sobre a interseção do bordo e do interior vem c
 \end{corollary}
 
 \begin{demo}
-    Seja $p \in \partial M$. Seja $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ parametrização com $x_0 = \varphi ^{-1}\left( p \right) \in \partial \mathbb{H}^{m}$. Seja $\psi: V_0\subseteq\mathbb{H}^{m} \longrightarrow M$ qualquer outra parametrização em $p$, digamos, com $y_0 = \psi^{-1}\left( p \right) $. Pelo Teorema de Mudança de Parametrização, $\psi^{-1}\circ \varphi : \varphi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right)  \longrightarrow \psi^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right) \right)  $ é um difeomorfismo de classe $C^{k}$. Além disso, \[
+    Seja $p \in \partial M$. Seja $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ parametrização (de bordo) com $x_0 = \varphi ^{-1}\left( p \right) \in \partial \mathbb{H}^{m}$. Seja $\psi: V_0\subseteq\mathbb{H}^{m} \longrightarrow M$ qualquer outra parametrização em $p$, digamos, com $y_0 = \psi^{-1}\left( p \right) $. Pelo Teorema de Mudança de Parametrização, $\psi^{-1}\circ \varphi : \varphi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right)  \longrightarrow \psi^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right) \right)  $ é um difeomorfismo de classe $C^{k}$, ou seja, mapeia fechos em fechos. Além disso, \[
     \psi^{-1}\circ \varphi \left( x_0 \right) = \psi^{-1}\left( p \right) = y_0
-    .\] Como $\varphi \left( x_0 \right) \in \partial \mathbb{H}^{m}$, então $\psi^{-1}\left( p \right) \in \partial \mathbb{H}^{m}$.\[
+    .\] Como $ x_0 \in \partial \mathbb{H}^{m}$, então $\psi^{-1}\left( p \right) \in \partial \mathbb{H}^{m}$.\[
     \implies \psi ^{-1}\left( p \right) \not\in int \mathbb{H}^{m}
     .\] Pela arbitrariedade de $\psi$, temos que $p \not\in int M$.
+
+    \emph{Mutatis mutandis}, temos também que \[
+    p \in int\,M \implies p \not\in \partial M
+    .\]
 \end{demo}
 
-Agora, precisamos somente provar que $\partial M$ e $int M$ são subvariedades. Veja que $int M$ é claramente uma subvariedade uma vez que, por definição, constitui um aberto e todos os seus pontos possuem uma parametrização de abertos de $\R^{m}$.
+\subsection*{$\partial M$ e $int\,M$ como subvariedades}
+
+Agora, nos resta provar que $\partial M$ e $int M$ são subvariedades.
+
+Veja que $int M$ é claramente uma subvariedade uma vez que, por definição, constitui um aberto e todos os seus pontos possuem uma parametrização de abertos de $\R^{m}$.
 
 Então, fixamos, além de $M$, $p \in \partial M$ e uma parametrização $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ de forma que $\varphi ^{-1}\left( p \right) = x_0 \in \partial \mathbb{H}^{m}$. Sabemos que podemos escolher um aberto $\widetilde{U}_0$ de forma que $U_0 = \widetilde{U}_0 \cap \mathbb{H}^{m}$. Seja \[
 V_0 = \left\{ x = \left( x_1,\ldots,x_{m-1} \right) \in \R^{m-1} : \left( x, 0 \right) := \left( x_1,\ldots,x_{m-1},0 \right) \in \widetilde{U}_0 \cap \partial \mathbb{H}^{m}  \subseteq U_0 \right\} 
-.\] É fácil ver que $V_0$ é um aberto de $\R^{m-1}$, uma vez que seus pontos pertencem a $\widetilde{U}_0$, então podemos pegar uma bola ao seu redor e pegar somente os pontos com última coordenada 0 (TODO: verificar). Considere
+.\] É fácil ver que $V_0$ é um aberto de $\R^{m-1}$. $\forall x \in V_0$, $\left( x,0 \right) \in \widetilde{U}_0$, como $\widetilde{U}_0$ é um aberto $\exists \epsilon>0$ de forma que a bola aberta $B_\epsilon^{\R^{m}}\left( \left( x,0 \right)  \right) \subseteq \widetilde{U}_0$. Então $B_{\epsilon}^{\R^{m-1}}\left( x \right) \subseteq V_0$.
+
+Considere
 \begin{align*}
     i:\R^{m-1}  &\longrightarrow \R^{m} \\
     x &\longmapsto i(x) = \left( x,0 \right)  
@@ -112,12 +122,27 @@ que é linear (logo $C^{\infty}$), e $i\left( V_0 \right) = \widetilde{U}_0 \cap
 i_0:= i\Big|_{V_0}: V_0 \longrightarrow \R^{m}
 .\] Assim, $i_0\left( V_0 \right) = i\left( V_0 \right) = \widetilde{U}_0 \cap \partial \mathbb{H}^{m}$.
 
-Ponha $\zeta :=\varphi \circ i_0 : V_0\subseteq\R^{m-1} \longrightarrow \R^{n}$. (TODO: verifique que 1) $\zeta$ é de classe $C^{k}$, 2) $\zeta $ é imersão, i.e., $D\zeta_x$ é injetora $\forall x\in V_0$). Por construção, $\zeta \left( V_0 \right) \subseteq \partial M$. Além disso, $\zeta \left( V_0 \right) = \varphi \left( \widetilde{U}_0 \cap \partial \mathbb{H}^{m} \right) = \widetilde{U} \cap \partial M$, logo, um aberto. 
-[ Seja $q\in \widetilde{U} \cap \partial M \subseteq \widetilde{U} \cap M = \varphi \left( U_0 \right) $, $\implies \exists ! z\in U_0$ com $\varphi \left( z \right) =q$. Mas $q\in \partial M \implies z\in \varphi ^{-1}\left( q \right) \in \partial \mathbb{H}^{m}$. $z=\left( z_1,\ldots,z_{m-1},0 \right) \in \widetilde{U}_0 \cap \partial \mathbb{H}^{m} \implies \hat{z} = \left( z_1,\ldots,z_{m-1} \right) \in V_0 $ e $q = \varphi \left( z \right) $... $\implies \widetilde{U}\cap \partial M \subseteq \zeta\left( V_0 \right) $.]  Verifique também que $\zeta$ é uma bijeção sobre sua imagem.
+Ponha \[
+\zeta :=\varphi \circ i_0 : V_0\subseteq\R^{m-1} \longrightarrow \R^{m}
+.\]
+\begin{problem}
+    Verifique que:
+    \begin{enumerate}
+        \item $\zeta$ é de classe $C^{k}$
+	\item $\zeta $ é imersão, i.e., $D\zeta_x$ é injetora $\forall x\in V_0$
+	\item $\zeta$ é uma bijeção sobre sua imagem
+    \end{enumerate}
+\end{problem}
+
+    Por construção, $\zeta \left( V_0 \right) \subseteq \partial M$, uma vez que $x \in \widetilde{U}_0 \cap \partial \mathbb{H}^{m}\implies\varphi \left( x \right) \in \partial M $. Além disso, $\zeta \left( V_0 \right) = \varphi \left( \widetilde{U}_0 \cap \partial \mathbb{H}^{m} \right) = \widetilde{U} \cap \partial M$, logo, um aberto. 
+
+    \begin{remark}
+	Seja $q\in \widetilde{U} \cap \partial M \subseteq \widetilde{U} \cap M = \varphi \left( U_0 \right) $, $\implies \exists ! z\in U_0$ com $\varphi \left( z \right) =q$. Mas $q\in \partial M \implies z\in \varphi ^{-1}\left( q \right) \in \partial \mathbb{H}^{m}$, logo, é da forma $z=\left( z_1,\ldots,z_{m-1},0 \right) \in \widetilde{U}_0 \cap \partial \mathbb{H}^{m} \implies \hat{z} := \left( z_1,\ldots,z_{m-1} \right) \in V_0 $ e $q = \varphi \left( z \right) = \varphi \circ i_0\left( \hat{z}   \right) \in \zeta\left( V_0 \right) \implies \widetilde{U}\cap \partial M \subseteq \zeta\left( V_0 \right) $.
+    \end{remark}
 
 $\vdash \zeta^{-1} : \zeta\left( V_0 \right) = \widetilde{U}\cap \partial M \longrightarrow V_0$ é contínua. Veja que \[
 \zeta \left( z \right) = \varphi \circ i_0\left( z \right) 
-.\] Note que $\zeta \left( V_0 \right) \subseteq \varphi \left( V_0 \right) $ \[
+.\] Note que $\zeta \left( V_0 \right) \subseteq \varphi \left( U_0 \right) $ \[
 \implies \varphi ^{-1}\Big|_{\zeta\left( V_0 \right) } : \zeta\left( V_0 \right)  \longrightarrow U_0
 \] é contínua. Considere
 \begin{align*}
@@ -132,9 +157,9 @@ Veja que é uma aplicação linear, $C^{\infty}$ e $\pi_1\left( x,0 \right) = x$
 \chi \circ \zeta\left( x \right) = \chi \left( \varphi \left( i_0\left( x \right)  \right)  \right) = \pi_1\Big|_{\widetilde{U}_0\cap \partial \mathbb{H}^{m}} \circ \varphi ^{-1} \left( \varphi \left( i_0\left( x \right)  \right)  \right) = \pi_1 \circ i_0 \left( x \right) = x.
 ,\] ou seja, \[
 \chi \circ \zeta = \mathbb{I}_{V_0}\left( x \right) 
-.\] Isso mostra que $\chi$ é inversa à esquerda, mas $\zeta$ é bijeção, logo $\chi$ é inversa também à direita, portanto, inversa.$\dashv$
+.\] Isso mostra que $\chi$ é inversa à esquerda, mas $\zeta$ é bijeção, logo $\chi$ é inversa também à direita, portanto, inversa, i.e., $\zeta^{-1} = \chi$. Além disso, $\chi$ é contínua por ser uma restrição de uma função contínua, logo, $\zeta^{-1}$ é contínua. $\dashv$
 
-therefore, $\zeta$ é uma parametrização de dimensão $m-1$ e classe $C^{k}$.
+$\therefore\zeta$ é uma parametrização de dimensão $m-1$ e classe $C^{k}$.
 
 \begin{prop}
     Seja $f : U\subseteq\R^{n} \longrightarrow \R$, $n\ge 2$, de classe $C^{k}$. Seja $c\in Im\left( f \right) $ um valor regular (i.e., $\forall x\in f^{-1}\left( c \right) $, $\nabla f\left( x \right) \neq 0$). Então, \[
