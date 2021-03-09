@@ -1,0 +1,176 @@
+\lecture{11}{08.03.2021}{Bordo e interior de uma subvariedade}
+
+\begin{previouslyseen}
+    \[
+    \partial M := \left\{ p \in M : \exists \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M, p \in \varphi \left( U_0 \right) \text{ param.}, \varphi ^{-1}\left( p \right) \in \partial \mathbb{H}^{m} \right\} 
+    \] \[
+    int M := \left\{ p \in M : \exists \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M, p \in \varphi \left( U_0 \right) \text{ param.}, \varphi ^{-1}\left( p \right) \in int \mathbb{H}^{m} \right\} 
+    \] 
+\end{previouslyseen}
+
+\begin{problem}
+    Se $\varphi : U_0 \subseteq\mathbb{H}^{m} \longrightarrow M$ parametrização de classe $C^{k}$ e dimensão $m$, e $U_0' \subseteq U_0 \subseteq \mathbb{H}^{m}$ é aberto de $\mathbb{H}^{m}$. Verifique que $\varphi \Big|_{U_0'}$ é ainda uma parametrização.
+\end{problem}
+
+
+\section*{Bordo e interior de uma subvariedade}
+
+Queremos demonstrar algumas propriedades do interior e do bordo de uma subvariedade, sumarizadas no seguinte teorema:
+\begin{theorem}
+    Seja $M$ uma subvariedade de dimensão $m$ e classe $C^{k}$. Então
+    \begin{itemize}
+        \item $\partial M \cap int M = \O$
+	\item $M = int M \dot{\cup } \partial M$
+	\item Para $m\ge 2$, $\partial M$ é uma subvariedade de $\R^{n}$ de classe $C^{k}$ e dimensão $m-1$ e $\partial \left( \partial M \right) = \O$ (uma subvarieadade \emph{sem bordo})
+	\item Da mesma forma, $int M$ é subvariedade de $\R^{n}$ de classe $C^{k}$ e dimensão $m$ sem bordo
+    \end{itemize}
+\end{theorem}
+
+Para isso, precisamos de alguns resultados. Fixe uma subvariedade $M\subseteq\R^{n}$ de dimensão $m$ e classe $C^{k}$.
+
+\begin{theorem}
+    (Mudança de Parametrização) Sejam $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ e $\psi: V_0\subseteq\mathbb{H}^{m} \longrightarrow M$ parametrizações de uma subvariedade $M$, com \[
+    \varphi \left( U_0 \right) \cap \psi\left( V_0 \right) \neq \O
+    ,\] então
+    \begin{enumerate}
+        \item $\varphi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right)$ e $\psi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right)$ são abertos de $\mathbb{H}^{m}$; e
+	\item $\psi^{-1}\circ \varphi : \varphi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right)  \longrightarrow \psi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right) $ é um difeomorfismo de classe $C^{k}$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{intuition}
+    O primeiro resultado é direto, uma vez que pontos da interseção das imagens das parametrizações estão cobertos pelas parametrizações, logo, decorre de sua definição como homeomorfismo sobre sua imagem que sua inversa mapeia abertos em abertos.
+
+    Portanto, nos basta mostrar que a composição da inversa de uma parametrização com a outra é um difeomorfismo entre as coordenadas da interseção de suas imagens.
+\end{intuition}
+
+Esse teorema pode ser visto como um caso particular do seguinte lema.
+
+\begin{lemma}\label{lemma-params}
+    Seja $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ parametrização e seja $f: U\subseteq\mathbb{H}^{l} \longrightarrow \R^{n}$ de classe $C^{k}$ tal que \[
+    f\left( U \right) \subseteq\varphi \left( U_0 \right) 
+    .\] Então \[
+    \varphi ^{-1}\circ f : U\subseteq\mathbb{H}^{l} \longrightarrow \mathbb{H}^{m}
+    \] é de classe $C^{k}$.
+\end{lemma}
+\begin{demo}
+    (Usando o caso sem bordo vide H-Calc III) $\vdash \exists \widetilde{M} \supseteq M$, que é subvariedade sem bordo de classe $C^{k}$ e dimensão $m$ e que as parametrizações usadas para $M$ podem ser usadas para $\widetilde{M}$.
+
+    $\forall p \in M$, escolha $\varphi _p: U_p\subseteq\mathbb{H}^{m} \longrightarrow M$ uma parametrização em $p$. Seja $x_p \in U_p$ tal que $\varphi_p \left( x_p \right) =p$. Diminuindo $U_p$ se necessário, posso assumir que $\exists \widetilde{U}_p \ni x_p$ aberto de $\R^{m}$ com \[
+	\widetilde{U}_p \cap \mathbb{H}^{m} = U_p
+    \] e $\widetilde{\varphi }_p: \widetilde{U}_p \longrightarrow \R^{n}$ de classe $C^{k}$ (no sentido usual) de forma que \[
+    \widetilde{\varphi }_p\Big|_{U_p} = \varphi _p
+    .\] 
+
+    Note que $D \widetilde{\varphi }_{x_p} = D \varphi _{x_p}$ é injetora, pois $\varphi $ é uma imersão por definição (de parametrização). Pela forma local das imersões, diminuindo $\widetilde{U}_p$ (e $U_p$), se necessário, podemos assumir que $\widetilde{\varphi }_p$ é um mergulho, ou seja, podemos restringir o domínio de $\widetilde{\varphi }_p $ até que ela se torne injetiva.
+
+    Ponha \[
+    \widetilde{M} := \bigcup_{p \in M} \widetilde{\varphi }_p \left( \widetilde{U}_p \right) \supseteq M
+    .\] Por construção, $\widetilde{M}$ é subvariedade de classe $C^{k}$ e dimensão $m$ sem bordo, uma vez que $\widetilde{\varphi }_p$ são parametrizações de classe $C^{k}$ para todos os seus pontos $\dashv$ de abertos de $\R^{m}$ que, como já vimos, implica em $\widetilde{M}$ ser uma subvariedade sem bordo pela nossa definição.
+
+    Seja $x_0\in U$ de forma que $p=f\left( x_0 \right) $. Podemos, sem perda de generalidade, assumir que $\varphi $ é uma restrição de $\widetilde{\varphi }: \widetilde{U}_0\subseteq\R^{m} \longrightarrow \R^{n}$ parametrização de $\widetilde{M} \supseteq M$ de dimensão $m$ e classe $C^{k}$. Nesse caso, fica claro que \[
+    f\left( U \right) \subseteq \widetilde{\varphi }\left( \widetilde{U}_0 \right)
+.\] Ora, $\exists \widetilde{U} \subseteq\R^{l}$ aberto com $x_0 \in \widetilde{U}$ e $U = \widetilde{U} \cap \mathbb{H}^{l} $ e $\widetilde{f}: \widetilde{U} \longrightarrow \R^{n}$ extensão de $f$, de classe $C^{k}$ no sentido usual. Pela continuidade de $\widetilde{f}$ em $x_0$ e diminuindo $\widetilde{U}$ (e, logo, $U$) se necessário, posso assumir \[
+    \widetilde{f}\left( \widetilde{U} \right) \subseteq \widetilde{\varphi }\left( \widetilde{U}_0 \right)
+    .\]
+
+    O resultado para subvariedades sem bordo \[
+    \implies \widetilde{\varphi }^{-1} \circ \widetilde{f} : \widetilde{U} \longrightarrow \R^{m}
+    \] é uma aplicação de classe $C^{k}$ no sentido usual. Ora, $\forall x\in U = \widetilde{U}\cap \mathbb{H}^{l}$ \[
+    \widetilde{\varphi }^{-1} \circ \widetilde{f}\left( x \right)  = \widetilde{\varphi }^{-1}\left( f\left( x \right)  \right) \in \varphi \left( U_0 \right) 
+    ,\] logo \[
+    \widetilde{\varphi }^{-1}\left( f\left( x \right)  \right) = \varphi ^{-1}\left( f\left( x \right)  \right) = \varphi ^{-1}\circ f \left( x \right) 
+    .\] Portanto $\varphi ^{-1}\circ f$ é de classe $C^{k}$ no sentido de $\mathbb{H}^{l}$.
+\end{demo}
+
+Para chegar na mudança de parametrização, basta entendermos $f = \psi$.
+
+Dessa forma, o nosso resultado sobre a interseção do bordo e do interior vem como um corolário.
+
+\begin{corollary}
+    Se $M$ é subvariedade com bordo, $\partial M \cap int M = \O$,
+\end{corollary}
+
+\begin{demo}
+    Seja $p \in \partial M$. Seja $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ parametrização com $x_0 = \varphi ^{-1}\left( p \right) \in \partial \mathbb{H}^{m}$. Seja $\psi: V_0\subseteq\mathbb{H}^{m} \longrightarrow M$ qualquer outra parametrização em $p$, digamos, com $y_0 = \psi^{-1}\left( p \right) $. Pelo Teorema de Mudança de Parametrização, $\psi^{-1}\circ \varphi : \varphi ^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right)  \right)  \longrightarrow \psi^{-1}\left( \varphi \left( U_0 \right) \cap \psi\left( V_0 \right) \right)  $ é um difeomorfismo de classe $C^{k}$. Além disso, \[
+    \psi^{-1}\circ \varphi \left( x_0 \right) = \psi^{-1}\left( p \right) = y_0
+    .\] Como $\varphi \left( x_0 \right) \in \partial \mathbb{H}^{m}$, então $\psi^{-1}\left( p \right) \in \partial \mathbb{H}^{m}$.\[
+    \implies \psi ^{-1}\left( p \right) \not\in int \mathbb{H}^{m}
+    .\] Pela arbitrariedade de $\psi$, temos que $p \not\in int M$.
+\end{demo}
+
+Agora, precisamos somente provar que $\partial M$ e $int M$ são subvariedades. Veja que $int M$ é claramente uma subvariedade uma vez que, por definição, constitui um aberto e todos os seus pontos possuem uma parametrização de abertos de $\R^{m}$.
+
+Então, fixamos, além de $M$, $p \in \partial M$ e uma parametrização $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ de forma que $\varphi ^{-1}\left( p \right) = x_0 \in \partial \mathbb{H}^{m}$. Sabemos que podemos escolher um aberto $\widetilde{U}_0$ de forma que $U_0 = \widetilde{U}_0 \cap \mathbb{H}^{m}$. Seja \[
+V_0 = \left\{ x = \left( x_1,\ldots,x_{m-1} \right) \in \R^{m-1} : \left( x, 0 \right) := \left( x_1,\ldots,x_{m-1},0 \right) \in \widetilde{U}_0 \cap \partial \mathbb{H}^{m}  \subseteq U_0 \right\} 
+.\] É fácil ver que $V_0$ é um aberto de $\R^{m-1}$, uma vez que seus pontos pertencem a $\widetilde{U}_0$, então podemos pegar uma bola ao seu redor e pegar somente os pontos com última coordenada 0 (TODO: verificar). Considere
+\begin{align*}
+    i:\R^{m-1}  &\longrightarrow \R^{m} \\
+    x &\longmapsto i(x) = \left( x,0 \right)  
+,\end{align*}
+que é linear (logo $C^{\infty}$), e $i\left( V_0 \right) = \widetilde{U}_0 \cap \partial \mathbb{H}^{m}$. Chame \[
+i_0:= i\Big|_{V_0}: V_0 \longrightarrow \R^{m}
+.\] Assim, $i_0\left( V_0 \right) = i\left( V_0 \right) = \widetilde{U}_0 \cap \partial \mathbb{H}^{m}$.
+
+Ponha $\zeta :=\varphi \circ i_0 : V_0\subseteq\R^{m-1} \longrightarrow \R^{n}$. (TODO: verifique que 1) $\zeta$ é de classe $C^{k}$, 2) $\zeta $ é imersão, i.e., $D\zeta_x$ é injetora $\forall x\in V_0$). Por construção, $\zeta \left( V_0 \right) \subseteq \partial M$. Além disso, $\zeta \left( V_0 \right) = \varphi \left( \widetilde{U}_0 \cap \partial \mathbb{H}^{m} \right) = \widetilde{U} \cap \partial M$, logo, um aberto. 
+[ Seja $q\in \widetilde{U} \cap \partial M \subseteq \widetilde{U} \cap M = \varphi \left( U_0 \right) $, $\implies \exists ! z\in U_0$ com $\varphi \left( z \right) =q$. Mas $q\in \partial M \implies z\in \varphi ^{-1}\left( q \right) \in \partial \mathbb{H}^{m}$. $z=\left( z_1,\ldots,z_{m-1},0 \right) \in \widetilde{U}_0 \cap \partial \mathbb{H}^{m} \implies \hat{z} = \left( z_1,\ldots,z_{m-1} \right) \in V_0 $ e $q = \varphi \left( z \right) $... $\implies \widetilde{U}\cap \partial M \subseteq \zeta\left( V_0 \right) $.]  Verifique também que $\zeta$ é uma bijeção sobre sua imagem.
+
+$\vdash \zeta^{-1} : \zeta\left( V_0 \right) = \widetilde{U}\cap \partial M \longrightarrow V_0$ é contínua. Veja que \[
+\zeta \left( z \right) = \varphi \circ i_0\left( z \right) 
+.\] Note que $\zeta \left( V_0 \right) \subseteq \varphi \left( V_0 \right) $ \[
+\implies \varphi ^{-1}\Big|_{\zeta\left( V_0 \right) } : \zeta\left( V_0 \right)  \longrightarrow U_0
+\] é contínua. Considere
+\begin{align*}
+    \pi_1: \R^{m} &\longrightarrow \R^{n-1} \\
+    x\in \R^{m-1},t\in \R &\longmapsto \Pi_1(x\in \R^{m-1},t\in \R) = x
+.\end{align*}
+Veja que é uma aplicação linear, $C^{\infty}$ e $\pi_1\left( x,0 \right) = x$. Logo \[
+\pi_1\Big|_{\widetilde{U}_0 \cap \partial \mathbb{H}^{m}} \circ i_0 = \mathbb{I}_{V_0}
+.\] Considere \[
+\chi := \pi_1\Big|_{\widetilde{U}_0\cap \partial \mathbb{H}^{m}} \circ \varphi ^{-1}\Big|_{\zeta\left( V_0 \right) = \varphi \left( U_0\cap \partial M \right) }: \zeta\left( V_0 \right)  \longrightarrow V_0
+.\] Então $\forall x\in V_0$, temos \[
+\chi \circ \zeta\left( x \right) = \chi \left( \varphi \left( i_0\left( x \right)  \right)  \right) = \pi_1\Big|_{\widetilde{U}_0\cap \partial \mathbb{H}^{m}} \circ \varphi ^{-1} \left( \varphi \left( i_0\left( x \right)  \right)  \right) = \pi_1 \circ i_0 \left( x \right) = x.
+,\] ou seja, \[
+\chi \circ \zeta = \mathbb{I}_{V_0}\left( x \right) 
+.\] Isso mostra que $\chi$ é inversa à esquerda, mas $\zeta$ é bijeção, logo $\chi$ é inversa também à direita, portanto, inversa.$\dashv$
+
+therefore, $\zeta$ é uma parametrização de dimensão $m-1$ e classe $C^{k}$.
+
+\begin{prop}
+    Seja $f : U\subseteq\R^{n} \longrightarrow \R$, $n\ge 2$, de classe $C^{k}$. Seja $c\in Im\left( f \right) $ um valor regular (i.e., $\forall x\in f^{-1}\left( c \right) $, $\nabla f\left( x \right) \neq 0$). Então, \[
+    M = \left\{ x \in U : f\left( x \right) \le c \right\} 
+    \] é subvariedade de $\R^{n}$ de codimensão 0 e bordo \[
+    \partial M = f^{-1}\left( c \right) 
+    .\] 
+\end{prop}
+\begin{demo}
+    \begin{problem}
+	Complete a demonstração.
+    \end{problem}
+
+    Pelo teorema da função implícita, podemos tomar um aberto que intersecta o bordo de $M$ que pode ser mapeado por um difeomorfismo $\Phi$ em um gráfico (?). Já provamos que a região abaixo do gráfico é uma subvariedade e o gráfico é seu bordo. Lembre que $\nabla f$ é ortogonal à superfície de nível $f^{-1} \left( c \right) $.
+\end{demo}
+
+\begin{eg}
+    Fixe $a,b,c > 0$. Defina
+    \begin{align*}
+        f: \R^3 &\longrightarrow \R \\
+        x,y,z &\longmapsto f(x,y,z) = \frac{x^2}{a^2} + \frac{y^2}{b^2} + \frac{z^2}{c^2}
+    .\end{align*}
+    Veja que $1 \in Im f$ é um valor regular. Então, \[
+    M = \left\{ \left( x,y,z \right) \in \R^3 : f\left( x,y,z \right) \le 1 \right\} 
+    \] é uma subvariedade de dimensão $3$ e classe $C^{\infty}$ com bordo \[
+    \partial M = \left\{ \left( x,y,z \right) \in R^3 : f\left( x,y,z \right) = 1 \right\} 
+    .\]
+
+    Em particular, \[
+    \overline{B}_a = \left\{ \left( x,y,z \right) \in \R^3 : x^2 + y^2 + z^2 \le a^2 \right\} 
+    \] é subvariedade de dimensão 3 e classe $C^{\infty}$.
+
+    Isso é fácil de generalizar para dimensão $n$.
+\end{eg}
+
+\begin{problem}
+    Seja $M\subseteq \R^{n}$ uma subvariedade de classe $C^{k}$ e dimensão $m$. Seja $g: U\subseteq\R^{n} \longrightarrow \R^{n+l}$ ($l\ge 0$) um mergulho de classe $C^{k}$, e suponha que $M \subset U$. Prove que $g\left( M \right)$ é subvariedade de $\R^{n+l}$ de dimensão $m$ e classe $C^{k}$.
+\end{problem}
+
