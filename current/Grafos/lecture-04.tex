@@ -1,0 +1,58 @@
+\lecture{5}{18.02.2021}{Caminhos e ciclos eulerianos}
+
+\section*{Caminhos e ciclos}
+
+\begin{definition}
+    Dado um grafo $G=\left( V,E \right) $, dizemos que uma sequência representada por $\left<v_1,\ldots,v_n \right>$ é um \emph{caminho} em $G$ se \[
+    \left( v_{i-1},v_i \right) \in E, \forall i=2,\ldots,n
+    \] e \[
+    \left( v_i,v_{i+1} \right) \in E, \forall i=1,\ldots,n-1
+    .\] 
+    
+    Veja que essa definição é válida para grafos dirigidos.
+\end{definition}
+
+\begin{definition}
+    Dado um grafo $G=\left( V,E \right) $, dizemos que um caminho $\left<v_1,\ldots,v_n \right>$ é um \emph{ciclo} se $v_1=v_n$.
+\end{definition}
+
+\section*{Ciclos hamiltonianos e eulerianos}
+
+\begin{problem}
+    (Caminho Hamiltoniano) Dado um grafo $G=\left( V,E \right) $ (usualmente não dirigido), um \emph{caminho hamiltoniano} $\left< v_1,\ldots,v_n\right>$ é tal que \[
+    \forall v \in V, \exists i\in \{1,\ldots,n\} \text{ tal que }v=v_i
+    \] e \[
+    \forall i,j \in \{1,\ldots,n\} , i\neq j \implies v_i \neq v_j
+    .\] 
+\end{problem}
+
+\begin{problem}
+    (Caminho Euleriano) Dado um grafo $G=\left( V,E \right) $ (usualmente não dirigido), um \emph{caminho euleriano} $\left< v_1,\ldots,v_n\right>$ é tal que \[
+    \forall \left( v_k,v_l \right) \in E, \exists i\in \{1,\ldots,n-1\} \text{ tal que }\left( v_k, v_l \right) = \left( v_i, v_{i+1} \right) 
+    \] e \[
+    \forall i,j \in \{1,\ldots,n-1\} , i\neq j \implies \left( v_i,v_{i+1} \right) \neq \left( v_j, v_{j+1} \right) 
+    .\] 
+\end{problem}
+
+\begin{note}
+    Veja que para cada problema de caminho, existe um problema de ciclo derivado.
+\end{note}
+
+\subsection*{Algoritmo de Hierholzer}
+
+O algoritmo de Hierholzer resolve o problema do \emph{ciclo euleriano} com complexidade $O\left( \left| E \right|  \right) $.
+
+\begin{intuition}
+    O algoritmo caminha pelo grafo até encontrar um ciclo qualquer. A partir disso, ele remove as arestas que já foram visitadas e os vértices que ficarem isolados. Então, um vértice que já foi visitado no ciclo encontrado é utilizado como ponto de partida no grafo resultante para encontrar um novo ciclo, de forma recursiva. O ciclo resultante, então, é injetado no ciclo anterior.
+\end{intuition}
+
+\subsection*{Algoritmo de Bellman-Held-Karp}
+
+O algoritmo de Bellman-Held-Karp resolve o problema do caixeiro viajante e pode ser usado para resolver o problema do ciclo hamiltoniano.
+
+\begin{problem}
+    (Caixeiro Viajante) Seja um grafo não-dirigido e ponderado $G=\{V,E,w\} $ completo, i.e., $E=V\times V$. Encontrar o ciclo hamiltoniano de menor custo.
+\end{problem}
+
+O algoritmo de Bellman-Held-Karp é uma solução que usa programação dinâmica que resolve esse problema em $O\left( 2^{\left| V \right|} \left| V \right|^2 \right) $. Ambos os problemas são NP-Hard. A redução do problema do ciclo hamiltoniano ao problema do caixeiro viajante é feita adicionando arestas de peso infinito ao grafo original. Assim, se o ciclo resultante tem peso infinito, não existe um ciclo hamiltoniano.
+
