@@ -1,0 +1,83 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 4}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+ 
+\maketitle
+
+\section*{Objetivo}
+ 
+Esse roteiro de experimentos visa desenvolver familiaridade com o uso de diodos através de modelos de componentes reais (1N4001) em arranjos comuns, demonstrados através dos 4 circuitos propostos.
+ 
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+
+Considerando o diodo ideal, o valor de pico na saída seria o mesmo da entrada, então $V_{o,p} = 10 V$. Já o valor médio da tensão de saída pode ser encontrado por \[
+V_{o,med} = \frac{1}{T}\int_{0}^{T} \left| V_{o}\left( t \right)  \right| dt = \frac{1}{T}\left( \frac{T}{2}\cdot \frac{10}{2} \right) = 2,5\,V
+.\] 
+
+Considerando a aproximação do diodo com uma queda de tensão de $0,7\,V$, o valor de pico da saída simplesmente sofre a queda do diodo, i.e., $V_{o,p} = 10 - 0,7 = 9,3\, V$, enquanto o valor médio da tensão de saída pode ser aproximado por \[
+V_{o,med} = \frac{1}{T}\int_{0}^{T} \left| V_{o}\left( t \right)  \right| dt \approx \frac{1}{T}\left( \frac{T}{2}\cdot \frac{V_{o,p}}{2} \right) = 2,325\,V
+.\] 
+
+Para o circuito implementado no LTSpice com o modelo do diodo 1N4001, a medição foi feita com ferramentas do LTSpice conforme na figura \ref{fig:figures-lab4-1-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab4-1.png}
+    \caption{Medição realizada em $V_o$ utilizando as ferramentas do LTSpice.}
+    \label{fig:figures-lab4-1-png}
+\end{figure}
+
+Os resultados medidos foram conforme na tabela abaixo.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c}
+	Medida & Resultado \\
+	\hline
+	$V_{i,p}$ & 9,98 V \\
+	$V_{o,p}$ & 9,41 V \\
+	$V_{i,med}$ & 0 V \\
+	$V_{o,med}$ & 2,25 V
+    \end{tabular}
+\end{table}
+
+Ainda que o valor de pico da tensão de saída seja maior na simulação do que na aproximação feita para o diodo não ideal, o valor médio encontrado é inferior. Isso é esperado uma vez que a aproximação feita considera que a saída no semiciclo positivo é sempre proporcional à entrada, o que não é verdade pois há um atraso até que a tensão de entrada supere a tensão de condução do diodo.
+
+\exercise{4}
+
+O resultado das medições feitas no circuito simulado pode ser observado na figura \ref{fig:figures-lab4-4-png} e na tabela posterior.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab4-4.png}
+    \caption{Medição realizada em $V_o$ utilizando as ferramentas do LTSpice.}
+    \label{fig:figures-lab4-4-png}
+\end{figure}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c}
+	Medida & Resultado \\
+	\hline
+	$V_{i,pp}$ & 19,98 V \\
+	$V_{o,pp}$ & 15,48 V \\
+	$V_{o,min}$ & -9,95 V \\
+	$V_{o,máx}$ & 5,53 V \\
+    \end{tabular}
+\end{table}
+
+O comportamento da tensão de saída pode ser compreendido em dois momentos. Quando a tensão de entrada $V_i$ é menor do que a tensão $V_x$ somada da queda de tensão do diodo, não há corrente e, portanto, não há queda sobre o resistor $R_1$, logo, $V_o = V_i$. Quando $V_i$ é maior do que $V_x$ somada à queda do diodo, então há uma corrente no circuito e, portanto, o diodo sofre a queda de tensão que, pela malha interna formada, é equivalente à diferença entre a tensão de entrada e a tensão de referência ($V_x$ + diodo), logo, a tensão de saída satura na tensão de referência.
+
+\section*{Conclusão}
+
+TODO
+
+\end{document}
