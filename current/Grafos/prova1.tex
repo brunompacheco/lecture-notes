@@ -1,0 +1,135 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Prova 1}
+\author{Bruno M. Pacheco (16100865)\\
+Grafos}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Podemos utilizar uma modificação do algoritmo de busca em largura (Algoritmo 3 das anotações), que já utiliza essa abordagem de varrer o grafo pelos vizinhos do vértice de origem. Não precisamos mais registrar a distância nem o predecessor. Entretanto, precisamos controlar os níveis de cada vértice em relação ao original, uma vez que denotam o instante de tempo em que foram contaminados. Para isso, ao invés de varrer as distâncias ao final, podemos controlar os recém infectados ($Q_{i+1}$). O algoritmo de busca em largura modificado pode ser observado abaixo.
+
+\begin{algorithm}[H]
+    \KwIn{um grafo $G=\left( V, E \right) $, vértice $x\in V$, inteiro $k$}
+    $C_v \gets  $ false $\, \forall v\in V$ \\
+    $C_x\gets $ true \\
+    // Mantemos controle da propagação por unidade de tempo \\
+    $Q_0\gets $ Fila()\\
+    $Q_0$.enqueue($x$) \\
+
+    // Conterá as unidades de tempo em que houveram mais do que $k$ infecções \\
+    $K \gets $ conjuntoVazio()
+
+    $i \gets 0$
+
+    \While{$Q_{i}$.empty()$=$ false}{
+	$i\gets i + 1$\\
+	$Q_{i} \gets $ Fila() \\
+	\ForEach{$u\in Q_{i-1}$}{
+	    \ForEach{$v\in N\left( u \right) $}{
+		\If{$C_v = $ false}{
+		    $C_v \gets $ true \\
+		    $Q_{i}$.enqueue($v$)
+		}
+	    }
+	} 
+	\If{$\left| Q_{i} \right|  \ge k$}{
+	    $K$.adiciona$(i)$
+	}
+    }
+
+    \Return{$K$}
+\end{algorithm}
+
+Apesar de adicionar um laço, não impactamos a quantidade de iterações em cima dos vértices, uma vez que esse laço se faz presente somente para separar as unidades de tempo. Portanto, mantemos a mesma complexidade computacional do algoritmo de busca em largura, ou seja, $O\left( \left| V \right| + \left| E \right|   \right) $.
+
+\exercise{2}
+
+Com as informações fornecidas da propriedade, podemos montar um grafo completamente conectado em que cada vértice representa um ponto de aferição ou a guarita e as arestas são valoradas pelas distâncias entre as localidades de interesse. Dessa forma, o algoritmo de Bellmann-Held-Karp como definido no Algoritmo 7 das anotações, nos retorna a distância total percorrida no caminho mínimo. Dessa forma, nos basta verificar quais dos funcionários são rápidos o suficiente. A implementação pode seguir o descrito no algoritmo abaixo.
+
+\begin{algorithm}[H] 
+    \KwIn{conjunto de funcionários $F$, função $v$, conjunto $A$, ponto $g$, função $d$, valor $k$}
+    // Monta o grafo dos pontos pelos quais os guardas passam \\
+    $V \gets A \cup \left\{ g \right\} $ \\
+    $E \gets V\times V$ \\
+    \ForEach{$\left\{ u, v \right\} \in E$}{
+	$w\left( \left\{ u, v \right\}  \right) \gets \|d\left( u \right) - d\left( v \right) \|$ 
+    }
+    // $c$ a distância do ciclo hamiltoniano mínimo \\
+    $c \gets$ Bellmann-Held-Karp$\left( G \right) $ \\
+
+    $F_v \gets $ conjuntoVazio$()$\\
+    \ForEach{$f \in F$}{
+	\If{$\frac{c}{v\left( f \right)}  < k$}{
+	    $F_v$.adiciona$(f)$ \\
+	}
+    }
+    \Return{$F_v$}
+\end{algorithm}
+
+\exercise{3}
+
+Podemos abordar esse problema utilizando o algoritmo de Dijkstra conforme Algoritmo 11 das anotações. Usaremos ele para encontrar os caminhos mínimos de $s$ até os vértices de $P$ e desses para todos os vértices de $I$. Para todo $i \in I$, como o grafo não é dirigido, podemos encontrar o caminho de todos os postos para $i$ simplesmente invertendo o caminho mínimo de $i$ para os postos, que pode ser obtido aplicando Dijkstra com $i$ como fonte. A partir disso, basta encontrar o posto de combustível tal que a soma dos caminhos mínimos de $s$ para $p$ e de $p$ para $i$ seja mínima.
+
+Essa abordagem pode ser vista no algoritmo abaixo. Note o uso da função "caminho", que indica a construção de um caminho usando o vetor de antecessores conforme resultante do algoritmo de Dijkstra, com um dado destino. Além disso, a função "reverte" é uma simples inversão do caminho de entrada.
+
+\begin{algorithm}
+    \KwIn{um grafo $G=\left( V, A, w \right) $, vértice $s \in V$, $P\subseteq V$, $I \subseteq V$}
+    $D^{(s)}, A^{(s)} \gets $ Dijkstra$\left( G, s \right) $ \\
+
+    $D_i \gets \infty\, \forall i \in I$ \\
+    $p_i \gets $ null $\forall i \in I$ \\
+    \ForEach{$i \in I$}{
+	$D^{(i)}, A^{(i)} \gets $ Dijkstra$\left( G, i \right) $ \\
+
+	$V_i \gets$
+	$G_i \gets \left(  \right) $
+	\ForEach{$p \in P$}{
+	    \If{$D^{(s)}_p + D^{(i)}_p < D_i$}{
+		$D_i \gets D^{(s)}_p + D^{(i)}_p $ \\
+		$p_i \gets p$
+	    }
+	}
+	$c^{(s)}_i \gets \,$caminho$\left( A^{(s)}, p \right)$ \\
+	$c^{(i)}_i \gets \,$caminho$\left( A^{(i)}, p \right)$ \\
+	$c_i \gets c^{(s)}_i + $ reverte$\left(  c^{(i)}_i\right) $
+    }
+    \Return{c}
+\end{algorithm}
+
+\exercise{4}
+
+Podemos modificar o algoritmo de Floyd-Warshall apresentado no Algoritmo 12 das anotações para computar a quantidade de arcos do caminho mínimo durante os relaxamentos, ou seja, cada vez que há um relaxamento nós atualizamos a quantidade de arcos no caminho. Para isso, podemos utilizar uma nova matriz de adjacências. Uma implementação possível pode ser vista no algoritmo abaixo.
+
+\begin{algorithm}[H] 
+    \KwIn{um grafo $G=\left( V, E, w \right) $}
+    $D^{(0)} \gets  W\left( G  \right) $\\
+
+    // $G_a$ o grafo com arestas de peso unitário, para gerar a matriz $A$ \\
+    $w_a\left( \left( u,v \right)  \right) \gets 1\, \forall \left( u,v \right) \in E$ \\
+    $G_a \gets \left( V, E, w_a \right) $
+    $A^{(0)} \gets W\left( G_a \right) $ \\
+
+    \ForEach{$k\in V$}{
+	$D^{(k)} \gets D^{(k-1)}$, uma cópia  \\
+	$A^{(k)} \gets A^{(k-1)}$, uma cópia  \\
+	\ForEach{$u\in V$}{
+	    \ForEach{$v\in V$}{
+		\If{$d_{uk}^{(k-1)} + d_{kv}^{(k-1)} < d_{uv}^{(k)}$}{
+		    $d_{uv}^{(k)} \gets d_{uk}^{(k-1)} + d_{kv}^{(k-1)}$ \\
+		    $a_{uv}^{(k)} \gets a_{uk}^{(k-1)} + a_{kv}^{(k-1)}$ \\
+		}
+	    }
+	}
+    }
+
+    \Return{$\left( D^{(\left| V \right| )}, A^{(\left| V \right| )} \right) $}
+\end{algorithm}
+
+Dessa forma, o algoritmo retorna não só o custo dos caminhos mínimos entre quaisquer dois vértices através da matriz $D$ como também a quantidade de arcos no caminho mínimo através da matriz $A$, uma vez que essa é "relaxada" (nem sempre diminui a quantidade de arcos) somente quando a matriz $D$ o é.
+
+\end{document}
