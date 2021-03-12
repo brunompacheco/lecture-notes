@@ -1,0 +1,202 @@
+\lecture{12}{10.03.2021}{Cálculo diferencial em subvariedades}
+
+\begin{remark}
+        Dimensão é invariante por mudança de parametrizações.
+
+	Pela mudança de parametrizações, é possível estabelecer mapeamentos entre as coordenadas de duas parametrizações e mostrar que derivada desses mapeamentos é um isomorfismo, logo, os dois espaços das coordenadas tem que possuir a mesma dimensão.
+
+	Com isso, vemos que um conjunto desconexo resultante da união de duas subvariedades de diferentes dimensões não é uma subvariedade.
+\end{remark}
+
+Uma questão particular das subvariedades é que são objetos do cálculo.
+
+\section*{Extensão da definição de diferenciabilidade}
+
+\begin{definition}
+    Seja $M\subseteq\R^{n}$ uma subvariedade de dimensão $m$ e classe $C^{k}$. Uma aplicação $f: M \longrightarrow \R^{l}$ é dita ser \emph{diferenciável} em $p \in M$ se $\exists \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ uma parametrização em $p$ tal que $f\circ \varphi : U_0 \longrightarrow \R^{l}$ é derivável em $\varphi ^{-1}\left( p \right) \in U_0$.
+\end{definition}
+
+\begin{remark}
+    Essa definição é invariante por mudança de parametrização no sentido: se $\exists $ uma parametrização $\varphi $ em $p$ tal que $f\circ \varphi $ é derivável em $\varphi ^{-1}\left( p \right) $, então $\forall $ parametrização isso ocorre.
+
+    Sejam $\psi : V_0\subseteq\mathbb{H}^{m} \longrightarrow M$ e $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ parametrizações em $p$. Seja também $f: M \longrightarrow \R^{l}$ tal que $f\circ \varphi : U_0 \longrightarrow M$ é derivável em $\varphi ^{-1}\left( p \right) =: x_0$. Chame $y_0:=\psi^{-1}\left( p \right) $.
+
+    $\vdash$ $f\circ \psi$ é derivável em $y_0$. Queremos estudar o comportamento de \[
+    f\circ \varphi \circ \varphi ^{-1}\circ \psi
+    .\] Tome $V_0'$ de forma que $y_0\in V_0' \subseteq V_0$, $\psi\left( V_0' \right) \subseteq\varphi \left( U_0 \right) $, então conseguimos estabelecer uma aplicação de classe $C^{k}$ $\varphi ^{-1}\circ \psi \Big|_{V_0'}$. Aí basta aplicar a regra da cadeia à composição de $\left( f \circ \varphi  \right) $, que é diferenciável, por hipótese, em $x_0 = \varphi ^{-1}\circ \psi\left( y_0 \right) $, sendo também $\varphi ^{-1}\circ \psi$ de classe $C^{k}$, em particular, diferenciável em $y_0$.$\dashv$
+\end{remark}
+
+\begin{note}
+    A classe de diferenciabilidade é definida de forma idêntica à diferenciabilidade, i.e., uma função é de classe $C^{b}$ se a sua composição com uma parametrização é de classe $C^{b}$. De forma análoga ao discutido acima, vemos também que essa definição é invariante por reparametrização.
+
+    Veja que isso acaba restringindo a classe de diferenciabilidade de uma função em $M$ à classe da subvariedade, i.e., $b\le k$.
+\end{note}
+
+\begin{remark}
+    Se $f$ é derivável em $p$, então é contínua em $p$. Isso pois, pela nossa definição, sua composição com uma parametrização é derivável e, portanto, contínua, uma vez que $\varphi ^{-1}$ é contínua.
+\end{remark}
+
+\begin{remark}
+    Se $f, g: M \longrightarrow \R^{l}$ são deriváveis (ou de classe $C^{b}$) em $p \in M$, então
+    \begin{align*}
+        f+g: M &\longrightarrow \R^{l} \\
+        q &\longmapsto f+g(q) = f\left( q \right) + g\left( q \right) 
+    \end{align*}
+    também o é.
+
+    Da mesma forma para
+    \begin{align*}
+        \lambda . f: M &\longrightarrow \R^{l} \\
+        y &\longmapsto \lambda . f(y)
+    \end{align*}
+    com $\lambda\in \R$.
+
+    Se $l=1$, podemos ainda tomar $f . g: M \longrightarrow \R$ e ver que também é diferenciável.
+\end{remark}
+
+\begin{remark}
+    Seja $h: U\subseteq\R^{n} \longrightarrow \R^{l}$ de classe $C^{b}$ ($b\le k$) e $U$ aberto com $M\subseteq U$. Então $h\Big|_{M} : M \longrightarrow \R^{l}$ é $C^{b}$.
+
+    De fato, $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow \R^{n}$ é $C^{k}$, logo \[
+    h\Big|_{M} \circ  \varphi = h \circ \varphi 
+    \] que é diferenciável no sentido usual.
+\end{remark}
+
+\begin{note}
+    O sentido usual de diferenciabilidade pode ser visto como um caso particular da nossa definição uma vez que para todo aberto podemos pegar a identidade como parametrização e temos uma subvariedade de codimensão 0.
+\end{note}
+
+\begin{note}
+    \[
+	\mathbb{S}^{n} := \left\{ \left( x_1,\ldots,x_{n+1} \right) \in \R^{n+1}: x_1^2+\ldots+x_{n+1}^2 = 1 \right\} 
+    \] é uma subvariedade $C^{\infty}$ uma vez que é (TODO) valor regular de uma função.
+\end{note}
+
+\begin{eg}
+    Seja \begin{align*}
+        \pi_3: \R^{3} &\longrightarrow \R \\
+        x,y,z &\longmapsto \pi_3(x,y,z) = z
+    ,\end{align*}
+    que é $C^{\infty}$ no sentido usual.
+
+    Seja $M = \mathcal{S}^2$, $C^{\infty}$. Então $h := \pi_3\Big|_{\mathbb{S}^2}: \mathbb{S}^2 \longrightarrow \R$ é $C^{\infty}$.
+\end{eg}
+
+\begin{definition}
+    Sejam $M\subseteq\R^{n}$, $N\subseteq\R^{l}$ subvariedades de dimensões $m$ e $\alpha$, respectivamente, e classe $C^{k}$. Uma função $f: M \longrightarrow N$ é de classe $C^{b}$ se $f': M \longrightarrow \R^{l}$ (simples mudança de contra-domínio) é de classe $C^{b}$.
+\end{definition}
+
+\begin{prop}
+    Sejam $M\subseteq\R^{n}$, $N\subseteq\R^{l}$ subvariedades de dimensões $m$ e $\alpha$, respectivamente, e classe $C^{k}$. $f: M \longrightarrow N$ é de classe $C^{b}$ sse $\forall p \in M\, \exists \varphi : U_0\subseteq\mathbb{H}^{m}  \longrightarrow M$ e $\psi: V_0\subseteq\mathbb{H}^{\alpha} \longrightarrow N$ parametrizações em $p$ e $f\left( p \right) $ de forma que
+    \begin{enumerate}
+        \item $f\left( \varphi \left( U_0 \right)  \right) \subseteq\psi\left( V_0 \right) $
+	\item $\psi^{-1}\circ f \circ \varphi : U_0 \longrightarrow V_0$ é de classe $C^{b}$
+    \end{enumerate}
+\end{prop}
+
+\begin{demo}
+    ($\implies$) Fixe $p \in M$. Seja $\varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow M$ uma parametrização em $p$ tal que $f\circ \varphi : U_0 \longrightarrow \R^{l}$ sejam $C^{b}$. Seja $\psi: V_0\subseteq\mathbb{H}^{\alpha} \longrightarrow N$ parametrização em $f\left( p \right) \in N$.
+
+    $f\circ \varphi $ é contínua, portanto, $\exists x_0:= \varphi ^{-1}\left( p \right) \subseteq U_0' \subseteq U_0$ aberto de modo que $f\left( \varphi \left( U_0 ' \right)  \right) \subseteq\psi \left( V_0 \right) $.
+
+    $\varphi ' := \varphi \Big|_{U_0 '}:  U_0'\longrightarrow M $ ainda é parametrização e \[
+    f\circ \varphi '\left( U_0' \right) \subseteq \psi\left( V_0 \right) 
+    .\] Como essa composição $f\circ \varphi '$ é $C^{b}$ e $\psi$ é uma parametrização, pelo lema da aula passada temos que \[
+    \psi^{-1}\circ  f \circ \varphi ' : U_0' \longrightarrow V_0
+    \] é $C^{b}$.
+
+    ($\impliedby $) Sejam $\varphi : U_0\subseteq\mathbb{H}^{m}  \longrightarrow M$ e $\psi: V_0\subseteq\mathbb{H}^{\alpha} \longrightarrow N$ parametrizações em $p$ e $f\left( p \right) $, resp., com $f\left( \varphi \left( U_0 \right)  \right) \subseteq \psi\left( V_0 \right) $ tal que \[
+    \psi^{-1} \circ f \circ \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow V_0 \subseteq \mathbb{H}^{\alpha}
+    \] seja $C^{b}$. Isso nos permite compor $\psi \circ \left( \psi^{-1} \circ f \circ \varphi  \right) = f \circ \varphi : U_0\subseteq\mathbb{H}^{m} \longrightarrow \R^{l} $ e afirmá-la $C^{b}$.
+\end{demo}
+
+\begin{eg}
+    $M = N = \mathbb{S}^{n} \subseteq\R^{n+1}$ e seja $T: \R^{n+1} &\longrightarrow \R^{n+1}$ \emph{isometria linear} com respeito à norma euclideana, ou seja, $T$ é linear e isométrica no sentido de que \[
+    \|T\left( v \right) \|_{eucl.} = \|v\|_{eucl.} \, \forall v\in \R^{n+1}
+.\] Veja que essa é uma aplicação que preserva distâncias. Ainda mais, essa é uma aplicação injetora sobre todo o espaço vetorial, logo, sobrejetora (?) $\implies$ um isomorfismo.
+
+Note que $T\left( \mathbb{S}^{n} \right) \subseteq \mathbb{S}^{n}$. Portanto, posso ver $T\Big|_{\mathbb{S}^{n}}: \mathbb{S}^{n} \longrightarrow \mathbb{S}^{n}$. Como $T$ é linear, então é $C^{\infty}$, assim sua restrição é $C^{\infty}$ no sentido de subvariedade (TODO: verificar).
+
+Sua inversa possui as mesmas características (inclusive a inversa da restrição é a restrição da inversa) e, portanto, é um difeomorfismo no sentido de subvariedade.
+\end{eg}
+
+\begin{eg}
+    O torus dentro de $\R^{3}$ nos permite fazer uma rotação no eixo ortogonal ao seu orifício que mantém ele inalterado.
+
+    Fixamos $0<r<R$. Construímos
+    \begin{align*}
+        \varphi : \left[ 0, 2\pi \right] \times \left[ 0,2\pi \right]  &\longrightarrow \R^{3} \\
+	u,v &\longmapsto \varphi (u,v) = \left( x:=(R + r\sin v)\cos u, y:=\left( R+r\sin v \right) \sin u,z:= r\cos v \right) 
+    .\end{align*}
+    Definimos, então, \[
+    \mathbb{T}^2 := Im\, \varphi 
+    .\] 
+
+    Veja que \[
+    \sqrt{ x^2+y^2} = \left( R+r\sin v \right)
+    \] \[
+    \left( \sqrt{ x^2+y^2} - R \right)^2 + z^2  = r^2
+    .\] 
+
+    Defina
+    \begin{align*}
+	U :=& \left\{ \left( x,y,z \right) \in \R^{3}: x^2+y^2 > 0 \right\} \\
+	=& \R^{3}\setminus \text{(eixo z)}
+    .\end{align*}
+    \begin{align*}
+        g: U &\longrightarrow \R \\
+        x,y,z &\longmapsto g(x,y,z) = \left( \sqrt{ x^2+y^2} - R \right)^2 + z^2  - r^2
+    .\end{align*}
+    Então \[
+    \mathbb{T}^2 = g^{-1}\left( 0 \right) 
+    ,\] valor regular.
+
+    Considere $\theta \in \left[ 0, 2\pi \right)$
+    \begin{align*}
+        T_{\theta}: \R^3 &\longrightarrow \R^{3} \\
+        x,y,z &\longmapsto T_{\theta}(x,y,z) = \begin{bmatrix} 
+	    \cos\theta & -\sin\theta & 0 \\
+	    \sin\theta & \cos\theta & 0 \\
+	    0 & 0 & 1
+	\end{bmatrix} \begin{bmatrix} x \\ y \\ z \end{bmatrix} 
+    .\end{align*}
+    Se \[
+    T_{\theta}\left( x,y,z \right) = \left( x', y', z' \right) 
+    \] \[
+    \implies x'^2 + y'^2 = x^2 + y^2
+    ,\] e $z' = z$ pela construção da rotação (matriz). Dessa forma, essa aplicação preserva a restrição da imagem do valor regular da função, portanto \[
+    T_{\theta}\left( \mathbb{T}^2 \right) \subseteq \mathbb{T}^2
+    .\] 
+\end{eg}
+
+\begin{problem}
+    Sejam $M, N, P$ subvariedades. $f: M \longrightarrow N$ e $g: N \longrightarrow P$ de classe $C^{b}$. Mostre que $g\circ f : M \longrightarrow P$ é de classe $C^{b}$.
+\end{problem}
+
+\begin{remark}
+    Se $M$ tem classe $C^{k}$ \[
+    \implies Id_M : M \longrightarrow M
+\] é difeomorfismo (uma vez que a inversa é garantida por definição) de classe $C^{k}$.
+\end{remark}
+
+\subsection*{Espaços tangentes a subvariedades}
+
+O problema que surge quando pensamos na noção de derivadas para subvariedades é que a noção de derivada é pensada como uma transformação linear, mas nossos objetos agora não suportam esse tipo de operação. Para resolver esse problema, recorremos aos espaços tangentes.
+
+\begin{intuition}
+    Uma subvariedade sem bordo, localmente, sempre pode ser pensada como uma superfície regular, ou seja, é bem comportada em vizinhanças de seus pontos. Assim, em um dado ponto $p$ da subvariedade, podemos estudar os caminhos que passam por $p$.
+
+    Pensando, analogamente, no caso tridimensional, pensamos na subvariedade como uma superfície suave. Assim, podemos computar as velocidades desses diversos caminhos que passam por $p$. A composição desses vetores velocidade foram o espaço tangente no ponto $p$.
+\end{intuition}
+
+\begin{definition}
+    Seja $M\subseteq\R^{n}$ uma subvariedade de dimensão $m$ e classe $C^{k}$. Seja $p \in int\, M$. Então, o \emph{espaço tangente de $M$} (ou \emph{a} $M$) \emph{em $p$} é \[
+    T_p\, M := \left\{ v\in \R^{n}: \exists \alpha : \left( -\epsilon, \epsilon \right)  \longrightarrow M \subseteq\R^{n} \text{ derivável em 0 tal que }\alpha\left( 0 \right) = p,\text{ e }\alpha'\left( 0 \right) = v  \right\} 
+    .\] 
+\end{definition}
+Veja que $\alpha$ é um caminho que passa por $p$, conforme na intuição. Chamamos $\alpha$ a curva representante de $v$. Além disso, o vetor nulo está em $T_p M$ uma vez que podemos sempre pegar a curva constante.
+
+Em seguida, mostraremos que esse espaço tem a mesma dimensão que $M$. Ainda mais, esse espaço possui uma maneira natural de ser descrito através de parametrizações.
+
+Além disso, veremos que a definição do espaço tangente para os pontos do bordo será um espaço de dimensão $m-1$ que é tangente à subvariedade do bordo.
+
