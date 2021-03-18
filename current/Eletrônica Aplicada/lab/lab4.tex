@@ -51,7 +51,58 @@ Os resultados medidos foram conforme na tabela abaixo.
 
 Ainda que o valor de pico da tensão de saída seja maior na simulação do que na aproximação feita para o diodo não ideal, o valor médio encontrado é inferior. Isso é esperado uma vez que a aproximação feita considera que a saída no semiciclo positivo é sempre proporcional à entrada, o que não é verdade pois há um atraso até que a tensão de entrada supere a tensão de condução do diodo.
 
-\exercise{4}
+\subsection{Circuito 2}
+
+Para calcular o valor teórico de $\Delta V_o$, utilizaremos a equação simplificada \ref{eq:exe2}. Vale ressaltar que para facilitar a visualização dos valores, a fonte foi iniciada em 10V.
+
+\begin{equation}
+    \label{eq:exe2}
+    \Delta V_o = \frac{V_p}{C_1R_1f} = \frac{10}{10k \cdot 1\mu \cdot 1k} = 1V
+\end{equation}
+
+Após isso foi montado o circuito no software LTspice, como mostrado na figura \ref{fig:figures-lab4-2-circuito-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab4-2-circuito.PNG}
+    \caption{Segundo circuito simulado no LTSpice.}
+    \label{fig:figures-lab4-2-circuito-png}
+\end{figure}
+
+Sendo assim, o circuito foi simulado com resultado apresentado no gráfico mostrado na figura \ref{fig:figures-lab4-2-grafico-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab4-2-grafico.PNG}
+    \caption{Resposta de $V_o$ no tempo na simulação do LTspice.}
+    \label{fig:figures-lab4-2-grafico-png}
+\end{figure}
+
+Pelo gráfico acima percebemos que $\Delta V_o = 0.937V \approx 1V$ e que $V_{o,med} \approx 8.74V$, porém vale ressaltar que como a fonte inicia em 10V e o tempo de simulação foi razoavelmente curto, no infinito esse valor tende a diminuir.
+
+\subsection{Circuito 3}
+
+Como requisitado no roteiro, foi montado o circuito no software LTspice, como mostrado na figura \ref{fig:figures-lab4-3-circuito-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab4-3-circuito.PNG}
+    \caption{Terceiro circuito simulado no LTSpice.}
+    \label{fig:figures-lab4-3-circuito-png}
+\end{figure}
+
+Após isso, foi realizada a simulação com resultado apresentado no gráfico mostrado na figura \ref{fig:figures-lab4-3-grafico-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab4-3-grafico.PNG}
+    \caption{Resposta de $V_o$ no tempo na simulação do LTspice.}
+    \label{fig:figures-lab4-3-grafico-png}
+\end{figure}
+
+Como mostrado no gráfico acima, o valor de $V_o$ sobe lentamente ao decorrer dos ciclos. Considerando o tempo de 10ms simulado, temos $V_{i,p} \approx 9,36V$ e $V_{o,med} \approx 8,79V$.
+
+\subsection{Circuito 4}
 
 O resultado das medições feitas no circuito simulado pode ser observado na figura \ref{fig:figures-lab4-4-png} e na tabela posterior.
 
@@ -78,6 +129,7 @@ O comportamento da tensão de saída pode ser compreendido em dois momentos. Qua
 
 \section*{Conclusão}
 
-TODO
+Durante a execução do experimento, foi possível perceber as principais características de comportamento do diodo estudado alimentado por uma onda triangular. Além disso, também foi possível comparar esse valor com equações aproximadas, comprovando que os resultados realmente eram próximos.
 
+Por fim, também foram utilizadas novas ferramentas para análise de gráficos no LTspice. As funções utilizadas desenvolveram mais familiaridade com o \textit{software} e devem ser utilizadas nos próximos experimentos.
 \end{document}

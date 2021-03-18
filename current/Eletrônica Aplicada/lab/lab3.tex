@@ -12,7 +12,7 @@ EEL 7550 - Eletrônica Aplicada}
 
 \section*{Objetivo}
  
-TODO
+Os experimentos executados visam desenvolver familiaridade com a análise de amplificadores considerando as imperfeições, largura de banda finita e \textit{Slew-Rate}. Além disso, o experimento requere analises do diagrama de Bode, consolidando esse método para os alunos.
  
 \section*{Simulações}
 
@@ -70,6 +70,30 @@ Para determinar a resposta do circuito quanto à frequência de entrada, utiliza
 
 Vemos que o circuito tem característica de filtrar altas frequências, portanto, se comporta como um filtro passa-baixa.
 
+\subsection*{Circuito 2}
+
+O circuito foi modelado no software LTspice conforme a figura \ref{fig:figures-lab3-2-circuito-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab3-2-circuito.PNG}
+    \caption{Segundo circuito montado no LTspice.}
+    \label{fig:figures-lab3-2-circuito-png}
+\end{figure}
+
+
+Utilizando novamente a ferramenta "AC Analysis" conseguimos obter o gráfico da figura \ref{fig:figures-lab3-2-grafico-png}. Nesse gráfico podemos observar que a curva inferior é a fase, que repeita o eixo da direita, enquanto a curva superior representa a magnitude do sinal, com escala representada no eixo da direta. Além disso, vale ressaltar que o eixo X representa a frequência.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab3-2-grafico.PNG}
+    \caption{Gráfico de magnitude e fase pela frequência.}
+    \label{fig:figures-lab3-2-grafico-png}
+\end{figure}
+
+
+
+
 \subsection*{Circuito 3}
 
 Destaca-se o uso do gerador de pulso em modo contínuo (sem definir quantidade de pulsos). Também, para garantir uma proximidade do sinal gerado a uma onda quadrada, foi necessário especificar o tempo de subida e descida de forma real, uma vez que deixando como 0 causava uma resposta mais lenta (onda trapezoidal). O circuito montado assim como os resultados podem ser vistos na figura \ref{fig:figures-lab3-3-png}.
@@ -85,6 +109,8 @@ Dessa forma, chegamos em um valor de \emph{slew rate} de aproximadamente $0,32 \
 
 \section*{Conclusão}
 
-TODO
+Os resultados dos circuitos apresentou a característica de cada arranjo, principalmente considerando a resposta da frequência seguindo os gráficos apresentados no roteiro.
+
+Além disso, os valores calculados por meio dos experimentos do circuito 3 são próximos dos valores reais, o que demonstra a qualidade das simulações realizadas.
 
 \end{document}
