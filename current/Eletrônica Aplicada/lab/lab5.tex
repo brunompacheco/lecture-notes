@@ -3,7 +3,7 @@
  
 \begin{document}
  
-\title{Laboratório 4}
+\title{Laboratório 5}
 \author{Bruno M. Pacheco (16100865)\\
 Pedro Y. F. Ceripes (18100681) \\
 EEL 7550 - Eletrônica Aplicada}
@@ -11,7 +11,7 @@ EEL 7550 - Eletrônica Aplicada}
 \maketitle
 \section*{Objetivo}
  
-TODO
+Nesta experiência visamos adquirir familiaridade com duas variantes muito utilizadas do diodo. A primeira, o LED, em um arranjo simples, e a segunda, o diodo Zener, em um circuito regulador e em outro ceifador.
  
 \section*{Simulações}
 
@@ -67,7 +67,55 @@ Foi dobrada a resistência utilizada na simulação e refeita a simulação. Des
 Analisando os resultado é possível perceber que ocorre uma queda pequena na tensão diodo e outra grande, cerca de 50\%, na tensão. Sendo assim, o aumento da resistência faz com que a potência do LED diminua, diminuindo também o brilho gerado por ele.
 
 \subsection*{Circuito 2}
-TODO
+
+O circuito foi montado conforme a figura \ref{fig:figures-lab5_1-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5-2.png}
+    \caption{Circuito regulador de tensão com diodo Zener no LTSpice.}
+    \label{fig:figures-lab5_1-png}
+\end{figure}
+
+\subsubsection*{a}
+
+De acordo com o datasheet fornecido, o componente 1N750 possui tensão Zener de 4,7 volts, portanto, precisamos de uma queda de tensão mínima desse valor sobre a resistência da carga $R_L$, ou seja, \[
+    V_{out} = I_L \cdot R_L = \left( I_R-I_Z \right) R_L
+.\] Assumindo que o diodo Zener é ideal, ou seja, $V_{out} < 4,7 \implies I_Z = 0$, temos $I_R = I_L$, ou seja, \[
+I_R = \frac{12}{R_1 + R_L}
+.\] Assim,
+\begin{align*}
+    V_{out} = \frac{12}{R_1 + R_L}R_L < 4,7 \\
+    \implies \left( 12 - 4,7 \right) R_L < 4,7 R_1 \\
+    \implies R_L < 361 \Omega
+,\end{align*}
+i.e., $R_{L,min} = 361 \Omega$.
+
+\subsubsection*{b}
+
+Veja que $R_L \to \infty \implies I_Z = I_R$, i.e., \[
+    I_R = \frac{12-V_Z}{R_1} \approx 13 \text{ mA}
+.\] Portanto, encontra-se dentro da corrente máxima de 85 mA estabelecida pelo fabricante. Além disso, também nesse caso, temos uma dissipação de potência de \[
+P_Z = 0,013 \cdot V_Z \approx 61,3 mW
+.\] 
+
+\subsubsection*{c}
+
+\begin{table}[H]
+    \centering
+    \caption{Resultados do experimento com o circuito regulador de tensão com diodo Zener.}
+    \label{tab:1-zener}
+    \begin{tabular}{c | c | c | c | c}
+    $R_L\,\left[ \Omega \right] $ & $I_L\,\left[ \text{mA} \right]$ & $I_R\,\left[ \text{mA} \right]$ & $I_Z\,\left[ \text{mA} \right]$ & $V_Z\,\left[ \text{V} \right]$ \\
+    \hline
+    Sem carga & 0 & 13,1 & 13,1 & 4,68 \\
+    1,2 k$\Omega$ & 3,9 & 13,1 & 9,2 & 4,66 \\
+    560 $\Omega$ & 8,3 & 13,2 & 4,9 & 4,62 \\
+    330 $\Omega$ & 13,0 & 13,7 & 0,7 & 4,3 \\
+    \end{tabular}
+\end{table}
+
+Vemos que o comportamento condiz com o esperado pelos resultados teóricos, ou seja, com a resistência abaixo do valor calculado o diodo Zener já não mais opera como um regulador de tensão.
 
 \subsection*{Circuito 3}
 \subsubsection*{a}
@@ -109,6 +157,6 @@ Utilizando as ferramentas do LTspice e a simulação apresentada no item anterio
 
 \section{Conclusão}
 
-TODO
+Vimos os usos mais comuns de dois componentes de vasta utilização: o diodo emissor de luz e o diodo Zener. Quanto ao uso do LED no componente TQLP690C, apesar dos resultados não ideais, isso não se mostra um problema uma vez que esse componente é visado normalmente como indicador de algum estado de operação. Por outro lado, o diodo Zener é fundamental no seu arranjo como regulador de tensão, por exemplo, como referência de tensão de fontes lineares de tensão, sendo o seu desempenho e precisão cruciais. O mesmo pode-se dizer sobre esse componente quando utilizado como ceifador, uma vez que impacta diretamente o sinal produzido.
 
 \end{document}
