@@ -1,0 +1,114 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 4}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+ 
+\maketitle
+\section*{Objetivo}
+ 
+TODO
+ 
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+\subsection*{a}
+
+Seguindo as instruções do roteiro, foi montado o circuito representado pela figura \ref{fig:figures-lab5-1-a-png} abaixo no software LTspice XII.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5-1-a.PNG}
+    \caption{Primeiro circuito configurado no LTSpice.}
+    \label{fig:figures-lab5-1-a-png}
+\end{figure}
+
+\subsubsection*{b}
+
+Considerando uma queda de tensão no LED de 2V, podemos calcular R como:
+
+\begin{equation*}
+    R = \frac{V_{fonte}-V_{D0}}{I_D} = \frac{5-2}{0.02} = 150 \Omega
+\end{equation*}
+
+\subsubsection*{c}
+
+Definimos $R_x = 150 \Omega$, como esse é um valor comercial, podemos dizer que $R_1 = 150 \Omega$. Após isso simulamos o circuito e alcançamos os resultados abaixo.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c}
+	Medida & Resultado \\
+	\hline
+	$R_{x}$ & $150 \Omega$ \\
+	$V_{D}$ & 1,94 V \\
+	$I_{D}$ & 20,42 mA
+\end{tabular}
+\end{table}
+
+\subsubsection*{d}
+Foi dobrada a resistência utilizada na simulação e refeita a simulação. Dessa forma, foi obtido os resultados abaixo.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c}
+	Medida & Resultado \\
+	\hline
+	$R_{x}$ & $300 \Omega$ \\
+	$V_{D}$ & 1,85 V \\
+	$I_{D}$ & 10,49 mA
+\end{tabular}
+\end{table}
+
+Analisando os resultado é possível perceber que ocorre uma queda pequena na tensão diodo e outra grande, cerca de 50\%, na tensão. Sendo assim, o aumento da resistência faz com que a potência do LED diminua, diminuindo também o brilho gerado por ele.
+
+\subsection*{Circuito 2}
+TODO
+
+\subsection*{Circuito 3}
+\subsubsection*{a}
+Conforme instruído no roteiro, foi montado o circuito no software LTspice como é mostrado na figura \ref{fig:figures-lab5-3-a-png}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5-3-a.PNG}
+    \caption{Terceiro circuito configurado no LTSpice.}
+    \label{fig:figures-lab5-3-a-png}
+\end{figure}
+
+\subsubsection*{b}
+
+Após isso, o circuito acima foi simulado e a figura \ref{fig:figures-lab5-3-b-png} mostra o sinal de entrada e de saída nas cores azul e verde, respectivamente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab5-3-b.PNG}
+    \caption{Simulação do terceiro circuito.}
+    \label{fig:figures-lab5-3-b-png}
+\end{figure}
+
+\subsubsection*{c}
+
+Utilizando as ferramentas do LTspice e a simulação apresentada no item anterior, foi possível preencher a tabela abaixo.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c}
+	Medida & Resultado \\
+	\hline
+	$V_{i,pp}$ & 20V \\
+	$V_{o,pp}$ & 10,84 V \\
+	$V_{o,min}$ & -5,42 V \\
+	$V_{0,max}$ & 5,42
+\end{tabular}
+\end{table}
+
+\section{Conclusão}
+
+TODO
+
+\end{document}
