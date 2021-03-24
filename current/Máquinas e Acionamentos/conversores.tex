@@ -4,15 +4,76 @@
 
 \subsection{Conversores CC-CC}
 
-% \input{conversores/cc-buck}
-% 
-% \input{conversores/cc-boost}
-% 
-% \input{conversores/cc-buck-boost}
-% 
+Conversores CC-CC controlam o fluxo de potência entre a entrada e a saída através do chaveamento de semicondutores de potência, i.e., atuando como um interruptor entre a fonte e a carga. Uma ilustração dessa operação pode ser vista na figura \ref{g0cc}, junto do comportamento da tensão sobre a carga.
+
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.55]{imagens/coversor_cc_circuito_grafico.png}
+\caption{Circuito ilustrativo e forma de onda da tensão sobre a carga de um conversor CC-CC.}\label{g0cc}  
+\caption*{Fonte: Introdução aos conversores CC-CC (2001)}
+\end{figure}
+
+Nesse cenário, denotamos o intervalo de comutação por \[
+    T_{s} = \frac{1}{F_{s}}
+,\] onde $F_{s}$ representa a frequência de comutação.
+
+Uma forma de mensurar a entrega de tensão à carga é através da razão cíclica \[
+    D = \frac{T_{on}}{T_{s}}
+,\] onde $T_{on}$ representa o intervalo de condução.
+
+A tensão média pode ser determinada por
+\begin{align*}
+    V_{o} &= \frac{1}{T_{s}}\int_{o}^{T_{on}}V_{i}dt \\
+    &= \frac{T_{on}}{T_{s}}V_{i}\\
+    &= D V_i
+.\end{align*}
+
+A partir disso, elucida-se o ganho estático do conversor, que é definido como a razão entre a tensão de saída e a tensão de entrada através da razão cíclica, uma vez que \[
+D = \frac{V_o}{V_i}
+.\]
+
+Pode-se gerar ondas com frequência fixa através da modulação por largura de pulso (\emph{PWM}). A figura \ref{gcp} ilustra uma forma de gerar tal sinal através de um gerador de rampa.
+
+\begin{figure}[h]
+\center
+\includegraphics[scale=0.55]{imagens/grafico_circuito_pwm.png}
+\caption{Exemplo de um circuito que realiza modulação por largura de pulso.}\label{gcp} 
+\caption*{Fonte: Introdução aos conversores CC-CC (2001)}
+\end{figure}
+
+Conversores CC-CC são amplamente utilizados em sistemas de alimentação de componentes eletrônicos, principalmente quando não se tem uma preocupação grande com o nível de ruído (harmônicas) do sinal. São componentes amplamente utilizados em fontes chaveadas, alternativas modernas as fontes lineares. Além disso, são de grande uso nos sistemas geradores de energias renováveis e no carregamento de baterias.
+
+\subsubsection{Conversores Buck}
+
+\input{conversores/cc-buck}
+ 
+\subsubsection{Conversores Boost}
+
+\input{conversores/cc-boost}
+ 
+\subsubsection{Conversores Buck-Boost}
+
+\input{conversores/cc-buck-boost}
+ 
 \subsection{Conversores CC-CA}
-% 
-% \input{conversores/ca-monofasico}
-% 
-% \input{conversores/ca-trifasico}
+
+Também conhecidos como inversores, possuem como principal função transformar uma fonte contínua de alimentação em uma fonte alternada, simétrico, de frequência constante e tensão média nula. Conversores CC-CA podem ser categorizados ainda quanto à fonte utilizada, o número de fases e o número de fontes de alimentação.
+
+Se o inversor opera em um fonte de corrente ele é chamado CSI (\emph{Current-Source Inverter}), enquanto que se opera em uma fonte de tensão é denominado VSI (\emph{Voltage-Source Inverter}), sendo essa última a mais comum.
+
+Quanto ao número de fases, não há uma limitação clara, sendo dependente da aplicação, ainda que o mais comum seja vermos inversores monofásicos e trifásicos.
+
+Por último, um inversor pode se beneficiar de múltiplas fontes de alimentação como uma forma de, dependo do arranjo, dispor de vários níveis de tensão. Por isso são chamados multiníveis.
+
+Esse tipo de inversor tem ampla utilização na industria principalmente pois permitem o controle de velocidade para motores síncronos e de indução. Além disso, são também costumeiramente utilizados como fontes de alimentação para diversos sistemas trifásicos que se alimentam de alta tensão, uma vez que faz o intermédio entre fontes contínuas de alta tensão (e.g., transmissão HVDC) e cargas de corrente alternada.
+
+Destaca-se que os transistores utilizados são assumidos bem dimensionados e serão tratados como chaves ideais.
+
+\subsubsection{Inversores Monofásicos}
+
+\input{conversores/ca-monofasico}
+ 
+\subsubsection{Inversores Trifásicos}
+
+\input{conversores/ca-trifasico}
 
