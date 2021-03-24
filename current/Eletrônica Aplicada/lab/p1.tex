@@ -1,0 +1,61 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Prova 1}
+\author{Bruno M. Pacheco (16100865)\\
+EEL 7550 - Eletrônica Aplicada}
+ 
+\maketitle
+
+\section*{1}
+
+O resultado da simulação do circuito (a) pode ser visto na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/p1-1.png}
+\end{figure}
+
+Com o arranjo inversor e os resistores determinados, o ganho esperado é de \[
+A_{teo} = - \frac{R_2}{R_1} = -1,2000
+.\] Com base nos valores medidos, podemos determinar o ganho em \[
+A_{pra} = - \frac{-8,95}{7,48} \approx -1,1965
+.\] Isso resulta em um erro percentual em relação ao valor teórico de \[
+err_{\%} = \frac{1,2000 - 1,1965}{1,2000} \approx 0,29 \%
+.\] Naturalmente, existe um erro de medição dos cursores do LTSpice, além de possíveis erros oriundos da não idealidade dos transistores utilizados para construção do LM741.
+
+\section*{2}
+
+As formas de onda após a adição dos diodos Zener na saída pode ser visto abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/p1-2.png}
+\end{figure}
+
+Cada diodo atua como um ceifador para uma das polaridades, limitando a saída do ampop à soma da queda de tensão de um dos diodos com a tensão de Zener do outro, uma vez que após isso eles entram em condução.
+
+\section*{3}
+
+Colocando a fonte de tensão na entrada não inversora do LM741, obtêm-se as formas de onda conforme na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/p1-3.png}
+\end{figure}
+
+Agora no arranjo não inversor, o ganho esperado é de \[
+A_{teo} = 1 + \frac{R_2}{R_1} = 2,2
+.\] Devido à saturação, temos um ganho prático de \[
+A_{pra} = \frac{10,97}{7,41} \approx 1,48
+.\] Isso resulta em um erro percentual em relação ao valor teórico de \[
+err_{\%} = \frac{2,2 - 1,48}{2,2} \approx 32,73 \%
+.\] Como visível na medição, a tensão de saída saturou cerca de 1 V aquém do limitado pela alimentação (em módulo), uma vez que há uma queda de tensão nos componentes internos do amplificador. Dessa forma, mesmo que a tensão de alimentação fosse marginalmente suficiente para suprir a tensão de pico esperada (o que não é, uma vez que seria esperado um pico de $16,5$ V), ainda teríamos uma saturação do sinal de saída.
+
+\section*{4}
+
+Como vimos em um roteiro prévio, o amplificador operacional real possui um atraso na resposta normalmente indicado pelo \emph{slew rate}. Dessa forma, ele não consegue replicar o mesmo desempenho em altas frequência, então espera-se que ele atenue o ganho a partir de um limiar superior de frequência, i.e., atue como um filtro passa-baixa.
+
+\end{document}
