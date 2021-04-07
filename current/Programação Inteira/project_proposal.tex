@@ -19,52 +19,11 @@ The PE-CTT intends to simulate the situation where the students are given a choi
 The CB-CTT approach consists of the scheduling of the lectures for several university courses within a given number of rooms and periods. The conflicts between courses are set according to the curricula published by the University [5]. So, the source of conflicts in PE-CTT is the actual student enrolment whereas in CB-CTT the courses in conflict are those that belong to the same predefined group of courses, or curricula.
 However, this is only one of the differences. When in PE-CTT, the lectures can be seen as a self-standing event, penalizing late, consecutive, and isolated ones, in CB-CTT it is important to focus on trying to evenly spread the lectures of a course over the weekdays, preserve the same room, and focus on developing a good experience to each curriculum [3].
 
-[BMP: I don't understand the following sentence. My suggestion would be something in the line of "Following the definition of blablabla that mathematical programming is the allocation of resource to activities to maximize intereset and minimize cost, it is natural to think of timetabling as an application for it. Limited resources...]
-Feiring, in \emph{Linear Programming: An Introduction}, had defined Linear Programming as a subset of mathematical programming where this aim has been followed by efficient assigning of limited resources to the specified activities to maximize the interest and minimize the cost. Limited resources in timetabling can be seen as rooms, time-periods, teachers' availability, equipment, and lecture requirements. The interest is the satisfaction of students and teachers with the allocation, at the same time that the cost is related to the number of rooms used, the gap time between lectures, the number of time that a class changes room, etc. As one can clearly notice, most of objects of interest are of integer nature, thus the need for integer programming.
-
-\begin{itemize}
-    \item What is timetabling? (definition) (Vrielink et al., Practices in timetabling in higher education institutions: a systematic review)
-	\begin{itemize}
-	    \item Wren 1995: (Scheduling, timetabling and rostering—a special relationship?) "The allocation of given resources to specific objects being placed in space time, in such way as to satisfy as nearly as possible a set of desirable objectives"
-	    \item NP-hard or NP-complete problem (Even 1975, On the complexity of time table and multi-commodity flow problems)
-	    \item HEI timetabling has many formulations, the two most "standard" being (via Bellio et al., Feature-based tuning of simulated annealing appliedto the curriculum-based course timetabling problem - great introduction)
-		\begin{itemize}
-		    \item Post-Enrollment Course Timetabling(PE-CTT) (see Lewis et al., Post enrolment based course timetabling: a description of the problem model used for track two of the second international timetabling competition.)
-		    \item Curriculum-Based Course Timetabling(CB-CTT) (see Di Gaspero et al., The second international timetabling competition (ITC-2007): Curriculum-based course timetabling (track 3).)
-		    \item University Course Timetabling (UCTT) Babaei et al.
-		\end{itemize}
-	\end{itemize}
-    \item Integer programming \& timetabling - so what?
-	\begin{itemize}
-	    \item Thus, it is natural to think of it as an IP problem.
-	    \item (Perhaps not necessary) Some solutions through heuristics (Hidalgo-Herrero, 2013, Comparing problem solving strategies for NP-hard optimization problems)
-	    \item Babaei et al., A survey of approaches for university course timetabling problem - great overview of the problem formulation for IP at the end of section 2.2.1
-	    \item Burke et al, Decomposition, reformulation, and diving in university course timetabling (decomposes the problem and uses IP)
-	\end{itemize}
-\end{itemize}
+Following the definition of Feiring, in \emph{Linear Programming: An Introduction} that mathematical programming is the allocation of limited resources to activities to maximize intereset and minimize cost, it is natural to think of timetabling as an application for it. Limited resources in timetabling can be seen as rooms, time-periods, teachers' availability, equipment, and lecture requirements. The interest is the satisfaction of students and teachers with the allocation, at the same time that the cost is related to the number of rooms used, the gap time between lectures, the number of time that a class changes room, etc. As one can clearly notice, most of objects of interest are of integer nature, thus the need for integer programming.
  
 \section*{Methodology}
 
 We plan to open the lecture with an introduction to the problem, its main features and particularities, and what makes it relevant nowadays. Afterward, the formulations of the timetabling problem for IP will be shown for its different variants. During this moment, we will present the challenges that arise alongside the complexity of the formulations. Lastly, we will bring a brief overview of the state-of-the-art and a comparison with other approaches, besides references that may be useful for further research.
-
-\begin{itemize}
-    \item During the lecture, we will:
-	\begin{itemize}
-	    \item Present the problem, showing .
-	    \item Formulation for IP
-	    \item Which challenges arise?
-	    \item What is the limit? (What are the boundaries of computability? what are the parameters that make it impossible/very hard to compute?)
-	    \item Variations
-	    \item Overview of the state-of-the-art
-	    \item comparison with other approaches
-	\end{itemize}
-    \item How?
-	\begin{itemize}
-	    \item State-of-the-art papers
-	    \item Competition summary
-	    \item Books on the subject?
-	\end{itemize}
-\end{itemize}
 
 \section*{Expected Results}
 
@@ -72,13 +31,12 @@ With the lecture, we plan to provide a good understanding of the problem and the
 
 \section*{References}
 
-Practice and Theory of Automated Timetabling (PATAT) and the Multidisciplinary International Scheduling Conference: Theory and Application (MISTA). \\
 1. Scheduling, timetabling and rostering - A special relationship? Wren, A. 1995. \\
 2. Practices in timetablingin higher education institutions: a systematic review. Vrielink. 2019. \\
 3. Feature-based tuning of simulated annealingappliedto the curriculum-based course timetabling problem - greatintroduction. Bellio. 2014. \\
 4. Post enrolment based course timetabling: a description of the problem model used for track two of the second international timetabling competition. Lewis, R. 2007. \\
 5. The second international timetabling competition (ITC-2007): Curriculum-based course timetabling (track 3). Di Gaspero, L. 2007. \\
 6. A survey of approaches for university course timetabling problem. Babaei, H., Karimpour, J., \& Hadidi, A. 2015. \\
-
+7. Practice and Theory of Automated Timetabling (PATAT) and the Multidisciplinary International Scheduling Conference: Theory and Application (MISTA). \\
 \end{document}
 
