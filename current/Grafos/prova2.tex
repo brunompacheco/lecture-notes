@@ -1,0 +1,162 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Prova 2}
+\author{Bruno M. Pacheco (16100865)\\
+Grafos}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Determinar se é possível acessar qualquer intersecção da cidade a partir de qualquer outra interseção é o mesmo que determinar se existe uma componente fortemente conexa que contenha todos os vértices de $G$. A partir do algoritmo de Componentes-Fortemente-Conexas (Algoritmo 15), basta que verifiquemos se existe mais de uma árvore gerada pelo algoritmo, o que é uma garantia de que não há uma componente fortemente conexa que contenha todos os vértices de $G$.
+
+Para isso, o algoritmo abaixo agrupa os vértices (utilizando a lista $R$) através das raízes das árvores geradas pelo algoritmo de componentes fortemente conexas mencionado. Assim, caso haja mais de uma componente fortemente conexa, a lista possuirá mais de um valor único. Foi utilizada uma função genérica para essa verificação.
+
+\begin{algorithm}
+    \KwIn{um grafo $G=\left( V, A, w \right) $}
+    // Utiliza-se a letra $P$ para para evitar confusão com os arcos \\
+    $P\gets $Componentes-Fortemente-Conexas $\left( G \right) $ \\
+    // Inicializa lista das raízes da árvore de cada elemento \\
+    $R_v \gets \textbf{null} \, \forall v\in V$ \\
+
+    // Descobre as raízes da árvore de cada vértice \\
+    \ForEach{$u \in V : A_u \neq \textbf{null}$}{
+	// Todos os predecessores de $u$ (incluindo esse) \\
+	$P' \gets \left\{ u \right\} $ \\
+
+	\Repeat{$A_p = \textbf{null}$}{
+	    $p\gets A_u$ \\
+	    $P' \text{.adiciona} \left( p \right) $ \\
+	    \If{$R_p \neq \textbf{null}$}{
+		$p\gets R_p$
+	    }
+	}
+	// $r$ é a raiz da árvore \\
+	$r \gets p$  \\
+	$R_p \gets r\, \forall p \in P'$
+    }
+    \Return{$\text{contaÚnicos}\left( R \right) $ > 1}
+\end{algorithm}
+
+\exercise{2}
+
+Para evitar a construção da ordenação topológica completa do grafo, pode-se executar uma busca em largura corrigindo as interdependências dos vértices que precedem $v$. Para isso, uma modificação do algoritmo de busca em largura visitando somente os predecessores ($N^{-}$) é proposta no algoritmo abaixo. Veja que a abordagem garante a ordenação pelos níveis de profundidade da árvore associada ao algoritmo BFS adicionando os vértices visitados à ordenação $O$ retornada. Além disso, caso hajam interdependências entre as dependências indiretas de $t$, i.e., caso algum vértice de um nível superior seja predecessor de um vértice de um nível inferior, ele é reorganizado para o início junto com os seus predecessores já visitados, de forma recursiva, por isso é necessário que o grafo não possua ciclos nas dependências de $t$.
+
+Apesar dessa abordagem ser pouco otimizada (principalmente na reorganização da ordenação) ela permite mais flexibilidade uma vez que os vértices que sucedem $t$ podem formar ciclos, além de evitar a construção da ordenação topológica do grafo inteiro, o que seria bem custoso para grafos grandes e desconexos.
+
+\begin{algorithm}[H]
+    \KwIn{um grafo $G=\left( V, A \right) $ e um vértice $t\in V$}
+    $C_v \gets  $ false $\, \forall v\in V$ \\
+    $C_t\gets $ true \\
+    $Q\gets $ Fila()\\
+    $Q$.enqueue($t$) \\
+
+    // Ordenação das dependências (diretas ou indiretas) de $t$ \\
+    $O \gets \left(  \right) $
+
+    \While{$Q$.empty()$=$ false}{
+	$u\gets Q$.dequeue$()$ \\
+	\ForEach{$v\in N^{-}\left( u \right) $}{
+	    \If{$C_v = $ false}{
+		$C_v \gets $ true \\
+		$Q$.enqueue($v$) \\
+		$O \gets \left( v \right) \cup O$ \\
+	    }
+	    \Else{
+		// Realoca $v$ e seus predecessores de forma recursiva \\
+		$O\gets $ReorganizaVértice($O, v, C$) \\
+	    }
+	}
+    }
+
+    \Return{$O$}
+\end{algorithm}
+
+\begin{algorithm}
+    \TitleOfAlgo{ReorganizaVértice} 
+    \KwIn{uma ordenação $O$, um vértice $v$, uma lista $C$}
+    $O \gets \left( v \right) \cup  \left(  O \setminus (v)\right) $ \\
+    \ForEach{$u\in N^{-}\left( v \right) $}{
+	\If{$C_u = $false}{
+	    $O \gets $ReorganizaVértice($O, u, C$)
+	}
+    }
+    \Return{$O$}
+\end{algorithm}
+
+\exercise{3}
+
+Vemos que o algoritmo enunciado conecta duas árvores através da aresta de menor custo. Primeiro, é claro que o resultado não possui ciclos, uma vez que $A_1$ e $A_2$ são árvores e, portanto, um ciclo no resultado deveria incluir $m$, mas como ele é a única aresta entre os vértices de $V_1$ e de $V_2$, é impossível que o resultado possua um ciclo. Assim, o resultado é uma árvore geradora para $G_3$, uma vez que cobre todos os seus vértices e não possui ciclos. Agora, nos resta verificar que é mínima. Veja que não existe aresta para ser substituída dentre aquelas de $A_1$ e $A_2$, logo, somente há espaço para que a aresta $m$ seja otimizada. Entretanto, pela verificação feita no algoritmo, sabe-se que $m$ é a aresta de menor peso dentre aquelas de $E$, logo, sua substituição não acarretará em uma árvore geradora de peso menor. Portanto, a árvore gerada pelo algoritmo é uma árvore geradora mínima de $G_3$.
+
+\exercise{4}
+
+Se faz necessário 2 verificações:
+\begin{itemize}
+    \item $A$ deve ser uma árvore geradora de $G$ (conexa e sem ciclos)
+    \item $A$ tem peso mínimo
+\end{itemize}
+
+As primeiras duas verificações são feitas por uma modificação do algoritmo de busca em largura como no algoritmo \texttt{ÉÁrvore}. Caso algum vértice seja visitado mais de uma vez (salvo pelo antecessor na árvore associada) então $A$ possui um ciclo, logo, não é uma árvore. Além disso, se algum vértice de $G$ não é visitado durante a busca, $A$ não é uma árvore geradora de $G$. 
+
+A verificação de que $A$ é uma árvore mínima é feita comparado o seu peso total com o de uma árvore garantidamente mínima, i.e., encontrada por um algoritmo como o de Kruskal (Algoritmo 21 das notas de aula).
+
+\begin{algorithm}
+    \KwIn{um grafo não dirigido e ponderado $G=\left( V,E,w \right)$ e um subconjunto $A\subseteq E$}
+    // Verifica que $A$ é uma árvore \\
+    $s \gets $random($V$) \\
+    $G_A \gets \left( V, A \right) $ \\
+    \If{\textbf{not} ÉÁrvore($G, s$)}{
+	\Return{false}
+    }
+
+    // Verifica se $A$ é mínima \\
+    $W_A \gets \sum_{e \in A} w(e)$ \\
+
+    $A' \gets $Kruskal($G$) \\
+    $W_{A'} \gets \sum_{e' \in A'} w(e')$ \\
+
+    \If{$W_A = W_{A'}$}{
+	\Return{true}
+    }
+    \Else{
+	\Return{false}
+    }
+\end{algorithm}
+
+\begin{algorithm}
+    \TitleOfAlgo{ÉÁrvore} 
+    \KwIn{um grafo $G=\left( V,E \right) $ e um vértice de origem $s \in V$}
+
+    $C_v \gets  $ false $\, \forall v\in V$ \\
+    $C_s\gets $ true \\
+    $A_v \gets \textbf{null},\, \forall v\in V$ \\
+
+    $Q\gets $ Fila()\\
+    $Q$.enqueue($s$) \\
+
+    \While{$Q$.empty()$=$ false}{
+	$u\gets Q$.dequeue$()$ \\
+	// Exclui o antecessor de $u$ da verificação \\
+	\ForEach{$v\in N\left( u \right) \setminus \left\{ A_u \right\}  $}{
+	    \If{$C_v = $ false}{
+		$C_v \gets $ true \\
+		$A_v \gets u$ \\
+		$Q$.enqueue($v$)
+	    }
+	    \Else{
+		\Return{false}
+	    }
+	}
+    }
+    \If{false $\in C$}{
+	\Return{false}
+    }
+    \Else{
+	\Return{true}
+    }
+\end{algorithm}
+
+\end{document}
