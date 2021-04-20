@@ -1,0 +1,108 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 6}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410079 - Modelagem para Otimização}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Sejam $\bm{x} = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}  \in \Z^2$ a quantidade de colares produzidos. Seja \[
+\bm{r} = \begin{bmatrix} 120 \\ 70 \end{bmatrix} 
+\] os recursos disponíveis de prata e horas de mão-de-obra. Assim, temos as restrições quanto a fabricação dos colares como \[
+\begin{bmatrix}
+    3 & 2 \\
+    1 & 2
+\end{bmatrix}\bm{x} = A \bm{x} \le \bm{r}
+.\] Além disso, há também as restrições relativas as encomendas feitas previamente, i.e., \[
+\bm{x} \ge \begin{bmatrix} 20 \\ 25 \end{bmatrix} 
+.\] 
+
+Quanto ao ouro, temos uma não linearidade do tipo retificador, i.e., o custo associado à quantidade de ouro utilizada $o$ é \[
+c_{ouro}\left( o \right) = \begin{cases}
+    0, & o \le 100 \\
+    100 o, & o > 100
+\end{cases}
+.\] Para resolver esse problema, adicionamos uma variável de folga $w$ e restrições
+\begin{align*}
+    o + w &\ge 100 \\
+    100 \ge w &\ge 0
+.\end{align*}
+Dessa forma, se calculamos o custo como \[
+c_{ouro}\left( o, w \right) = \left( o+w -100\right) 100
+,\] fazemos com que a solução ótima seja $c_{ouro}\left( o,100-o \right) = 0\, \forall o \in \left[ 0,100 \right] $ e $c_{ouro}\left( o,0 \right) = \left( o-100 \right) 100\, \forall o>100$, como desejado.
+
+Finalmente, sabemos que \[
+	\begin{bmatrix} 2 & 3 \end{bmatrix} \bm{x} = o
+\]  podemos determinar o retorno total
+\begin{align*}
+    c\left( \bm{x}, w \right) &= \begin{bmatrix} 400 & 500 \end{bmatrix} \bm{x} - c_{ouro}\left(  \begin{bmatrix} 2 & 3 \end{bmatrix} \bm{x}, w  \right)  \\
+    &= \begin{bmatrix} 400 & 500 \end{bmatrix} \bm{x} -\begin{bmatrix} 200 & 300 \end{bmatrix} \bm{x} - 100 \left( w-100 \right)  \\
+    &= \begin{bmatrix} 200 & 200 \end{bmatrix} \bm{x} - 100\left( w-100 \right) 
+.\end{align*}
+
+Agora, formulemos o problema com todas as restrições como
+\begin{align*}
+    \max_{\bm{x}, w} \quad & \begin{bmatrix} 200 & 200 \end{bmatrix} \bm{x} -100\left( w-100 \right)  \\
+    \textrm{s.t.} \quad A\bm{x} &\le \bm{r} \\
+    \bm{x} &\ge \begin{bmatrix} 20 \\ 25 \end{bmatrix} \\
+			\begin{bmatrix} 2 & 3 \end{bmatrix} \bm{x} + w &\ge 100 \\
+			w &\in \left[ 0, 100 \right] \\
+			\bm{x} &\in \Z^2
+.\end{align*}
+
+Dadas as restrições propostas das encomendas já feitas, o resultado ótimo é exatamente a quantidade mínima, gerando um lucro de \$9000. Isso é fácil de ver uma vez que para fabricá-las já será necessária toda a quantidade de horas disponível.
+
+\exercise{2}
+
+\subexercise{a)}
+
+Se esse fosse o caso, então o custo total seria ditado por
+\begin{align*}
+    c\left( \bm{x}, w \right) &= \begin{bmatrix} 400 & 500 \end{bmatrix} \bm{x} -\begin{bmatrix} 380 & 570 \end{bmatrix} \bm{x} - 190 \left( w-100 \right)  \\
+    &= \begin{bmatrix} 20 & -70 \end{bmatrix} \bm{x} - 190\left( w-100 \right) 
+.\end{align*}
+Vemos que ainda seria lucrativo fabricar colares 1 além do estoque, direcionando, assim, a solução ótima.
+
+\subexercise{b)}
+
+Nesse caso, fabricam-se 4 colares 1 a mais, sendo somente o mínimo de colares 2 fabricados. O lucro aumenta para \$9400.
+
+\subexercise{c)}
+
+\exercise{3}
+
+Sejam \[
+    A = \begin{bmatrix}
+	2 & 0 & 1 \\
+	1 & 1 & -1
+    \end{bmatrix} 
+,\] \[
+\bm{b} = \begin{bmatrix} 
+    4 \\
+    -1
+\end{bmatrix} 
+\] e \[
+\bm{c} = \begin{bmatrix} 
+    8 \\
+    5 \\
+    4
+\end{bmatrix} 
+.\] Então, podemos escrever o problema na forma matricial como
+\begin{align*}
+    \max_{\bm{x}} \quad & \bm{c}^{T}\bm{x} \\
+    \textrm{s.t.} \quad & A\bm{x} \ge \bm{b} \\
+      & x_1,x_2,x_3 \ge 0
+.\end{align*}
+Assim, encontramos seu dual como
+\begin{align*}
+    \min_{\bm{y}} \quad & \bm{b}^{T} \bm{y} \\
+    \textrm{s.t.} \quad & A^{T}\bm{y} \le \bm{c} \\
+      & y_1,y_2,y_3 \ge 0
+.\end{align*}
+
+\end{document}

@@ -1,0 +1,65 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 7}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410079 - Modelagem para Otimização}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Seja $c_{ij}$ o custo de fornecimento do gerador $i$ para a cidade $j$, onde $j$ mapeia inteiros nas cidades segundo a associação $1\to $São José, $2\to $Florianópolis e $3\to $Palhoça.
+Estende-se essa definição para abarcar a possibilidade de comprar energia da COPEL através de $i=4$, considerando a restrição de não fornecimento a Palhoça através de custo infinito.
+Dessa forma, \[
+C = \left\{ c_{ij} \right\} = \begin{bmatrix} 
+    600 & 700 & 400 \\
+    320 & 300 & 350 \\
+    500 & 480 & 450 \\
+    1000 & 1000 & \infty
+\end{bmatrix} 
+.\] 
+
+Ademais, definimos como $s_i$ a capacidade de fornecimento do gerador $i$, de forma que \[
+\left\{ s_i \right\} = \begin{bmatrix} 22,5 \\ 36 \\ 27 \\ \infty \end{bmatrix} 
+.\] Note que já é desconsiderada da capacidade a perda de transmissão. Também, $d_j$ a demanda da cidade $j$, i.e., \[
+\left\{ d_j \right\}  = \begin{bmatrix} 30 \\ 35 \\ 25 \end{bmatrix} 
+.\] 
+
+Assim, sendo $x_{ij}$ o fornecimento do gerador $i$ para a cidade $j$, conforme as definições anteriores, chega-se à formulação
+\begin{align*}
+    \min_{\left\{ x_{ij} \right\}} \quad & \sum_{i=1}^{4} \sum_{j=1}^{3} c_{ij}x_{ij} \\
+    \textrm{s.t.} \quad & \sum_{j=1}^{3} x_{ij} \le  s_i,\, i=1,\ldots,3 \\
+      & \sum_{i=1}^{4} x_{ij} = d_j,\, j=1,\ldots,3 \\
+      & x_{ij} \ge 0,\, \forall i,j
+.\end{align*}
+
+A solução então é
+\begin{align*}
+    x_{1,3} = 22,5 \\
+    x_{2,1} = 1 \\
+    x_{2,2} = 35 \\
+    x_{3,1} = 24,5 \\
+    x_{3,3} = 2,5 \\
+    x_{4,1} = 4,5
+,\end{align*}
+sendo o resto nulo.
+
+Após o aumento de 20\%, que resulta na alteração de $\left\{ d_{ij} \right\} $, temos
+\begin{align*}
+    x_{1,3} = 22,5 \\
+    x_{2,2} = 36 \\
+    x_{3,1} = 13,5 \\
+    x_{3,2} = 6 \\
+    x_{3,3} = 7,5 \\
+    x_{4,1} = 22,5
+.\end{align*}
+
+
+\exercise{2}
+
+
+
+\end{document}
