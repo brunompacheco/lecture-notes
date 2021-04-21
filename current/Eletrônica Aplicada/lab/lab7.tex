@@ -1,0 +1,190 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 7}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+
+\maketitle
+\section*{Objetivo}
+
+As experiências relatadas neste documento visam demonstrar e garantir experiência nos diversos arranjos para polarização de transistores de junção bipolar, manipulando os valores dos resistores utilizados para atingir um dado ponto de operação.
+
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+\subsection*{a}
+
+Escolhendo o ponto de operação de $\mathbf{I_C = 2mA}$ e $\mathbf{V_{CE} = 4V}$, e observando que $V_{BE}=660mV$ e $\beta = 290$ típicos fornecidos pelo fabricante, e conhecendo a relação:
+\begin{equation}
+        I_C = \beta \frac{V_{cc}-V_{BE}}{R_B};
+\end{equation}
+\begin{equation} 
+        V_{CE} = V_{cc} - I_C R_C.
+\end{equation}
+    
+Podemos calcular o valor de $R_B$ como sendo,
+\begin{equation*}
+    R_B = \beta \frac{V_{cc}-V_{BE}}{I_C} = 1.64 M \Omega.
+\end{equation*}
+
+Além disso, podemos calcular $R_C$, como:
+\begin{equation*}
+    R_C = \frac{V_{cc}-V_{CE}}{I_C} = 4k\Omega.
+\end{equation*}
+
+\subsection*{b}
+Com base na tabela de valores comerciais de resistores podemos escolher os resistores de $R_B = 1.6M \Omega$ e  $R_C = 4.3k \Omega$. A partir disso, e utilizando os valores  $\beta_{min} = 200 $ e $\beta_{max} = 450$ , obtemos os resultados.
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $I_C(\beta_{min})$	&	$I_C(\beta_{max})$	&	$V_{CE}(\beta_{min})$	&	$V_{CE}(\beta_{max})$	\\	\hline
+1.42mA	&	3.19mA	&	5.91V	&	-1.71V	\\	\hline
+    \end{tabular}
+    \caption{$I_C$ e $V_{BE}$ os limites do $\beta$.}
+    \label{tab:Q1}
+\end{table}
+
+\subsection*{c}
+
+Para realizar a simulação, foi montado o circuito abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7-1-c.png}
+    \caption{Primeiro circuito configurado no LTSpice.}
+    \label{fig:figures-lab7-1-c-png}
+\end{figure}
+
+Simulando o circuito da figura, obtemos as seguintes medições.
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+\hline
+$\beta$	&	$I_C$	&	$V_{CE}$	\\	\hline
+291.72	&	2.068mA	&	3.1075V	\\	\hline
+
+    \end{tabular}
+    \caption{Parâmetros simulados }
+    \label{tab:Q1c}
+\end{table}
+\subsection*{Circuito 2}
+
+\subsection*{a}
+
+Escolhendo o ponte de operação $\mathbf{I_C = 2mA}$ e $\mathbf{V_{CE} = 4V}$ com $\mathbf{R_B = 1M \Omega}$, $\mathbf{R_C = 1.8k\Omega}$ e $\mathbf{R_E = 2.2 k \Omega}$ e conhecendo a relação:
+
+
+\begin{equation}
+        I_C = \beta \frac{V_{cc}-V_{BE}}{R_B+ (1+\beta)R_E},
+\end{equation}
+\begin{equation} 
+        V_{CE} = V_{cc} - I_C (R_C + R_E).
+\end{equation}
+
+
+
+Podemos utilizar os mesmos valores limites de $\beta$ para completar a tabela abaixo:
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $I_C(\beta_{min})$	&	$I_C(\beta_{max})$	&	$V_{CE}(\beta_{min})$	&	$V_{CE}(\beta_{max})$	\\	\hline
+1.57mA	&	2.56mA	&	5.71V	&	1.75V	\\	\hline
+
+    \end{tabular}
+    \caption{$I_C$ e $V_{BE}$ calculados para os limites de $\beta$.}
+    \label{tab:Q2a}
+\end{table}
+\subsection*{b}
+
+Para realizar a simulação, foi montado o circuito abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7-2-b.png}
+    \caption{Segundo circuito configurado no LTSpice.}
+    \label{fig:figures-lab7-1-c-png}
+\end{figure}
+
+
+Simulando o circuito da figura, obtemos os seguintes valores.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+        \hline
+         $\beta$	&	$I_C$	&	$V_{CE}$	\\	\hline
+295.34	&	2.028mA	&	3.8731V	\\	\hline
+
+    \end{tabular}
+    \caption{Parâmetros simulados}
+    \label{tab:Q2b}
+\end{table}
+
+\subsection*{Circuito 3}
+\subsection*{a}
+Para o ponto de operação semelhante ao do exercício passado, porém utilizando os novos resistores, temos que:
+    \begin{equation}
+        V_{TH} = \frac{R_2 V_{cc}}{R_1+R_2};
+    \end{equation}
+    \begin{equation}
+        R_{TH} = \frac{R_1 R_2}{R_1+R_2};
+    \end{equation}
+    \begin{equation}
+        I_C =\beta \frac{V_{TH}- V_{BE}}{R_{TH} + (1+\beta)R_E};
+    \end{equation}
+    \begin{equation}
+        V_{CE} = V_{cc} - I_C(R_C + R_E).
+    \end{equation}
+
+Calculamos os valores de $\mathbf{I_C} $ e $\mathbf{V_{CE}}$ para os limites de $\beta$, presentes na tabela abaixo.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    $I_C(\beta_{min})$	&	$I_C(\beta_{max})$	&	$V_{CE}(\beta_{min})$	&	$V_{CE}(\beta_{max})$	\\	\hline
+2.08mA	&	2.11mA	&	3.67V	&	3.58V	\\	\hline
+    \end{tabular}
+    \caption{}
+    \label{tab:Q3a}
+\end{table}
+
+\subsection*{b}
+
+
+Para realizar a simulação, foi montado o circuito abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab7-3-b.png}
+    \caption{Terceiro circuito configurado no LTSpice.}
+    \label{fig:figures-lab7-1-c-png}
+\end{figure}
+
+
+Simulando o circuito da figura, obtemos os seguintes valores.
+
+\begin{table}[!h]
+    \centering
+    \begin{tabular}{|c|c|c|}
+    \hline
+         $\beta$	&	$I_C$	&	$V_{CE}$	\\	\hline
+293.93	&	2.0965mA	&	3.5983V	\\	\hline
+
+    \end{tabular}
+    \caption{Parâmetros simulados}
+    \label{tab:Q3b}
+\end{table}
+
+
+\section{Conclusão}
+
+Dentre as diversas experiências, foram expostas e testadas as características dos diversos circuitos básicos para polarização de transistores BJT. Dentre eles, foram validadas os diferentes requisitos em termo de arranjo dos componentes para atingir um mesmo ponto de operação, inclusive as variações relativas as não idealidades.
+
+\end{document}
