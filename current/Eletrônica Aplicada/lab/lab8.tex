@@ -1,0 +1,80 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 8}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+
+\maketitle
+\section*{Objetivo}
+
+TODO
+
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+\subsection*{a}
+
+Considerando valores de $V_{BE} = 0,66\,V$ e $\beta = 150$,
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c c}
+    $V_{TH} = 4,8\,V$ & $I_C \approx 1,83\,mA$ \\
+    $R_{TH} = 7k2\,\Omega$ & $I_E \approx 1,84\, mA $ \\
+    $I_B = 12,20\,\mu A$ & $V_{CE} \approx 4,68\,V$
+    \end{tabular}
+\end{table}
+
+\subsection*{b}
+
+O circuito foi montado conforme a figura abaixo. Nota-se que os capacitores foram emitidos uma vez que se comportam como circuito aberto em regime permanente devido à natureza contínua dos sinais.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{figures/lab8_1_b.png}
+\end{figure}
+
+Assim, os valores encontrados foram
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c | c | c | c | c}
+	 & $I_B$ & $I_C$ & $I_E$ & $V_{BE}$ & $V_{CE}$ \\
+	 \hline
+	Teórico & $12,20\,\mu A$ & $1,83\,mA$ & $1,84\,mA$ & $0,66\,V$ & $4,68\,V$ \\
+	Prático & $6,22\,\mu A$ & $1,86\,mA$ & $1,86\,mA$ & $0,65\,V$ & $4,55\,V$
+    \end{tabular}
+\end{table}
+
+\subsection*{c}
+
+\subsection*{d}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c | c | c}
+     & $r_\pi$ & $g_m$ & $A_v$ \\
+     \hline
+	Teórico & $2k13\,\Omega$ & $0,07$ & $-63,34$ \\
+	Prático & $2k01\,\Omega$ & $0,07$ & $-55,80$
+    \end{tabular}
+\end{table}
+
+\subsection*{e}
+
+Notamos que a partir de $150\,mV$ o sinal de saída já apresenta deformações similares a um achatamento do semiciclo positivo, portanto, esse foi o valor utilizado. Nessa condição, $V_C$ possui máximo em $9,28\,V$ e mínimo em $7,71\,V$.
+
+Entretanto, somente a partir de uma amplitude de $460\,mV$ o sinal apresenta ceifamento claro, visível no semiciclo negativo. Nesse cenário, $V_C$ oscila entre $9,96\,V$ e $4,47\,V$.
+
+\section*{Circuito 2}
+
+TODO
+
+\section{Conclusão}
+
+TODO
+
+\end{document}
