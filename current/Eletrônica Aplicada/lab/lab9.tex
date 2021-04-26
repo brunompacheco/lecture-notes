@@ -1,0 +1,63 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 9}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+
+\maketitle
+\section*{Objetivo}
+
+TODO
+
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+\subsection*{a}
+
+A porta G é aquela conectada ao resistor $R_G$, o dreno está conectado ao resistor $R_D$ e a fonte ao resistor $R_S$. As tensões são estabelecidas entre esses terminais, ou seja, $V_{GS}$ na malha da fonte $V_{GG}$ e do resistor $R_S$ enquanto $V_{DS}$ naquela do resistor $R_S$ e da fonte $V_{DD}$.
+
+\subsection*{b}
+\subsection*{c}
+\subsection*{d}
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c | c | c | c | c}
+	$V_{GG}$ [V]  & $I_G$ & $V_{GS}$ [V]  & $I_D$ [mA]  & $V_{DS}$ [V]  & Região \\
+    \hline
+    0 & 0 & 0 & 0 & 12 & Corte \\
+    4 & 0 & 1,73 & 1,90 & 4,61 & Saturação \\
+    8 & 0 & 4,31 & 3,07 & 0,01 & Triodo
+    \end{tabular}
+\end{table}
+
+\section*{Circuito 2}
+
+O circuito foi simulado conforme na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab9_2.png}
+\end{figure}
+
+Mediu-se
+\begin{align*}
+    I_D &= 0,00100947 \\
+    V_G &= 5 \\
+    V_{GS} &= 1,66874
+.\end{align*}
+
+Dessa forma, estimamos \[
+k_n \frac{W}{L} = \frac{2I_D}{\left( V_{GS}-V_{th} \right)^2 } \approx 0,214
+.\] 
+
+
+\section{Conclusão}
+
+TODO
+
+\end{document}
