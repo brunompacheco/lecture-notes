@@ -17,7 +17,7 @@ Sejam $\bm{x} = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}  \in \Z^2$ a quantidade
 \begin{bmatrix}
     3 & 2 \\
     1 & 2
-\end{bmatrix}\bm{x} = A \bm{x} \le \bm{r}
+\end{bmatrix}\bm{x} = A' \bm{x} \le \bm{r}
 .\] Além disso, há também as restrições relativas as encomendas feitas previamente, i.e., \[
 \bm{x} \ge \begin{bmatrix} 20 \\ 25 \end{bmatrix} 
 .\] 
@@ -25,9 +25,9 @@ Sejam $\bm{x} = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix}  \in \Z^2$ a quantidade
 Quanto ao ouro, temos uma não linearidade do tipo retificador, i.e., o custo associado à quantidade de ouro utilizada $o$ é \[
 c_{ouro}\left( o \right) = \begin{cases}
     0, & o \le 100 \\
-    100 o, & o > 100
+    100 \left( o-100 \right) , & o > 100
 \end{cases}
-.\] Para resolver esse problema, adicionamos uma variável de folga $w$ e restrições
+.\] Para resolver esse problema, adicionamos uma variável de folga $w$, simbolizando a quantidade de ouro em estoque não utilizada, e restrições
 \begin{align*}
     o + w &\ge 100 \\
     100 \ge w &\ge 0
@@ -48,14 +48,34 @@ Finalmente, sabemos que \[
 Agora, formulemos o problema com todas as restrições como
 \begin{align*}
     \max_{\bm{x}, w} \quad & \begin{bmatrix} 200 & 200 \end{bmatrix} \bm{x} -100\left( w-100 \right)  \\
-    \textrm{s.t.} \quad A\bm{x} &\le \bm{r} \\
+    \textrm{s.t.} \quad A'\bm{x} &\le \bm{r} \\
     \bm{x} &\ge \begin{bmatrix} 20 \\ 25 \end{bmatrix} \\
 			\begin{bmatrix} 2 & 3 \end{bmatrix} \bm{x} + w &\ge 100 \\
 			w &\in \left[ 0, 100 \right] \\
 			\bm{x} &\in \Z^2
 .\end{align*}
 
-Dadas as restrições propostas das encomendas já feitas, o resultado ótimo é exatamente a quantidade mínima, gerando um lucro de \$9000. Isso é fácil de ver uma vez que para fabricá-las já será necessária toda a quantidade de horas disponível.
+Para simplificar a análise posterior, definimos \[
+A = \begin{bmatrix} 
+    3 & 2 & 0 \\
+    1 & 2 & 0 \\
+    -1 & 0 & 0 \\
+    0 & -1 & 0 \\
+    -2 & -3 & -1 \\
+    0 & 0 & 1
+\end{bmatrix} ; \bm{b} = \begin{bmatrix} 
+    120 \\ 70 \\ -20 \\ -25 \\ -100 \\ 100
+\end{bmatrix} ; \bm{c} = \begin{bmatrix} 
+200 \\ 200 \\ -100
+\end{bmatrix} 
+,\] de forma que o problema pode ser agora escrito como
+\begin{align*}
+    \max_{\bm{x}} \quad & \bm{c}^{T}\bm{x} \\
+    \textrm{s.t.} \quad & A\begin{bmatrix} \bm{x} \\ w \end{bmatrix} \le \bm{b}  \\
+      & \begin{bmatrix} \bm{x} \\ w \end{bmatrix} \in \Z^3_+
+.\end{align*}
+
+Dadas as restrições propostas das encomendas já feitas, o resultado ótimo é exatamente a quantidade mínima, gerando um lucro de \$19 000. Isso é fácil de ver uma vez que para fabricá-las já será necessária toda a quantidade de horas disponível.
 
 \exercise{2}
 
@@ -70,9 +90,15 @@ Vemos que ainda seria lucrativo fabricar colares 1 além do estoque, direcionand
 
 \subexercise{b)}
 
-Nesse caso, fabricam-se 4 colares 1 a mais, sendo somente o mínimo de colares 2 fabricados. O lucro aumenta para \$9400.
+Nesse caso, fabricam-se 4 colares 1 a mais, sendo somente o mínimo de colares 2 fabricados. O lucro aumenta para \$19 400.
 
 \subexercise{c)}
+
+Uma hora a mais de mão de obra seria suficiente para fabricar mais 1 colar 1, portanto, aumentando o lucro em \$200.
+
+\subexercise{d)}
+
+Neste caso, a prata não é um limitante para a fabricação, sobrando ainda 10 g de prata em estoque, portanto, não seria para a empresa adquirir mais prata.
 
 \exercise{3}
 
