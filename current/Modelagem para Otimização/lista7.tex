@@ -60,6 +60,79 @@ Após o aumento de 20\%, que resulta na alteração de $\left\{ d_{ij} \right\} 
 
 \exercise{2}
 
+De forma similar ao anterior, temos o custo $c_{ij}$ do trabalhador $i$ executar a tarefa $j$, de forma que \[
+\left\{ c_{ij} \right\} = \begin{bmatrix} 
+    50 & 50 & \infty & 20 \\
+    70 & 40 & 20 & 30 \\
+    90 & 30 & 50 & \infty \\
+    70 & 20 & 60 & 70
+\end{bmatrix} 
+.\]
 
+Assim, modelamos através de das variáveis binárias $x_{ij} \in \left\{ 0,1 \right\} $ a execução da tarefa $j$ pelo trabalhador $i$, implicando no modelo
+\begin{align*}
+    \min_{\left\{ x_{ij} \right\} } \quad & \sum_{i=1}^{4} \sum_{j=1}^{4} c_{ij}x_{ij} \\
+    \textrm{s.t.} \quad & \sum_{j=1}^{4} x_{ij} = 1,\, i=1,\ldots,4\\
+      & \sum_{i=1}^{4} x_{ij} = 1,\, j=1,\ldots,4 \\
+      & x_{ij} \in \left\{ 0,1 \right\} 
+.\end{align*}
+
+A solução ótima encontrada é \[
+\left\{ x_{ij} \right\} = \begin{bmatrix} 
+    1 & 0 & 0 & 0 \\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1 \\
+    0 & 1 & 0 & 0
+\end{bmatrix} 
+.\] 
+
+\exercise{3}
+
+Queremos definir $x_{ij}$ o fluxo de bicicletas do nó $i$ para o nó $j$. Então, o custo de transporte pelos arcos $c_{ij}$ do vértice $i$ para o vértice $j$, de forma que \[
+\left\{ c_{ij} \right\} = \begin{bmatrix} 
+    \infty & \infty & \infty & 1 & 0,3 & \infty & \infty & \infty \\
+    \infty & \infty & \infty & 0,8 & 4,3 & \infty & \infty  & \infty \\
+    \infty & \infty & \infty & 2 & 4,6 & \infty & \infty & \infty   \\
+    \infty & \infty & \infty & \infty & 0,5 & 0,2 & 4,5 & 6   \\
+    \infty & \infty & \infty & \infty & \infty & 3 & 2,1 & 1,9 \\
+    \infty & \infty & \infty & \infty & \infty & \infty & \infty & \infty \\
+    \infty & \infty & \infty & \infty & \infty & \infty & \infty & \infty \\
+    \infty & \infty & \infty & \infty & \infty & \infty & \infty & \infty \\
+\end{bmatrix} 
+.\] 
+
+Ademais, definimos como $b_i$ como o saldo (diferença entre saídas e entradas) almejado de cada nó. Assim, levando em consideração os fornecimentos e as demandas, \[
+\left\{ b_i \right\} = \begin{bmatrix} 
+    -900 \\
+    -1400 \\
+    -1000 \\
+    240 \\
+    0 \\
+    1100 \\
+    1000 \\
+    1200
+\end{bmatrix} 
+.\]
+
+Dessa forma, podemos modelar o problema como
+\begin{align*}
+    \min_{\left\{ x_{ij} \right\} } \quad & \sum_{i=1}^{8} \sum_{j=1}^{8} c_{ij}x_{ij} \\
+    \textrm{s.t.} \quad & \sum_{i=1}^{8} x_{ik} - \sum_{j=1}^{8} x_{kj} = b_k,\, k=1,2,3,5 \\
+      & \sum_{i=1}^{8} x_{ik} - \sum_{j=1}^{8} x_{kj} \le  b_k,\, k=4,6,7,8 \\
+      & x_{ij} \ge 0,\, i,j \in \left\{ 1,\ldots,8 \right\} 
+.\end{align*}
+
+A solução ótima encontrada foi \[
+    \left\{ x_{ij} \right\} = \begin{bmatrix} 
+    0 & 0 & 0 & 0 & 900 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 1400 & 0 & 0 & 0  & 0 \\
+    0 & 0 & 0 & 1000 & 0 & 0 & 0 & 0   \\
+    0 & 0 & 0 & 0 & 1060 & 1100 & 0 & 0   \\
+    0 & 0 & 0 & 0 & 0 & 0 & 760 & 1200 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+\end{bmatrix} 
+\] 
 
 \end{document}
