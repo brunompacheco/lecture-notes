@@ -1,0 +1,39 @@
+O motor de corrente contínua permite o controle da velocidade, pois é mais fácil de acionar em relação à maquinas de corrente alternada. O uso de conversores estáticos a tiristor ou transistor é a melhor solução para a variação da velocidade.
+
+Portanto, devido a variedade de estruturas disponíveis, é necessário o uso de critérios para estabelecer qual a melhor solução para cada caso. Os critérios mais importantes são:
+
+\begin{enumerate}
+    \item Característica torque-velocidade: A presença de um conversor modifica a característica torque-velocidade natural do motor, é preciso então que as novas características sejam adequadas para a carga que se deseja acionar.
+    
+    \item Fator de potência: Estruturas e modos diferentes de controlá-las podem provocar consumos de reativos diferentes para uma mesma carga e uma mesma máquina. O fator de potência é dado por:
+    \begin{equation*}
+        FP = \frac{Potencia de entrada}{Volt.Amperes de entrada} = \frac{V.I_{1}.\cos{\phi_{1}}}{V.I}
+    \end{equation*}
+    
+    onde:
+    
+    $I_{1} \rightarrow$ Valor eficaz da corrente fundamental.
+    
+    $I \rightarrow$ Valor eficaz da corrente total.
+    
+    $\phi_{1}  \rightarrow$  Ângulo entre a tensão e a corrente fundamental.
+    
+    \item Conteúdo Harmônico: É definido pela expressão a seguir:
+    \[I_{h} = \frac{\sqrt{I^{2} - I_{1}^{2}}}{I_{1}}\]
+    
+    Quanto maior o conteúdo harmônico introduzido na rede, mais indesejável é o sistema conversor-motor CC.
+    
+    \item Fator de forma da corrente de armadura: O fator de forma é definido por:
+    \begin{equation*}
+        FF = \frac{I_{a_{eficaz}}}{I_{a_{medio}}}
+    \end{equation*}
+    
+    $I_{a}$ é a corrente de armadura do motor.
+    
+    Quanto maior o fator de forma, maior será as perdas do motor. A corrente máxima do motor sempre deve ser respeitada.
+    
+    \item Corrente de pico: Quanto maior a corrente de pico, para uma corrente média, pior será o funcionamento do comutador do motor. A corrente máxima do motor sempre deve ser respeitada.
+    
+    \item Rendimento: Diferentes estruturas de comando podem propiciar rendimentos diferentes, para um dado motor e para uma dada carga.
+\end{enumerate}
+
