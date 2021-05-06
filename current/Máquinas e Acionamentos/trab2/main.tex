@@ -18,6 +18,7 @@ foot=0.7cm]{geometry}
 \usepackage{fancyhdr}
 \usepackage{multirow}
 \usepackage{tabularx}
+\usepackage{placeins}
 \usepackage{natbib}
 \usepackage{import}
 \usepackage[nottoc]{tocbibind} % insere as referências no sumário
@@ -59,18 +60,23 @@ foot=0.7cm]{geometry}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \input{introducao}
+\FloatBarrier
 \newpage
 
 \input{cc}
+\FloatBarrier
 \newpage
 
 \input{assincronas}
+\FloatBarrier
 \newpage
 
 \input{sincronas}
+\FloatBarrier
 \newpage
 
 \input{passo}
+\FloatBarrier
 \newpage
 
 \input{conclusao}
