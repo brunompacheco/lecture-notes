@@ -1,0 +1,130 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Homework Assignment}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410049 - Integer Programming}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Following the algorithm suggested by Vanderbei, we first introduce the slack variables to the problem, so the constraints become
+\begin{align*}
+    x_5 &= 5 - 2x_1 - x_2 - x_3 - 3x_4 \\
+    x_6 &= 3 - x_1 - 3x_2 - x_3 - 2x_4  \\
+    x_1&,\ldots,x_6 \ge 0
+,\end{align*}
+and we name the objective function \[
+\zeta = 6x_1 + 8x_2 + 5x_3 + 9x_4
+.\] 
+
+Notice that the trivial solution is feasible, so we can indeed have $\mathcal{N}=\left\{ 1,\ldots,4 \right\} $ and $\mathcal{B} = \left\{ 5,6 \right\} $ as our initial nonbasic and basic variables resp. This being said, we choose $x_4$ as the leaving variable in the fist iteration as it has the largest coefficient in the cost function, which implies in \[
+x_4 = \min \left( \frac{5}{3}, \frac{3}{2} \right) = \frac{3}{2}
+,\] with $x_6$, thus, as the entering variable.
+
+Now, our constraints are
+\begin{align*}
+    x_5 &= \frac{1}{2} - \frac{1}{2}x_1 + \frac{7}{2}x_2 + \frac{1}{2}x_3 + \frac{3}{2}x_6 \\
+    x_4 &= \frac{3}{2} - \frac{1}{2}x_1 - \frac{3}{2}x_2 - \frac{1}{2}x_3 - \frac{1}{2}x_6  \\
+    x_1&,\ldots,x_6 \ge 0
+\end{align*}
+and our objective function is \[
+\zeta = \frac{27}{2} + \frac{3}{2}x_1 - \frac{11}{2}x_2 +\frac{1}{2}x_3 - \frac{9}{2}x_6
+.\] 
+
+Now, by picking $x_1$ as our leaving variable, we have \[
+x_1 = \min\left( 1, 3 \right) = 1
+,\] which implies in $x_5$ being our entering variable for the iteration. Upon this, our constraints become
+\begin{align*}
+    x_1 &= 1 + 7x_2 + x_3 -2x_5 + 3x_6 \\
+    x_4 &= 1 - 5x_2 - x_3 +x_5 -2x_6  \\
+    x_1&,\ldots,x_6 \ge 0
+\end{align*}
+and our cost function becomes \[
+\zeta = 15 + 5x_2 + 2x_3 -3x_5 + 0x_6
+.\] 
+
+For the third iteration, $x_2$ is chosen as the leaving variable \[
+x_2 = \frac{1}{5} 
+\] and $x_4$ as the entering variable. Thus, our constraints become
+\begin{align*}
+    x_1 &= \frac{12}{5} - \frac{2}{5}x_3 -\frac{7}{5}x_4 -\frac{3}{5}x_5 + \frac{1}{5}x_6 \\
+    x_2 &= \frac{1}{5} - \frac{1}{5}x_3 -\frac{1}{5}x_4 +\frac{1}{5}x_5 -\frac{2}{5}x_6  \\
+    x_1&,\ldots,x_6 \ge 0
+\end{align*}
+and the cost becomes \[
+\zeta = 16 + x_3 -x_4 -2x_5 -2x_6
+.\] 
+
+Finally, we pick $x_3$ as the leaving variable \[
+x_3 = \min\left( 6, 1 \right) = 1
+\] and $x_2$ as the entering variable. The constraints become
+\begin{align*}
+    x_1 &= 2 + 2x_2 -x_4 -x_5 +x_6 \\
+    x_3 &= 1 - 5x_2 -x_4 +x_5 -2x_6  \\
+    x_1&,\ldots,x_6 \ge 0
+\end{align*}
+and the cost \[
+\zeta = 17 - 5x_2 -2x_4 -x_5 -4x_6
+,\] which cannot be increased. Thus, the optimal solution is \[
+\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix} = \begin{bmatrix} 2 \\ 0 \\ 1 \\ 0 \end{bmatrix} 
+\] with a cost of 17.
+
+The dual of the problem is
+\begin{align*}
+    \min_{y_1,y_2} \quad & 5y_1 + 3y_2 \\
+    \textrm{s.t.} \quad & 2y_1 + y_2 \ge 6 \\
+      & y_1+3y_2 \ge 8 \\
+      & y_1+y_2 \ge 5 \\
+      & 3y_1+2y_2 \ge 9 \\
+.\end{align*}
+
+\exercise{2}
+
+First, let us rearrange the primal in standard form as
+\begin{align*}
+    P^{(std)}:\quad \max_{x,y} \quad\quad & c_1^{T}x+c_2^{T}y \\
+    \textrm{s.t.} \quad -&a_{i,1}^{T} x -a_{i,2}^{T}y \le  -d_i,\,i=1,\ldots,p \\
+			 &a_{i,1}^{T} x + a_{i,2}^{T}y \le d_i,\,i=1,\ldots,q \\
+.\end{align*}
+
+Now, we denote \[
+c' = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} \in \R^{m+n};\,
+x' = \begin{bmatrix} x \\ y \end{bmatrix} \in \R^{m+n};\,
+d' = \begin{bmatrix} -d_1 \\ \vdots \\ -d_p \\ d_1 \\ \vdots \\ d_q \end{bmatrix} \in \R^{p+q};\,
+A = \begin{bmatrix}
+    -a_{1,1}^{T} & -a_{1,2}^{T} \\
+    \vdots & \vdots \\
+    -a_{p,1}^{T} & -a_{p,2}^{T} \\
+    a_{1,1}^{T} & a_{1,2}^{T} \\
+    \vdots & \vdots \\
+    a_{q,1}^{T} & a_{q,2}^{T} \\
+\end{bmatrix} \in \R^{\left( p+q \right)  \times \left( m+n \right) }
+.\] Our problem can then be written as
+\begin{align*}
+    P^{(std)}:\quad \max_{x'} \quad & c'^{T}x' \\
+    \textrm{s.t.} \quad & A x' \le d' \\
+			& x'\in \R^{m+n}
+,\end{align*}
+which makes it easy to see that
+\begin{align*}
+    D:\quad \min_{y'} \quad & d'^{T}y' \\
+    \textrm{s.t.} \quad & A^{T}y' \ge c' \\
+      & y'\in \R^{p+q}
+\end{align*}
+is the dual of $P$.
+
+\exercise{3}
+
+Let us prove the equivalence by constructing the graph that shall be the input for a minimum-cost network-flow problem. The notation of Wolsey's Integer Programming, 2021, is used.
+
+Let $V=\left\{ 1,\ldots,n,\ldots, 2n \right\} $	be the set of nodes in which the nodes $1,\ldots,n$ represent the servers while the $n+1,\ldots,2n$ nodes represent the jobs. Let $A=\left\{ \left( i,j \right)  \right\}_{i\in \left\{ 1,\ldots,n \right\},j\in \left\{ n+1,\ldots,2n \right\} }$ be the arcs which represent the capacity of a server $i$ to be allocated for a job $j$. Then, we define $h_{\left( i,j \right) } = 1\,\forall \left( i,j \right) \in A$ as each server can only be allocated to one job. Let us define the demands $b_i = -1,\,i=1,\ldots,n$ as in our problem each server must be allocated so we can handle all the jobs, and $b_j=1,\,j=n+1,\ldots,2n$ as each job demands a resource.
+
+Notice that a solution $\left\{ x_{ij} \right\}$ for the minimum-cost network-flow problem of graph $G=\left( V,A \right) $ with capacities $h$ and demands $b$ as defined is a solution to the allocation problem proposed.
+
+It is known (Proposition 3.4, Wolsey's Integer Programming, 2021) that the constraint matrix of a minimum-cost network-flow problem is totally unimodular, thus, as the demands and capacities are all integer values, the solution will also be integral. I.e., we can solve the linear relaxation of the problem.
+
+\end{document}
