@@ -127,4 +127,50 @@ Notice that a solution $\left\{ x_{ij} \right\}$ for the minimum-cost network-fl
 
 It is known (Proposition 3.4, Wolsey's Integer Programming, 2021) that the constraint matrix of a minimum-cost network-flow problem is totally unimodular, thus, as the demands and capacities are all integer values, the solution will also be integral. I.e., we can solve the linear relaxation of the problem.
 
+\exercise{4}
+
+The resulting branch-and-bound tree can be seen in the figure below. The optimal solution found was \[
+x_1 = 0;\, x_2=2;\, x_3=0;\,x_4=0
+\] with cost of 24, as in node 12.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/integer_programmin_homework_4.png}
+\end{figure}
+
+The sub-problems were explored in a breadth-first approach, so the iterations can be followed by the indices. Note that the pruned nodes are marked with dashed contour and the upper bounds found through the linear relaxations are in the top-right of each node, while the lower bound are in the bottom-right. Nodes 5, 12 and 13 were bound by optimality; nodes 2, 8 and 10 were pruned by infeasibility; and nodes 9 and 14 were pruned by bound.
+
+All LP relaxations were solved using Gurobipy, Gurobi's interface for Python. The implementation can be seen in the \texttt{homework-4.pdf} file, which is the jupyter notebook with the python code.
+
+\exercise{5}
+
+The optimal solution of the LP relaxation is \[
+x_1 = 0;\, x_2=1;\, x_3=\frac{3}{4}
+\] with a cost of 14.5.
+
+We write the lagrangean relaxation of the proposed 0-1 knapsack problem as
+\begin{align*}
+    Z(u) = \max_{x_1,x_2,x_3} \quad & 10x_1+4x_2+14x_3 + u\left( 4-3x_1-x_2-4x_3 \right)  \\
+    \textrm{s.t.} \quad & x_1,x_2,x_3\in \left\{ 0,1 \right\}
+\end{align*}
+and the lagrangean dual as
+\begin{align*}
+    W_{LD} = \min_{u} \quad & Z(u) \\
+    \textrm{s.t.} \quad & u\ge 0
+.\end{align*}
+
+As we have a finite and small number of feasible points $X=\left\{ x^{1},\ldots,x^{8} \right\} = \left\{ 0,1 \right\}^{3}$, the lagrangean dual was solved using Gurobi through the formulation
+\begin{align*}
+    \min_{\eta,u} \quad & \eta \\
+    \textrm{s.t.} \quad & \eta \ge 10x_1^{t}+4x_2^{t}+14x_3^{t} + u\left( 4-3x_1^{t}-x_2^{t}-4x_3^{t} \right),\, t=1,\ldots,8  \\
+      & u\in \R_+,\eta\in \R
+.\end{align*}
+The optimal value for the lagrangean multiplier was 3.5 with a cost of 14.5.
+
+It is known (theorem 10.1 of Wolsey's Integer Programming, 2021) that the lagrangean dual gives us a solution in the convex hull of the constraints not dualized. This, in our problem, can be written as \[
+W_{LD} = \max\left\{ 10x_1+4x_2+14x_3 : 3x_1+x_2+4x_3\le 4,\, x\in \text{conv}\left( X \right)  \right\} 
+.\] Now, note that \[
+\text{conv}\left( X \right) = \left[ 0,1 \right] ^{3}
+,\] which is precisely the linear relaxation of the original problem, thus why both approaches find the same optimal value.
+
 \end{document}
