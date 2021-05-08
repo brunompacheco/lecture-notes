@@ -167,10 +167,12 @@ As we have a finite and small number of feasible points $X=\left\{ x^{1},\ldots,
 .\end{align*}
 The optimal value for the lagrangean multiplier was 3.5 with a cost of 14.5.
 
-It is known (theorem 10.1 of Wolsey's Integer Programming, 2021) that the lagrangean dual gives us a solution in the convex hull of the constraints not dualized. This, in our problem, can be written as \[
+It is known (Theorem 10.1 of Wolsey's Integer Programming, 2021) that the lagrangean dual gives us a solution in the convex hull of the constraints not dualized. This, in our problem, can be written as \[
 W_{LD} = \max\left\{ 10x_1+4x_2+14x_3 : 3x_1+x_2+4x_3\le 4,\, x\in \text{conv}\left( X \right)  \right\} 
 .\] Now, note that \[
 \text{conv}\left( X \right) = \left[ 0,1 \right] ^{3}
 ,\] which is precisely the linear relaxation of the original problem, thus why both approaches find the same optimal value.
+
+The implementation of both approaches can be seen in \texttt{homework-5.pdf}.
 
 \end{document}
