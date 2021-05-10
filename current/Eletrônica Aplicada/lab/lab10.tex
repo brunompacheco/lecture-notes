@@ -1,0 +1,73 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 10}
+\author{Bruno M. Pacheco (16100865)\\
+Pedro Y. F. Ceripes (18100681) \\
+EEL 7550 - Eletrônica Aplicada}
+
+\maketitle
+\section*{Objetivo}
+
+As simulações descritas neste roteiro visam experimentar o uso de MOSFETs em um arranjos de amplificador, em particular, amplificador fonte comum.
+
+\section*{Simulações}
+
+\subsection*{Circuito 1}
+\subsection*{a}
+
+Como requisitado no roteiro, foi montado o circuito completo, porém note que as fontes de tensão que representam Vs estão com amplitude igual a zero. Logo, os únicos componentes que determinam o comportamento do sistema no equilíbrio são os resistores R1, R2, RS, RD e Vcc. O circuito pode ser observado na figura abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab10-1.PNG}
+    \caption{Primeiro circuito simulado no LTspice.}
+\end{figure}
+
+Com isso, foi possível completar a tabela abaixo:
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c | c | c | c | c}
+	$I_G$ [mA]  & $I_D$ [mA] & $I_{S}$ [mA]  & $V_{GS}$ [V]  & $V_{DS}$ [V]\\
+    \hline
+    0 & 1.3 & 1.3 & 1.7 & 1.5 
+    \end{tabular}
+\end{table}
+
+Como $V_{GS} > V_{th}$, considerando $V_{th} = 1.6 V$, e também $V_{DS} >  | V_{GS} - V_{th} |$, logo o transistor está operando em saturação, atuando como amplificador.
+
+\subsection*{b}
+
+Para esse exercício foi modificada a tensão Vs, para duas fontes senoidais com amplitudes e frequências diferentes, como mostrado na figura abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{figures/lab10-2.PNG}
+    \caption{Segundo circuito simulado no LTspice.}
+\end{figure}
+
+Para analisar o ganho, é necessário checar o sinal de entrada e de saída. O gráfico desses sinais pode ser observado na figura abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lab10-3.PNG}
+    \caption{Análise da tensão de entrada pela de saída.}
+\end{figure}
+
+Para definir o ganho, devemos utilizar a relação: $G = \cfrac{Vout}{Vin}$. Considerando o ponto observado, temos que:
+$$
+G = \cfrac{Vout}{Vin} \approx \cfrac{210mV}{-70mV} = -3  
+$$
+
+Analisando a curva, também percebemos que o ganho não é alterado por estas faixas de frequência, ou seja o MOSFET está se comportando conforme o esperado para chaveamentos ou freqências altas.
+
+\section{Conclusão}
+
+A experiência demonstra o uso de um MOSFET em um arranjo amplificador de fonte comum. No circuito, uma fonte CC é utilizada tanto para o sinal amplificado quanto para polarizar o \textit{gate} do transistor, enquanto uma fonte AC fornece o sinal a ser amplificado. Analisaram-se o impacto da grandeza dos componentes utilizados no ganho, i.e., na quantidade de amplificação do sinal de entrada como visto pela carga simulada.
+
+Em geral, os resultados, apesar de impactados pela não idealidade simulada do componente principal, seguiram o esperado pelo estudo teórico desse tipo de amplificador.
+
+\end{document}
