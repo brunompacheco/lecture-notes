@@ -1,0 +1,51 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 8}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410079 - Modelagem para Otimização}
+ 
+\maketitle
+ 
+\exercise{2}
+
+Primeiro, definimos os custos por ano de manutenção de uma máquina como $M = \left\{ m_i \right\} = \left\{ 38, 50, 97, 182, 304 \right\} $ e os custo de aquisição como $C = \left\{ c_i \right\} = \left\{ 170, 190, 210, 250, 300 \right\} $.
+
+Agora, sabemos que no período de 5 anos podemos ter no máximo 5 máquinas diferentes, então definimos como $m_{i,s}$ o ano de aquisição da $i$-ésima máquina e $m_{i,e}$ o seu ano de venda. Dessa forma, sabemos que o custo associado a essa máquina será \[
+\sigma_i = C_{m_{i,e} - m_{i,s}} + \sum_{n=1}^{m_{i,e} - m_{i,s}} M_n
+.\] Para garantir o funcionamento, assumimos que $C_0 = M_0 = 0$. Além disso, como não precisaremos comprar uma máquina nova no último ano, podemos desconsiderar esse custo, i.e., o custo total será \[
+\sigma = \sum_{i=1}^{5} \sigma_i - C_{5-\max\left\{  m_{i,s}: i>1 ,\, m_{i,s} < 5\right\} }
+.\] 
+
+Para garantirmos ordem na aquisição das máquinas, temos que adicionar as restrições \[
+1 = m_{1,s} \le m_{1,e} = m_{2,s} \le \ldots \le m_{5,s} \le m_{5,e} = 5
+.\] 
+
+Entretanto, analisando os custos, vemos que somente uma troca de máquinas é necessária durante os 5 anos, uma vez que os custos de manutenção crescem exponencialmente enquanto os custos de compra crescem quase linearmente. Dessa forma, podemos formular o problema simplesmente por uma variável $y$ que define o ano em que a troca acontece, formulando o custo através de três componentes
+\begin{align*}
+    \sigma = & \sum_{n=1}^{y} M_n \\
+	     &+ \sum_{n=1}^{5-y} M_n \\
+	     &+ C_y
+.\end{align*}
+Então, basta restringir $y \in \left\{ 1,\ldots,4 \right\} $.
+
+Chega-se a um valor de $y=2$ e um custo de $\sigma = 463$ (em milhares).
+
+\exercise{3}
+
+A relação entre os componentes dessa cooperativa pode ser vista no grafo abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{L8_3.png}
+\end{figure}
+
+Para atingir a máxima produção e demanda que o sistema suporta, podemos formular o problema como um problema de fluxo máximo no qual os sorvedouros e as vertentes possuem demanda/produção ilimitada, sendo somente limitadas pela capacidade dos meios, através dos nós S e T ilustrados no grafo.
+
+O fluxo máximo da cooperativa é de 100 m³ por dia. A máxima produção diária das refinarias é de 10, 70 e 20 m³/dia para as refinarias R1, R2 e R3, respectivamente. Já quanto às demandas, para garantir que o fluxo máximo seja mantido, pode-se vender 60 e 40 m³/dia através dos terminais de venda T1 e T2, respectivamente.
+
+A implementação foi feita utilizando o código em \url{http://www.github.com/brunompacheco/grafos}, no arquivo \texttt{fluxo.py}.
+
+\end{document}
