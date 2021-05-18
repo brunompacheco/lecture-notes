@@ -1,0 +1,81 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Exam}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410079 - Modelagem para Otimização}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Let's start  by defining \[
+\bm{x} = \begin{bmatrix} x_{Personal} \\ x_{Car} \\ x_{Home} \\ x_{Farm} \\ x_{Commercial} \end{bmatrix} 
+\] our working variable that indicates the amount of money destined to each type of loan. It is clear that \[
+0\le \|\bm{x}\|_{l_1} \le 12
+,\] that is, the boundaries of the investment.
+
+Besides that, we must enforce \[
+x_{Farm} + x_{Commercial} = 0,4 * 12
+.\] Also, as stated, \[
+x_{Home} \ge 0,5 \left( x_{Personal} + x_{Car} + x_{Home} \right) 
+\] \[
+\implies x_{Home} \ge  x_{Personal} + x_{Car}
+.\] 
+
+On the bad debts, let's define \[
+    \bm{d} = \begin{bmatrix} d_{Personal} \\ d_{Car} \\ d_{Home} \\ d_{Farm} \\ d_{Commercial} \end{bmatrix} 
+\] the probability of bad debt for each type of loan. Now, the policy of the bank specifies that \[
+    \frac{1}{\|\bm{x}\|_{l_1}} \bm{d}^{T}\bm{x} \le 0,04
+\] \[
+    \implies \bm{d}^{T}\bm{x} \le \begin{bmatrix} 0,04 \\ 0,04 \\ 0,04 \\ 0,04 \end{bmatrix} ^{T} \bm{x}
+\] \[
+\implies \left( \bm{d} - 0,04 \right)^{T} \bm{x} \le  0
+,\] where the subtraction is considered element-wise.
+
+Finally, we define \[
+    \bm{i} = \begin{bmatrix} i_{Personal} \\ i_{Car} \\ i_{Home} \\ i_{Farm} \\ i_{Commercial} \end{bmatrix} 
+\] the interest rate for each investment. So the expected profit, which is the goal of our optimisation, can be determined as \[
+\sum_{t \in T} i_t x_t \left( 1-d_t \right)
+,\] where $T=\left\{ Personal, Car, Home, Farm, Commercial \right\} $.
+
+Thus, the programming can be written
+\begin{align*}
+    \max_{\bm{x}} \quad & \sum_{t \in T} i_t x_t \left( 1-d_t \right) \\
+    \textrm{s.t.} \quad & \left( \bm{d} - 0,04 \right)^{T} \bm{x} \le 0 \\
+      & x_{Home} \ge  x_{Personal} + x_{Car} \\
+      & x_{Farm} + x_{Commercial} = 0,4 * 12 \\
+      & 0\le \|\bm{x}\|_{l_1} \le 12 \\
+	  & x_t \ge 0,\, t \in  T
+.\end{align*}
+
+\exercise{3}
+
+We define $x_i \in \Z^{+}$ as the number of computers produced at plant $i$. We know that the production must be limited by the demand, that is, \[
+\sum_{i=1}^{4} x_i \le 20 000
+.\]
+
+Now, we must also model the applicability of the fixed cost. So by using $y_i \in \left\{ 0,1 \right\} $, we can enforce
+\begin{align*}
+    x_i &\ge 1 - M \left( 1-y_i \right) \\
+    x_i &\le 0 + M y_i 
+,\end{align*}
+where $M$ is a big enough number. This way, $y_i$ will indicate whether plant $i$ is in operation. This allows us to model the profit, which we want to maximize, as \[
+-\bm{y}^{T} \begin{bmatrix} 9000000 \\ 5000000 \\ 3000000 \\ 1000000 \end{bmatrix} + \bm{x}^{T}\begin{bmatrix} 3500 - 1000 \\ 3500 - 1700 \\ 3500-2300 \\ 3500-2900 \end{bmatrix} 
+.\] 
+
+So our optimization problem can be formulated as
+\begin{align*}
+    \max_{\bm{x}} \quad & -\bm{y}^{T} \begin{bmatrix} 9000000 \\ 5000000 \\ 3000000 \\ 1000000 \end{bmatrix} + \bm{x}^{T}\begin{bmatrix} 2500 \\ 1800 \\ 1200 \\ 600 \end{bmatrix} \\
+    \textrm{s.t.} \quad & \sum_{i=1}^{4} x_i \le 20 000 \\
+			&x_i \ge 1 - M \left( 1-y_i \right),&i=1,\ldots,4 \\
+			&x_i \le 0 + M y_i,& i=1,\ldots,4 \\
+			& \bm{x} \le \begin{bmatrix} 10000 \\ 8000 \\ 9000 \\ 6000 \end{bmatrix} \\
+			& x_i \in \Z^{+},\, y_i \in \left\{ 0,1 \right\} ,&i=1,\ldots,4
+.\end{align*}
+
+The optimal solution was found using Gurobipy at a profit of \$ 25,600,000 by producing 10,000 computers at plant 1, 8,000 computers at plant 2 and 2,000 computers at plant 4, none being produced at plant 3.
+
+\end{document}
