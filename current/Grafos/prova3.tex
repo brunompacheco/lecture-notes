@@ -1,0 +1,56 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Prova 3}
+\author{Bruno M. Pacheco (16100865)\\
+Grafos}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Considerando que o comportamento dos motoristas é organizado no sentido de maximizar o fluxo total de $s$ para $t$, podemos utilizar o algoritmo de Ford-Fulkerson para obter o fluxo máximo em $G$. Dessa forma, podemos obter o fluxo através de uma intersecção $u\in V$ através do fluxo através dos arcos saintes de $u$ (ou entrantes em $u$, seria o mesmo resultado). Um exemplo dessa abordagem pode ser visto no algoritmo abaixo.
+
+\begin{algorithm}
+    \KwIn{um grafo $G=\left( V, A, c \right) $, vértices $s,t \in V$}
+    $f \gets \,$FordFulkerson$\left( G,s,t \right) $ \\
+    $F_u \gets \sum_{\left( u,v \right) \in N^{+}\left( u \right)  } f\left( \left( u,v \right)  \right) ,\, \forall u \in V$ \\
+    \Return{$\left\{ u\in V : F_u = \max F \right\} $}
+\end{algorithm}
+
+\exercise{2}
+
+O grafo CPM obtido a partir do conjunto de atividades fornecido pode ser visto na figura abaixo.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{cpm.png}
+\end{figure}
+
+Dessa forma, performamos o \emph{forward-pass} e o \emph{backward-pass} para encontrar a seguinte relação entre os eventos e os seus tempos mínimos/máximos de ocorrência:
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c | c | c}
+     & $E_j$ & $T_j$ \\
+     \hline
+	1 & 0 & 0 \\
+	2 & 3 & 3 \\
+	3 & 7 & 7 \\
+	4 & 9 & 9 \\
+	5 & 11 & 11
+    \end{tabular}
+\end{table}
+
+As atividades críticas são $B, C, D, F $.
+
+\exercise{3}
+
+Obter o emparelhamento máximo de $G'$ com apenas um caminho aumentante alternante não é possível para todo grafo $G$ como estipulado no enunciado. Um exemplo seria um grafo $G$ com vértices $u\in X$, $v\in Y$ não emparelhados por $M$ de forma que não exista um caminho de $u$ para $v$. Ainda mais, suponha que $Z_x = \left\{ \left( x,v \right)  \right\} $ e $Z_y = \left\{ \left( y,u \right)  \right\} $. Veja que não existe sequer um caminho que passe por $x$ e $y$ e, ainda assim, o emparelhamento máximo do grafo $G'$ inclui os emparelhamentos $x-v$ e $u-y$, ou seja, seriam necessários dois caminhos aumentantes alternantes para obter o emparelhamento máximo de $G'$.
+
+\exercise{4}
+
+Veja que, como os vértices de $T$ não possuem arestas entre si, os vizinhos de cada vértice de $T$ terão no máximo $k$ cores distintas. Dessa forma, podemos, no pior caso, adicionar uma nova cor e utilizá-la para todos os vértices de $T$ uma vez que eles não são vizinhos entre si. Ou seja, $G'$ tem no máximo $k+1$ cores.
+
+\end{document}
