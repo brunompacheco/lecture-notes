@@ -51,6 +51,24 @@ e
 \end{align*}
 sejam as operações de travessia no sentido da margem desejada, ou seja, possuem como pré-requisito que $b=1$ e que tenham suficientes passageiros para a mesma na margem de origem. De forma equivalente, as operações $g_i=f_i^{-1}, i=1,\ldots,5$ fazem o mesmo mas no sentido oposto, com pré-requisitos, portanto, exatamente opostos.
 
+\exercise{5}
+
+\subexercise{a}
+
+Podemos modelar os estados como uma matriz $n\times n$ normal (pela definição do enunciado) e um valor binário que indica se a matriz é um quadrado mágico ou não.
+
+Dessa forma, podemos escrever o conjunto de estados \[
+E = \left\{ \left( M, m \right) \in  \Z_{n\times n} \times \{0,1\} : M\text{ é normal} \right\} 
+.\] 
+
+\subexercise{b}
+
+O estado inicial $e_i=\left( M_i, b_i \right) $ pode ser composto por matriz normal $M_i$ e valor $b_i$, enquanto o final $e_f=\left( M_f,b_f \right) $ é qualquer estado com $b_f=1$.
+
+\subexercise{c}
+
+As operações possíveis são trocas de valores entre os campos da matriz, mantendo-a normal. Nota-se também que o valor de $b$ deve ser corrigido a cada operação para condizer com a matriz resultante.
+
 \exercise{6}
 
 \subexercise{a}
