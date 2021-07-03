@@ -1,0 +1,74 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Exercícios 1}
+\author{Bruno M. Pacheco (16100865)\\
+EEL5354 - Eletrotécnica para Automação}
+ 
+\maketitle
+ 
+\exercise{1}
+
+A lei de indução eletromagnética estabelece a interação entre um campo magnético e um campo elétrico. Na sua formulação mais comum, podemos interpretá-la como a geração de uma força eletromotriz a partir de uma variação do fluxo magnético.
+
+Um outro uso bastante comum no nosso cotidiano é nos sistema de comunicação, por exemplo, sistemas NFC.
+
+\exercise{2}
+
+Como vemos que o fluxo é ortogonal à superfície do interior da espira, podemos considerar \[
+\Phi = B \cdot  A
+.\] 
+
+Além disso, considerarei que $B\left( 0 \right) = 0$.
+
+\subexercise{a}
+
+Neste caso, \[
+B(t) = 0,02 t \implies \Phi(t) = 0,00024 t\,Wb
+,\] logo, \[
+\epsilon = -1 \frac{\partial \Phi}{\partial t} = -0,00024\,V
+.\] Dessa forma, \[
+I = 48\,\mu A
+.\] 
+
+\subexercise{b}
+
+\[
+B(t) = \frac{0,03}{2\pi} \cos\left( 2\pi t \right) \implies \Phi(t) = \frac{0,00018}{\pi}\cos\left( 2\pi t \right) \, Wb
+.\] \[
+\epsilon = -0,00036 \sin\left( 2\pi t \right) \,V \implies I = 72\,\mu A
+.\]
+
+\exercise{3}
+
+A frequência de rotação mecânica do eixo do gerador é \[
+f_M = \frac{180}{60} = 3\,Hz
+.\] Dessa forma, podemos estimar o número de polos uma vez que queremos \[
+f_e = 60\,Hz = \frac{P}{2} f_M \implies P = 20\text{ polos}
+.\]
+
+\exercise{4}
+
+Sabemos que o efeito de reação da armadura se dá pelo campo magnético induzido pela corrente que passa pelas espiras. O número de espiras impacta linearmente na força eletromotriz mas também na resistência do enrolamento, ou seja, não impacta na corrente induzida. Dessa forma, como sabemos também que um número maior de espiras implica em uma maior indutância o que aumentaria a intensidade do campo magnético gerado, diminuir a quantidade de espiras diminuiria os efeitos de reação da armadura.
+
+\exercise{5}
+
+Podemos estabelecer a relação entre a potência máxima $P_{max}$ e a fornecida durante a operação $P_{out}$ \[
+P_{out} = P_{max} \sin \delta \implies P_{max} = \frac{100\cdot 10^6}{\sin 20^{\circ}} \approx 292\,MW
+.\] Portanto seria possível entregar.
+
+\exercise{6}
+
+No caso de um curto-circuito, teríamos um aumento da corrente no estator, logo, um campo maior gerado por ele (reação da armadura). Com isso, teríamos uma maior defasagem entre $V_{\Phi}$ e $E_A$, o que significa uma queda de $V_{\Phi}$ até um valor que entre em equilíbrio com a corrente induzida. Destacamos que isso resultaria em uma maior potência dissipada na armadura (em $X_S$).
+
+\exercise{7}
+
+Considerando $R_A$ como uma carga RC.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/2-2_7.png}
+\end{figure}
+
+\end{document}
