@@ -1,0 +1,25 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Controle de Iluminação de Ambiente\\Definição do Projeto Final}
+\author{Bruno M. Pacheco (16100865) \\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+
+\section*{Descrição do Projeto}
+
+Pretende-se desenvolver um sistema de controle de iluminação de ambiente para garantir a luminosidade necessária. O ambiente para o qual este projeto se direciona é um escritório pequeno, se adequando ao uso em um \emph{home office}. Almeja-se garantir que a iluminação seja própria ao trabalho tanto em intensidade quanto em temperatura da cor, assumindo-se que cores mais quentes são preferíveis nos períodos noturnos e com variações progressivas.
+
+Para o desenvolvimento e teste, planeja-se medir a intensidade e cor da luz ambiente através de um transdutor de luminosidade e de cor ambiente (APDS-9960 ou similar) e atuar através de uma lâmpada inteligente (Smart Lâmpada Positivo, fechando a malha de controle. A interface entre ambos e o software em LabVIEW pode ser feita através de um Arduino, que possui módulos inclusive para o controle da lâmpada inteligente através da rede wireless residencial.
+
+Planeja-se fornecer ao usuário controle sobre o período de trabalho, o que seria convertido em um sinal de referência para a malha de controle de luminosidade e de temperatura da cor.
+
+\section*{Componentes}
+
+Infelizmente, somente a lâmpada inteligente se encontra a disposição do projeto. O arranjo de transdutor(es) é flexível à disponibilidade, caso diferentes transdutores já estejam a disposição. O Arduino também pode ser facilmente obtido.
+
+\end{document}
+
