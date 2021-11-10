@@ -1,0 +1,30 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Dimensionamento circuitos com PNP}
+\author{Bruno M. Pacheco (16100865)\\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+ 
+\subsection*{Solução 1}
+
+Como é necessário que a corrente na carga seja $i=100\,mA$, precisamos que $i_{C_1}= -i_{B_2}=0,5\,mA$ e, portanto, $i_{B_1} = 6,25\,\mu A$. É desejável minimizar a potência dissipada nos transistores, portanto, operamos eles todos na região de saturação. Dessa forma, sabemos que $V_{CE_1} = 0,2\,V$ e $V_{EB_2} = 1\,V$, o que nos permite dimensionar o resistor $R_2$, uma vez que \[
+i_{C_1} \approx \frac{12-0,2 - 1}{R_2} \ge 0,5\,mA \implies R_2 \le 21,6\,k\Omega
+.\] Utilizando valores padrão E12, podemos utilizar $R_2=18\,k\Omega$.
+
+Dessa forma, recalculamos $i_{C_1} = 0,6\,mA \implies i_{B_1} = 7,5\,\mu A$, o que nos permite definir $R_1$ através de \[
+i_{B_1} = \frac{5-0,7}{R_1} \ge 7,5\,\mu A \implies R_1 \le 573,3\,k\Omega
+.\] Novamente utilizando valores do padrão E12, definimos $R_1 = 470\,k\Omega$ (levando em consideração os 10\% de erro do resistor, não seria seguro utilizar o resistor de $560\,k\Omega$).
+
+Finalmente, o resistor de \emph{pull-up} $R_p$ pode ser escolhido de forma a não interferir nos cálculos, então escolhe-se $R_p = 470\,k\Omega \gg R_2$ pois evita a compra de resistores de outro valor.
+
+\subsection*{Solução 2}
+
+Para garantir $100\,mA$ na carga, é necessário que $i_{B} = -0,5\,mA$. Assim, podemos definir $R_1$ através de \[
+|i_{B}| \approx \frac{5-1}{R_1} > 0,5\,mA \implies R_1 < 8\,k\Omega
+.\] Na série E12, podemos escolher $R_1 = 6,8\,k\Omega$. Dessa forma, podemos também escolher $R_p =  82\,k\Omega \gg R_1$ para não interferir no funcionamento do sistema.
+
+\end{document}

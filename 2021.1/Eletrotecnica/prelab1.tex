@@ -1,0 +1,89 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Laboratório 1}
+\author{Bruno M. Pacheco (16100865)\\
+EEL5354 - Eletrotécnica para Automação}
+ 
+\maketitle
+ 
+\section*{Preparação}
+
+\exercise{1}
+
+O ensaio de curto-circuito é utilizado para determinar a reatância síncrona do gerador, enquanto o ensaio de circuito aberto é utilizado para determinar a relação entre a corrente de campo e a tensão gerada enquanto o gerador roda na velocidade rotacional nominal. Dessa forma, basta determinar a resistência do enrolamento para que o modelo do gerador seja levantado.
+
+\exercise{2}
+
+A frequência angular mecânica do rotor estabelece a frequência da tensão elétrica gerada pelo número de pares de polos no rotor.
+
+\exercise{3}
+
+Para medir a tensão gerada $E_A$ deve ser utilizado um voltímetro na faixa de 1000 V e um amperímetro com limite de 100 A para a corrente do estator $I_A$.
+
+\exercise{4}
+
+A velocidade de rotação do rotor determina a velocidade com que os polos do rotor interagem com os enrolamentos do estator, portanto, determinando a frequência com que a força eletromotriz oscila.
+
+\exercise{5}
+
+A resistência pode ser estimada aplicando uma tensão contínua nos terminais do estator e medindo a corrente que circula. A partir disso, pode-se determinar a impedância em um ensaio de curto-circuito, i.e., sabendo a tensão que é gerada na operação nominal, conecta-se somente o amperímetro como carga, o que possibilita a determinação da impedância uma vez que \[
+I_A = \frac{E_A}{\sqrt{R_A^2 + X_S^2} }
+.\] 
+
+\exercise{6}
+
+Para um gerador operando em 60 Hz, podemos estimar que a tensão gerada será determinada por \[
+v_{60} = -N \frac{d \Phi}{d t} = -N \frac{d}{d t}\left( K \sin\left( 2 \pi 60 t \right)  \right) = -N K 2\pi 60 \sin\left( 2\pi 60 t \right) 
+,\] onde $K$ é uma constante, enquanto se operarmos em 50 Hz \[
+v_{50} = -N K 2\pi 50 \sin\left( 2\pi 50 t \right) 
+.\] Dessa forma, a tensão eficaz em cada um dos casos será
+\begin{align*}
+    v_{60,RMS} &= 60\frac{ N K 2\pi }{\sqrt{2} }  \\
+    v_{50,RMS} &= 50\frac{ N K 2\pi }{\sqrt{2} }
+.\end{align*}
+
+Podemos, então, estimar que a potência resultante, para uma mesma carga, será
+\begin{align*}
+    P_{60} &= \frac{v_{60,RMS}^2}{R} = 3600\frac{\left( \frac{ N K 2\pi }{\sqrt{2} } \right) ^2}{R} \\
+    P_{50} &= 2500\frac{\left( \frac{ N K 2\pi }{\sqrt{2} } \right) ^2}{R} \\
+    \implies P_{50} &= \frac{25}{36} P_{60} 
+.\end{align*}
+Ou seja, a potência será reduzida em cerca de 31\%.
+
+\exercise{7}
+
+Espera-se que um gerador de 60 Hz, para atingir a mesma potência e tensão nominal, precise de mais espiras no estator, portanto, aumentando de tamanho em relação ao de 400 Hz.
+
+\exercise{8}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/prelab1-8.png}
+\end{figure}
+
+\exercise{9}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/prelab1-9.png}
+\end{figure}
+
+\exercise{10}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/prelab1-10.png}
+\end{figure}
+
+\exercise{11}
+
+57,735 V
+
+\exercise{12}
+
+Assumindo que a potência consumida se mantenha dentro do valor nominal, um valor muito alto da corrente de armadura gerará um superaquecimento da armadura por efeito Joule, o que seria de grande risco para o operador e para a manutenção do equipamento.
+
+\end{document}

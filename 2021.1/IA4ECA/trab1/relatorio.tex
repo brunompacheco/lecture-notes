@@ -1,0 +1,46 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Trabalho 1}
+\author{Bruno M. Pacheco (16100865)\\
+DAS5341 - Inteligência Artificial Aplicada a Controle e Automação}
+ 
+\maketitle
+ 
+\section*{Introdução}
+
+Este relatório apresentará e descreverá a implementação do problema de planejamento em PDDL assim como as soluções obtidas. Espera-se que o leitor siga este documento acompanhando o código desenvolvido. Como o código já possui comentários descrevendo os seus componentes, aqui serão tratados aspectos de mais alto nível como a interação das estruturas e decisões de modelagem.
+
+A descrição do código do domínio será abordada logo abaixo, seguida pela implementação dos problemas e, por fim, as soluções e conclusões.
+
+\section*{Domínio}
+
+O domínio pode ser entendido como o modelo do ambiente no qual o problema se situa. Portanto, é essencial que ele aborde todos as liberdades e restrições dos agentes bem como os objetivos. Tão importante quanto é também que o domínio seja enxuto para que a descrição dos problemas e a resolução não sejam demasiadamente custosas.
+
+Pensando nisso, dois tipos foram definidos: \texttt{place} e \texttt{robot}.
+Dessa forma, todas as demais características são tratadas como atributos desses
+objetos definidos através dos predicados.
+
+Como exemplo, os caminhos são modelados através do predicado \texttt{path} entre dois lugares. Destaca-se que o predicado modela os caminhos de forma ordenada, o que conflita com a característica bidirecional deles. Por isso, sempre que é feita a verificação de existência de um caminho entre dois lugares é necessário verificar nos dois sentidos de forma disjuntiva. A mesma lógica se aplica a \texttt{can\_path}.
+
+Uma outra particularidade do modelo é o lixão, que ao mesmo tempo que se situa em um lugar mas comporta inúmeros robôs. Para tal, foi entendido que o lixão é uma estrutura acessível a partir do lugar definido. Dessa forma, para o modelo, um robô que está no local definido não está imediatamente dentro do lixão, mas precisa entrar e sair dele através das ações \texttt{enter-trash} e \texttt{exit-trash}. Isso implica em o local onde o lixão se situa possuir a restrição comum de somente um robô e os caminhos que levam ao lixão também serem tratados da mesma forma que os demais, enquanto permite que inúmeros robôs estejam no lixão ao mesmo tempo (ausência de \texttt{busy} para o lixão).
+
+Finalmente, uma última \emph{design choice} foi relacionada a capacidade de enviar o relatório do local onde a nave se situa, que não é diretamente definida no enunciado.
+
+\section*{Problemas}
+
+A definição dos problemas em PDDL é bastante direta dada a definição do domínio. Infelizmente, se faz necessário definir os caminhos e os caminhos pelos quais os robôs podem passar, o que é um tanto repetitivo. Também é necessário inicializar os locais em que os robôs começam como ocupados.
+
+Para os problemas programados, definiu-se que o lixão é acessível a partir do local l4, sendo esse um local comum (somente um robô por vez). Caso o desejado seja que l4 seja o lixão, i.e., aceite mais de um robô ao mesmo tempo, basta remover ele da definição do problema e marcar todos os lugares que tem acesso a ele como \texttt{is\_trash}.
+
+\section*{Soluções e conclusão}
+
+A partir do domínio e dos problemas programados, os planos foram encontrados utilizando o solver disponível em \texttt{http://solver.planning.domains}. Ambos os planos podem ser vistos em \texttt{problem1.log} e \texttt{problem2.log}.
+
+Destaca-se que as soluções foram encontradas sem grande esforço computacional. Entretanto, em particular para o problema 2, o plano não é ótimo. Há movimentação desnecessária do robô 1 no começo e a utilização do lixão não é otimizada (há movimentação dos robôs entre os lugares para "dar a passagem"). Isso poderia ser resolvido implementando uma métrica de quantidade de ações (significantes) tomadas ou estimando um tempo para cada ação e minimizando o tempo total.
+
+Ainda assim, uma solução foi obtida sem que o esforço fosse necessário para desenvolver um algoritmo para esse problema, o que é uma grande vantagem desse método. Em geral, o esforço de modelagem foi baixo e bastante direto a partir da especificação. Conhecimento de sistemas a eventos discretos se assemelha bastante à lógica de modelagem necessária para esse tipo de problema, o que facilita bastante a utilização de PDDL.
+
+\end{document}

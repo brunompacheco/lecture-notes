@@ -1,0 +1,19 @@
+model glows-sos2.mod;
+data p1.dat;
+
+option solver cplex;
+option show_stats 1;
+
+# setup for SOS2 variables
+suffix sosno;
+suffix ref;
+
+let {n in 1..N, i in 1..K[n]} lambda[n,i].sosno := -n;
+let {n in 1..N, i in 1..K[n]} lambda[n,i].ref := i;
+
+solve;
+
+display solve_result >result.out;
+display Qinj_max, OilProduction >result.out;
+display Qinj, Qoil, Qwat, Qgas >result.out;
+display _varname, _var >result.out;

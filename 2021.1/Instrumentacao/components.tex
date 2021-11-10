@@ -1,0 +1,92 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Controle de Temperatura e Nível de Tanque\\Componentes e Circuitos}
+\author{Bruno M. Pacheco (16100865) \\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+
+\section*{Projeto Mecânico}
+
+A planta deste projeto consiste em um tanque cilíndrico no qual deseja-se realizar um controle automático de temperatura ao longo do líquido e um controle manual de nível através da vazão de entrada e saída. O esquemático da montagem pode ser observado na imagem abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/tank.png}
+\end{figure}
+
+Como se pode observar, o fluído entra no tanque pela sua superfície superior e é extraído de sua base através de válvulas borboleta (BV 01 e 02). Além disso, o aquecimento é feito na base, através de um aquecedor elétrico (EH 01), bastante próximo da saída. Também é de destaque o isolamento térmico, marcado pela área hachurada, restando somente a troca de calor através da superfície do líquido como fonte de perdas térmicas significantes.
+
+5 transdutores de temperatura (TI 01 até 05) foram projetados ao longo da parede do tanque, garantindo sensoriamento mais granular no conteúdo. Também, um transdutor de nível (LI 01) é essencial para o controle manual.
+
+O modelo da planta (propagação térmica e dinâmica do fluído) segue o desenvolvido no trabalho de LabVIEW.
+
+\section*{Componentes}
+
+A relação geral dos componentes pode ser observada na tabela abaixo.
+
+\begin{table}[H]
+\begin{tabular}{l|l|l}
+\textbf{Código} & \textbf{Nome}                   & \textbf{Componente} \\ \hline
+EH 01           & Aquecedor elétrico              & TMT04014            \\ \hline
+BV 01/02        & Válvula de entrada              & D6100N+DR24A-SR-5   \\ \hline
+LI 01           & Transdutor capacitivo de nível  & LSP-050.1.500       \\ \hline
+TI 01/.../05    & Transdutor de temperatura PT100 & TRA-C61\footnotemark \\ \hline
+\end{tabular}
+\end{table}
+
+\footnotetext{\url{https://pdf.directindustry.com/pdf/krohne-messtechnik/optitemp-tra-h6x-c6x/5863-961839.html}}
+
+Todas as simulações de circuitos expostas a seguir foram feitas no LTSpice com modelos dos componentes reais sempre quie possível.
+
+\subsection*{Atuadores}
+
+\subsubsection*{Aquecedor elétrico}
+
+O aquecedor elétrico utilizado será o aquecedor de imersão TMT04014. Ele possui um acionamento ON/OFF direto na rede. Modelado como uma carga puramente resistiva, seu acionamento foi projetado através de uma combinação de um opto-DIAC (MOC3023) e um TRIAC (2N5446) em cascata, garantindo isolamento entre o sistema de controle e a rede elétrica. O resultado da simulação desse circuito pode ser observada na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sym_heater.png}
+\end{figure}
+
+Como pode ser observado, o sinal de controle (no gráfico, \emph{V(n002)}, em azul) foi convertido em acionamento da carga que representa o aquecedor com sucesso sem consumir grande potência do sistema de acionamento.
+
+\subsubsection*{Válvulas}
+
+A solução encontrada tanto para o controle do fluxo de líquido é o conjunto de atuador e válvula da Belimo. Em particular, projetou-se o uso dos atuadores rotacionais da linha DR24A e válvulas borboleta da linha D6..N. Para realizar o acionamento, será utilizado um LM741 para amplificar o sinal do sistema de controle para a faixa de operação do atuador rotacional (ganho 2). O resultado pode ser observado na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sym_valve.png}
+\end{figure}
+
+Destaca-se que o bloco \emph{Output sym} é utilizado somente para simular um sinal de controle e não faz parte do projeto.
+
+\subsection*{Transdutores}
+
+\subsubsection*{Temperatura}
+
+Para fazer o monitoramento da temperatura foram escolhidos os transdutores da KROHNE da linha TRA-H6X/-C6X, que seguem o padrão PT100. Para a transmissão do sinal, projetou-se um cabo manga 4x26 AWG com blindagem. Para evitar o uso de uma fonte de corrente, o circuito para aquisição de sinal consiste em um divisor resistivo e uma medição a 3 fios. Além disso, para que não seja necessária uma fonte simétrica, seguiu-se as recomendações de projeto da Texas Instruments para amplificadores operacionais com fonte única (arquivo anexo).
+
+Dessa forma, empregou-se um LM358 (próprio para utilização com alimentação única) em um arranjo próprio para amplificar o sinal e controlar o \emph{offset}. Assim, condicionou-se o sinal para que a faixa de operação desejada (0 a 100ºC) seja mapeada na faixa de 1 a 4 V, se mantendo fora dos limites de operação do amplificador operacional. O resultado da simulação pode ser visto na figura abaixo. Destaca-se que cada linha no gráfico é uma temperatura de entrada, variando de 0 a 100ºC em intervalos de 20ºC.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sym_pt100.png}
+\end{figure}
+
+\subsubsection*{Nível}
+
+O sensoriamento do nível foi projetado em cima do transdutor capacitivo da linha LSP 05X, da Baumer. Sua saída é na forma de uma fonte de corrente, portanto, foi projetado um circuito de sensoriamento com um resistor dentro das suas capacidades de carga e um seguidor de tensão utilizando um LM358 para acoplar ao sistema de aquisição de dados. O resultado pode ser visto na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/sym_level.png}
+\end{figure}
+
+\end{document}
+

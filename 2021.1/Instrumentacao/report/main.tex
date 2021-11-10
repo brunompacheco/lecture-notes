@@ -1,0 +1,76 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}		% Seleção de códigos de fonte
+\usepackage[utf8]{inputenc}		% Codificação do documento (conversão
+\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{graphicx}			% Inclusão de gráficos
+\usepackage{subcaption}				% enables the use of subfigures in floats
+\usepackage[
+%	a4paper,
+left=2cm,
+right=1.5cm,
+bottom=1.5cm,
+top = 2.5cm, 
+foot=0.7cm]{geometry}
+\usepackage{url}
+\usepackage{setspace}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{fancyhdr}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{natbib}
+\usepackage{import}
+\usepackage[nottoc]{tocbibind} % insere as referências no sumário
+\usepackage[brazil]{babel}
+\usepackage{hyperref}
+\usepackage{float}
+
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{DAS5151 - Instrumentação em Controle}
+\rhead{Projeto Final}
+\rfoot{\thepage}
+
+\begin{document}
+	\thispagestyle{empty}
+\begin{center}
+	\includegraphics[height=2cm]{imagens/logoUFSCsimples.png} \\
+	{\Large Universidade Federal de Santa Catarina -- UFSC} \\
+	{\Large Centro Tecnológico -- CTC} \\
+	{\Large Departamento de Automação e Sistemas -- DAS} \\
+	\vspace{1cm}
+	{\large Disciplina DAS 5151 - Instrumentação em Controle} \\
+	\vfill
+	\large{\textbf{Projeto Final} \\
+	} 
+	\vspace{1cm}
+	% Integrantes: \\
+    Bruno Machado Pacheco (16100865) \\
+    \vfill
+	Florianópolis, \today.
+\end{center}
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{proposta}
+\newpage
+
+\input{planta}
+\newpage
+
+\input{transdutores}
+\newpage
+
+\input{simulacao}
+\newpage
+
+\input{conclusao}
+\newpage
+
+\end{document}

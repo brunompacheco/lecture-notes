@@ -1,0 +1,106 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+\newenvironment{alltt}{\ttfamily}{\par}
+ 
+\begin{document}
+ 
+\title{Production Optimization of Gas-Lifted Oil Wells}
+\author{Bruno M. Pacheco (202100361) \\
+DAS410062 - Introduction to Optimization}
+ 
+\maketitle
+ 
+\section{Introduction}
+
+This report details the MILP formulation and implementation of the proposed gas-lift rate optimization problem as well as the results found. This problem's main challenge regards its non-linear nature from the relationship between the injected gas and the produced oil. Therefore, piecewise linearization techniques were applied so we can bring the problem into the linear domain, achieving approximated results. Beside the discontinuities that the linearization methods bring, the option to produce or not from any given well introduces binary variables which result in the mixed-integer formulation.
+
+The implementation of the proposed formulations was completely done in AMPL and the solver used for the optimization was CPLEX (running on local machine). All of the developed code and raw results are made available with this document.
+
+\section{Reformulations}
+
+\subsection{Convex Combination}
+
+By applying the Convex Combination method to the $q_o^{n}\left( q_{inj}^n \right) $ relations of each well one achieves a reformulation that replaces (2f) (as in the assignment description) by
+\begin{align*}
+    &q_{inj}^{n} = \sum_{i=1}^{K^{n}} \lambda^{n,i} q_{inj}^{n,i} \\
+    &\dot{q}_o^{n} = \sum_{i=1}^{K^{n}} \lambda^{n,i} q_o^{n,i} \\
+    &1 = \sum_{i=1}^{K^{n}} \lambda^{n,i} \tag{$*$}\\
+    &1 = \sum_{i=2}^{K^{n}} z^{n,i} \\
+    &\lambda^{n,i} \le z^{n,i} + z^{n,i+1},\, i=2,\ldots,K^{n}-1 \\
+    &\lambda^{n,1} \le z^{n,2},\, \lambda^{n,K^{n}} \le z^{n,K^{n}}
+,\end{align*}
+for each $n \in \mathcal{N}$, where $\lambda^{n,i}$ are non-negative and $z^{n,i}$ are binary variables and $\mathcal{K}^{n} = \left\{  \left( q_{inj}^{n,1}, q_o^{n,1} \right), \ldots, \left( q_{inj}^{n,K^{n}}, q_o^{n,K^{n}} \right) \right\} $ are the data points for each $q_o^{n}\left( q_{inj}^n \right)$ function.
+
+Now, note that the use of the $y^{n}$ variables to control which wells are in use together with equation (2g) result in $y^{n} = 0 \implies q_{inj}^{n} = 0$, and the desired behavior would be for $y^{n}=0 \implies \dot{q}_o^{n} = 0$. Still, the CC constraints enforce that $\dot{q}_o^{n} \ge \min \left\{ q_o^{n,1},\ldots,q_o^{n,K^{n}} \right\} $, which, in case of surgent wells, is a positive value. Therefore, to avoid such scenarios, the constraint \[
+\hat{q}_o^{n} = \dot{q}_o^{n} - \left( 1 - y^{n} \right) q_o^{n,1},\, n\in \mathcal{N}
+\] 
+is added.
+
+\subsection{SOS2}
+
+If we have access to Special Ordered Sets of type 2 (SOS2) as a type for the variables in our solver, then our piecewise linearization can become much lighter. In practice, the constraints in $\left( * \right) $ can be replaced by
+\begin{align*}
+    &q_{inj}^{n} = \sum_{i=1}^{K^{n}} \lambda^{n,i} q_{inj}^{n,i} \\
+    &\dot{q}_o^{n} = \sum_{i=1}^{K^{n}} \lambda^{n,i} q_o^{n,i} \\
+    &1 = \sum_{i=1}^{K^{n}} \lambda^{n,i}
+\end{align*}
+in the MILP formulation just by adding the guarantee that each set $\left\{ \lambda^{n,i} \right\}_{i=1}^{K^{n}} $ is SOS2.
+
+Effectively, using SOS2 variables showed a reduction in the number of variables (after presolve) from 148 to 102, on the average scenarios ($q_{inj}^{max} \ge 200$), and around 30\% less simples iterations to find the optimal solution.
+
+\section{Results}
+
+The behavior of the problem instance proposed is first studied through the analysis of the relation between lift-gas capacity and the total oil production. Then, 3 scenarios are analysed in depth.
+
+Given the AMPL implementation of the problem, 30 executions of the solver were performed with lift-gas capacities ranging from 50 to 1500 in steps of 50. The impact of such in the oil production can be seen in the graph below.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{oil_production.png}
+    \caption{Maximum oil production as a function of lift-gas availability.}
+    \label{fig:oil_production-png}
+\end{figure}
+
+As one can see, the oil production increases rapidly with the availability of lift-gas but achieves a plateau at around 1200. From this graph, first the scenario with very little lift gas is analysed in depth. For $q_{inj}^{max} = 50$, the maximum oil production is only of 286.7 and only well 5 is in production. This is caused by $q_{inj}^{min,n}$, which restrict the pool of wells to only wells 4 and 5. From these, well 5 has a higher return rate and, thus, it is the destination of all of the lift-gas. In this scenario, well 5 operates with $q_w^{5} = 4.6$ and $q_g^{5} = 1059.3$, which are still far from the respective limits of the production plant.
+
+With $q_{inj}^{max} = 500$, there is enough lift-gas to put all but the well 1 in operation, resulting in a total oil production of 2948.1. Still, the lift-gas availability is the bottle-neck as the bare minimum of gas-lift is used in all wells in production but for wells 3 and 8 (analysis of the slack of the constraint). The operating conditions for each well in production can be seen in the table below.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+	Well & $q_{inj}^{n}$ & $q_o^{n}$ & $q_w^{n}$ & $q_g^{n}$ \\
+	\hline
+	2 & 68 & 530 & 493.957 & 380.964 \\
+	3 & 70 & 486.072 & 410.575 & 294.171 \\
+	4 & 42 & 284 & 167.941 & 852 \\
+	5 & 35 & 285 & 4.60471 & 1053.13 \\
+	6 & 74 & 315 & 167.685 & 434.637 \\
+	7 & 114 & 815 & 83.9632 & 536.84 \\
+	8 & 97 & 233 & 37.3016 & 510.713
+    \end{tabular}
+    \caption*{Operating conditions of the wells in production for $q_{inj}^{max} = 500$.}
+    \label{tab:label}
+\end{table}
+
+Finally, for $q_{inj}^{max} = 1500$, there is a total oil production of 3403.4 and all the wells are in production. In this scenario with plenty lift-gas, the bottle-neck of production becomes $q_g^{max}$, which makes so that no one of the wells produce in its full capacity and wells 4 to 7 still operate with the bare minimum lift-gas consumption. The operating conditions of the wells are in the table below.
+
+\begin{table}[H]
+    \centering
+    \begin{tabular}{c|c|c|c|c}
+	Well & $q_{inj}^{n}$ & $q_o^{n}$ & $q_w^{n}$ & $q_g^{n}$ \\
+	\hline
+	1 & 314 & 324 & 272.356 & 636.401 \\
+	2 & 266 & 591 & 550.808 & 424.811 \\
+	3 & 272.703 & 556.449 & 470.02 & 336.763 \\
+	4 & 42 & 284 & 167.941 & 852 \\
+	5 & 35 & 285 & 4.60471 & 1053.13 \\
+	6 & 74 & 315 & 167.685 & 434.637 \\
+	7 & 114 & 815 & 83.9632 & 536.84 \\
+	8 & 97 & 233 & 37.3016 & 510.713 \\
+    \end{tabular}
+    \caption*{Operating conditions of the wells in production for $q_{inj}^{max} = 1500$.}
+    \label{tab:label}
+\end{table}
+
+
+\end{document}

@@ -1,0 +1,130 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 1}
+\author{Bruno M. Pacheco (16100865)\\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+ 
+\exercise{1}
+
+No momento da alta do sinal, com $V_{in} = 10\,V$, temos, assumindo uma queda de $0,7\,V$ na junção BE do transistor, uma corrente $I_B = \frac{10}{245520} = 40,72\,\mu A$, o que resultaria em uma corrente $I_C = \beta I_B = 4,89\,mA$. Para isso, precisaríamos de uma queda de tensão de mais de 10 V sobre o resistor no coletor do transistor, ou uma queda de tensão negativa na junção CE do transistor. Isso nos indica que o transistor está atuando já na zona de saturação no período de alta do sinal de entrada.
+
+Assumindo 1,0 V de queda na junção CE do transistor no período de condução (saturação), teremos um sinal de saída como na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lista1-1.png}
+\end{figure}
+
+\exercise{2}
+
+Pela construção do circuito, espera-se uma corrente fluindo pelo diodo $I_Z = \frac{V_S - 15}{R_S}$. Pela especificação de potência do diodo, sabemos que a corrente máxima que ele suporta é \[
+I_{Z,max} = \frac{0,5}{15} = 33,33\,mA
+.\] Dessa forma, \[
+    \frac{V_S - 15}{R_S} < I_{Z,max} \implies R_S > 750,76\,\Omega
+.\] 
+
+\exercise{3}
+
+A impedância vista pela fonte é $Z=11500 + j6000$. Assim, podemos calcular a queda de tensão na impedância do multímetro \[
+V_{out} = \frac{V_{in}}{Z} 10000 = \frac{V_{in}}{1,15 + j0,6} \implies \|V_{out}\| = 0,7709 \|V_{in}\|
+.\] Ou seja, teremos um erro de 22,81\%.
+
+\exercise{4}
+
+Pelas especificações informadas, o motor precisa de $250\,mA$. Isso já elimina o BC547, uma vez é especificado para operar com no máximo $100\,mA$ de corrente de coletor.
+
+Já o 2N4401 pode operar com até $600\,mA$ no coletor, além de possuir um ganho mínimo de 40 quando operando com corrente de coletor de $500\,mA$, o que indica que precisaríamos de $6,25\,mA$ de corrente de base vindo do Arduino, o que se encontra dentro dos seus limites de operação. Ou seja, mesmo acionando o motor de forma contínua estaríamos dentro dos limites do Arduino e do transistor caso fosse utilizado o 2N4401 e um resistor de base apropriado.
+
+\exercise{5}
+
+O circuito proposto para acionar uma carga $R_L$ é como abaixo, dado um condicionamento ideal dos resistores e transistores envolvidos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lista1-5.png}
+\end{figure}
+
+Caso fosse utilizado um resistor NPN entre a carga e a fonte, seria necessário um acionamento de alta tensão, o que não seria possível dadas as especificações da placa de aquisição de dados. Caso fosse utilizado um transistor NPN conectado entre a carga e o terminal comum do circuito, a junção CB do transistor seria o calcanhar de aquiles, uma vez que falhando poderia expor a placa de aquisição à alta tensão, além de manter a carga sempre conectada à alta tensão, ou seja, seria possível fechar o circuito da carga caso ela fosse conectada de alguma outra forma ao terminal comum.
+
+\exercise{6}
+
+\subexercise{a}
+
+Definindo $R_i = 10\,M\Omega$ e $R_o = 75\,\Omega$ os resistores de entrada e de saída do LM741, analisamos o circuito como na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lista1-6a.png}
+\end{figure}
+
+Para simplificar a análise, definimos $R_1' = R_1 + 10\,\Omega$ e $R_2'=R_2+R_o$. Agora, analisando o nó de $V^{-}$, a tensão no terminal inversor do amplificador operacional, e resolvendo também as malhas que envolvem esse e $V_i$ e $V_o$, pode-se chegar na relação \[
+V^{-} = \frac{R_i\left( R_1'V_i+R_2'V_o \right) }{1+R_i\left( R_1'+R_2' \right) }
+.\] Também temos que $V_o = A\left( V^{+}-V^{-} \right) = -A V^{-}$, logo, pode-se chegar na relação \[
+\frac{V_o}{V_i} = \frac{-AR_iR_2'}{1+R_i\left( R_1'+R_2' \right) +AR_iR_1'} \tag{$*$}
+.\] 
+
+Para a situação proposta, teremos $V_i = 1\,mV$ e $A_{3\,kHz} = 50 dB \approx 316,23$. Dessa forma, por $(*)$, encontra-se $V_o \approx 45,82\,mV$ de amplitude.
+
+\subexercise{b}
+
+Em um sistema ideal, \[
+\lim_{A,R_i \to \infty} \frac{V_o}{V_i} = \frac{-R_2'}{R_1'}
+.\] Considerando ainda que as impedâncias de saída e as impedâncias de entrada são todas nulas, teríamos o ganho de 100 esperado. Nesse caso, esperaríamos um sinal de saída $V_{o,ideal}=100\,mV$. Ou seja, um erro de 54,18\%.
+
+\subexercise{c}
+
+Mesmo considerando um amplificador ideal ($A,R_i \to \infty$), podemos melhorar a estimativa do ganho considerando as impedâncias de saída do transdutor e do amplificador operacional. Ou seja, aproximamos o ganho do circuito por \[
+\frac{V_o}{V_i}' = \frac{R_2+R_o}{R_1+10} = 100
+.\] Dessa forma, pode-se escolher $R_1=10\,\Omega$ e $R_2=1925\,\Omega$, o que resultaria, por $(*)$, em um ganho de \[
+    \frac{V_o}{V_i} = 75,79
+,\] ou seja, um erro de 24.21\%. Ainda melhores resultados podem ser obtidos a partir da iterações de valores em cima de $(*)$.
+
+\exercise{7}
+
+Pelas especificações, encontramos $\tau \approx 136,4\,ms$, o que nos permite modelar o sistema de transmissão como \[
+    G(s) = \frac{1}{1+\tau s}
+.\] Assim, queremos \[
+\|G(j2\pi60)\| = \|\frac{1}{1+\tau\pi120}\| \approx 0,02
+,\] ou seja, o sinal terá somente 2\% da sua amplitude original.
+
+\exercise{8}
+
+A partir dos dados do transdutor, podemos determinar $\tau=50$, o que nos da uma frequência de corte $f_c = 0,0032\,Hz$. Então, para encontrar a frequência na qual há 5\% de atenuação, resolvemos \[
+\frac{1}{\sqrt{1+ \left( \frac{f_c}{f} \right) ^2} } = 0,95 \implies f = 0,0097\,Hz
+.\] 
+
+Como o sistema se comporta como um passa alta, teremos uma atenuação menor com uma frequência acima da encontrada.
+
+\exercise{9}
+
+Pela dissipação máxima de potência, encontramos $I_{max} = 33,33\,mA$, que é a corrente quando a queda de tensão sobre o LED é menor (ou seja, a queda de tensão sobre o resistor é maior). Além disso, nessa situação, a queda de tensão sobre o resistor é de 2 V, ou seja, \[
+I = \frac{2}{R} < 0,03333 \implies R > 60\,\Omega
+.\]
+
+\exercise{10}
+
+Para esse problema, será utilizado o circuito abaixo como referência já sendo substituído o amplificador operacional pelo seu circuito equivalente, onde $R_e = 10^9$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lista1-10.png}
+\end{figure}
+
+\subexercise{a}
+
+Pelo circuito, é fácil ver que $V_o = \frac{V^+}{2}$. Dessa forma, precisamos que, para $pH=15$, $V^+=200\,mV$ para que seja utilizada toda a escala do registrador. Além disso, $pH=15\implies V_i = 885\,mV$ e \[
+V^+ = R_i \frac{V_i}{R_e+R_i} \implies R_i = \frac{R_e V^+}{V_i - V^+} = 2,920.10^8
+.\]
+
+Já a sensibilidade do indicador deve ser tal que em $100\,mV$ ele indique 15 de pH, ou seja, sensibilidade de $0,15\,pH/mV$.
+
+\subexercise{b}
+
+Nesse caso, ter-se-ia, com $PH=7 \implies V_i = 413\,mV$, $V^+ = 52,61\,mV$. Isso resultaria em $V_o = 26,31\,mV$ e, portanto, com a sensibilidade proposta, uma indicação de pH de 3,95. Ou seja, um erro de -20,36\% em relação ao fundo de escala.
+
+\end{document}

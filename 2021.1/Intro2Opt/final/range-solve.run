@@ -1,0 +1,23 @@
+model glows-sos2.mod;
+data p1.dat;
+
+option solver cplex;
+option show_stats 1;
+
+# setup for SOS2 variables
+suffix sosno;
+suffix ref;
+
+let {n in 1..N, i in 1..K[n]} lambda[n,i].sosno := -n;
+let {n in 1..N, i in 1..K[n]} lambda[n,i].ref := i;
+
+# iterate and solve
+printf "solve_result,Qinj_max,OilProduction\n" >range_results.csv;
+let Qinj_max := 0;
+for {1..30} {
+    let Qinj_max := Qinj_max + 50;
+
+    solve;
+
+    printf "%s,%d,%f\n", solve_result, Qinj_max, OilProduction >range_results.csv;
+}

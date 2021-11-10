@@ -1,0 +1,49 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Fast Fourier Transform\\Project Proposal}
+\author{Bruno M. Pacheco (16100865)\\
+DAS410047 - Introdução a Algoritmos}
+ 
+\maketitle
+
+\section*{Goals}
+
+Gilbert Strang, in his introduction to wavelets, called the FFT "the most important numerical algorithm of our lifetime" \cite{strang}. With a considerable improvement in complexity ($O\left( n^2 \right) $ to $O\left( n \log n\right) $), the algorithm published by Cooley and Tukey in 1965 \cite{Cooley1965} is still in the roots of many of the numerical softwares used daily by engineers and mathematicians. Thus, with this lecture I aim to introduce and detail the algorithm \cite{Lathi}, including a complexity analysis and different implementations \cite{ThomasH.Cormen2009}. Also, I plan to provide some applications so my colleagues can grasp how impactful is the FFT.
+
+I also included a short introduction to Fourier analysis as it is not taught anymore in the Signals and Linear Systems course. This way, I hope to level everyone with the necessary basics to follow the FFT explanation.
+
+\section*{Planned Content}
+
+\begin{enumerate}
+    \item Fourier Transform
+    \begin{enumerate}
+	\item Fourier analysis
+	\item Discrete Fourier Transform (DFT)
+    \end{enumerate}
+    \item Fast Fourier Transform - FFT
+    \begin{enumerate}
+	\item Linearity of the DFT
+	\item The Cooley-Tukey algorithm
+	\item The Gauss algorithm? \cite{Heideman1985}
+	\item Complexity
+	\item Efficient implementations
+    \end{enumerate}
+    \item Applications
+    \begin{enumerate}
+	\item Convolutions
+	\item Polynomials multiplication
+	\item Multiplication of large integers
+	\item Spectral method
+    \end{enumerate}
+    \item Conclusion
+\end{enumerate}
+
+
+\bibliographystyle{plain}
+\bibliography{project_proposal}
+
+\end{document}
+

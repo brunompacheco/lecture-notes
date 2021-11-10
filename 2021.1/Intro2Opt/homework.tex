@@ -1,0 +1,187 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+\newenvironment{alltt}{\ttfamily}{\par}
+ 
+\begin{document}
+ 
+\title{Homework Assignment}
+\author{Bruno M. Pacheco (202100361) \\
+DAS410062 - Intro to Optimization}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Given $x_1,\ldots,x_7 \in \{0,1\} $, the variables that indicate whether the stock will be acquired (in any amount), the restrictions will follow.
+
+\subexercise{a}
+
+\[
+\sum_{n=1}^{7} x_{n} < 7
+\]
+
+\subexercise{b}
+
+\[
+\sum_{n=1}^{7} x_{n} > 0
+\] 
+
+\subexercise{c}
+\[
+x_1+x_3 \le 1
+\]
+\subexercise{d}
+\[
+x_4\le x_2
+\] 
+I understood this restriction as "stock 4 can be selected only if stock 2 \emph{is} selected".
+
+\subexercise{e}
+\[
+x_1=x_5
+\]
+\subexercise{f}
+\[
+\left( x_1+x_2+x_3 \right) + \left( \frac{x_2+x_4+x_5+x_6}{2} \right) \ge 1
+\] 
+
+\exercise{2}
+
+\subexercise{$\|x\|_0 \le k$}
+
+First, we create variables $x_{i}^{+}, x_{i}^{-} \ge 0, i=1,\ldots,n$ constrained to \[
+x_{i}^{+}-x_{i}^{-} = x_{i},\,i=1,\ldots,n
+.\] It is clear that $x_{i}^{-}+x_{i}^{+} = |x_{i}|$.
+
+Now, let us assume that $\epsilon$ is the smallest value possible: the resolution of our floating point representation. Then, with the constraints
+\begin{align*}
+    y_{i} &\le \left( x_{i}^{-}+x_{i}^{+} \right)  \frac{1}{\epsilon} \\
+    y_{i} &\le 1
+\end{align*}
+for $i=1,\ldots,n$ the variables $y_{i}$ will be 1 just in case $x_{i}$ is non-zero. Therefore, \[
+\sum_{i=1}^{n} y_{i} \le k \iff \|x\|_0 \le k
+.\] 
+
+\subexercise{$\|x\|_1 \le k$}
+
+Using our variables defined in the previous, the constraint with the Manhattan norm can be modeled by \[
+\sum_{i=1}^{n} \left( x_{i}^{-} + x_{i}^{+} \right) \le k
+.\] 
+
+\subexercise{$\|x\|_{\infty} \le k$}
+
+This norm can be modeled through a simple optimization formulation. Again, reusing our variables,
+\begin{align*}
+    \max_{z} \quad & z \\
+    \textrm{s.t.} \quad & z \le x_{i}^{-}+x_{i}^{+},\,i=1,\ldots,n \\
+      & z \ge 0
+.\end{align*}
+This way, we will have \[
+    z = \max \{|x_1|,\ldots,|x_{n}|\} = \|x\|_\infty
+.\]
+
+In an optimization problem with a cost function already, one can add such constraint by adding $z$ to the cost function (or $-z$ in case it is a minimization problem) and then adding $z\le k$ to the constraints.
+
+\exercise{3}
+
+\subexercise{(a)}
+
+Let $x_i \in \left\{ 1,\ldots,n \right\} $ be the order in which task $i$ is performed. For it to be a feasible solution, no more than one task must be processed at each time, that is, \[
+x_i \neq x_j ,\, i\neq j,\, i,j \in V \tag{$*$}
+.\] Also, the precedence defined by $G=\left( V,E \right) $ must be respected, thus \[
+x_i < x_j\,\forall \left( i,j \right) \in E \tag{$**$}
+.\]
+
+Still, one must compute the start time \[
+s_i = \sum_{j \in V : x_j < x_i } p_j
+,\] which is a nonlinear constraint. For us to handle this constraint, we add a support variable $y_{ij}$ which represents that task $i$ precedes task $j$. This way, with a big enough $M$ constant value, one can write
+\begin{align*}
+    x_i - x_j &\ge 1 - My_{ij} \\
+    x_i - x_j &\le -1 + M \left( 1 -  y_{ij}\right)
+.\end{align*}
+Notice how these constraints also imply ($*$). Also, ($**$) can now be written \[
+y_{ij} = 1\,\forall \left( i,j \right) \in E 
+.\] 
+
+Finally, we can write the problem
+\begin{align*}
+    \min_{x_1,\ldots,x_n} \quad & \sum_{i=1}^{n} w_i s_i \\
+    \textrm{s.t.} \quad & x_i - x_j \ge 1 - My_{ij},\, i,j \in V ,\, i\neq j \\
+      & x_i - x_j \le  1 - M \left( 1 - y_{ij}\right) ,\, i,j \in V ,\, i\neq j \\
+      & y_{ij} = 1,\, \forall \left( i,j \right) \in E \\
+      & s_i = \sum_{j \in V} p_j y_{ji} \\
+      & y_{ij} \in \left\{ 0,1 \right\},\, i,j \in V \\
+      & x_i \in \left\{ 1,\ldots,n \right\}
+.\end{align*}
+
+The AMPL formulation can be seen in files \texttt{ampl-6.\{mod,dat,run\}}. The problem was solved using CPLEX, in the NEOS server. The output was:
+
+\begin{alltt}
+Presolve eliminates 36 constraints and 6 variables. \\
+Adjusted problem: \\
+162 variables: \\
+\-\hspace{2cm}138 binary variables \\
+\-\hspace{2cm}12 integer variables \\
+\-\hspace{2cm}12 linear variables \\
+270 constraints, all linear; 918 nonzeros \\
+\-\hspace{2cm}12 equality constraints \\
+\-\hspace{2cm}258 inequality constraints \\
+1 linear objective; 12 nonzeros. \\
+
+CPLEX 20.1.0.0: threads=4 \\
+CPLEX 20.1.0.0: optimal integer solution; objective 1888 \\
+288 MIP simplex iterations \\
+0 branch-and-bound nodes \\
+:      \_varname  \_var    := \\
+1     'x[1]'        7 \\
+2     'x[2]'       10 \\
+3     'x[3]'        8 \\
+4     'x[4]'       12 \\
+5     'x[5]'        1 \\
+6     'x[6]'        5 \\
+7     'x[7]'       11 \\
+8     'x[8]'        4 \\
+9     'x[9]'        2 \\
+10    'x[10]'       6 \\
+11    'x[11]'       3 \\
+12    'x[12]'       9 \\
+\end{alltt}
+
+\exercise{4}
+
+Given that the non-linearities of the formulation reside in the trigonometric functions, the piece-wise linearization is chosen to be on $P_{i,j}$ as a whole. For this, 9 points of the domain are chosen for the approximation, from $-\pi$ to $\pi$ in steps of $\frac{\pi}{4}$, that is, the set of points are such that
+\begin{align*}
+    \theta^{(k)} &= -\pi + k\left(  \frac{\pi}{4} \right),\,k=0,\ldots,8  \\
+    P^{(k)}_{i,j} &= g_{i,j} -\left( g_{i,j}\cos\theta^{(k)} + b_{i,j}\sin\theta^{(k)} \right), i \in N , j\in N_i
+.\end{align*}
+
+This way, using the \emph{Convex Combination} model, one gets the following appendix to the original formulation (replacing equation $\left( 5c \right) $)
+\begin{align*}
+    & \theta_i - \theta_j = \sum_{k=1}^{8} \lambda_k \theta^{(k)},\, P_{i,j} = \sum_{k=0}^{8} \lambda_k P^{(k)}_{i,j} \\
+    & 1 = \sum_{k=0}^{8} \lambda_k,\, 1 = \sum_{k=1}^{8} z_k \\
+    & \lambda_k \le z_k + z_{k+1},\, k=1,\ldots,7 \\
+    & \lambda_{0} \le z_1,\, \lambda_8 \le z_8 \\
+    & \lambda_k \ge 0,\, k=0,\ldots,8 \\ 
+    & z_k \in \{0,1\},\, k=1,\ldots,8
+.\end{align*}
+
+If one has access to a solver which handles \emph{Special Ordered Sets of Variables Type 2} (SOS2), then the formulation may become simply
+\begin{align*}
+    & \theta_i - \theta_j = \sum_{k=0}^{8} \lambda_k \theta^{(k)},\, P_{i,j} = \sum_{k=0}^{8} \lambda_k P^{(k)}_{i,j} \\
+    & 1 = \sum_{k=0}^{8} \lambda_k \\
+    & \lambda_k \ge 0,\, k=0,\ldots,8 \\
+    & \{\lambda_k \}_{k=0}^{8} \text{ is SOS2}
+.\end{align*}
+
+Finally, so we can minimize the absolute value of the powers, we add
+\begin{align*}
+    & P_i^{(+)} - P_i^{(-)} = P_i, \\
+    & P_i^{(+)}, P_i^{(-)} \ge 0,\, i = 1,\ldots,3
+,\end{align*}
+so our cost function can be \[
+\sum_{i\in N} P_i^{(+)} + P_i^{(-)}
+.\]
+
+The AMPL implementation as well as the results can be seen in the .dat and .mod files.
+
+\end{document}

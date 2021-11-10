@@ -1,0 +1,78 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 3}
+\author{Bruno M. Pacheco (16100865)\\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+ 
+\exercise{1}
+
+\subexercise{a}
+
+A melhor instalação seria com os extensômetros na mesma orientação, i.e., paralelos, mas em lados opostos da viga, de forma que, em um circuito de meia ponte, não só a sensibilidade seja dobrada uma vez que a deformação em ambas as superfícies da peça são utilizadas, mas também os efeitos da temperatura também são compensados. Ainda mais, pode-se utilizar ambos em série no circuito de meia ponte, de forma a ter uma variação linear da resposta.
+
+\subexercise{b}
+
+Sabendo que \[
+    V_{AB} = \frac{1}{2}\frac{\Delta R}{R} V_E = \frac{K \epsilon}{2} V_E
+,\] podemos determinar \[
+\epsilon = \frac{2 V_{AB}}{V_E K} = 19,048\,\frac{\mu m}{m}
+.\] 
+
+\subexercise{c}
+
+Com mais dois extensômetros seria ideal arranjá-los em pares nas faces opostas, conectando-os em um circuito de ponte completa. Isso resultaria em uma aumento considerável na sensibilidade da medição, que não seria exatamente o dobro uma vez que os novos extensômetros possuem ganhos diferentes.
+
+\exercise{2}
+
+Instalando ambos termorresistores imersos no líquido, podemos conectá-los nas diagonais de um circuito de ponte cuja tensão diferencial é conectada ao amplificador de instrumentação ideal. Dessa forma, temos que a tensão lida $V_{in} = 100 V_{AB}$, enquanto, assumindo $\Delta R \ll R$, chegamos em
+\begin{align*}
+    V_{AB} &= \frac{\left( R+\Delta R \right)^2 - R^2}{\left( 2R + \Delta R \right)^2 } V_E \\
+    &= \frac{2R\Delta R + \Delta R^2}{4R^2 + 4R\Delta R + \Delta R^2} V_E \\
+    &\approx \frac{1}{2}\frac{\Delta R}{R + \Delta R}V_E \\
+    &\approx \frac{1}{2}\frac{\Delta R}{R} V_E
+.\end{align*}
+A partir disso, podemos calcular a sensibilidade do circuito observando o valor lido a partir da variação de $1\,K$ na temperatura (uma vez que o comportamento do circuito é linear), ou seja, $\Delta R = 0,38\,\Omega \implies V_{AB} = 0,19\,mV \implies V_{in} = 19\,mV$.
+
+\exercise{3}
+
+Para a primeira alternativa, tem-se
+\begin{align*}
+    V_{OUT} &= \frac{\left( 100+\Delta R \right) 49,9k - 4990k}{50k\left( 50k + \Delta R \right) } V_{IN} \\
+    &= \frac{49,9}{50}\frac{\Delta R}{50k + \Delta R} V_{IN} \\
+    &\approx \frac{\Delta R}{50k}V_{IN}
+.\end{align*}
+
+Da mesma forma, para a alternativa b,
+\begin{align*}
+    V_{OUT} &= \frac{25k\left( 25k + \Delta R \right) -25k.25k}{50k\left( 50k + \Delta R \right) } V_{IN} \\
+    &= \frac{1}{2}\frac{\Delta R}{50k + \Delta R} V_{IN} \\
+    &\approx \frac{1}{2}\frac{\Delta R}{50k}V_{IN}
+.\end{align*}
+Assim, é fácil ver que a alternativa a terá aproximadamente o dobro da sensibilidade da alternativa b.
+
+\exercise{4}
+
+\subexercise{a}
+
+Assumindo que a alimentação da célula de carga é tal que a tensão de excitação $V_{ex} = 5\,V$, tem-se uma tensão de saída de \[
+\frac{8}{10}0,002 V_{ex} = 8\,mV
+.\] 
+
+\subexercise{b}
+
+Agora, sabendo já que sob $10\,kg$ tem-se $V_{AB} = 10\,mV$, pode-se encontrar \[
+\epsilon = \frac{V_{AB}}{K V_{ex}} = 1000\,\mu m / m
+.\]
+
+\exercise{5}
+
+Uma abordagem possível é a já estudada nos exercícios anteriores: extensometria em circuitos de ponte. Entretanto, é necessário atentar que os extensômetros devem ficar a $45^\circ$ do eixo para capturar as linhas de tração e compressão. Apesar de todas as vantagens já sabidas, essa abordagem apresenta grandes problemas quanto a alimentação no caso de eixos girantes, quando pensa-se em mensurar torque em rotações contínuas (e.g., motor elétrico).
+
+Para evitar esse problema, é possível utilizar uma abordagem direta e medir o ângulo entre duas partes do eixo através de referências (e.g., roda dentada). Dessa forma, medem-se os deslocamentos angulares entre duas secções do eixo girante e compara-se a variação relativa aos valores iniciais (eixo em repouso). Apesar de ser bastante interessante por ter pouca interferência na operação o eixo, essa abordagem se limita a rotações mais baixas (cerca de 10000 rpm) e não costuma apresentar grande resolução.
+
+\end{document}

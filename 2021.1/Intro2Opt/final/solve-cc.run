@@ -1,0 +1,12 @@
+model glows-cc.mod;
+data p1.dat;
+
+option solver cplex;
+option show_stats 1;
+
+solve;
+
+display solve_result >result.out;
+display Qinj_max, OilProduction >result.out;
+display Qinj, Qoil, Qwat, Qgas >result.out;
+display _varname, _var >result.out;

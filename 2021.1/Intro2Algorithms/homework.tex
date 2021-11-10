@@ -1,0 +1,293 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+\newenvironment{alltt}{\ttfamily}{\par}
+
+\RestyleAlgo{ruled}
+\DontPrintSemicolon
+ 
+\begin{document}
+ 
+\title{Homework Assignment}
+\author{Bruno M. Pacheco (202100361) \\
+DAS410047 - Introduction to Algorithms}
+ 
+\maketitle
+ 
+\exercise{1}
+
+\begin{algorithm}[H]
+    \KwIn{An array $A$ with $n$ elements.}
+    \For{$i\gets 1$ \KwTo $n-1$}{
+	$i' \gets $ ArgMin$\left( A\left[ i:n \right]  \right) $ \\
+	Swap$\left( A, i, i' \right) $ \\
+    }
+    \Return{$A$}
+\end{algorithm}
+
+\subexercise{a}
+
+After each iteration (before increment), it is true that $A[1:i]$ is sorted and $A[i] < \min \left( A[i+1:n] \right) $.
+
+\subexercise{b}
+
+As our invariant states, at iteration $i= n-1$, $A[i] = A[n-1] < \min\left( A[i+1:n] \right) = A[n]$. Thus, as $A[1:n-1]$ is already sorted, $A$ is sorted.
+
+\subexercise{c}
+
+    First, we recall that ArgMin has complexity $n'-1$, where $n'$ is the size of the input array, for both cases. Swap has constant time complexity and adding a comparison before doing the swap wouldn't change the time complexity of the algorithm as it would only matter if we take into account the implementation of comparison and assignments in the machine the algorithm is running. Therefore, each iteration $i$ takes $n-i+2$ time in both best-case and worst-case scenarios, which implies the algorithm runs in
+\begin{align*}
+    T(n) &= \sum_{i=1}^{n-1} n-i+2 \\
+	&= \left( n-1 \right) \left( n+2 \right) - \sum_{i=1}^{n-1} i \\
+	&= \left( n-1 \right) \left( n+2 \right) - \left( n-1 \right) \frac{n}{2} \\
+	&= \left( n-1 \right) \left( \frac{n}{2} + 2 \right) \implies \Theta\left( n \right)
+.\end{align*}
+
+\exercise{2}
+
+First, by using merge sort, we sort the input array using any $\Theta\left( n \log n \right) $ algorithm (e.g., merge sort). Then we can apply the following algorithm:
+
+\begin{algorithm}[H]
+    \KwIn{A sorted array $A$ with $n$ elements, a number $x$}
+    $i\gets 1$ \\
+    $j \gets n$ \\
+    \While{true}{
+	$sum \gets A[i]+A[j]$ \\
+	\uIf{sum $= x$}{
+	    \Return{true}
+	}
+	\uElseIf{sum $< x$}{
+	    $i++$ \\
+	}
+	\Else{
+	    $j--$ \\
+	}
+
+	\If{$i = j$}{
+	    \Return{false}
+	}
+    }
+\end{algorithm}
+
+It is clear that the following algorithm runs in $\Theta \left( n \right) $, thus, limiting the algorithm to the time complexity of the sorting algorithm used.
+
+\exercise{3}
+
+By the definition, take $N_0 \in \N$ such that $n>N_0 \implies f\left( n \right) ,g\left( n \right) >0$. Now, it is clear that for any $n_0 > N_0$, $\max \left\{ f\left( n_0 \right) ; g\left( n_0 \right)  \right\} \le  f\left( n_0 \right) +g\left( n_0 \right) $, that is, $\max \left\{ f, g \right\} $ is bounded above by $f+g$ asymptotically, which means that $\max\left\{ f;g \right\} = O\left( f+g \right) $.
+
+Now, suppose, without loss of generality, that $\lim_{n \to \infty} f\left( n \right) = 0$. Then, clearly $\max\left\{ f\left( n \right);g\left( n \right)  \right\} \to  g\left( n \right) = \Theta\left( g\left( n \right)  \right)= \Theta\left( f\left( n \right) +g\left( n \right)\right)$. Note that this is also true if both functions vanish.
+
+On the other hand, if neither functions vanish, it is true that $ n> N_0 \implies \max\left\{ f\left( n \right) ;g\left( n \right)  \right\} < f\left( n \right) + g\left( n \right) $. This means that, for any $n_0 > N_0$, \[
+    \frac{\max\left\{ f\left( n_0 \right) ;g\left( n_0 \right)  \right\} }{f\left( n_0 \right) + g\left( n_0 \right) } > 0
+,\] that is, \[
+\lim_{n \to \infty} \inf \frac{\max\left\{ f\left( n \right) ;g\left( n \right)  \right\} }{f\left( n \right) + g\left( n \right) } >0
+,\] which means that $\max\left\{ f;g \right\} = \Omega\left( f + g \right) $, thus, $\max\left\{ f;g \right\} = \Theta\left( f + g \right) $.
+
+\exercise{4}
+
+\subexercise{a}
+
+For the average case, when we are to insert the $j$-th element of the input array, we can assume that half of the elements of our input array $A$ previous to $A[j]$ are smaller and half are greater than our element. For this, and assuming our input array is initially sorted, we can merge half of our input array with the other half in reverse order, such that \[
+A' = \left<a_n,a_1,a_{n-1},a_2,a_{n-2},a_3,a_{n-3} \right>
+.\] This way, at iteration $i$, if $i$ is even, $A[1:i-1] = \left<a_1, \ldots, a_{i/2},a_{n+1-i/2},\ldots,a_n\right>$, so element $A[i+1]$ will be inserted precisely in the middle of the already sorted part of our input array. The same happens for the odd iterations, but, as the sorted part of the array is not even, there is no way to insert the element in such a way that only half of the sorted array is changed. This makes the input the closest as possible to the average sequence.
+
+\subexercise{b}
+
+\begin{algorithm}[H] 
+    \KwIn{An array $A$ with $n$ elements}
+    $A \gets $ MergeSort$\left( A \right) $ \\
+    $A' \gets \left< \right>$  \\
+    \For{$i\gets 1$ \KwTo $\frac{n}{2}$}{
+	$A'$.append$\left( A[n-i+1]\right) $ \\
+	$A'$.append$\left( A[i]\right) $
+    }
+    \Return{$A'$}
+\end{algorithm}
+
+It is clear that the loop takes $n$ time. This with the complexity of the merge sort makes the proposed algorithm $\Theta\left( n \log n \right) $.
+
+\exercise{5}
+
+First, let us assume $T\left( 1 \right) =T\left( 2 \right) = T$, which will not affect the results. We will also add an "offset" $b$ to our bounds to facilitate the analysis, knowing that any such value can be overcome by increasing the multiplying constant for large enough $n$ and, thus, does not affect the proof.
+
+\subexercise{a}
+
+By the master method, we guess that $T\left( n \right) = \Theta\left( n^3 \right) $. Now, let us prove that by the induction method. First, for the upper bound, we see that \[
+T\left( 1 \right) \le k n^3 + b = k + b
+\] and \[
+T\left( 2 \right) \le k 2^3 + b
+\] is true for $b\ge T$ and $k\ge 0$. Now, for the induction, assuming that the upper bound is true for $T\left( \frac{n}{2} \right) $ and see that
+\begin{align*}
+    T\left( n \right) &\le 2\left( k\left( \frac{n}{2} \right) ^3 + b \right) +n^3 \\
+    &= \left( \frac{k}{2^2}+1 \right) n^3 + 2b \\
+    &\le k n^3 + b
+\end{align*}
+for $k \ge \frac{4}{3}$, thus, the upper bound is proved. Now, for the lower bound, we can follow similar reasoning. First, \[
+T\left( 1 \right) = T\left( 2 \right) \ge k 2^3 \ge k 1^3
+\] is true for $k \le \frac{T}{2^3}$. Now, assuming that the lower bound holds for $T\left( \frac{n}{2} \right) $,
+\begin{align*}
+    T\left( n \right) &\ge \left( \frac{k}{2^2}+1 \right) n^3 \\
+    &\ge k n^3
+\end{align*}
+is true for $k \le \frac{4}{3}$. Thus, for $0<k\le \min \left( \frac{T}{2^3};\frac{4}{3} \right) $, the lower bound holds, which confirms that $T\left( n \right) = \Theta\left( n^3 \right) $.
+
+\subexercise{b}
+
+Our initial guess will be $T\left( n \right) = \Theta\left( n \right) $. Then, for the upper bound, first \[
+T\left( 1 \right) = T\left( 2 \right) \le k + b \le k2 + b
+\] holds for $k\ge 0$ and $b\ge T$. Now, assuming the upper bound holds for $T\left( \frac{9}{10}n \right) $,
+\begin{align*}
+    T\left( n \right) &\le \frac{k9}{10}n + b + n \\
+    &= \frac{9k + 10}{10}n + b \\
+    &\le kn + b
+\end{align*}
+is true for $k\ge 10$.
+
+On the lower bound, \[
+T\left( 1 \right)  = T\left( 2 \right) \ge 2k \ge k
+\] holds for $k\le \frac{T}{2}$. Following similar reasoning as in the previous induction, it is easy to see that for $0<k\le \min\left( 10; \frac{T}{2} \right) $ we have the lower bound. Thus, $T\left( n \right) = \Theta\left( n \right) $.
+
+\subexercise{c}
+
+Our guess will be $T\left( n \right) = \Theta\left( n^2 \log n \right) $. So first, \[
+T\left( 1 \right) = T\left( 2 \right) \le 0 + b \le k 4 + b
+\] holds for $k\ge 0$ and $b\ge T$. Now, for the induction,
+\begin{align*}
+    T\left( n \right) &\le 16\left( k \frac{n^2}{4^2}\log \frac{n}{4} + b\right) + n^2 \\
+    &= k n^2 \left( \log n - \log 4\right) + n^2 +16b\\
+    &= kn^2 \log n -2kn^2 + n^2 + 16b \\
+    &\le kn^2 \log n + b
+\end{align*}
+is true for $k\ge \frac{1}{2}$, thus, proving the upper bound.
+
+For the lower bound, \[
+T\left( 1 \right) = T\left( 2 \right) \ge k 4 \ge 0
+\] holds for $k\le \frac{T}{4}$. Similarly as for the upper bound, one can see that the lower bound holds for $k \le \frac{1}{2}$, thus, for $0<k\le \min\left( \frac{T}{4};\frac{1}{2} \right) $ the lower bound holds.
+
+\subexercise{d}
+
+Guess: $T\left( n \right) = \Theta\left( n^2 \right) $.
+
+Upper bound:
+\[
+T\left( 1 \right) = T\left( 2 \right) \le k+b \le k 4 + b,\, b\ge T,\,k\ge 0
+.\] 
+\begin{align*}
+    T\left( n \right)  &\le 7\left( \frac{k}{3^2}n^2 + b \right) + n^2 \\
+    &= \left( \frac{7k}{3^2}+ 1 \right) n^2 + 7b \\
+    &\le kn^2 + b,\, k \ge \frac{9}{2}
+.\end{align*}
+
+Lower bound:
+\[
+T\left( 1 \right) = T\left( 2 \right) \ge k 4 \ge k,\, k\le \frac{T}{4}
+.\] 
+Similarly to the upper bound, induction holds for $k \le \frac{9}{2}$.
+
+\subexercise{e}
+
+Using expansion,
+\begin{align*}
+    T\left( n \right) &= 7 T\left( \frac{n}{2} \right) + n^2 \\
+    &= 7^{2} T\left( \frac{n}{2^2} \right) + 7 \left(  \frac{n}{2}\right)^2 + n^2 \\
+    &= 7^{3} T\left( \frac{n}{2^3} \right) + 7^2 \left(  \frac{n}{2^2}\right)^2 + 7 \left(  \frac{n}{2}\right)^2 + 7^{0}\left( \frac{n}{2^{0}} \right)^2 \\
+    &\quad\quad\vdots \\
+    &= 7^{N}T + n^2 \sum_{i=0}^{N-1} \frac{7^{i}}{4^{i} },\, n = 2^{N} \\
+    &= 7^{N}T + 4^{N} \sum_{i=0}^{N-1} \frac{7^{i}}{4^{i} } \\
+    &= 7^{N}T + \frac{1 - \left( \frac{7}{4} \right)^{N} }{1- \frac{7}{4}} \\
+    &= 7^{N}T - \frac{1 - \left( \frac{7}{4} \right)^{N} }{\frac{3}{4}} \\
+    &= 7^{N}T + \frac{4}{3}\left( \frac{7}{4} \right)^{N} - \frac{4}{3} \\
+    &= 7^{N} \left( T +\frac{1}{3}\frac{1}{4^{N-1}} \right) - \frac{4}{3} \\
+    &\approx 7^{N} T = 7^{\log n} T = n^{\log 7} T
+.\end{align*}
+Thus, $T\left( n \right) = \Theta\left( n^{\log 7} \right) $.
+
+\subexercise{f}
+
+Through expansion,
+\begin{align*}
+    T\left( n \right) &= 2 T\left( \frac{n}{4} \right) + \sqrt{n}  \\
+    &= 2^2 T\left( \frac{n}{4^{2}} \right) + 2 \left( \frac{n}{4} \right) ^{\frac{1}{2}} + n^{\frac{1}{2}}  \\
+    &= 2^3 T\left( \frac{n}{4^{3}} \right) + 2^{2} \left( \frac{n}{4^{2}} \right) ^{\frac{1}{2}}+ 2^{1} \left( \frac{n}{4^{1}} \right) ^{\frac{1}{2}} + 2^{0} \left( \frac{n}{4^{0}} \right) ^{\frac{1}{2}}  \\
+    &\quad\quad\vdots \\
+    &= 2^{\frac{N}{2}}T +\sum_{i=0}^{\frac{N}{2}-1} 2^{i}\frac{2^{\frac{N}{2}}}{\left( 4^i \right)^{\frac{1}{2}}}, \, n = 2^{N} \\
+    &= 2^{\frac{N}{2}}T + 2^{\frac{N}{2}} \sum_{i=0}^{\frac{N}{2} -1} \frac{2^{i}}{2^{i}} = 2^{\frac{N}{2}}T + 2^{\frac{N}{2}} \frac{N}{2} \\
+    &= \sqrt{n} \left( T + \frac{1}{2} \log n \right) \approx \sqrt{n} \log n 
+.\end{align*}
+Thus, we have that $T\left( n \right) = \Theta\left( \sqrt{n} \log n \right) $
+
+\subexercise{g}
+
+Again, expanding the recurrence relation,
+\begin{align*}
+    T\left( n \right) &= T\left( n-1 \right) + n \\
+    &= T\left( n-2 \right) + \left( n-1 \right) + n  \\
+    &= T\left( n-3 \right) + \left( n-2 \right) + \left( n-1 \right) + n  \\
+    &\quad\quad \vdots \\
+    &= T + \left( n - n + 3 \right) +  \left( n - n + 4 \right) + \ldots + \left( n-1 \right) + n\\
+    &= T + n\sum_{i=0}^{n-3} 1 - \sum_{i=0}^{n-3} i \\
+    &= T + n\left( n-2 \right) -\frac{\left( n-2 \right) \left( n-3 \right) }{2} \\
+    &= T + n^2 -2n - \frac{1}{2}n^2 +\frac{5}{2}n -3 \\
+    &= \frac{1}{2}n^2 + \frac{1}{2}n -3 + T \approx n^2
+.\end{align*}
+That is, $T\left( n \right) = \Theta \left( n^2 \right) $.
+
+\exercise{6}
+
+\subexercise{a}
+
+The designed approach is a divide-and-conquer algorithm that focuses on reducing the sum of arrays along the search for the maximum contiguous subarray. For the current implementation, we will assume the array's size is always a power of two, just for the sake of simplicity.
+
+\begin{algorithm}[H] 
+    \caption{MaximumSubarray}
+    \KwIn{An array $A$ with size $n$}
+
+    \uIf{$n = 2$}{
+	// assume the whole array is the biggest subarray \;
+	$\text{sum} \gets A[0] + A[1]$ \;
+	$i \gets  0$ \;
+	$j \gets 1$ \;
+
+	\uIf{\textup{$A[0] > \text{sum} \land A[0] > A[1]$}}{
+	    // the element on the left is actually the biggest subarray \;
+	    $\text{sum} \gets  A[0] $ \;
+	    $j \gets 0$ \;
+	}
+	\ElseIf{\textup{$A[1] > \text{sum} \land A[1] > A[0]$}}{
+	    // the element on the right is actually the biggest subarray \;
+	    $\text{sum} \gets  A[1] $ \;
+	    $i \gets  1$ \;
+	}
+    }
+    \Else{
+	$i_0,j_0, \text{sum}_0 = $ MaximumSubarray$\left( A[0:n/2]  \right) $\;
+	$i_1,j_1, \text{sum}_1 = $ MaximumSubarray$\left( A[n/2:n]  \right) $\;
+
+	$i_1 \gets i_1 + \frac{n}{2}$ \;
+	$j_1 \gets j_1 + \frac{n}{2}$ \;
+
+	// finds biggest subarray that crosses the middle of $A$ \;
+	sum\_left, $i \gets $ MaximumSubarrayLeft$\left( A[0:n / 2] \right)$  \;
+	sum\_right, $j \gets $ MaximumSubarrayRight$\left( A[n / 2 : n] \right)$  \;
+	$j \gets j + \frac{n}{2}$ \;
+	sum $\gets $ sum\_left $+$ sum\_right \;
+	\uIf{\textup{$\text{sum}_0> \text{sum} $}}{
+	    sum $\gets \text{sum}_0$ \;
+	    $i \gets i_0$ \;
+	    $j \gets j_0$ \;
+	}
+	\ElseIf{\textup{$\text{sum}_1 > \text{sum}$}}{
+	    sum $\gets \text{sum}_1$ \;
+	    $i \gets i_1$ \;
+	    $j \gets j_1$ \;
+	}
+    }
+    \Return{\textup{$i,j,\text{sum}$}}
+\end{algorithm}
+
+The MaximumSubarrayLeft is a routine that scans the input array starting at its end (so, to the left) and finds the biggest contiguous subarray that contains the last element, returning the sum of such subarray and its first index. The same applies to MaximumSubarrayRight, but in reverse order.
+
+\subexercise{b}
+
+It is easy to see that such algorithm runs in linear time over the inputs array's size, thus, both operations take $\Theta\left( n \right) $ time to run. As all the other operations have constant cost, it is safe to say that each node of the divide-and-conquer algorithm runs in $\Theta\left( n \right) $. As the input array is always split in two, the tree will have $\log n$ levels and, thus, the algorithm runs in $\Theta\left( n \log n \right) $.
+
+\end{document}

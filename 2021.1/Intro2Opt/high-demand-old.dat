@@ -1,0 +1,62 @@
+data;
+
+set N := b1, b2, b3;
+
+set N_[b1] := 2, 3;
+set N_[b2] := 1, 3;
+set N_[b3] := 1, 3;
+
+param n[b1,b2] := 2;
+param n[b1,b3] := 1;
+param n[b2,b3] := 1;
+
+param theta_k[0] := -3.141592654;
+param theta_k[1] := -2.35619449;
+param theta_k[2] := -1.570796327;
+param theta_k[3] := -0.7853981634;
+param theta_k[4] := 0;
+param theta_k[5] := 0.7853981634;
+param theta_k[6] := 1.570796327;
+param theta_k[7] := 2.35619449;
+param theta_k[8] := 3.141592654;
+
+param P_k[b1,b2,0] := 1.115241636;
+param P_k[b1,b2,1] := -2.071028926;
+param P_k[b1,b2,2] := -3.717472119;
+param P_k[b1,b2,3] := -2.85962385;
+param P_k[b1,b2,4] := 0;
+param P_k[b1,b2,5] := 3.186270562;
+param P_k[b1,b2,6] := 4.832713755;
+param P_k[b1,b2,7] := 3.974865485;
+param P_k[b1,b2,8] := 1.115241636;
+
+param P_k[b1,b3,0] := 1.098469988;
+param P_k[b1,b3,1] := -1.836452851;
+param P_k[b1,b3,2] := -3.373872107;
+param P_k[b1,b3,3] := -2.613188429;
+param P_k[b1,b3,4] := 0.000000000;
+param P_k[b1,b3,5] := 2.93492284;
+param P_k[b1,b3,6] := 4.472342095;
+param P_k[b1,b3,7] := 3.711658417;
+param P_k[b1,b3,8] := 1.098469988;
+
+param P_k[b2,b3,0] := 1.230769231;
+param P_k[b2,b3,1] := -2.430613827;
+param P_k[b2,b3,2] := -4.307692308;
+param P_k[b2,b3,3] := -3.300899096;
+param P_k[b2,b3,4] := 0;
+param P_k[b2,b3,5] := 3.661383057;
+param P_k[b2,b3,6] := 5.538461538;
+param P_k[b2,b3,7] := 4.531668327;
+param P_k[b2,b3,8] := 1.230769231;
+
+param P_g_max[b1] := 7.0;
+param P_g_max[b2] := 4.0;
+param P_g_max[b3] := 0.0;
+
+param P_d {N};
+
+param P_d :=
+    1   1.0
+    2   3.5
+    3   5.0   ;

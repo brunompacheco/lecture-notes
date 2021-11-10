@@ -1,0 +1,17 @@
+\section{Planta}
+
+As dinâmicas do líquido no interior do tanque foram simuladas no LabVIEW utilizando as ferramentas para equações diferenciais, em particular, para a equação do calor bidimensional para domínios retangulares. Como o tanque é cilíndrico, assumiu-se que simulando uma seção do tanque seria o suficiente para aproximar o comportamento da temperatura no interior do líquido frente aos pontos de medição almejados.
+
+As condições de contorno foram utilizadas para simular as perdas e o aquecimento. Troca de calor nula nas paredes do tanque simulam o seu isolamento, enquanto uma injeção de calor constante (dentro de um passo de cálculo) nas paredes próximas ao aquecedor simulam a potência do aquecedor aquecendo o líquido. Para simular as perdas ao ambiente, a condução térmica entre o líquido e o ambiente externo (na distância entre a superfície e a abertura do tanque) foi calculada e definida como a perda de calor na superfície a cada passo de cálculo.
+
+As variações volumétricas foram implementadas através de modificações no domínio de cálculo. Podemos entender o domínio de cálculo em uma situação computacional como uma matriz que representa as temperaturas nos pontos do líquido. Dessa forma, remoção do líquido perto da base foi emulada com a remoção das linhas da matriz mais próximas da base, enquanto adições de líquido foram feitas através de adições de linhas na matriz na região dos pontos da superfície do líquido.
+
+Dessa forma, a cada passo de cálculo é necessário:
+\begin{enumerate}
+    \item Inicializar as equações e o domínio com a matriz de temperaturas resultante do passo anterior;
+    \item Calcular as condições de contorno a partir dos valores do aquecedor e da temperatura ambiente;
+    \item Resolver a equação do calor bidimensional para 1 passo de cálculo;
+    \item Renderizar os resultados;
+    \item Adicionar e remover linhas da matriz de acordo com a vazão de entrada e saída.
+\end{enumerate}
+

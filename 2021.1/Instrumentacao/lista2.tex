@@ -1,0 +1,84 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Lista 2}
+\author{Bruno M. Pacheco (16100865)\\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+ 
+\exercise{1}
+
+Um termorresistor, por natureza, é bastante impactado pela resistência dos condutores quando medido a 2 fios, e.g., quando utiliza-se uma fonte de corrente e um voltímetro, a queda de tensão nos condutores é somada a queda de tensão no termorresistor o que causa um \emph{offset} no valor medido.
+
+Para evitar tal erro, uma medição a 4 fios, por exemplo, aplica-se a corrente através de um par de condutores enquanto mede-se a tensão através de outro par, evitando a queda de tensão nos condutores que conectam o termorresistor ao voltímetro, ou seja, mede-se somente a queda de tensão sobre o termorresistor.
+
+Uma outra possibilidade é utilizar uma segunda fonte de corrente e realizar uma medição a 3 fios. Nessa configuração, as duas fontes de corrente são utilizadas para gerar uma quedas de tensão no sentido contrário (em relação à malha do voltímetro) nos condutores que encontram-se entre o termorresistor e o voltímetro. Dessa forma, se as resistências dos condutores são idênticas e garante-se que as fontes de corrente injetam a mesma corrente no circuito, o erro é compensado no próprio circuito (a queda de tensão em um condutor é de mesma intensidade mas oposta à queda de tensão no outro).
+
+\exercise{2}
+
+\subexercise{a}
+
+A partir da temperatura $T_r$ encontra-se a tensão $V_r = 0,912\,mV$. Dessa forma, pode-se encontrar a tensão gerada pela junção na temperatura $T_j$, ou seja, $V_j = 1,796+0,912 = 2,708\,mV$. Assim, encontra-se uma temperatura $T_j = 65,44\,^\circ C$.
+
+\subexercise{b}
+
+Um valor fixo do coeficiente de Seebeck poderia ser uma boa aproximação, mas como sabemos que esse coeficiente varia de acordo com a temperatura, teríamos um erro maior do que a curva fornecida pela tabela, afinal, utilizar um coeficiente de Seebeck fixo é o mesmo que aproximar a variação de temperatura por um polinômio de grau 1.
+
+No caso da aplicação proposta, por exemplo, utilizando o coeficiente fornecido, ter-se-ia um erro de cerca de 2 \% na temperatura estimada para valores de tensão próximos do enunciado.
+
+\exercise{3}
+
+A partir do CMRR fornecido e do ganho de malha direta, tem-se \[
+    100 = 20 \log \left|\frac{100}{A_{cm}}\right| \implies A_{cm} = 10^{-3}
+.\] Dessa forma, pode-se estimar \[
+V_o = A_d\left( V^{+}-V^{-} \right) + A_{cm}\left( \frac{V^{+}+V^{-}}{2} \right) = 1,01\,V
+.\] 
+
+\exercise{4}
+
+Assumindo valores típicos de $10^5$ e $90\,dB$ para o ganho de malha aberta e o CMRR do LM741, podemos comparar com os valores encontrados no INA118 sem um resistor para controle do ganho. De acordo com informações do fabricante (datasheet da TI), o INA118 sem um resistor $R_G$ (pinos 1 e 8 desconectados) possui ganho unitário e CMRR típico de $90\,dB$. Ou seja, apesar de um CMRR parecido, a diferença no ganho de malha aberta é praticamente impeditiva no que tange o seu uso para a maioria das aplicações em que se utilizaria o LM741, de ganho $10^5$.
+
+\exercise{5}
+
+Os circuitos como vistos pelo multímetro podem ser vistos na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{lista2_5.png}
+\end{figure}
+
+\subexercise{a}
+
+Para o primeiro cenário, o voltímetro mede $45,52\,mV$ o que seria convertido em $335,79\,^\circ C$.
+
+\subexercise{b}
+
+No segundo cenário, o voltímetro mede $28,76\,mV$, o que pode ser convertido para $115,26\,^\circ C$.
+
+\exercise{6}
+
+Denominando a impedância de entrada como $R_{in}$, sabemos que \[
+V_{DAQ} = V_{FONTE} \frac{R_{in}}{R +R_{in}} \implies R_{in} = \frac{R V_{DAQ}}{V_{FONTE} - V_{DAQ}}
+.\] 
+
+Dessa forma, para $R=1\,k\Omega$ e $V_{FONTE} = 1,0\,V$, estima-se o impacto da variação de 0,99 para 0,98 no valor da tensão $V_{DAQ}$ para o cálculo da impedância de entrada de acordo com a equação anterior. Através desse método, chega-se em uma variação de $50\,k\Omega$. Da mesma forma mas para $V_{FONTE} = 5,0\,V$ e $V_{DAQ}$ de $4,94\,V$ para $4,93\,V$, estima-se um impacto de $\approx 11,9\,k\Omega$. Para $R=100\,k\Omega$ estima-se um impacto de $3,5\,k\Omega$ e $720\,\Omega$ para $V_{FONTE}$ em $1$ e $5\,V$, respectivamente.
+
+A partir disso, utiliza-se os resultados de $R=100\,k\Omega$ e $V_{FONTE}=5\,V$, a partir dos quais determina-se $R_{in} \approx 90,1\,k\Omega$.
+
+\exercise{7}
+
+Como os termistores geralmente apresentam uma variação de resistência bastante alta dentro da faixa de medição especificada, uma medição a partir de um divisor resistivo é efetiva. Entretanto, o mesmo não acontece no caso de termorresistores do tipo PT100, por isso diferentes abordagens são necessárias para a aquisição.
+
+\exercise{8}
+
+\begin{enumerate}[label=\alph*]
+    \item $4887,6\,\mu V$
+    \item $305,2\,\mu V$
+    \item $76,3\,\mu V$
+    \item $0,3\,\mu V$
+\end{enumerate}
+
+\end{document}

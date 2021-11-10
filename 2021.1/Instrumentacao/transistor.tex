@@ -1,0 +1,61 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+\begin{document}
+ 
+\title{Exercício de Transistores}
+\author{Bruno M. Pacheco (16100865)\\
+DAS5151 - Instrumentação em Controle}
+ 
+\maketitle
+ 
+\exercise{a}
+
+Dadas as especificações da lâmpada, espera-se uma corrente $I_c = 4\,A$, assumindo que o transistor será utilizado na configuração emissor comum. Assim, pela figura 1 pode-se esperar uma tensão $V_{CE} \approx 1,25\,V$ o que resultaria em uma queda de tensão levemente abaixo da nominal para a lâmpada. Assumindo que a lâmpada tem um comportamento puramente resistivo, poderemos esperar, com $V_{CE} = 1,25\,V$, uma corrente de $4,9\,A$, o que ainda resultaria em $V_{CE} > 1\,V$, portanto, não teríamos uma queda de tensão sobre a lâmpada maior do que a nominal.
+
+Agora, mesmo assumindo $I_C = 5\,A \implies I_E \approx 5\,A$ e $V_{CE}= 1,25\,V$, teremos uma dissipação de potência sobre o transistor de cerca de $6,25\,W$, bem abaixo do seu limite. Assim, vemos que é possível empregar o transistor descrito para acionar a lâmpada em modo liga/desliga.
+
+\exercise{b}
+
+\subexercise{$I_B = 0$}
+
+Nesse caso, teremos $V_{CE} = 13\,V$ mas $I_E = 0$, logo, não temos potência dissipada sobre o transistor nem sobre a lâmpada.
+
+\subexercise{$I_B = 1\,mA$}
+
+Dado o ganho especificado, espera-se $I_C = 1\,A$. Assumindo um comportamento puramente resistivo da lâmpada, ter-se-ia $V_{CE} = 10,6\,V$, com o transistor operando na sua região linear. Dessa forma, a potência dissipada sobre a lâmpada é de $2,4\,W$ e sobre o transistor é de $10,6\,W$.
+
+\subexercise{$I_B = 16\,mA$}
+
+Pelo analisado no exercício anterior, o transistor claramente entrará em região de saturação, sendo as condições, portanto, como anteriormente. Dessa forma, podemos esperar uma dissipação de potência máxima de $6,25\,W$ sobre o transistor e de pouco menos de $48\,W$ sobre a lâmpada.
+
+\exercise{c}
+
+Como já estamos considerando o acionamento com uma grande margem de segurança, podemos dimensionar o circuito com somente um transistor para que seja fornecida uma corrente de base próxima de $20\,mA$. Dessa forma, basta que a saída digital seja conectada à base do transistor através de uma resistência $R_B = 137,5\,\Omega$ ($V_{BE}$ extraída da figura 1 para $I_C=5\,A$), como no circuito abaixo, com um resistor de \emph{pull-down} ($R_{PD}$) grande o suficiente.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lista1-c.png}
+\end{figure}
+
+\subexercise{d}
+
+Com a redução da corrente da saída digital será necessário empregar um arranjo Darlington como na figura abaixo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{figures/lista1-d.png}
+\end{figure}
+
+Dimensiona-se então o resistor $R_2$ para que $I_{B_2}= 20\,mA$. Considerando que o resistor $R_{PD}$ é grande o suficiente, teremos $I_{C_1} = 20\,mA \implies V_{CE_1}<0,5\,V$, enquanto $V_{BE_2}\approx 2,25\,V$ como visto anteriormente. Dessa forma, temos \[
+R_2 < \frac{13-V_{CE_1} - V_{BE_2}}{0,02} < 512,5\,\Omega
+.\] 
+
+Agora, para o resistor $R_1$ escolhemos um valor que garanta $I_{B_1} = 80\,\mu A$, que será suficiente para gerar a corrente $I_{C_1}$ necessária. Além disso, podemos estipular $V_{BE_1} = 1,25\,V$ a partir da figura 1. Assim, queremos \[
+R_1 < = \frac{5 - V_{BE_1} - V_{BE_2}}{80\mu} < 18750\,\Omega
+.\]
+
+O resistor de \emph{pull-down} só precisa ser grande o suficiente em relação aos demais ($R_{PD} \gg R_1$).
+
+
+\end{document}
