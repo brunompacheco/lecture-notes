@@ -1,0 +1,53 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+ 
+
+\begin{document}
+\renewcommand{\bibname}{Referências}
+ 
+\title{Otimização Convexa Diferenciável\\Proposta de Projeto Final}
+\author{Bruno M. Pacheco\\
+DAS410048 - Otimização Convexa}
+ 
+\maketitle
+
+\section*{Caracterização}
+
+A caracterização de um problema de otimização como uma função dos seus parâmetros permite utilizar diversas ferramentas da análise funcional com uma vasta gama de aplicações.
+Essa análise não é nova: já há muito tempo os multiplicadores de Lagrange são utilizados para analisar a variação do objetivo em função dos parâmetros, enxergando o problema de otimização como uma função que mapeia os parâmetros no máximo da função objetivo.
+Entretanto, nos últimos anos um novo ferramental foi apresentado na comunidade científica \cite{agrawal2019}, possibilitando diferenciar as variáveis de um problema de otimização no ponto ótimo em função dos parâmetros.
+Em outras palavras, enxergando o problema de otimização como uma função
+\begin{align*}
+    z^*(x) = \arg\max & f(z,x) \\
+	s.t. \quad & z \in \mathcal{C}(x)
+,\end{align*}
+onde $f$ é a função objetivo, $x$ são parâmetros, $z$ são as variáveis de otimização e $\mathcal{C}$ é o conjunto restritivo, é possível definir $\frac{d z^*}{d x}$. 
+
+Desse ferramental, diversas aplicações surgiram combinando modelos baseados em aprendizagem com otimização convexa, desde o uso de problemas de otimização como camadas de uma rede neural \cite{amos2017}, até o ajuste automático (\emph{learning-based}) de parâmetros de controladores \cite{amos2018,avila2018}.
+
+\section*{Metodologia}
+
+Pretendo apresentar os resultados que nos permitem diferenciar um problema de otimização convexa e algumas aplicações relevantes dentro do contexto do programa de pós-graduação.
+Além dos artigos citados acima, pretendo tomar como referência também o \emph{workshop} sobre diferenciação implícita apresentado na conferência NeurIPS 2020\footnotemark para a parte teórica e a apresentação do prof. Boyd na conferência L4DC 2022 \footnotemark para apresentar aplicações na área de controle de sistemas dinâmicos.
+\footnotetext{Disponível em \url{http://implicit-layers-tutorial.org/}.}
+\footnotetext{Disponível em \url{https://youtu.be/-VUjaIdDZ3w?t=1560}.}
+
+Em geral, pretendo conduzir os assuntos na seguinte ordem:
+\begin{enumerate}
+    \item Introdução à perspectiva de problemas de otimização convexa como funções, traçando um paralelo com os multiplicadores de Lagrange;
+    \item Formulação e teoria para diferenciação de problemas de otimização convexa;
+    \item Aplicações em \emph{deep learning};
+    \item Aplicações em controle de sistemas dinâmicos.
+\end{enumerate}
+
+\section*{Resultados Esperados}
+
+Com essa aula, espera-se fornecer uma base suficiente de diferenciação de problemas de otimização convexa para que os colegas consigam visualizar uma possível aplicação desse ferramental nas suas áreas de pesquisa.
+Não almejo discutir as implementações do ferramental nem das aplicações, uma vez que as ferramentas ainda são muito incipientes.
+Ademais, com a apresentação das aplicações, pretendo demonstrar aos colegas a relevância dessa área de pesquisa, destacando o interesse da comunidade científica e a abrangência das aplicações.
+
+\bibliographystyle{plain} % We choose the "plain" reference style
+\bibliography{project_proposal}
+
+\end{document}
+

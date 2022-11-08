@@ -1,0 +1,67 @@
+@article{agrawal2019,
+  author    = {Akshay Agrawal and
+               Brandon Amos and
+               Shane T. Barratt and
+               Stephen P. Boyd and
+               Steven Diamond and
+               J. Zico Kolter},
+  title     = {Differentiable Convex Optimization Layers},
+  journal   = {CoRR},
+  volume    = {abs/1910.12430},
+  year      = {2019},
+  url       = {http://arxiv.org/abs/1910.12430},
+  eprinttype = {arXiv},
+  eprint    = {1910.12430},
+  timestamp = {Thu, 31 Oct 2019 14:02:26 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1910-12430.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@article{amos2018,
+  author    = {Brandon Amos and
+               Ivan Dario Jimenez Rodriguez and
+               Jacob Sacks and
+               Byron Boots and
+               J. Zico Kolter},
+  title     = {Differentiable {MPC} for End-to-end Planning and Control},
+  journal   = {CoRR},
+  volume    = {abs/1810.13400},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1810.13400},
+  eprinttype = {arXiv},
+  eprint    = {1810.13400},
+  timestamp = {Thu, 08 Nov 2018 10:57:46 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1810-13400.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{avila2018,
+ author = {de Avila Belbute-Peres, Filipe and Smith, Kevin and Allen, Kelsey and Tenenbaum, Josh and Kolter, J. Zico},
+ booktitle = {Advances in Neural Information Processing Systems},
+ editor = {S. Bengio and H. Wallach and H. Larochelle and K. Grauman and N. Cesa-Bianchi and R. Garnett},
+ pages = {},
+ publisher = {Curran Associates, Inc.},
+ title = {End-to-End Differentiable Physics for Learning and Control},
+ url = {https://proceedings.neurips.cc/paper/2018/file/842424a1d0595b76ec4fa03c46e8d755-Paper.pdf},
+ volume = {31},
+ year = {2018}
+}
+
+
+@InProceedings{amos2017,
+  title = 	 {{O}pt{N}et: Differentiable Optimization as a Layer in Neural Networks},
+  author =       {Brandon Amos and J. Zico Kolter},
+  booktitle = 	 {Proceedings of the 34th International Conference on Machine Learning},
+  pages = 	 {136--145},
+  year = 	 {2017},
+  editor = 	 {Precup, Doina and Teh, Yee Whye},
+  volume = 	 {70},
+  series = 	 {Proceedings of Machine Learning Research},
+  month = 	 {06--11 Aug},
+  publisher =    {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v70/amos17a/amos17a.pdf},
+  url = 	 {https://proceedings.mlr.press/v70/amos17a.html},
+  abstract = 	 {This paper presents OptNet, a network architecture that integrates optimization problems (here, specifically in the form of quadratic programs) as individual layers in larger end-to-end trainable deep networks. These layers encode constraints and complex dependencies between the hidden states that traditional convolutional and fully-connected layers often cannot capture. In this paper, we explore the foundations for such an architecture: we show how techniques from sensitivity analysis, bilevel optimization, and implicit differentiation can be used to exactly differentiate through these layers and with respect to layer parameters; we develop a highly efficient solver for these layers that exploits fast GPU-based batch solves within a primal-dual interior point method, and which provides backpropagation gradients with virtually no additional cost on top of the solve; and we highlight the application of these approaches in several problems. In one notable example, we show that the method is capable of learning to play mini-Sudoku (4x4) given just input and output games, with no a priori information about the rules of the game; this highlights the ability of our architecture to learn hard constraints better than other neural architectures.}
+}
+
+
