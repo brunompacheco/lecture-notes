@@ -120,222 +120,370 @@ Remove-se, então, $y_2$ das variáveis básicas, sendo restrita a \[
 y_2 = \min\left( \frac{5}{4}, \frac{1}{3}, 1 \right) = \frac{1}{3}
 ,\] 
 definindo $y_5$ como a variável entrante.
-As restrições são escritas...  % TODO
-
-
-
-Novamente, introduzindo as \emph{slack variables}, escrevemos as restrições
+As restrições são escritas
 \begin{align*}
-    y_4 &= -5  +2y_1 + 4y_2 + 3y_3 \\
-    y_5 &= -4 +3y_1 + y_2 + 4y_3  \\
-    y_6 &= -3 + y_1 + 2y_2 + 2y_3  \\
-    y_1&,\ldots,y_6 \ge 0
+    y_0 &= \frac{11}{3}  -\frac{10}{3}y_1 - \frac{13}{3}y_3 -\frac{1}{3}y_4 - \frac{4}{3}y_5 \\
+    y_2 &= \frac{1}{3} +\frac{1}{3}y_1 +\frac{1}{3}y_3  +\frac{1}{3}y_4 -\frac{1}{3}y_5 \\
+    y_6 &= \frac{4}{3} -\frac{5}{3}y_1 -\frac{5}{3}y_3 +\frac{1}{3}y_4 - \frac{2}{3}y_5 \\
+    y_0&,\ldots,y_6 \ge 0
 \end{align*}
-e o objetivo \[
-\zeta = -5y_1 - 11y_2 - 8y_3
+com objetivo \[
+    \zeta_0 = -\frac{11}{3}  +\frac{10}{3}y_1 +\frac{13}{3}y_3 +\frac{1}{3}y_4 -\frac{4}{3}y_5
 .\] 
+
+Remove-se, então, $y_3$ das variáveis básicas, sendo restrita a \[
+y_3 = \min\left( \frac{11}{13}, \infty, \frac{4}{5} \right) = \frac{4}{5}
+,\] 
+definindo $y_6$ como a variável entrante.
+As restrições são escritas
+\begin{align*}
+    y_0 &= \frac{1}{3}  +y_1 - \frac{6}{5}y_4 + \frac{2}{5}y_5 + \frac{13}{5}y_6 \\
+    y_2 &= \frac{3}{5} + 0y_1 + \frac{2}{5}y_4 - \frac{7}{15}y_5 - \frac{1}{5}y_6 \\
+    y_3 &= \frac{4}{5} -y_1 +\frac{1}{5}y_4 - \frac{2}{5}y_5 -\frac{3}{5}y_6 \\
+    y_0&,\ldots,y_6 \ge 0
+\end{align*}
+com objetivo \[
+    \zeta_0 = -\frac{1}{3}  -y_1 + \frac{6}{5}y_4 - \frac{2}{5}y_5 - \frac{13}{5}y_6.\] 
+
+Remove-se, então, $y_4$ das variáveis básicas, sendo restrita a \[
+y_4 = \min\left( \frac{5}{18}, \infty,\infty \right) = \frac{5}{18}
+,\] 
+definindo $y_0$ como a variável entrante.
+As restrições são escritas
+\begin{align*}
+    y_4 &= \frac{5}{18} -\frac{5}{6}y_0	+\frac{5}{6}y_1 + \frac{1}{3}y_5 + \frac{13}{6}y_6 \\
+    y_2 &= \frac{32}{45} -\frac{1}{3}y_0 + \frac{1}{3}y_1 - \frac{1}{3}y_5 + \frac{2}{3}y_6 \\
+    y_3 &= \frac{77}{90} -\frac{1}{6}y_0 -\frac{5}{6}y_1 - \frac{1}{3}y_5 -\frac{1}{6}y_6 \\
+    y_0&,\ldots,y_6 \ge 0
+\end{align*}
+com objetivo \[
+    \zeta_0 = -y_0.\] 
+
+Assim, obtemos uma solução factível para o problema original, que retomamos com as mesmas restrições (sem $y_0$ ) e com objetivo \[
+    \zeta = -5y_1 -11y_2 -8y_3 = -\frac{44}{3} +\frac{1}{3}y_1 + \frac{19}{3}y_5 -\frac{18}{3}y_6.\] 
+
+Remove-se, então, $y_5$ das variáveis básicas, sendo restrita a \[
+y_5 = \min\left( \infty, \frac{32}{15}, \frac{77}{30} \right) = \frac{32}{15}
+,\] 
+definindo $y_2$ como a variável entrante.
+As restrições são escritas
+\begin{align*}
+    y_4 &= \frac{89}{90} +\frac{7}{6}y_1 -y_2 + \frac{17}{6}y_6 \\
+    y_5 &= \frac{32}{15} + y_1 - 3y_2 + 2y_6 \\
+    y_3 &= \frac{13}{90} -\frac{7}{6}y_1 + y_2 -\frac{5}{6}y_6 \\
+    y_0&,\ldots,y_6 \ge 0
+\end{align*}
+com objetivo \[
+    \zeta =-\frac{52}{45} +\frac{20}{3}y_1 -19y_2 +\frac{20}{3}y_6.\] 
+
+Remove-se, então, $y_6$ das variáveis básicas, sendo restrita a \[
+y_6 = \min\left( \infty, \infty, \frac{13}{75} \right) = \frac{13}{75}
+,\] 
+definindo $y_3$ como a variável entrante.
+As restrições são escritas
+\begin{align*}
+    y_4 &= \frac{37}{75} -\frac{14}{5}y_1 +\frac{12}{5}y_2 - \frac{17}{5}y_3 \\
+    y_5 &= \frac{186}{75} -\frac{9}{5}y_1 - \frac{3}{5}y_2 -\frac{12}{5}y_3 \\
+    y_6 &= \frac{13}{75} -\frac{7}{5}y_1 + \frac{6}{5}y_2 -\frac{6}{5}y_3 \\
+    y_0&,\ldots,y_6 \ge 0
+\end{align*}
+com objetivo \[
+    \zeta =-\frac{8}{3}y_1 -11y_2 -\frac{40}{5}y_6.\] 
+
+%Novamente, introduzindo as \emph{slack variables}, escrevemos as restrições
+%\begin{align*}
+%    y_4 &= -5  +2y_1 + 4y_2 + 3y_3 \\
+%    y_5 &= -4 +3y_1 + y_2 + 4y_3  \\
+%    y_6 &= -3 + y_1 + 2y_2 + 2y_3  \\
+%    y_1&,\ldots,y_6 \ge 0
+%\end{align*}
+%e o objetivo \[
+%\zeta = -5y_1 - 11y_2 - 8y_3
+%.\] 
 
 
 
 \exercise{2}
 
-First, let us rearrange the primal in standard form as
-\begin{align*}
-    P^{(std)}:\quad \max_{x,y} \quad\quad & c_1^{T}x+c_2^{T}y \\
-    \textrm{s.t.} \quad -&a_{i,1}^{T} x -a_{i,2}^{T}y \le  -d_i,\,i=1,\ldots,p \\
-			 &a_{i,1}^{T} x + a_{i,2}^{T}y \le d_i,\,i=1,\ldots,q \\
-.\end{align*}
+Exercícios do livro-texto sobre conjuntos convexos.
 
-Now, we denote \[
-c' = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} \in \R^{m+n};\,
-x' = \begin{bmatrix} x \\ y \end{bmatrix} \in \R^{m+n};\,
-d' = \begin{bmatrix} -d_1 \\ \vdots \\ -d_p \\ d_1 \\ \vdots \\ d_q \end{bmatrix} \in \R^{p+q};\,
-A = \begin{bmatrix}
-    -a_{1,1}^{T} & -a_{1,2}^{T} \\
-    \vdots & \vdots \\
-    -a_{p,1}^{T} & -a_{p,2}^{T} \\
-    a_{1,1}^{T} & a_{1,2}^{T} \\
-    \vdots & \vdots \\
-    a_{q,1}^{T} & a_{q,2}^{T} \\
-\end{bmatrix} \in \R^{\left( p+q \right)  \times \left( m+n \right) }
-.\] Our problem can then be written as
+\subexercise{1}
+
+Sabemos que a propriedade de interesse é válida para $k=2$ uma vez que é a definição de um conjunto convexo.
+Agora, suponha que a propriedade é válida para $k$ arbitrário.
+Queremos mostrar que ela também será válida para $k+1$, em um prova por indução.
+
+Seja $C$ um conjunto convexo e $x_1,\ldots,x_k,x_{k+1}\in C$.
+Assume-se que $x_1,\ldots,x_k$ satisfazem \[
+\sum_{n=1}^{k} \theta_n x_n \in C
+\] para quaisquer $\theta_1,\ldots,\theta_n\ge 0$, $\sum_{n=1}^{k} \theta_n=1$.
+
+Tome, então, $\alpha_1,\ldots,\alpha_{k+1}\ge 0$ de forma que $\sum_{n=1}^{k+1} \alpha_n=1$ e defina $\theta=1-\alpha_{k+1}$.
+Veja que \[
+\sum_{n=1}^{k} \frac{\alpha_n}{\theta} = \frac{1}{\theta}\left( -\alpha_{k+1} + \sum_{n=1}^{k+1} \alpha_n \right) = \frac{1}{\theta}\left( -\alpha_{k+1} + 1 \right) = \frac{1}{\theta}\theta = 1
+.\] 
+Portanto, escrevendo  $y=\sum_{n=1}^{k} \frac{\alpha_n}{\theta}x_n$, pelo o que foi assumido com respeito a $x_1,\ldots,x_k$, $y\in C$.
+
+Agora, pela convexidade de $C$, temos $\theta y + \left( 1-\theta \right)x_{k+1} \in C$, logo
 \begin{align*}
-    P^{(std)}:\quad \max_{x'} \quad & c'^{T}x' \\
-    \textrm{s.t.} \quad & A x' \le d' \\
-			& x'\in \R^{m+n}
-,\end{align*}
-which makes it easy to see that
+    \theta y + \left( 1-\theta \right)x_{k+1} &= \theta \sum_{n=1}^{k} \frac{\alpha_n}{\theta}x_n + \alpha_{k+1}x_{k+1}  \\
+    &= \sum_{n=1}^{k} \alpha_n x_n + \alpha_{k+1}x_{k+1}  \\
+    &= \sum_{n=1}^{k+1} \alpha_n x_n \in C
+.\end{align*}
+\qed
+
+\subexercise{3}
+
+Seja $C$ um conjunto fechado e tal que $\forall x,y \in C$, $\frac{x+y}{2}\in C$.
+Agora, assuma que $\exists \theta^{*}\in \left[ 0,1 \right] $ tal que $\theta^{*} x + (1-\theta^{*})y \not\in C$, ou seja, $C$ não é um conjunto convexo.
+Pela definição do conjunto, 
 \begin{align*}
-    D:\quad \min_{y'} \quad & d'^{T}y' \\
-    \textrm{s.t.} \quad & A^{T}y' \ge c' \\
-      & y'\in \R^{p+q}
-\end{align*}
-is the dual of $P$.
+    \frac{1}{2}\left( \frac{x+y}{2} \right) + \frac{1}{2}y &= \frac{1}{4}x + \frac{3}{4}y \\
+    &= \frac{1}{4}x + \left( 1-\frac{1}{4} \right)y \in C \\
+    \frac{1}{2}x + \frac{1}{2}\left( \frac{x+y}{2} \right) &= \frac{3}{4}x + \frac{1}{4}y \\
+    &= \frac{3}{4}x + \left( 1-\frac{3}{4} \right)y \in C 
+.\end{align*}
+Dessa forma, podemos mostrar que, através de sucessivos pontos médios, podemos aproximar arbitrariamente qualquer valor de $\theta$. 
+Ou seja, $\forall \epsilon > 0, \exists \theta\in \left[ 0,1 \right]$ tal que $\theta x + (1-\theta)y \in  C$ e \[
+\theta x + (1-\theta)y \in B_\epsilon\left( \theta^{*}x + (1-\theta^{*})y \right) 
+,\] em que $B_\epsilon(z)$ é uma bola aberta de raio  $\epsilon$ em torno de um vetor $z$.
+Como $C$ é um conjunto fechado, \[
+B_\epsilon\left( \theta^{*}x + (1-\theta^{*})y \right) \neq \O \implies \theta^{*}x + (1-\theta^{*})y \in C
+,\] uma contradição.
+\qed
 
 \exercise{3}
 
-Let us prove the equivalence by constructing the graph that shall be the input for a minimum-cost network-flow problem. The notation of Wolsey's Integer Programming, 2021, is used.
+Exercícios do livro-texto sobre funções convexas.
 
-Let $V=\left\{ 1,\ldots,n,\ldots, 2n \right\} $	be the set of nodes in which the nodes $1,\ldots,n$ represent the servers while the $n+1,\ldots,2n$ nodes represent the jobs. Let $A=\left\{ \left( i,j \right)  \right\}_{i\in \left\{ 1,\ldots,n \right\},j\in \left\{ n+1,\ldots,2n \right\} }$ be the arcs which represent the capacity of a server $i$ to be allocated for a job $j$. Then, we define $h_{\left( i,j \right) } = 1\,\forall \left( i,j \right) \in A$ as each server can only be allocated to one job. Let us define the demands $b_i = -1,\,i=1,\ldots,n$ as in our problem each server must be allocated so we can handle all the jobs, and $b_j=1,\,j=n+1,\ldots,2n$ as each job demands a resource.
+\subexercise{2}
 
-Notice that a solution $\left\{ x_{ij} \right\}$ for the minimum-cost network-flow problem of graph $G=\left( V,A \right) $ with capacities $h$ and demands $b$ as defined is a solution to the allocation problem proposed.
+Assumindo continuidade, podemos inferir da imagem que as curvas de nível de $f$ ilustradas são conjuntos convexos.
+Entretanto, não pode-se afirmar, por exemplo, que a curva de nível $f(x)=1,5$ seja um conjunto convexo, por mais que saibamos que ela se situe entre as curvas de nível mostradas.
+Portanto, não podemos afirmar que $f$ é uma função quasi-convexa e, muito menos, que é uma função convexa.
+Todavia, podemos afirmar que $f$ não é uma função côncava, uma vez que ${x|f(x)=1} \subset {x|f(x)=2}$ e, portanto, $\nabla^2 f \not\le 0$, assumindo diferenciabilidade.
 
-It is known (Proposition 3.4, Wolsey's Integer Programming, 2021) that the constraint matrix of a minimum-cost network-flow problem is totally unimodular, thus, as the demands and capacities are all integer values, the solution will also be integral. I.e., we can solve the linear relaxation of the problem.
+O mesmo raciocínio pode ser levado à segunda figura, dessa vez afirmando que a função não é convexa, mas sem evidências para afirmar concavidade ou quasi-concavidade.
 
-\exercise{4}
+\subexercise{15}
 
-The resulting branch-and-bound tree can be seen in the figure below. The optimal solution found was \[
-x_1 = 0;\, x_2=2;\, x_3=0;\,x_4=0
-\] with cost of 24, as in node 12.
+a)
 
-%\begin{figure}[h!]
-%    \centering
-%    \includegraphics[width=0.8\textwidth]{figures/integer_programmin_homework_4.png}
-%\end{figure}
-
-The sub-problems were explored in a breadth-first approach, so the iterations can be followed by the indices. Note that the pruned nodes are marked with dashed contour and the upper bounds found through the linear relaxations are in the top-right of each node, while the lower bound are in the bottom-right. Nodes 5, 12 and 13 were bound by optimality; nodes 2, 8 and 10 were pruned by infeasibility; and nodes 9 and 14 were pruned by bound.
-
-All LP relaxations were solved using Gurobipy, Gurobi's interface for Python. The implementation can be seen in the \texttt{homework-4.pdf} file, which is the jupyter notebook with the python code.
-
-\exercise{5}
-
-The optimal solution of the LP relaxation is \[
-x_1 = 0;\, x_2=1;\, x_3=\frac{3}{4}
-\] with a cost of 14.5.
-
-We write the lagrangean relaxation of the proposed 0-1 knapsack problem as
+Veja que
 \begin{align*}
-    Z(u) = \max_{x_1,x_2,x_3} \quad & 10x_1+4x_2+14x_3 + u\left( 4-3x_1-x_2-4x_3 \right)  \\
-    \textrm{s.t.} \quad & x_1,x_2,x_3\in \left\{ 0,1 \right\}
-\end{align*}
-and the lagrangean dual as
-\begin{align*}
-    W_{LD} = \min_{u} \quad & Z(u) \\
-    \textrm{s.t.} \quad & u\ge 0
+    \lim_{\alpha \to 0} u_\alpha\left( x \right) &= \lim_{\alpha \to 0} \frac{x^{\alpha}-1}{\alpha} \\
+     &= \lim_{\alpha \to 0} \frac{x^{\alpha}\log x}{1} = \log x
 .\end{align*}
 
-As we have a finite and small number of feasible points $X=\left\{ x^{1},\ldots,x^{8} \right\} = \left\{ 0,1 \right\}^{3}$, the lagrangean dual was solved using Gurobi through the formulation
-\begin{align*}
-    \min_{\eta,u} \quad & \eta \\
-    \textrm{s.t.} \quad & \eta \ge 10x_1^{t}+4x_2^{t}+14x_3^{t} + u\left( 4-3x_1^{t}-x_2^{t}-4x_3^{t} \right),\, t=1,\ldots,8  \\
-      & u\in \R_+,\eta\in \R
-.\end{align*}
-The optimal value for the lagrangean multiplier was 3.5 with a cost of 14.5.
+b) 
 
-It is known (Theorem 10.1 of Wolsey's Integer Programming, 2021) that the lagrangean dual gives us a solution in the convex hull of the constraints not dualized. This, in our problem, can be written as \[
-W_{LD} = \max\left\{ 10x_1+4x_2+14x_3 : 3x_1+x_2+4x_3\le 4,\, x\in \text{conv}\left( X \right)  \right\} 
-.\] Now, note that \[
-\text{conv}\left( X \right) = \left[ 0,1 \right] ^{3}
-,\] which is precisely the linear relaxation of the original problem, thus why both approaches find the same optimal value.
-
-The implementation of both approaches can be seen in \texttt{homework-5.pdf}.
-
-\exercise{6}
-
-\subexercise{(a)}
-
-Let $x_i \in \left\{ 1,\ldots,n \right\} $ be the order in which task $i$ is performed. For it to be a feasible solution, no more than one task must be processed at each time, that is, \[
-x_i \neq x_j ,\, i\neq j,\, i,j \in V \tag{$*$}
-.\] Also, the precedence defined by $G=\left( V,E \right) $ must be respected, thus \[
-x_i < x_j\,\forall \left( i,j \right) \in E \tag{$**$}
-.\]
-
-Still, one must compute the start time \[
-s_i = \sum_{j \in V : x_j < x_i } p_j
-,\] which is a nonlinear constraint. For us to handle this constraint, we add a support variable $y_{ij}$ which represents that task $i$ precedes task $j$. This way, with a big enough $M$ constant value, one can write
-\begin{align*}
-    x_i - x_j &\ge 1 - My_{ij} \\
-    x_i - x_j &\le -1 + M \left( 1 -  y_{ij}\right)
-.\end{align*}
-Notice how these constraints also imply ($*$). Also, ($**$) can now be written \[
-y_{ij} = 1\,\forall \left( i,j \right) \in E 
+Primeiro, veja que $u_0\left( 1 \right) = \log 1 = 0$ e para $\alpha\neq 0$ então \[
+u_\alpha(1) = \frac{1^{\alpha}-1}{\alpha} = \frac{0}{\alpha} = 0
 .\] 
+Além disso, para $x\ge 0$, \[
+\frac{d u_\alpha}{d x} = x^{a-1} > 0
+,\] ou seja, $u_\alpha$ é monotonicamente crescente.
+Finalmente, \[
+\frac{d^2 u_\alpha}{d x^2} = \left( \alpha-1 \right) x^{a-1} \le  0
+,\] uma vez que $\alpha \le 1$, logo, $u_\alpha$ são funções côncavas.
 
-Finally, we can write the problem
-\begin{align*}
-    \min_{x_1,\ldots,x_n} \quad & \sum_{i=1}^{n} w_i s_i \\
-    \textrm{s.t.} \quad & x_i - x_j \ge 1 - My_{ij},\, i,j \in V ,\, i\neq j \\
-      & x_i - x_j \le  1 - M \left( 1 - y_{ij}\right) ,\, i,j \in V ,\, i\neq j \\
-      & y_{ij} = 1,\, \forall \left( i,j \right) \in E \\
-      & s_i = \sum_{j \in V} p_j y_{ji} \\
-      & y_{ij} \in \left\{ 0,1 \right\},\, i,j \in V \\
-      & x_i \in \left\{ 1,\ldots,n \right\}
-.\end{align*}
-
-The AMPL formulation can be seen in files \texttt{ampl-6.\{mod,dat,run\}}. The problem was solved using CPLEX, in the NEOS server. The output was:
-
-\begin{alltt}
-Presolve eliminates 36 constraints and 6 variables. \\
-Adjusted problem: \\
-162 variables: \\
-\-\hspace{2cm}138 binary variables \\
-\-\hspace{2cm}12 integer variables \\
-\-\hspace{2cm}12 linear variables \\
-270 constraints, all linear; 918 nonzeros \\
-\-\hspace{2cm}12 equality constraints \\
-\-\hspace{2cm}258 inequality constraints \\
-1 linear objective; 12 nonzeros. \\
-
-CPLEX 20.1.0.0: threads=4 \\
-CPLEX 20.1.0.0: optimal integer solution; objective 1888 \\
-288 MIP simplex iterations \\
-0 branch-and-bound nodes \\
-:      \_varname  \_var    := \\
-1     'x[1]'        7 \\
-2     'x[2]'       10 \\
-3     'x[3]'        8 \\
-4     'x[4]'       12 \\
-5     'x[5]'        1 \\
-6     'x[6]'        5 \\
-7     'x[7]'       11 \\
-8     'x[8]'        4 \\
-9     'x[9]'        2 \\
-10    'x[10]'       6 \\
-11    'x[11]'       3 \\
-12    'x[12]'       9 \\
-\end{alltt}
-
-
-\exercise{7}
-
-A possible formulation for the problem is to transform it into a maximum $s$-$t$ flow problem. If we assign to each edge of the graph a unitary capacity, then we will make sure that through each edge there is at most one path that goes from $s$ to $t$. Thus, the maximum flow is the number of disjoint paths that exist. This becomes clear when we consider the Ford-Fulkerson algorithm/method for computing the maximum flow of a graph, which relies on augmenting paths.
-
-With this modification, and by adding $\left( t,s \right) $ to $E$, one can formulate the problem as
-\begin{align*}
-    \max_{x_{ij}} \quad & x_{ts} \\
-    \textrm{s.t.} \quad & \sum_{k \in V^{+}\left( i \right) }x_{ik} - \sum_{k\in V^{-}\left( i \right) } x_{ki} = 0,\, \forall i\in V \\
-      & x_{ij}\in \left\{ 0,1 \right\} ,\,\forall \left( i,j \right) \in E\setminus \left\{ \left( t,s \right)  \right\}
-.\end{align*}
-
-The AMPL formulation can be seen in files \texttt{ampl-7.\{mod,dat,run\}}. The problem was solved using CPLEX, in the NEOS server. The output was:
-\begin{alltt}
-Presolve eliminates 23 constraints. \\
-Adjusted problem: \\
-12 variables: \\
-\-\hspace{2cm}11 binary variables \\
-\-\hspace{2cm}1 integer variable \\
-8 constraints, all linear; 24 nonzeros \\
-\-\hspace{2cm}8 equality constraints \\
-1 linear objective; 1 nonzero.
-
-CPLEX 20.1.0.0: threads=4 \\
-CPLEX 20.1.0.0: optimal integer solution; objective 2 \\
-0 MIP simplex iterations \\
-0 branch-and-bound nodes \\
-:    \_varname \_var    := \\
-1    'x[1,2]'   1 \\
-2    'x[1,4]'   1 \\
-3    'x[2,3]'   1 \\
-4    'x[2,6]'   0 \\
-5    'x[3,4]'   0 \\
-6    'x[3,5]'   1 \\
-7    'x[4,7]'   1 \\
-8    'x[5,6]'   1 \\
-9    'x[5,7]'   0 \\
-10   'x[6,8]'   1 \\
-11   'x[7,8]'   1 \\
-12   'x[8,1]'   2
-\end{alltt}
+% First, let us rearrange the primal in standard form as
+% \begin{align*}
+%     P^{(std)}:\quad \max_{x,y} \quad\quad & c_1^{T}x+c_2^{T}y \\
+%     \textrm{s.t.} \quad -&a_{i,1}^{T} x -a_{i,2}^{T}y \le  -d_i,\,i=1,\ldots,p \\
+% 			 &a_{i,1}^{T} x + a_{i,2}^{T}y \le d_i,\,i=1,\ldots,q \\
+% .\end{align*}
+% 
+% Now, we denote \[
+% c' = \begin{bmatrix} c_1 \\ c_2 \end{bmatrix} \in \R^{m+n};\,
+% x' = \begin{bmatrix} x \\ y \end{bmatrix} \in \R^{m+n};\,
+% d' = \begin{bmatrix} -d_1 \\ \vdots \\ -d_p \\ d_1 \\ \vdots \\ d_q \end{bmatrix} \in \R^{p+q};\,
+% A = \begin{bmatrix}
+%     -a_{1,1}^{T} & -a_{1,2}^{T} \\
+%     \vdots & \vdots \\
+%     -a_{p,1}^{T} & -a_{p,2}^{T} \\
+%     a_{1,1}^{T} & a_{1,2}^{T} \\
+%     \vdots & \vdots \\
+%     a_{q,1}^{T} & a_{q,2}^{T} \\
+% \end{bmatrix} \in \R^{\left( p+q \right)  \times \left( m+n \right) }
+% .\] Our problem can then be written as
+% \begin{align*}
+%     P^{(std)}:\quad \max_{x'} \quad & c'^{T}x' \\
+%     \textrm{s.t.} \quad & A x' \le d' \\
+% 			& x'\in \R^{m+n}
+% ,\end{align*}
+% which makes it easy to see that
+% \begin{align*}
+%     D:\quad \min_{y'} \quad & d'^{T}y' \\
+%     \textrm{s.t.} \quad & A^{T}y' \ge c' \\
+%       & y'\in \R^{p+q}
+% \end{align*}
+% is the dual of $P$.
+% 
+% \exercise{3}
+% 
+% Let us prove the equivalence by constructing the graph that shall be the input for a minimum-cost network-flow problem. The notation of Wolsey's Integer Programming, 2021, is used.
+% 
+% Let $V=\left\{ 1,\ldots,n,\ldots, 2n \right\} $	be the set of nodes in which the nodes $1,\ldots,n$ represent the servers while the $n+1,\ldots,2n$ nodes represent the jobs. Let $A=\left\{ \left( i,j \right)  \right\}_{i\in \left\{ 1,\ldots,n \right\},j\in \left\{ n+1,\ldots,2n \right\} }$ be the arcs which represent the capacity of a server $i$ to be allocated for a job $j$. Then, we define $h_{\left( i,j \right) } = 1\,\forall \left( i,j \right) \in A$ as each server can only be allocated to one job. Let us define the demands $b_i = -1,\,i=1,\ldots,n$ as in our problem each server must be allocated so we can handle all the jobs, and $b_j=1,\,j=n+1,\ldots,2n$ as each job demands a resource.
+% 
+% Notice that a solution $\left\{ x_{ij} \right\}$ for the minimum-cost network-flow problem of graph $G=\left( V,A \right) $ with capacities $h$ and demands $b$ as defined is a solution to the allocation problem proposed.
+% 
+% It is known (Proposition 3.4, Wolsey's Integer Programming, 2021) that the constraint matrix of a minimum-cost network-flow problem is totally unimodular, thus, as the demands and capacities are all integer values, the solution will also be integral. I.e., we can solve the linear relaxation of the problem.
+% 
+% \exercise{4}
+% 
+% The resulting branch-and-bound tree can be seen in the figure below. The optimal solution found was \[
+% x_1 = 0;\, x_2=2;\, x_3=0;\,x_4=0
+% \] with cost of 24, as in node 12.
+% 
+% %\begin{figure}[h!]
+% %    \centering
+% %    \includegraphics[width=0.8\textwidth]{figures/integer_programmin_homework_4.png}
+% %\end{figure}
+% 
+% The sub-problems were explored in a breadth-first approach, so the iterations can be followed by the indices. Note that the pruned nodes are marked with dashed contour and the upper bounds found through the linear relaxations are in the top-right of each node, while the lower bound are in the bottom-right. Nodes 5, 12 and 13 were bound by optimality; nodes 2, 8 and 10 were pruned by infeasibility; and nodes 9 and 14 were pruned by bound.
+% 
+% All LP relaxations were solved using Gurobipy, Gurobi's interface for Python. The implementation can be seen in the \texttt{homework-4.pdf} file, which is the jupyter notebook with the python code.
+% 
+% \exercise{5}
+% 
+% The optimal solution of the LP relaxation is \[
+% x_1 = 0;\, x_2=1;\, x_3=\frac{3}{4}
+% \] with a cost of 14.5.
+% 
+% We write the lagrangean relaxation of the proposed 0-1 knapsack problem as
+% \begin{align*}
+%     Z(u) = \max_{x_1,x_2,x_3} \quad & 10x_1+4x_2+14x_3 + u\left( 4-3x_1-x_2-4x_3 \right)  \\
+%     \textrm{s.t.} \quad & x_1,x_2,x_3\in \left\{ 0,1 \right\}
+% \end{align*}
+% and the lagrangean dual as
+% \begin{align*}
+%     W_{LD} = \min_{u} \quad & Z(u) \\
+%     \textrm{s.t.} \quad & u\ge 0
+% .\end{align*}
+% 
+% As we have a finite and small number of feasible points $X=\left\{ x^{1},\ldots,x^{8} \right\} = \left\{ 0,1 \right\}^{3}$, the lagrangean dual was solved using Gurobi through the formulation
+% \begin{align*}
+%     \min_{\eta,u} \quad & \eta \\
+%     \textrm{s.t.} \quad & \eta \ge 10x_1^{t}+4x_2^{t}+14x_3^{t} + u\left( 4-3x_1^{t}-x_2^{t}-4x_3^{t} \right),\, t=1,\ldots,8  \\
+%       & u\in \R_+,\eta\in \R
+% .\end{align*}
+% The optimal value for the lagrangean multiplier was 3.5 with a cost of 14.5.
+% 
+% It is known (Theorem 10.1 of Wolsey's Integer Programming, 2021) that the lagrangean dual gives us a solution in the convex hull of the constraints not dualized. This, in our problem, can be written as \[
+% W_{LD} = \max\left\{ 10x_1+4x_2+14x_3 : 3x_1+x_2+4x_3\le 4,\, x\in \text{conv}\left( X \right)  \right\} 
+% .\] Now, note that \[
+% \text{conv}\left( X \right) = \left[ 0,1 \right] ^{3}
+% ,\] which is precisely the linear relaxation of the original problem, thus why both approaches find the same optimal value.
+% 
+% The implementation of both approaches can be seen in \texttt{homework-5.pdf}.
+% 
+% \exercise{6}
+% 
+% \subexercise{(a)}
+% 
+% Let $x_i \in \left\{ 1,\ldots,n \right\} $ be the order in which task $i$ is performed. For it to be a feasible solution, no more than one task must be processed at each time, that is, \[
+% x_i \neq x_j ,\, i\neq j,\, i,j \in V \tag{$*$}
+% .\] Also, the precedence defined by $G=\left( V,E \right) $ must be respected, thus \[
+% x_i < x_j\,\forall \left( i,j \right) \in E \tag{$**$}
+% .\]
+% 
+% Still, one must compute the start time \[
+% s_i = \sum_{j \in V : x_j < x_i } p_j
+% ,\] which is a nonlinear constraint. For us to handle this constraint, we add a support variable $y_{ij}$ which represents that task $i$ precedes task $j$. This way, with a big enough $M$ constant value, one can write
+% \begin{align*}
+%     x_i - x_j &\ge 1 - My_{ij} \\
+%     x_i - x_j &\le -1 + M \left( 1 -  y_{ij}\right)
+% .\end{align*}
+% Notice how these constraints also imply ($*$). Also, ($**$) can now be written \[
+% y_{ij} = 1\,\forall \left( i,j \right) \in E 
+% .\] 
+% 
+% Finally, we can write the problem
+% \begin{align*}
+%     \min_{x_1,\ldots,x_n} \quad & \sum_{i=1}^{n} w_i s_i \\
+%     \textrm{s.t.} \quad & x_i - x_j \ge 1 - My_{ij},\, i,j \in V ,\, i\neq j \\
+%       & x_i - x_j \le  1 - M \left( 1 - y_{ij}\right) ,\, i,j \in V ,\, i\neq j \\
+%       & y_{ij} = 1,\, \forall \left( i,j \right) \in E \\
+%       & s_i = \sum_{j \in V} p_j y_{ji} \\
+%       & y_{ij} \in \left\{ 0,1 \right\},\, i,j \in V \\
+%       & x_i \in \left\{ 1,\ldots,n \right\}
+% .\end{align*}
+% 
+% The AMPL formulation can be seen in files \texttt{ampl-6.\{mod,dat,run\}}. The problem was solved using CPLEX, in the NEOS server. The output was:
+% 
+% \begin{alltt}
+% Presolve eliminates 36 constraints and 6 variables. \\
+% Adjusted problem: \\
+% 162 variables: \\
+% \-\hspace{2cm}138 binary variables \\
+% \-\hspace{2cm}12 integer variables \\
+% \-\hspace{2cm}12 linear variables \\
+% 270 constraints, all linear; 918 nonzeros \\
+% \-\hspace{2cm}12 equality constraints \\
+% \-\hspace{2cm}258 inequality constraints \\
+% 1 linear objective; 12 nonzeros. \\
+% 
+% CPLEX 20.1.0.0: threads=4 \\
+% CPLEX 20.1.0.0: optimal integer solution; objective 1888 \\
+% 288 MIP simplex iterations \\
+% 0 branch-and-bound nodes \\
+% :      \_varname  \_var    := \\
+% 1     'x[1]'        7 \\
+% 2     'x[2]'       10 \\
+% 3     'x[3]'        8 \\
+% 4     'x[4]'       12 \\
+% 5     'x[5]'        1 \\
+% 6     'x[6]'        5 \\
+% 7     'x[7]'       11 \\
+% 8     'x[8]'        4 \\
+% 9     'x[9]'        2 \\
+% 10    'x[10]'       6 \\
+% 11    'x[11]'       3 \\
+% 12    'x[12]'       9 \\
+% \end{alltt}
+% 
+% 
+% \exercise{7}
+% 
+% A possible formulation for the problem is to transform it into a maximum $s$-$t$ flow problem. If we assign to each edge of the graph a unitary capacity, then we will make sure that through each edge there is at most one path that goes from $s$ to $t$. Thus, the maximum flow is the number of disjoint paths that exist. This becomes clear when we consider the Ford-Fulkerson algorithm/method for computing the maximum flow of a graph, which relies on augmenting paths.
+% 
+% With this modification, and by adding $\left( t,s \right) $ to $E$, one can formulate the problem as
+% \begin{align*}
+%     \max_{x_{ij}} \quad & x_{ts} \\
+%     \textrm{s.t.} \quad & \sum_{k \in V^{+}\left( i \right) }x_{ik} - \sum_{k\in V^{-}\left( i \right) } x_{ki} = 0,\, \forall i\in V \\
+%       & x_{ij}\in \left\{ 0,1 \right\} ,\,\forall \left( i,j \right) \in E\setminus \left\{ \left( t,s \right)  \right\}
+% .\end{align*}
+% 
+% The AMPL formulation can be seen in files \texttt{ampl-7.\{mod,dat,run\}}. The problem was solved using CPLEX, in the NEOS server. The output was:
+% \begin{alltt}
+% Presolve eliminates 23 constraints. \\
+% Adjusted problem: \\
+% 12 variables: \\
+% \-\hspace{2cm}11 binary variables \\
+% \-\hspace{2cm}1 integer variable \\
+% 8 constraints, all linear; 24 nonzeros \\
+% \-\hspace{2cm}8 equality constraints \\
+% 1 linear objective; 1 nonzero.
+% 
+% CPLEX 20.1.0.0: threads=4 \\
+% CPLEX 20.1.0.0: optimal integer solution; objective 2 \\
+% 0 MIP simplex iterations \\
+% 0 branch-and-bound nodes \\
+% :    \_varname \_var    := \\
+% 1    'x[1,2]'   1 \\
+% 2    'x[1,4]'   1 \\
+% 3    'x[2,3]'   1 \\
+% 4    'x[2,6]'   0 \\
+% 5    'x[3,4]'   0 \\
+% 6    'x[3,5]'   1 \\
+% 7    'x[4,7]'   1 \\
+% 8    'x[5,6]'   1 \\
+% 9    'x[5,7]'   0 \\
+% 10   'x[6,8]'   1 \\
+% 11   'x[7,8]'   1 \\
+% 12   'x[8,1]'   2
+% \end{alltt}
 
 
 \end{document}
