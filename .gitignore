@@ -300,3 +300,5 @@ ipython_config.py
 .cs_workspaces
 
 !**/presentations/*
+
+**/.DS_Store
