@@ -1,0 +1,32 @@
+\lecture{2}{05.09.2024}{Mathematical Prerequisites}
+
+
+Let $g,f_1,\ldots,f_k: \N \longrightarrow \R$ be functions such that $f_i \in O(g) \forall i$.
+Then, \[
+\sum_{i=1}^{k} f_i \in O(g)
+.\]\footnote{I believe this is an easy corollary of the max/sum lemma.}
+
+An easy corollary from the above is that any polynomial with non-negative exponents is in the order of its greatest exponent.
+
+Similarly, let $f_1,\ldots,f_k,g_1,\ldots,g_k: \N \longrightarrow \R$ be functions such that $f_i \in O(g_i) \forall i$.
+Then \[
+\prod_{i=1}^{k} f_i \in O\left( \prod_{i=1}^{k} g_i \right)  
+.\] 
+
+\section*{Petit $o$}
+
+Let $f,g: \N \longrightarrow \R$ two functions.
+Then \[
+f\in o(g) \iff \exists N\in \N : n\ge n \implies |f(n)| \le C|g(n)|\,\forall C \in \R^{>0}
+.\] 
+
+Note that the core inequality above must hold for \textbf{all} constants $C$.
+
+\paragraph{Transitivity}
+Let $f,g,h: \N \longrightarrow \N$ be functions such that $f\in o(g)$ and $g\in O(h)$.
+Then $f\in o(h)$.
+
+To see this, note that \[
+|f(n)| \le C_1|g(n)| \gets C_1 C_2 |h(n)|
+\] for every $C_1>0$.
+

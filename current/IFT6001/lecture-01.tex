@@ -1,8 +1,114 @@
-\lecture{X}{XX.XX.XXXX}{LECTURE TITLE}
+\lecture{1}{03.09.2024}{Introduction à l'algorithmique}
 
-\section*{SECTION}
+First lecture.
 
-Lorem Ipsum.
+\section*{Introduction}
 
-\subsection*{SUBSECTION}
+\section*{Definitions}
+
+Important metrics:
+\begin{itemize}
+    \item Calculation time
+    \item Memory required
+\end{itemize}
+
+A problem requires
+\begin{itemize}
+    \item to compute some value; or
+    \item to answer a yes/no question
+\end{itemize}
+given input data.
+
+A problem may have infinite instances, e.g., sorting has infinite possible input sequences.
+
+What are we analysing in an algorithm?
+\begin{itemize}
+    \item Correctness
+    \item Computation time
+    \item Memory usage
+    \item etc
+\end{itemize}
+
+\subsection*{Temps de calcul}
+
+We simplify the computation time as a function of the input size, such that it is a function $t: \N \longrightarrow \N$.
+
+Officially, the size of the input $n\in \N$ is the number of bits required to code the instance.
+Usually, we adapt this measure to the problem, e.g., $n=$number of numbers in a sequence (sorting).
+Another usual adaptation is to use \emph{two} numbers ($n,m\in \N$), representing, e.g., matrix dimensions.
+
+We can \emph{measure} the  \emph{temps de calcul} experimentally, by sampling the input space.\footnote{I believe, this requires some assumptions over the input space, such that we can approximate the running time using Monte-Carlo.}
+But we can also use the "ultra-rigorous" method:
+code the algorithm in a Turing machine and count the number of transitions.
+But that would be extremely arduous and wouldn't match the way modern computers work.
+Another approach is to define a language close to assembly and count the number of instructions, which is also quite arduous.
+
+\paragraph{Our method:}
+Count the elementary operations (constant runtime)!
+Doesn't depend much on the programming language.
+
+Worst case scenario: \[
+t(n) = \max_{\text{instance } e \text{ of size } n} \left\{ s \in \N : \text{running }A\text{ over }e\text{ takes }s\text{ time units} \right\} 
+.\] 
+
+Average case: \[
+    t_{P}(n) = \mathbb{E}_{e \sim P} \left[ \text{running time of }A\text{ given }e \right] 
+,\] given a distribution $P$ over the instance space.
+
+Question: temps amorti et temps espéré ?
+
+Note: commenting every line with a range of no. of instructions $\times $ no. of executions seems a good idea to guess O.
+E.g., if it may execute 0 times up to $n+2$, then comment would be $[ 0,n+2] $.
+Then, we can just sum everything.
+
+
+\subsection*{Analysis of flow-control structures}
+
+\subsubsection*{For loops}
+
+Iteration $i=1,\ldots,n$, code block $P(i)$ with $t(i)$ runtime, then \[
+t(n) \le c n + \sum_{i=1}^{n} t(i)
+.\] 
+
+\subsubsection*{Recursions}
+
+Establish a recurrence like \[
+t(n) = \begin{cases}
+    C_1  & \text{if the recursion breaks, usually }n<\text{ some number}  \\
+    C_{\cdot }t(n-1) + C_{\cdot }t(n-2) + \ldots  & \text{if the recursion happens}
+\end{cases}
+\] 
+
+\section*{Asymptotic behavior of functions}
+
+We are not so interested in exact running time because it is difficult to determine.
+Asymptotic behavior provides a great approximation for large $n$.
+
+Definition (Grand O): Let $f,g: \N \longrightarrow \R$ be two functions. Then, \[
+f\in O(g) \iff \exists C\in \R, \forall^{\infty}n, |f(n)| \le C|g(n)|
+.\]\footnote{$\forall^{\infty}n$ is the same as $\exists N, \forall n\ge N$.}
+
+Sometimes, people denote $f\in O(g(n))$ as $f(n) = O(g(n))$ (bad) or $f\le_{O} g$ (better).
+
+Exemple: Let $f(n) = 3n+5$, show that $f\in O(g)$, for $g(n)=n$.
+For $C=4$ and $n\ge 5$, then
+\begin{align*}
+    f(n) &= 3n+5 \\
+    &\le 3n+n  \\
+    &= 4n \\
+    &= C(n) \\
+.\end{align*}
+
+\begin{lemma}
+    (Transitivity) Let $f,g,h: \N \longrightarrow \N$ be three functions, then \[
+    f\in O(g) \land g\in O(h) \implies f \in O(h)
+    .\]
+\end{lemma}
+\begin{proof}
+    Assuming that $f\in O(g)$ and $g\in O(h)$, then we know that
+    \begin{align*}
+        |f(n)| \le C_1 |g(n)|
+    .\end{align*}
+\end{proof}
+
 

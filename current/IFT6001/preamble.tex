@@ -124,7 +124,7 @@
 % End example and intermezzo environments with a small diamond (just like proof
 % environments end with a small square)
 \usepackage{etoolbox}
-\AtEndEnvironment{vb}{\null\hfill$\diamond$}%
+\AtEndEnvironment{eg}{\null\hfill$\diamond$}%
 \AtEndEnvironment{intermezzo}{\null\hfill$\diamond$}%
 % \AtEndEnvironment{opmerking}{\null\hfill$\diamond$}%
 
@@ -183,6 +183,17 @@
         \def\@lecture{Lecture #1: #3}%
     }%
     \section{\@lecture}
+    \marginpar{\small\textsf{\mbox{#2}}}
+}
+
+\def\@demo{}%
+\newcommand{\demo}[3]{
+    \ifthenelse{\isempty{#3}}{%
+        \def\@demo{Démonstration #1}%
+    }{%
+        \def\@demo{Démonstration #1: #3}%
+    }%
+    \section{\@demo}
     \marginpar{\small\textsf{\mbox{#2}}}
 }
 

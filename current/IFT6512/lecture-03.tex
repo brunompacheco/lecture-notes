@@ -1,0 +1,54 @@
+\lecture{3}{10.09.2024}{Random Numbers Generation}
+
+We started with a quick recap of the Farmer's problem implementation in Julia+JuMP along with a new formulation of the entire problem (three cases).
+
+\begin{note}
+    The EVPI is the Expected Value \emph{OF} the Perfect Information.
+    It shows how much the optimal expected revenue would increase if we could perfectly predict which case is going to materialize.
+    Another way of phrasing it is by the difference of the expected revenue under perfect information and the expected revenue of the stochastic problem.
+
+    Similarly, the VSS is the value \emph{OF} the stochastic solution, which measures how much the revenue increases when taking the uncertainties into consideration during the optimization, i.e., in contrast to optimizing for the expected scenario.
+\end{note}
+
+
+\section*{Random Numbers Generation (RNG)}
+
+\subsection*{$\mathcal{U}[0,1]$-distributed random numbers}
+
+A random generator over $\mathcal{U}[0,1]$ is a major component of good RNG libraries.
+This is mostly due to being able to drawn from other distributions by applying transformations to the unitary uniform distribution.
+
+However, in computers, we are only able to generate integer values (binary), which is why we need some sort of discrete generation process?
+
+\begin{definition}
+    A \emph{transition function} $f: \mathcal{S} \longrightarrow \mathcal{S}$ is a functions over the \emph{state space} $\mathcal{S}$.
+    It is assumed that $\mathcal{S}$ has finite cardinality.
+\end{definition}
+
+\begin{notation}
+    The \emph{initial state} will be denoted $s_0\in \mathcal{S}$, and we will write \[
+    s_n = f(s_{n-1}
+    .\] 
+\end{notation}
+
+We assume that $f$ is periodic for all $n \ge \tau$ (often $\tau=0$) with period $\rho$: \[
+s_{n+\rho} = s_n,\,n\ge \tau
+.\] 
+
+Given a transition function, we want to map the states into the output space $\mathcal{U}=(0,1)$.
+We will use an output function $g: \mathcal{S} \longrightarrow \mathcal{U}$.
+
+Now, how to choose $f$ and $g$?
+Goals:
+\begin{itemize}
+    \item Large $\rho$ 
+    \item Good uniformity
+    \item "random" behavior
+\end{itemize}
+
+\subsection*{Linear Congruential Generator (LCG)}
+
+The state space is $\mathcal{S}=\N_{\ge 0}$ and the transition function is \[
+s_n = f(s_{n-1}) = (a s_{n-1} + c ) \mod m
+.\] 
+

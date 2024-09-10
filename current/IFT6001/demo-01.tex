@@ -1,0 +1,120 @@
+\demo{1}{05.09.2024}{}
+ 
+\exercise{1}
+
+\textbf{Rappel des techniques de preuve}
+
+Direct proof: $p\implies q$.
+
+Proof by counterposition(?): $p\implies q$ is equivalent to $\neg q \implies \neg p$.
+
+Proof by contradiction: assume hypothesis is correct, show that it leads to a contradiction.
+
+\exercise{2}
+
+Note that
+\begin{align*}
+    3n \log n! &= 3n \sum_{i=1}^{n} \log i \\
+    &\le  3n \sum_{i=1}^{n} \log n \\
+    &= 3n^2 \log n \\
+.\end{align*}
+Therefore, $3n \log n! \le C n^2 \log n$ for $C=2$.
+
+\exercise{3}
+
+\paragraph{($\implies$)}
+The implication is quite direct, as every function is a member of its associated $O$-set.
+Precisely, let $f,g: \N \longrightarrow \N$ be functions.
+Because $f(n) \in O(f(n))$, then $O(f(n)) = O(g(n)) \implies f(n) \in O(g(n))$. \emph{Mutatis mutandis}, the same is true for $g(n)$.
+
+\paragraph{($\implies$)}
+Suppose $f,g: \N \longrightarrow \N$ are such that $f(n) \in O(g(n))$ and $g(n) \in O(f(n))$.
+Then, $\exists C_f > 0$ such that $|f(n)| \le C_f |g(n)|$.
+Now, note that $\forall f'(n) \in O(f(n)), \exists C > 0$ such that
+\begin{align*}
+    |f'(n)| &\le C |f(n)| \\
+    &\le C C_f |g(n)|  \\
+.\end{align*}
+Therefore, $O(f(n)) \subseteq O(g(n))$.
+\emph{Mutatis mutandis}, the same is true for $O(g(n))$, i.e., $O(g(n)) \subseteq O(f(n))$. $\blacksquare$
+
+\exercise{4}
+
+We can easily show that $f(n) = \sum_{i=1}^{n} \log i \in O(n \log n)$, as
+\begin{align*}
+    \sum_{i=1}^{n} \log i &\le \sum_{i=1}^{n} \log n \\
+    &= n \log n \\
+.\end{align*}
+
+Now, to show that $f(n) \in \Omega(n \log n)$, we have that
+\begin{align*}
+    \sum_{i=1}^{n} \log i &\ge \sum_{i=\left\lceil \frac{n}{2} \right\rceil }^{n} \log i \\
+    &\ge \sum_{i=\left\lceil \frac{n}{2} \right\rceil }^{n} \log \left\lceil \frac{n}{2} \right\rceil  \\
+    &\ge \frac{n}{2} \log \frac{n}{2} \\
+    &= \frac{n}{2}\left( \log n - \log 2 \right) \\
+    &\ge \frac{n}{2} \log n
+    % &\ge C \frac{n}{2} \log n  \\
+,\end{align*}
+which, with $C = \frac{1}{2}$, shows that $f(n) \in \Omega(n \log n)$.
+
+\exercise{5}
+
+\subexercise{1}
+\paragraph{Vrai}
+For any $n\ge 2$, $n^2 + n \le n^3$.
+
+\subexercise{2}
+\paragraph{Faux}
+Suppose $N\in \N$ and $C>0$ such that $\forall n \ge N \implies n^2 \ge C n^3$ (I'm omitting the modulus operation because both functions are non-negative).
+However, for $n\ge 1$, this would imply that $Cn \le 1$, which is not true for $n > \frac{1}{C}$, a contradiction.
+
+\subexercise{3}
+\paragraph{Vrai}
+By the limit rule, we have
+\begin{align*}
+    \lim_{n \to \infty} \frac{2^{n+1}}{2^{n}} &= \lim_{n \to \infty} 2 \frac{2^{n}}{2^{n}} \\
+    &= 2
+,\end{align*}
+which ensures us that $2^{n+1} \in \Theta(2^{n})$.
+
+\subexercise{4}
+\paragraph{Faux}
+Note that $(n+1)!= (n+1) n!$, therefore, $(n+1)! > n! \,\forall n\ge 1 $, which implies that \[
+\lim_{n \to \infty} \frac{(n+1)!}{n!} = \infty
+.\] Therefore, $n! \not\in \Omega((n+1)!)$.
+
+\subexercise{5}
+\paragraph{Faux}
+
+Suppose $C > 0$ such that $|2^{n}| \ge C |4^{n}| \,\forall n > N $, for some $N\in \N$.
+Then, we would have
+\begin{align*}
+    2^{n} &\ge  C 4^{n} \\
+    &= C \left( 2^2 \right)^{n}  \\
+    &= C (2^n)^2 \\
+    \iff_{n\ge 1} 2^{n} &\le \frac{1}{C}
+,\end{align*}
+which, $\forall n\ge 1$, is only true for $n \le \log \frac{1}{C}$, a contradiction.
+
+\subexercise{6}
+\paragraph{Vrai}
+First, note that $f(n) = \sin n + 2 \ge -1 + 2 = 1$, so  $f(n) \in \Omega(1)$.
+At the same time,  $f(n) \le 1 + 2 = 3$, which implies that $f(n) \in O(1)$ for $C=3$.
+
+\exercise{6}
+
+This is trivial given the multiplicative rule.
+
+For the sake of completeness, let $C > 0$ be such that $|f(n)| \ge C n$, then
+\begin{align*}
+    |f(n)^{2}| &= |f(n)| |f(n)| \\
+    &\le C^2 n^2 
+,\end{align*}
+which proves that $f(n)^2 \in O(n^2)$.
+
+\exercise{7}
+
+Let $f(n) = 2n$.
+You fall into 5.5.
+
+

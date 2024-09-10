@@ -1,8 +1,36 @@
-\lecture{X}{XX.XX.XXXX}{LECTURE TITLE}
+\lecture{1}{03.09.2024}{Introduction to Stochastic Programming}
 
-\section*{SECTION}
+\paragraph{Main goal:} introduce stochastic programming, which aims to perform mathematical optimization while taking into account \emph{uncertainty}.
 
-Lorem Ipsum.
+\section*{Introduction}
 
-\subsection*{SUBSECTION}
+Are deterministic problems realistic?
+\begin{itemize}
+    \item Measurement errors
+    \item Uncertainties on the future
+    \item Unavailable data
+\end{itemize}
+
+Mathematical programming (optimization) = decision problem
+
+Stochastic programming = decision under uncertainty, where the uncertainty is represented through \emph{random parameters}.
+
+For a problem
+\begin{align*}
+    \min_{x\in X} \quad & g_0(x,\xi) \\
+    \textrm{s.t.} \quad & g_i(x,\xi) \le 0, i=1,\ldots,m 
+,\end{align*}
+where $\xi$ is a random variable, what does it mean to optimize?
+
+Assuming that the random vector is finite, we define a \emph{scenario} as a realization of the optimization.
+
+\section*{Farmer's problem}
+
+Let there be a problem over variables $x,y$.
+If variables $y$ can be uniquely determined by variables $x$ in the optimal solution, then we could formulate the problem as a bilevel program, splitting over the variables, which lets us determine the expected cost/objective over the scenarios.
+The bilevel formulation shows us that a solution to $x$ has to be feasible for all scenarios.
+
+Question :what is the definition of EVPI (expected value of perfect information)? I believe it is the difference between the expected value solution, and the expected cost/objective that results from using the optimal solutions for each scenario.
+
+The difference between the stochastic solution and the solution to the average scenario is called VSS (value of the stochastic solution).
 

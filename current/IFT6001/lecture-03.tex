@@ -1,0 +1,196 @@
+\lecture{3}{10.09.2024}{Mathematical Prerequisites}
+
+\begin{previouslyseen}
+    We discussed how little-o notation imposes a strict bound over a function, i.e., $f\in o(g)$ implies that we can always find $N\in \N$ such that $n\ge N$ makes the ratio $\frac{f(n)}{g(n)}$ is as small as we want.
+
+    Then, we have also seen that transitivity applies, but in a slightly different sense.
+    Namely, $f\in o(g) \land g\in O(h) \implies f\in o(h)$.
+    This is almost trivially shown.
+\end{previouslyseen}
+
+\begin{lemma}
+    Let $g,f_1,\ldots,f_k : \N \longrightarrow \R$ such that $\forall i,\,f_i \in o(g)$.
+    Then \[
+    \sum_{i=1}^{k} f_i \in o(g)
+    .\]
+\end{lemma}
+\begin{proof}
+    Let $C>0$ be any constant and take $N$ such that $\forall i,\,|f_i|\le \frac{C}{k}|g(n)|$ for every $n\ge N$.
+    Then
+    \begin{align*}
+	\left| \sum_{i=1}^{k} f_i(n) \right| &\le \sum_{i=1}^{k} |f_i(n)| \\
+					     &\le \sum_{i=1}^{k} \frac{C}{k}|g(n)|,\quad \forall n\ge N \\
+					     &= C|g(n)|
+    .\end{align*}
+\end{proof}
+
+\begin{lemma}
+    Let $f_1,f_2,g_1,g_2 : \N \longrightarrow \R$ such that $f_1\in o(g_1)$ and $f_2\in O(g_2)$.
+    Then $f_1f_2\in o(g_1g_2)$.
+\end{lemma}
+Quite easy to prove: $f_1$ is majored by $g_1$ considering any constant, which includes a ratio between any arbitrary constant and the constant that lets $g_2$ major $f_2$.
+
+\begin{eg}
+    Let $\alpha,\beta \in \R$ such that $\alpha < \beta$.
+    Then \[
+    n^{\alpha}\in o\left( n^{\beta} \right) 
+    .\]
+
+    This can be shown with the previous lemma by picking $f_1(n)=1,g_1(n)=n^{\beta-\alpha},f_2(n)=g_2(n)=n^{\alpha}$.
+    Because it is obvious that $f_2\in O(g_2)$, we need to show that $f_1\in o(g_1)$.
+
+    Let $C>0$ arbitrary.
+    Then, take $N=\left\lceil \left( \frac{1}{C} \right)^{\frac{1}{\beta-\alpha}} \right\rceil $.
+    Now, $\forall n\ge N$, we have that $n^{\beta-\alpha}\ge \frac{1}{C}$, thus \[
+    1 = \frac{C}{C} \le Cn^{\beta-\alpha}
+    .\] 
+\end{eg}
+
+\begin{definition}
+    (\emph{Big $\Omega$}) Let $f,g: \N \longrightarrow \R$, then \[
+	f\in \Omega(g) := g\in O(f)
+    .\]\footnote{Interesting way to define Big-$\Omega$.}
+\end{definition}
+\begin{definition}
+     (\emph{Small $\omega$})
+    Let $f,g: \N \longrightarrow \R$, then \[
+	f\in \omega(g) := g\in o(f)
+    .\]
+\end{definition}
+
+\begin{definition}
+    \emph{(Big $\Theta$)} Let $f,g: \N \longrightarrow \R$. Then \[
+	f\in \Theta(g) \iff f\in O(g) \land f\in \Omega(g)
+    .\] 
+\end{definition}
+
+\begin{eg}
+    $f(n)=n^2$ and $g(n)=2n^2+15$.
+\end{eg}
+
+More generally, any pair of polynomials of the same degree are Big-$Omega$ between each other.
+
+\begin{theorem}
+    \emph{(Limit criteria)}
+    Let $f,g: \N \longrightarrow \R$ such that $\exists N\in \N$ such that $\forall n\ge N$, $f(n)>0\land g(n)>0$.
+
+    Then:
+    \begin{itemize}
+        \item $\lim_{n \to \infty} \frac{f(n)}{g(n)}\in \R^{>0} \implies f\in \Theta(g)$; \\
+	\item $\lim_{n \to \infty} \frac{f(n)}{g(n)}=0 \iff f\in o(g)$ ; and \\
+	\item $\lim_{n \to \infty} \frac{f(n)}{g(n)}\to \infty \iff f\in \omega(g)$
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+To show the first case, let \[
+    \lim_{n \to \infty} \frac{f(n)}{g(n)} = L > 0
+.\] Then, $\forall \epsilon > 0, \exists N\in N$ such that $\forall n \ge N$, we have $\left| \frac{f(n)}{g(n)}-L \right| \le \epsilon$.
+This is particularly true for $\epsilon=\frac{L}{2}$, which implies that \[
+\frac{L}{2} \le \frac{f(n)}{g(n)} \le \frac{3L}{2},\,\forall^{\infty}n
+.\]
+Therefore, by choosing $C=\frac{3L}{2}$, we have $f\in O(g)$, and by choosing $C=\frac{L}{2}$ we have $g\in O(f)$.
+
+For $o$, we have that $\forall \epsilon>0$, then $\forall^{\infty}n, \frac{f(n)}{g(n)}\le \epsilon\implies f(n) \le \epsilon g(n)\implies f\in o(g)$.
+\emph{Mutatis mutandis}, this show also the case for $\omega$.
+
+\end{proof}
+
+\begin{note}
+    The limit criterion for $\Theta$ is not exhaustive!
+\end{note}
+\begin{eg}
+    The function $f(n) = \left[ n \text{is even} \right] $ is clearly in $\Theta(1)$, but its limit is not defined.
+\end{eg}
+
+\begin{lemma}
+    For every $\alpha\in \R$ and $b\in \R$ such that $b>1$, then \[
+	n^{\alpha} \in o(b^{n})
+    .\] 
+\end{lemma}
+\begin{proof}
+    We proceed by induction over $\left\lfloor \alpha \right\rfloor$.
+    First, consider $\left\lfloor \alpha \right\rfloor \le  -1$.
+    Then, $n^{\alpha}\le_O 1 <_O b^{n}$.
+
+    Now, suppose that the lemma is true for $\left\lfloor \alpha \right\rfloor\le k$, and we will show that it also holds for $\left\lfloor \alpha \right\rfloor=k+1$ through the limit criterion:
+    \begin{align*}
+        \lim_{n \to \infty} \frac{n^{\alpha}}{b^{n}} &= \lim_{n \to \infty} \frac{\alpha n^{\alpha-1}}{(\ln b)b^{n}} \\
+	&= \frac{\alpha}{\ln b} \lim_{n \to \infty} \frac{n^{\alpha-1}}{b^{n}}
+    .\end{align*}
+    But by assumption, we know that $n^{\alpha-1}\in o(b^{n})$, which implies that $\lim_{n \to \infty} \frac{n^{\alpha-1}}{b^{n}} = 0$.
+    Therefore, $\lim_{n \to \infty} \frac{n^{\alpha}}{b^{n}} = \frac{\alpha}{\ln b} 0 = 0$.
+\end{proof}
+
+\begin{lemma}
+    For every $\alpha \in \R$ and every $b>1$ \[
+    \log_b n \in o(n^{\alpha})
+    .\] 
+\end{lemma}
+\begin{proof}
+    First, note that
+    \begin{align*}
+        \lim_{n \to \infty} \frac{\ln n}{n^{\alpha}} &= \lim_{n \to \infty} \frac{n^{-1}}{\alpha n^{\alpha-1}} \\
+	&= \lim_{n \to \infty} \frac{1}{\alpha n^{\alpha}} \\
+	&= 0
+    ,\end{align*}
+    which implies that $\ln n \in o(n^{\alpha})$.
+    Now, because $\log_b n = \frac{1}{\ln b} \ln n \in O(\ln n)$, then we can assure that $\log_b n \in o(n^{\alpha})$.
+\end{proof}
+
+\begin{lemma}
+    Any polynomial is order $\Theta$ of its degree.
+\end{lemma}
+
+\begin{definition}
+    A \emph{Ring} is a set $A$ with operations $+$ and $\times $, and elements $0$ and $1$, such that
+    \begin{enumerate}
+        \item $(a+b) + c = a + (b+c)$ (associativity of sum);
+	\item $a+b = b+a$ (commutativity of sum);
+	\item $a+0=a$;
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}
+    A \emph{Field} is a non-trivial ($0\neq 1$) commutative ring where every element (except $0$ ) is invertible.
+\end{definition}
+
+\begin{lemma}
+    Let $p$ a prime number.
+    Then $\Z_p$ is a field.
+\end{lemma}
+
+
+\section*{Recurrences}
+
+\begin{definition}
+    A recurrence is an equation over a function $T: \N \longrightarrow \R$ such that $T(n)$ is defined as a function of its previous values (down to a certain point).
+\end{definition}
+\begin{eg}
+    Fibonacci sequence: \[
+    T(n) = \begin{cases}
+	0 & ,n=0 \\
+	1 & ,n=1 \\
+	T(n-1)+T(n-2) &, n\ge 2
+    \end{cases}
+    .\] 
+\end{eg}
+
+\begin{problem}
+    (Divide-and-conquer)
+    Let \[
+	T(n) = \ell T(n/b) + g(n)
+    .\] 
+    What is the asymptotic order of $T$? I.e., $T\in \Theta(?)$.
+\end{problem}
+The above recurrence relationship is very important because it corresponds to a problem decomposition in $\ell$ sub-problems, each of size $n / b$, which we solve recursively, and each reassemble of the returns costs $g(n)$.
+
+\begin{eg}
+    Let \[
+    T(n) = T(n /2)  c,\, n\ge 2
+    .\] 
+    
+    Expanding $T(n)$ shows that the cost is of $c$-times the number of times one must divide the input in half, that is $T(n) = c \log n\in \Theta(\log n)$.
+\end{eg}
+
+\textcolor{red}{\textbf{REVIEW HOMOGENEOUS LINEAR RECURRENCES}}
+
