@@ -122,7 +122,7 @@ For $o$, we have that $\forall \epsilon>0$, then $\forall^{\infty}n, \frac{f(n)}
 \end{proof}
 
 \begin{lemma}
-    For every $\alpha \in \R$ and every $b>1$ \[
+    For any real $\alpha >0$ and every $b>1$ \[
     \log_b n \in o(n^{\alpha})
     .\] 
 \end{lemma}
@@ -192,5 +192,21 @@ The above recurrence relationship is very important because it corresponds to a 
     Expanding $T(n)$ shows that the cost is of $c$-times the number of times one must divide the input in half, that is $T(n) = c \log n\in \Theta(\log n)$.
 \end{eg}
 
-\textcolor{red}{\textbf{REVIEW HOMOGENEOUS LINEAR RECURRENCES}}
+\begin{definition}
+    A recurrence relationship is said to be \emph{linear} and \emph{homogeneous} if it can be rewritten in the form \[
+    \sum_{i=0}^{k} a_{k-i}T(n-i) = 0
+    .\] 
+\end{definition}
+
+It is said \emph{linear}, because it is linear over the unknowns ($T(n-i)$ ), i.e., its solution space (sequences $T(n-k),\ldots,T(n)$ that satisfy the relationship) forms a linear space.
+
+It is said \emph{homogeneous} because the linear combination of the $T(n-i)$ is equal to $0$.
+
+\begin{eg}
+    The Fibonacci sequence is described by the recurrence \[
+    T(n) = T(n-1) + T(n-2)
+    ,\] which is linear and homogeneous, as it can be written \[
+    T(n) - T(n-1) - T(n-2)
+    ,\] i.e., with $a_0=1,a_1=a_2=-1$, and $k=2$.
+\end{eg}
 
