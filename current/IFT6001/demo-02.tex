@@ -1,0 +1,111 @@
+\demo{2}{12.09.2024}{Démonstration 2}
+ 
+\exercise{1}
+
+\[
+    O(n \log n) \subset O(n^{1+\epsilon}) \subset O(\frac{n^2}{\log n}) \subset  O(n^{8}) = O((n^2-n+1)^{4}) \subset O((1+\epsilon)^{n})
+.\] 
+
+\paragraph{$O(n \log n) \subset O(n^{1+\epsilon})$}
+By the limit theorem
+\begin{align*}
+    \lim_{n \to \infty} \frac{n \log n}{n^{1+\epsilon}} &= \frac{\log n}{n^{\epsilon}} \\
+    &= \lim_{n \to \infty} \frac{n^{-1}}{\epsilon n^{\epsilon-1}} \\
+    &= \lim_{n \to \infty} \frac{1}{\epsilon n^{\epsilon}} = 0
+.\end{align*}
+
+\paragraph{$O(n^{1+\epsilon}) \subset O(\frac{n^2}{\log n})$}
+\begin{align*}
+    \lim_{n \to \infty} \frac{n^2}{\log n} \frac{1}{n^{1+\epsilon}} &= \lim_{n \to \infty} \frac{n^{1-\epsilon}}{\log n} \\
+    &= \lim_{n \to \infty} \frac{(1-\epsilon)n^{-\epsilon}}{1 / n} \\
+    &= \lim_{n \to \infty} \frac{(1-\epsilon)n}{n^{\epsilon}} \\
+    &= \lim_{n \to \infty} (1-\epsilon)n^{1-\epsilon} \to \infty \\
+.\end{align*}
+
+\paragraph{$O(\frac{n^2}{\log n}) \subset  O(n^{8})$}
+\[
+    \lim_{n \to \infty} \frac{n^{8}}{\frac{n^2}{\log n}} = n^{6} \log n \to \infty
+.\] 
+
+\paragraph{$O(n^{8}) = O((n^2-n+1)^{4})$}
+Since both polynomials have the same degree, their $O$-set are identical.
+
+\paragraph{$O(n^{8}) \subset O((1+\epsilon)^{n})$}
+\[
+    \lim_{n \to \infty} \frac{(1+\epsilon)^{n}}{n^{8}} = \lim_{n \to \infty} \frac{(\log (1+\epsilon))^{9} (1+\epsilon)^{n}}{8!} \to \infty
+.\] 
+
+\exercise{2}
+\[
+O(n^{\log n}) \subset O(n^{\sqrt{n}}) \subset O(2^{n}) = O(2^{n+1}) \subset O(2^{2n}) \subset O(n!) \subset O((n+1)!) \subset O(n^{n})
+.\] 
+
+\paragraph{$O(n^{\log n}) \subset O(n^{\sqrt{n}})$}
+Note that\[
+    \lim_{n \to \infty} \frac{n^{\log n}}{n^{\sqrt{n}}} = \lim_{n \to \infty} n^{\log n - \sqrt{n} }
+.\] But we have that
+\begin{align*}
+    \lim_{n \to \infty} \frac{\log n}{\sqrt{n}} &= \lim_{n \to \infty} \frac{\frac{1}{x}}{\frac{1}{2\sqrt{x} }} \\
+    &= \lim_{n \to \infty} \frac{2 \sqrt{x} }{x} = 0 \\
+,\end{align*}
+which implies that $\forall^{\infty}n, \log n - \sqrt{n} < 0 $, which, in turn, leads to $\lim_{n \to \infty} n^{\log n - \sqrt{n} }= 0$.
+
+\paragraph{$O(n^{\sqrt{n}}) \subset O(2^{n})$}
+Note that
+\begin{align*}
+\lim_{n \to \infty} \frac{2^{n}}{n^{\sqrt{n} }} &= \lim_{n \to \infty} \frac{2^{n}}{\left( 2^{\log_2 n} \right)^{\sqrt{n} }} \\
+&= \lim_{n \to \infty} \frac{2^{n}}{2^{\sqrt{n} \log_2 n}} \\
+&\ge \lim_{n \to \infty} \frac{2^{n}}{2^{n^{\frac{1}{2}} n^{\frac{1}{4}}}}  \\
+&= \lim_{n \to \infty} 2^{n - n^{\frac{3}{4}}} = \infty
+,\end{align*}
+because $\lim_{n \to \infty} n - n^{\frac{3}{4}}=\infty$.
+
+\paragraph{$O(2^{n}) = O(2^{n+1})$}
+\[
+\lim_{n \to \infty} \frac{2^{n}}{2^{n+1}} = \frac{1}{2}
+.\] 
+
+\paragraph{$O(2^{n}) \subset O(2^{2n})$}
+\begin{align*}
+    \lim_{n \to \infty} \frac{2^{n}}{2^{2n}} &=  \lim_{n \to \infty} 2^{n - 2n} \\
+    &= \lim_{n \to \infty} 2^{-n} = 0
+.\end{align*}
+
+\paragraph{$O(2^{2n}) \subset O(n!)$}
+\begin{align*}
+    \lim_{n \to \infty} \frac{2^{2n}}{n!} &= \lim_{n \to \infty} \frac{1}{4}\frac{2}{4}\frac{3}{4}\frac{5}{4}\frac{6}{4}\ldots \frac{n-1}{4} \frac{n}{4} \\
+    &>= \lim_{n \to \infty} \frac{1}{4}\frac{2}{4}\frac{3}{4} 1 \frac{n}{4} = \infty
+.\end{align*}
+
+\paragraph{$O(n!) \subset O((n+1)!)$}
+\[
+    \lim_{n \to \infty} \frac{(n+1)!}{n!} = \lim_{n \to \infty} (n+1)\frac{n!}{n!} = \infty
+.\] 
+
+\paragraph{$O((n+1)!) \subset O(n^{n})$}
+\begin{align*}
+    \lim_{n \to \infty} \frac{n^{n}}{(n+1)!} &= \lim_{n \to \infty} \frac{1}{n+1} \frac{n}{n} \frac{n}{n-1} \frac{n}{n-2} \ldots \frac{n}{2}\frac{n}{1} \\
+    &= \lim_{n \to \infty} \frac{n}{n+1}\frac{n}{n} \frac{n}{n-1} \frac{n}{n-2} \ldots \frac{n}{2} \\
+    &\ge \lim_{n \to \infty} \frac{n}{n+1} 1 \cdot 1\cdot 1\cdot \ldots\cdot \frac{n}{2}  \\
+    &= \lim_{n \to \infty} \frac{n^2}{2(n+1)} = \lim_{n \to \infty} \frac{2n}{2} = \infty
+.\end{align*}
+
+\exercise{3}
+
+Recall that the functions must be over natural numbers, but they need not to be continuous.
+Let \[
+f(n) = \begin{cases}
+    n & \text{if }n\text{ is even} \\
+    0 & \text{otherwise}
+\end{cases}
+\] and $g(n) = n - f(n)$.
+
+Now, note that for every $N\in \N$ and $C \in \R^{>0}$, we can always find $n \ge N$ even such that $f(n) \ge Cg(N)$.
+\emph{Mutatis mutandis}, the same applies for $g$.
+
+\exercise{4}
+
+\subexercise{1}
+
+
+

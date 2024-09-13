@@ -1,0 +1,82 @@
+\lecture{4}{12.09.2024}{Mathematical Prerequisites (Continuation)}
+
+\begin{previouslyseen}
+    A recurrence relationship is said linear and homogeneous if it can be written as a root-finding problem with a linear operator (with delays) over $T(n)$.
+\end{previouslyseen}
+
+Let $S: V \longrightarrow V$ be an operator over a subspace $V$ and the polynomial \[
+p(x) = a_k x^{k} + \ldots + a_1 x + x_0
+,\] where $a_i\in \mathbb{C}, i=0,\ldots,k$.
+We can define the polynomial over operators as well, simply by replacement, as $p(S)$.
+
+\begin{lemma}
+    The set of solutions for a linear homogeneous recurrence of the form \[
+	a_k T(n) + a_{k-1} T(n-1) +\ldots + a_0 T(n-k) = 0
+    \] form a subspace of the function space $\N\to \mathbb{C}$ (which is a vector space) of dimension $k$.
+\end{lemma}
+\begin{proof}
+    Let $T_1 : \N \longrightarrow \mathbb{C}$ be a solution for the recurrence and $\alpha$ a constant.
+    Then $\alpha T_1$ is also a solution (easy check).
+
+    Let $T_2: \N \longrightarrow \mathbb{C}$ be another solution.
+    Then $T_1+T_2$ is also a solution (another easy check).
+\end{proof}
+
+\begin{note}
+    The dimension of the function space is $k$ because an element can be uniquely determined by $k$ points (e.g., $T(0),\ldots,T(k-1)$).\footnote{I believe this can be shown through a 1-to-1 mapping between the function space and the vector space.}
+\end{note}
+
+Our goal then is to find a basis for the subspace of solutions to the target recurrence.
+
+We now define the \emph{delay} operator 
+\begin{align*}
+    S: S: (\N\to \mathbb{C}) &\longrightarrow (\N\to \mathbb{C}) \\
+    T(n) &\longmapsto S(T(n)) = T(n+1)
+.\end{align*}
+This allows us to rewrite our recurrence as \[
+    (a_k S^{k} + a_{k-1}S^{k-1} + \ldots + a_0)T(n) = 0
+,\] which highlights the \emph{characteristic polynomial} $p(x) = a_kx^{k}+\ldots+a_0$.
+
+Naturally, we can factorize the polynomial and write it as \[
+    p(x) = C \prod_{i=1}^{k} (x-\lambda_i) 
+,\] where $\lambda_i$ are its roots and $C\in \mathbb{C}$ is a constant.
+This leads us to writing the recurrence as \[
+    \prod_{i=1}^{k} (S-\lambda_i) T(n) = 0
+,\] which is satisfied as long as any $(S-\lambda_i)T(n) = 0$, which can be solved by writing it as $T(n) = \lambda_i T(n-1)$.
+
+\begin{lemma}
+    The solution to a recurrence of the form \[
+    T(n) = \begin{cases}
+	C &, \text{if }n=0 \\
+	\lambda T(n-1) &
+    \end{cases}
+    \] is $T(n) = C\lambda^{n}$.
+\end{lemma}
+\begin{proof}
+    The characteristic polynomial has a single root, so it is easy to see how it goes from here.
+\end{proof}
+
+For the more general case, we have that $T(n) = \lambda_i T(n-1)=\lambda_i^{2} T(n-2) = \ldots = \lambda_i^{n}T(0)$ is a solution to every case.
+
+We should, however, look at all possible solutions, as we have the initial conditions to take into account.
+More precisely, if we have $k$ distinct roots $\lambda_i$, any solution is of the form \[
+T(n) = \sum_{i=1}^{k} c_i \lambda_i^{n}
+.\] 
+Now we can use the initial conditions to uniquely determine our solution.
+
+If we have multiple roots, then we don't have a complete basis for our subspace.
+Suppose that there is a root $\lambda$ that appears $m$ times.
+Then, we must find $m$ linearly independent solutions to the problem \[
+    (S-\lambda)^{m}T(n) = 0
+.\] 
+Recall that we already know $T(n) = T(0)\lambda^{n}$.
+
+\begin{lemma}
+    Let $m\ge 1$ an integer and $T(n)=n^{\ell}\lambda^{n}$ for $0\le \ell < m$.
+    Then $(S-\lambda)^{m}T(n) = 0$.
+\end{lemma}
+\begin{proof}
+    Proof by induction.
+\end{proof}
+
+
