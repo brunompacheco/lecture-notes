@@ -1,0 +1,122 @@
+\lecture{5}{17.09.2024}{Mathematical Prerequisites (Continuation)}
+
+\begin{previouslyseen}
+    The solutions to a homogeneous linear recurrence (with no repeated roots) form a subspace, for which we want to find a basis, which allows us to compute the desired solution given known initial conditions.
+\end{previouslyseen}
+
+What if the roots are not unique? Let $\lambda$ be a root with $m$ multiplicity.
+Then, we have to find $m$ linearly independent solutions to \[
+\left( S - \lambda \right)^{m} T = 0
+.\] Recall that we already know one: $T(n) = T(0)\lambda^{n}$.
+
+\begin{lemma}
+    Let $m\ge 1$ an integer and $T(n)=n^{\ell}\lambda^{n}$ for $0\le \ell < m$.
+    Then $(S-\lambda)^{m}T(n) = 0$.
+\end{lemma}
+\begin{proof}
+    We prove by induction, noting that the case $m=1$ is already known, as it implies that $\ell=0$, thus $T(n)=\lambda^{n}$, which, in turn, implies that \[
+	(S-\lambda)T(n) = T(n+1) - \lambda T(n) = \lambda^{n+1} - \lambda \lambda^{n} = 0
+    .\]
+
+    Now, assume that for $m$ the lemma holds. Let us show that it holds for  $m+1$.
+    First, we have that $T(n)=n^{\ell}\lambda^{n}$, $0\le \ell < m$ is a solution to $(S-\lambda)^{m}T(n) = 0$, but \[
+	(S-\lambda)^{m+1}T(n) = (S-\lambda)(S-\lambda)^{m}T(n) = 0
+    ,\] which means that it is also a solution to the case $m+1$.
+    Therefore, we just need to show that $T(n) = n^{m}\lambda^{n}$ is a solution to $(S-\lambda)^{m+1}=0$.
+    But note that $(S-\lambda)^{m+1} T(n) = (S-\lambda)^{m} (S-\lambda) T(n)$, and
+    \begin{align*}
+	(S-\lambda) T(n) &= (n+1)^{m}\lambda^{n+1} - \lambda n^{m} \lambda^{n}  \\
+	&= \left( (n+1)^{m} - n^{m} \right)\lambda^{n+1}  \\
+	&= \lambda p(n) \lambda^{n}
+    ,\end{align*}
+    where $p(n) = \sum_{\ell=1}^{m-1} C_\ell n^{\ell}$ (degree $<m$), which allows us to write
+    \begin{align*}
+        (S-\lambda)^{m+1} T(n) &=  (S-\lambda)^{m} \lambda\sum_{\ell =1}^{m-1} c_\ell n^{\ell}\lambda^{n} \\
+&= \lambda \sum_{\ell=1}^{m-1} c_\ell \left( \cancelto{0}{(S-\lambda)^{m}n^{\ell}\lambda^{n}} \right) = 0
+    .\end{align*}
+\end{proof}
+
+\section*{Inhomogeneous linear recurrences}
+
+Let the inhomogeneous linear recurrence \[
+\sum_{i=0}^{k} a_{k-i}T(n-i) = f(n)
+,\] where $f$ is an arbitrary function.
+Naturally, there is not a closed form solution for the general case, but we can work on some particularities.
+
+\subsection*{Polynomial $f$}
+
+If a inhomogeneous linear recurrence has $f(n) = b^{n}p(n)$, where $p(n)$ is a polynomial of degree $d$, we can reduce it to the problem of finding a solution to an equivalent homogeneous recurrence.
+More precisely, we have that, now, $f$ satisfies $(S-b)^{d+1}f(n) = 0$, which implies that a solution to the original recurrence must also be a solution to \[
+    (S-b)^{d+1} \prod_{i=1}^{k} (S-\lambda_i) T(n) = 0 
+,\] which boils down to the root-finding of the characteristic polynomial $(x-b)^{d+1} \prod_{i} (x-\lambda_i)$.
+However, we need extra $d+1$ initial conditions (we can get those by manual inspection of the original recurrence).
+
+\begin{note}
+    We can also deal with linear combinations of multiple polynomials of the form seen above.
+\end{note}
+
+\subsection*{Akra-Bazzi}
+
+
+\begin{definition}
+    (Akra-Bazzi) A function $T: \N \longrightarrow \R$ is a Akra-Bazzi recurrence if it can be written in the form \[
+    T(n) = \sum_{i=0}^{k-1} a_i T(r_i(n)) + g(n)
+    ,\] for $n\ge n_0$, and
+    \begin{enumerate}
+        \item $a_i \in \R^{\ge 0}$, $b_i\in (0,1)$ for every $i$ 
+	\item $T(n) > 0$ for every initial condition ($n < n_0$ )
+	\item $r_i: \N \longrightarrow \N$ is such that $r_i(n) < n$ for every $i$ and every $n\ge n_0$ 
+	\item $|r_i(n) - b_i n| \in o\left( \frac{n}{\ln^2 n} \right) $ for every $i$ 
+	\item $g: \R^{\ge 0} \longrightarrow \R^{\ge 0}$ is \emph{harmonious}
+    \end{enumerate}
+\end{definition}
+
+The exponent of an Akra-Bazzi recurrence is the value $p$ such that \[
+\sum_{i} a_i b^{p} = 1
+.\] 
+
+\begin{definition}
+    A function $f: \R \longrightarrow \R$ is  \emph{harmonious} if, $\forall b\in (0,1)$, $\exists c_1,c_2 > 0$ such that \[
+    c_1 f(x) \le f(u) \le c_2f(x),\,\forall^{\infty}x
+    \] is true for \emph{every} $u\in [bx,x]$.
+\end{definition}
+
+A trivial example of a harmonious function is $f(n) = n$.
+
+\begin{lemma}
+    Let $f: \R \longrightarrow \R$ be a harmonious function.
+    Then, $g(n) := f^(n)^{\alpha}$ is also harmonious for every $\alpha \in \R$.
+\end{lemma}
+\begin{proof}
+    First, consider the case $\alpha\ge 0$.
+    Then, for adequate $c_1,c_2,b$, $u\in [bx,x]$
+    \begin{align*}
+	g(u) &= f(u)^{\alpha} \\
+	    &\le c_2^{\alpha} f(x)^{\alpha}  \\
+	    &= C_2g(x)
+    ,\end{align*}
+    for $C_2=c_2^{\alpha}$. \emph{Mutatis mutandis}, the same holds for $C_1 = c_1^{\alpha}$ w.r.t the lower bound.
+    Therefore, we have proved that $g$ is harmonious for $\alpha \ge 0$.
+
+    To show the remaining, we can similarly show that $C_1=c_2^{\alpha}$ and $C_2=c_1^{\alpha}$ prove that $g$ is harmonious.
+\end{proof}
+
+\begin{lemma}
+    The natural logarithm is harmonious.
+\end{lemma}
+\begin{proof}
+    We know that, for any $b\in \left( 0,1 \right) $, and any $u\in [bn,n]$,  \[
+    \ln u \le \ln n
+    .\] On top of that,
+    \begin{align*}
+	\ln u &\ge \ln bn \\
+	&= \ln b + \ln n \\
+	&\ge  \ln \frac{1}{2} + \ln n \\
+	&\ge -\frac{1}{2} \ln n + \ln n,\,\forall^{\infty} n \\
+	&= \frac{1}{2} \ln n
+    .\end{align*}
+    In other words, the natural logarithmic is harmonious with $c_1 = 1 / 2$ and  $c_2=1$.
+\end{proof}
+
+
+
