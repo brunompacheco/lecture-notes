@@ -53,6 +53,9 @@ However, we need extra $d+1$ initial conditions (we can get those by manual insp
 
 \begin{note}
     We can also deal with linear combinations of multiple polynomials of the form seen above.
+    For that, note that $f(n) = b_1^{n}p_1(n) + b_2^{n}p_2(n)$ is the solution to \[
+	(S-b_1)^{d_1+1}(S-b_2)^{d_2+1}f(n) = 0
+    .\] So we just need need to extend the characteristic polynomial with the coefficients from the right-hand side polynomial.
 \end{note}
 
 \subsection*{Akra-Bazzi}
