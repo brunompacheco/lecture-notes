@@ -1,0 +1,75 @@
+\demo{3}{18.09.2024}{Démonstration 3}
+ 
+\exercise{2}
+
+Because we can write the recurrence for $n\ge 0$ as \[
+t_{n} - 3t_{n-1} + 2 t_{n-2} = 2^{n-2}3 = 2^{n} \frac{3}{4}
+,\] we see that it is a linear inhomogeneous recurrence.
+In other words, the right-hand side is the solution to $(S-2)f(n) = 0$, which implies that $t_n$ must be the solution to \[
+    (S-2)(S^2 -3S + 2)t_{n} = 0
+.\]
+
+The characteristic polynomial is, thus, $(x-2)(x-2)(x-1)$.
+Because $2$ is a root with multiplicity 2, our most general solution must be of the form \[
+    t_{n} = c_1 1^{n} + c_2 2^{n} + c_3 n 2^{n} = c_1 + (c_2 + c_3 n)2^{n}
+.\]
+Given the above, we use our initial conditions for
+\begin{align}
+    T(0) = 1 &\implies c_1+c_2 = 1 \\
+    T(1) = 2 &\implies c_1+ 2c_2 + 2c_3 = 2 \implies c_2+2c_3 = 1 \\
+    T(2) = 7 &\implies c_1+ (c_2 + 2c_3)4 = 7 \implies 3c_2 + 8c_3 = 6
+.\end{align}
+(1.2) and (1.3) imply that $c_3 = \frac{3}{2}$ and $c_2=-2$, which let's us use (1.1) to find $c_1=3$.
+Therefore, \[
+T(n) = 3 + (\frac{3}{2}n - 2)2^{n}
+.\] 
+
+\exercise{3}
+
+Given that $n$ is a power of 2, then let $k=\log n \in \N$, and we can write \[
+    T(2^{k}) = \begin{cases}
+	1 &,\, k=0 \\
+	2T(2^{k-1}) + k &,\,k\ge 1
+    \end{cases}
+.\] 
+In turn, this allows us to write the equivalent linear inhomogeneous recurrence \[
+t_k - 2t_{k-1} = k
+,\] with $t_k = T(2^{k})$.
+The characteristic polynomial is, then, $(x-2)(x-1)^2$, which implies that our general form for the solution is  \[
+t_k = c_1 2^{k} + c_2 1^{k} + c_3 k 1^{k} = c_1 2^{k} + c_2 + c_3 k
+.\] 
+With the initial conditions, we have
+\begin{align*}
+    t_0 &= 1 \implies c_1+c_2=1  \\
+    t_1 &= 3 \implies 2c_1+c_2+c_3 = 3 \\
+    c_2 &= 8 \implies 4c_1 + c_2 = 4 \\
+,\end{align*}
+which lets us infer that the solution is \[
+    t_k = 3 2^{k} -2 - k
+,\] or, equivalently, \[
+    T(n) = 3n - 2 - \log n
+.\] 
+
+\exercise{4}
+
+\subexercise{1}
+
+In the Akra-Bazzi form, we have $\ell=3$, $b=2$ and $g(n)=27$.
+Because $g(n) = 27 \in \Theta(1) \subseteq \O(n^{0})$, we have $k=0 < \log_b \ell = \log_2 3$ and, thus, \[
+    T \in \Theta \left( n^{\log_2 3} \right)
+.\] 
+
+\subexercise{2}
+
+Now, we have $\ell=2$, $b=2$, and $g(n) = 2n$, thus, $k=1=\log_b \ell$.
+Therefore, we have \[
+    T(n) = \Theta(n^{\log_b \ell} \log n) = \Theta(n \log n)
+.\] 
+
+\subexercise{3}
+
+In the Akra-Bazzi form, we have $r_1(n)=n / 2$ and $r_2(n) = \frac{n}{4}$. 
+
+Note that $r_1$
+The master theorem is not applicable here, 
+

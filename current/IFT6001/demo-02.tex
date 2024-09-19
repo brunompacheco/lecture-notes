@@ -107,5 +107,42 @@ Now, note that for every $N\in \N$ and $C \in \R^{>0}$, we can always find $n \g
 
 \subexercise{1}
 
+Assuming the sum operation costs $C_1$ ($\in O(1)$) and that the assignment costs $C_2$, we have that the total cost is
+\begin{align*}
+    T(n) &= C_2 + \sum_{i=1}^{N} \sum_{j=i}^{N} C_1 \\
+    &= C_2 + \sum_{i=1}^{N} (N-i + 1)C_1 \\
+    &= C_2 + C_1\left( N^2 + N + \sum_{i=1}^{N} i \right)  \\
+    &= C_2 + C_1\left( N^2 + N + N \frac{N+1}{2} \right) \in \Theta(N^2) \\
+.\end{align*}
+Because $N$ is an integer with $n$ bits, then $N \approx 2^{n}$, which means that $T(n) \in \Theta(4^{n})$.
+
+\subexercise{2}
+
+Let us assume that the elementary operations performed in this function are all $\in \Theta(n)$.
+Because at every iteration one bit of $a$ is removed, the loop will run, in the worst case, $n$ times.
+Also, in the worst case, the \texttt{if} will enter at every iteration (case $a=2^{n}-1$), so we perform 4 elementary operations at every iteration.
+Let $C(n)\in \Theta(n)$ be the cost of the elementary operations.
+Then, we can write
+\begin{align*}
+    T(n) &= C(n) + \sum_{i=1}^{n} C(n) \\
+    &= C(n) + n C(n) \\
+    &=_O n^2
+.\end{align*}
+
+\subexercise{3}
+
+Because $\text{debut}-\text{fin}$ is approximately halved at each iteration, we can be sure that the while loop, in the worst case, will run $\log \text{debut}- \text{fin} = \log n-1$ times.
+Considering that all operations run in constant time, we have that $T(n) \in \Theta(\log n)$.
+
+\subexercise{4}
+
+We have a recurrence relation defined by \[
+T(n) = \begin{cases}
+    1 &,\, n<2 \\
+    T(\left\lfloor \frac{n}{2} \right\rfloor) + T(\left\lceil \frac{n}{2} \right\rceil ) + g(n) &,\, n\ge 2
+\end{cases}
+,\] where $g(n) \in \Theta(n)$.
+By the master theorem, we can conclude that $T(n) \in \Theta(n \log n)$.
+
 
 
