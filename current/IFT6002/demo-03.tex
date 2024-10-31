@@ -1,0 +1,36 @@
+\demo{3}{04.10.2024}{}
+ 
+\exercise{R-7.8}
+
+When we add the $n$-th element, we have total cost of allocating a new array of size $n$, copying $n-1$ elements, and then adding the new element.
+Assuming that all of this runs in $O(n)$, we have a total time of  \[
+T(n) \le  \sum_{i=1}^{n} i.C = C \frac{n(n+1)}{2} \implies T(n) \in O(n^2)
+.\] 
+
+\exercise{R-7.12}
+
+\begin{algorithm*}
+    \SetKwFunction{FMain}{indexOf}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{Position p}}{
+    this.validate(p);\\
+    int i = 0; \\
+    Position curr = this.first(); \\
+    \While{curr.getElement() $\neq$  p.getElement() $\land$ curr $\neq $ null}{
+	curr = this.after(curr);\\
+	i++;
+    }
+    \Return{i}
+    }
+\end{algorithm*}
+
+\exercise{R-7.16}
+
+See code.
+
+\exercise{R-7.50}
+
+We can wrap the methods that modify the list to increase a private variable, let us say "modCount".
+Then, when the iterator is initialized we copy "modCount" and check that the current value is equal to that of the initialization at every call to the iterator method.
+
+

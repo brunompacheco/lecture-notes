@@ -1,0 +1,48 @@
+\demo{4}{11.10.2024}{}
+ 
+\exercise{R-8.13}
+
+Both methods size and isEmpty run in constant time because the implementation keeps track of its size along additions and deletions.
+Similarly, root and isRoot are computed by comparing to the stored position of the root node, while parent is just accessing the node's pointer to its parent.
+Then, isInternal and isExternal are trivial comparisons to numChildren, which runs in constant time because the linked list of the children keeps track of its time.
+
+The method children does a single pass at the linked list that contains the children of the node of interest, so it takes as much time as there are children.
+Similarly for depth, but moving through parents until the root is reached, which then means that the number of iterations is the depth of the node.
+However, height requires a recursive algorithm, that is applied to each children of the root, and the resulting value is added 1. Then, the maximum value is taken. Therefore, there are, in the worst case, n calls to this recursive method, and we assume that merging the results (max operation) takes constant time.
+
+\exercise{R-8.16}
+
+\begin{algorithm*}
+    \SetKwFunction{FMain}{root}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{}}{
+	\Return{A[0]}
+    }
+
+    \SetKwFunction{FMain}{parent}
+    \Fn{\FMain{Position p}}{
+	f\_parent $\gets \left\lfloor (f(p) - 1) / 2 \right\rfloor$  \\
+	\Return{A[f\_parent]}
+    }
+
+    \SetKwFunction{FMain}{left}
+    \Fn{\FMain{Position p}}{
+	\Return{A[2f(p) + 1]}
+    }
+
+    \SetKwFunction{FMain}{right}
+    \Fn{\FMain{Position p}}{
+	\Return{A[2f(p) + 2]}
+    }
+
+    \SetKwFunction{FMain}{isExternal}
+    \Fn{\FMain{Position p}}{
+	\Return{2f(p) + 1 > size(A)}
+    }
+
+    \SetKwFunction{FMain}{isRoot}
+    \Fn{\FMain{Position p}}{
+	\Return{f(p) == 0}
+    }
+\end{algorithm*}
+

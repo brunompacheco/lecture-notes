@@ -1,0 +1,76 @@
+\demo{Devoir 2}{31.10.2024}{}
+ 
+\exercise{1}
+
+\subexercise{a}
+
+Because $p=1$ solve the exponent problem, and it is unique, then it must be that.
+
+\subexercise{d}
+
+Let $p$ be the solution to the recurrence, then it also solves
+\begin{align*}
+    \ell \left( \frac{t}{\ell} \right)^{p} &= 1 \\
+    \iff p &= \log_{t / \ell} 1 / \ell \\
+    &= - \frac{\log_\ell \ell}{\log_\ell t / \ell} \\
+    &= - \frac{1}{\log_\ell t - \log_\ell \ell} \\
+    &= \frac{1}{1 - \log_\ell t}
+.\end{align*}
+Therefore, as $\ell$ increases, $\log_\ell t$ decreases, which takes $p$ closer to 1 from the right.
+
+\subexercise{b}
+
+He applied Jensen's inequality to a function $f(x) = x^{p}$ (note that it is convex).
+Such that 
+\begin{align*}
+    \sum_{i=0}^{\ell-1} b_i^{p} &= 1 \\
+    \sum_{i=0}^{\ell-1} \frac{1}{\ell} b_i^{p} &= \frac{1}{\ell} \\
+    \text{(Jensen's)} \left( \sum_{i=0}^{\ell-1} \frac{1}{\ell} b_i \right)^{p} &\le \sum_{i=0}^{\ell-1} \frac{1}{\ell} b_i = \frac{1}{\ell} \\
+    \left( \frac{t}{\ell} \right)^{p} &\le \frac{1}{\ell} \\
+    p \ge \log_{t / \ell} 1 / \ell &= \frac{1}{1 - \log_\ell t}
+,\end{align*}
+i.e., the exponent for the balanced case is smaller than or equal to the unbalanced case. 
+The balanced case is optimal.
+
+\subexercise{c}
+
+We just show that $p=0$ is optimal.
+
+\exercise{2}
+
+\subexercise{a}
+
+We are actually searching for an MST (the edges that remain), which is modeled through a matroid.
+
+\subexercise{b}
+
+Same, but now the independent set is the set of edges that contain 1 cycle.
+
+\subexercise{c}
+
+Use Kruskal, but changing the condition to allow 1 single cycle.
+
+OR
+
+Use Kruskal, then add the smallest edge to the MST.
+
+\exercise{3}
+
+\subexercise{a}
+
+First, sort in decreasing order of weight.
+Then, add to the solution the smallest edge not yet looked at if the result forms a stable.
+
+\subexercise{b}
+
+(2) - (3) - (2)
+
+\demo{7}{31.10.2024}{}
+
+\exercise{2}
+
+The result is $\left( j, j+i \right) $, thus, if the two numbers are terms of the Fibonacci sequence, the result will be the next step, i.e., let $f_i$ be the $i$-th term of the Fibonacci sequence, then $\left( f_i, f_{i+1} \right) * F = \left( f_{i+1}, f_{i+2} \right)$.
+
+To compute the $n $-th term in the Fibonacci sequence, we can multiply $\left( f_0, f_1 \right) F^{n-1} = \left( f_{n-1}, f_n \right)$.
+Then, we use a recurrent function to exponentiate, such that $b \gets \text{expo}(a, \left\lfloor n / 2 \right\rfloor)$, and then $b \gets b\cdot b$ or $b \gets b\cdot b\cdot a$ (if $n$ is odd).
+

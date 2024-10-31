@@ -1,0 +1,180 @@
+\demo{Devoir 1}{03.10.2024}{}
+ 
+\exercise{1}
+
+Obviously, the main diagonal is $\Theta$, as a function is trivially on the $\theta$-order of itself.
+
+\paragraph{$f_1$ and $f_2$}
+
+\begin{align*}
+    \lim_{n \to \infty} \frac{n^{18}\left( \ln n \right)^{37}}{3^{n}} &\le \lim_{n \to \infty} \frac{n^{18} n^{37}}{3^{n}} \\
+    &= 0
+,\end{align*}
+by successive l'Hôpital applications (precisely, 55 applications).
+Therefore, we have that $f_1 \in o(f_2)$ and $f_2 \in  \omega(f_1)$.
+
+\paragraph{$f_2$ and $f_3$}
+
+We can show that $f_2$ is asymptotically greater than both cases of $f_3$.
+In fact, because \[
+\lim_{n \to \infty} \frac{2^{n}}{37 \ln n} = \infty
+,\] we just need to show that $f_2$ dominates the exponential.
+\begin{align*}
+    \lim_{n \to \infty} \frac{2^{n}}{3^{n}} &= \lim_{n \to \infty} \left( \frac{2}{3} \right)^{n}  \\
+    &= 0
+.\end{align*}
+Thus $f_3 \in \omega(f_2)$ and $f_2 \in o(f_3)$.
+
+
+\paragraph{$f_1$ and $f_3$}
+
+Because \[
+\lim_{n \to \infty} \frac{f_1}{2^{n}} = 0
+\] and \[
+\lim_{n \to \infty} \frac{f_1}{37 \ln n} = \infty
+,\] we can always find a value such that, for any constant, $f_3$ will be greater than $f_1$, and another value for which $f_3$ will be smaller than $f_1$.
+Therefore, they are \emph{incomparable}.
+
+\exercise{2}
+
+\subexercise{a}
+
+We show this by induction that $b\upuparrows n \ge b^{n}$.
+For $n=0$, they are trivially equal.
+Now, if we suppose that this is true for $n$, then we have that
+\begin{align*}
+    b\upuparrows (n+1) &= b^{b\upuparrows n} \\
+    &\ge  b^{b^{n}} \ge b^{n+1}
+,\end{align*}
+because $b^{n} \in \omega(n+1)$, that is, for every $b\ge 2$, we can state that $b^{n} \ge n+1$, for $n\ge 0$.
+
+Thus, \[
+\lim_{n \to \infty} b\upuparrows n \ge \lim_{n \to \infty} b^{n} = \infty
+.\] 
+
+\subexercise{b}
+
+We have that $\exists n_0\in \N$, such that $f(n+1) \le \frac{1}{2}f(n)$, which implies that $f(n) \le \frac{1}{2^{n-n_0}} f(n_0)\ge 0$.
+
+Therefore, we can say that
+\begin{align*}
+    \lim_{n \to \infty} f(n) &=  \lim_{n \to \infty} \frac{1}{2^{n-n_0}}f(n_0) \\
+    &= 0
+.\end{align*}
+
+\subexercise{c}
+
+Let $f(n) = \frac{a^{n}}{b\upuparrows n}$.
+We want to show that \[
+    \lim_{n \to \infty} \frac{a^{n}}{b\upuparrows n} = 0
+.\] 
+
+Note that \[
+    \frac{f(n+1)}{f(n)} = \frac{a^{n+1}}{a^{n}} \frac{b\upuparrows n}{b\upuparrows (n+1)}
+.\] But we know that, $\forall C\in \N, \forall^{\infty}n, n\le C b^{n}$, which implies $b\upuparrows n\le C (b\upuparrows (n+1))$.
+So, in particular, for $C=\frac{1}{2a}$, we have that \[
+\forall^{\infty}n,\, \frac{f(n+1)}{f(n)} = a\frac{b\upuparrows n}{b\upuparrows (n+1)} \le \frac{a}{2a} = \frac{1}{2}
+.\] 
+Thus, by what has been shown in (b), we have that \[
+\lim_{n \to \infty} f(n) = 0 
+.\] 
+
+\subexercise{d}
+
+We start by showing by induction that $\ln^{*}(n) \le n-1$.
+For $n=1$, this is trivially true.
+Now, note that $\ln^{*} n$ is non-decreasing, that is, \[
+\ln^{*}(n+1) = \ln^{*}(\ln n+1) + 1
+.\] But we have that $\ln^{*}(x) \le \ln^{*}\left( \left\lceil n \right\rceil  \right) $, as given $k$ such that $x\in (e\upuparrows k-1,e\upuparrows k]$, then $\ln^{*}(x) = k$.
+Therefore, \[
+\ln^{*}(n+1) \le \ln^{*}(\left\lceil \ln n+1 \right\rceil) +1 \le \left\lceil \ln n+1 \right\rceil -1 +1 \le n
+.\] 
+
+Now, we can state
+\begin{align*}
+    \ln^{*}(n) &= \ln^{*}(\ln n) + 1 \\
+    &= \ln^{*}(\ln \ln n) + 2 \\
+    &= \ln^{*}(\ln \ln \ln n) + 3 \\
+    &\le \ln \ln \ln n + 2
+,\end{align*}
+which leads us to \[
+\lim_{n \to \infty} \frac{\ln^{*}(n)}{\ln \ln n} \le  \lim_{n \to \infty} \frac{\ln \ln \ln n +2}{\ln \ln n} = 0
+.\] 
+
+\exercise{3}
+
+\subexercise{a}
+
+By contradiction, suppose $\exists c_1,\ldots,c_k$ such that \[
+\sum_{i=1}^{k} c_i f_i = 0 \,\land\, \sum_{i=1}^{k} c_i > 0
+.\] 
+
+Let $j$ be the greatest number such that $c_j\neq 0$, that is, $\forall i>j, c_i=0$.
+Then, we can write
+\begin{align*}
+    \sum_{i=1}^{k} c_i f_i &= \sum_{i=1}^{j} c_i f_i = 0 \\
+    \implies \sum_{i=1}^{j} \frac{c_i f_i}{f_j} &= 0 \\
+.\end{align*}
+But $i<j \implies\frac{f_i}{f_j} \to 0$, because $f_i\in o(f_j)$.
+Therefore, we have that 
+\begin{align*}
+    \lim_{n \to \infty} \sum_{i=1}^{j} \frac{c_i f_i}{f_j} &= 0 \\
+    \implies \lim_{n \to \infty} \frac{c_j f_j}{f_j} &= \lim_{n \to \infty} c_j = 0
+,\end{align*}
+a contradiction.
+
+\subexercise{b}
+
+\textbf{\textcolor{red}{TODO: use the fact that the roots are all dominated by one-another.}}
+
+Remember that some roots have multiplicity greater than 1.
+
+
+\exercise{4}
+
+\subexercise{a}
+
+We can write the recurrence relationship as \[
+t_n - 10t_{n-1} + 9t_{n-2} = 0
+.\] The characteristic polynomial, then, is \[
+x^{2} - 10x + 9 = (x-1)(x-9) = 0
+.\] Which implies the solution is of the form \[
+T(n) = c_1 + c_2 9^{n}
+.\] 
+
+For the initial cases, we have
+\begin{align*}
+    T(0) &= 1 = c_1 + c_2 \\
+    T(1) &= 6 = c_1 + c_2 9 \\
+.\end{align*}
+These lead us to \[
+T(n) = \frac{3}{8} + \frac{5}{8} 9^{n}
+.\] 
+
+\subexercise{b}
+
+Our recurrence relation here is \[
+t_n - 2 t_n = (n +5) 2^{n}
+.\] 
+We know that if the RHS has the form $p(n) c^{n}$, where $p(n)$ is a polynomial, we can write it in the form $(x-c)^{\text{deg} p + 1}$ on the LHS, which implies that our characteristic polynomial is \[
+    (x-2)^{2} (x-2) = 0
+.\] which has a single root at $2$ with multiplicity 3, resulting in solutions of the form \[
+T(n) = \left( c_1 + c_2n + c_3 n^{2} \right)2^{n}
+.\] 
+
+Our initial condition gives us
+\begin{align*}
+    T(0) &= 1 = c_1 \\
+    T(1) &= 2+2+10 = 2c_1 + 2c_2+2c_3 \\
+    T(2) &= 28 + 8 + 20 = 56 = 4c_1 + 8c_2 + 16c_3 \\
+.\end{align*}
+The solution to the above linear system gives us \[
+T(n) = \left( 1 + \frac{11}{2}n + \frac{1}{2}n^2 \right) 2^{n}
+.\] 
+
+\demo{5}{03.10.2024}{}
+
+\exercise{2}
+
+\textbf{\textcolor{red}{TODO}}
+

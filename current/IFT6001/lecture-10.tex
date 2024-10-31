@@ -1,0 +1,75 @@
+\lecture{10}{29.10.2024}{Diviser-pour-regner (continuation)}
+
+\section*{Matrix multiplication}
+
+Matrix multiplication is a classic problem that can also be solved with divide-and-conquer algorithms.
+
+\begin{problem}
+    Given two square matrices $A,B \in \R^{n\times n}$, compute $A B$.
+\end{problem}
+
+Note that we are generally interested in the number of operations required in function of $n$, and not the running-time with respect to the input size.
+Thus, our starting point is $\Theta(n^3)$.
+To see this, let $C = AB$, such that $c_{ij}$ denotes the entry of $C$ at the $i$-th row and the $j$-th column.
+We can write \[
+c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}
+,\] i.e., each element of $C$ can be naively computed in $\Theta(n)$.
+Since  $C$ has $n^2$ elements, we get our baseline complexity of $\Theta(n^3)$.
+
+\subsection*{First attempt at divide-and-conquer}
+
+We can decompose matrices $A$ and $B$ each into 4 blocks of size $\frac{n}{2}\times \frac{n}{2}$.
+Note this will result in 8 recursive calls, thus \[
+T(n) = 8T(\left\lceil \frac{n}{2} \right\rceil ) + \Theta(n^2)
+,\] given that the sum of the returned matrices takes $n^2 / 4$ operations [WHY].
+By the master theorem, we get back to $\Theta(n^3)$.
+
+\subsection*{Strassen's algorithm}
+
+Using a similar trick to Karatsuba, Volker Strassen has proposed a better decomposition of the problem, reducing the number of recursive calls to 7.
+It does not seem to be a principled decomposition, it just works.
+
+The master theorem is applied just as before, but with $\ell = 7$ this time, which results in $\Theta(n^{2.8})$.
+However, it has a significantly higher base cost, as it requires a higher number of operations to combine the recursive returns (increases the constant term in the $\Theta(n^2)$ part of the recursion).
+It is better than the naïve for $n\ge 100$.
+
+The algorithms have improved ever since, reducing the exponent to $<2.37286$ (2021).
+It is still an open question whether $2+\epsilon$ is attainable (as reading the matrix takes $\Omega(n^2)$).
+
+
+\section*{Fourier transform}
+
+Actually, we are going to deal with the DFT (discrete Fourier transform) [and I guess we're getting to FFT].
+The transformation can be stated as \[
+\hat{x}(k) \approx \sum_{t=0}^{n-1} x(t) e^{\frac{-2\pi i}{n} t k}
+,\] and its inverse \[
+x(t) \approx \frac{1}{n} \sum_{k=0}^{n-1} \hat{x}(k) e^{\frac{2\pi i}{n} tk}
+,\] which become true equalities as $n\to \infty$.
+Note that the inverse shows clearly how the Fourier transform is a change of basis.
+
+[I'll skip the proofs regarding the validity of the Fourier transform and its inverse]
+
+The time complexity of the standard DFT is $\Theta(n^2)$, as there are $n$ coefficients to compute, and each takes $\Theta(n)$.
+
+\subsection*{FFT}
+
+We can split the DFT into its even and odd terms (of the discrete signal), such that \[
+\hat{x}(k) = \sum_{j=0}^{\frac{n}{2}-1} x(2j)\omega_{n / 2}^{jk} + \omega_n^{k} \sum_{j=0}^{\frac{n}{2}-1} x(2j+1)\omega_{n / 2}^{jk} = \hat{x}^{(even)}(k) + \omega_n^{k}\hat{x}^{(odd)}(k)
+,\] where $\omega_n = e^{2\pi i / n}$.
+In other words, we can compute the DFT of the input signal by computing the DFT of its even and odd elements and then combining both.
+
+Naturally, this yields a divide-and-conquer algorithm with a running time of \[
+T(n) = 2T(\frac{n}{2}) + \Theta(n)
+,\] given that the combination will require $n$ operations to split the signal and compute the product of the odds by $\omega_n^{k}$.
+The master theorem gives us the complexity of $\Theta(n \log n)$.
+
+\subsection*{Convolution}
+
+The convolution becomes a simple multiplication in the frequency domain.
+Thus, using the FFT, we can do convolutions in $\Theta(n \log n) + \Theta(n) + \Theta(n \log n) = \Theta(n \log n)$, instead of $\Theta(n^2)$ that would be required in the time domain.
+
+The same idea applies to the multiplication of polynomials, which can, in turn, be used in multiplication of integers, following the Toom-Cook algorithm.
+Whereas Toom-Cook takes $O(n^{1+\epsilon})$, using the FFT takes $O(n \log^{3} n)$.
+With Schönhage-Strassen tricks, it gets to $O(n \log n \log \log n)$.
+
+

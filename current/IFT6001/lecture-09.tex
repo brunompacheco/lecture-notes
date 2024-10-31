@@ -1,0 +1,157 @@
+\lecture{9}{15.10.2024}{Midterm Revision}
+
+\section*{Asymptotic Relations}
+
+It is clear that we must know the definition for the Big-$O$ notation.
+Another important thing is to get to know the table between the different relationships ($O$, $o$, $\Omega$,\ldots), as well as the difference between them.
+For example, the difference between $O$ and $o$ is that the former holds as long as there exists one value $C$, while the latter has to hold for all values of $C>0$.
+
+Recall that the limit criteria for $\Theta$ relationships works unidirectionally (it is not \emph{iff}).
+He (the professor) reviewed the limit criteria theorem statement (which states it for $o$ and $\omega$ relations).
+He also showed an example for when the limit criteria for the $\Theta$ relationship does not work backwards, i.e., $f \in \Theta(g)$ does not imply that $\lim_{n \to \infty} \frac{f(n)}{g(n)} \in \R^{>0}$. 
+The example is on a function that is defined differently for even and odd numbers \[
+f(n) = \begin{cases}
+    1 & n \text{ is even} \\
+    2 & n \text{ is odd}
+\end{cases}
+.\]
+
+He also briefly mentioned the $n^{\alpha}\in o(b^{n})$ asymptotic relation.
+
+\begin{note}
+    If we have to compute complexity with respect to the bit-size of the inputs, that will be explicit in the questions.
+    I believe that we can often assume that the arithmetic operations take constant time (invariant to the bit-size), unless the sizes really grow.
+
+\end{note}
+
+\section*{Recurrences}
+
+\subsection*{Linear recurrences}
+
+It is expected that one can solve linear homogeneous recurrences (finding the roots of the characteristic polynomial,\ldots).
+[I am not sure if he mentioned the non-homogeneous case as well.]
+
+\subsection*{Akra-Bazzi}
+
+It is necessary to know both versions of the Akra-Bazzi: the general version, and the master theorem.
+[I think he said it is important to understand as well when a function is harmonious (polynomial growth) as well.]
+He revised both, briefly.
+
+
+\section*{Greedy Algorithms}
+
+He said we can expect questions like "give the recurrence relationship that describes the time complexity of this algorithm and solve it".
+Another possible question: given a problem, describe a \emph{greedy} algorithm that solves it; then, show a case where it does not find an optimal solution.
+[I think he said that we won't be expected to write pseudo-code, just describe the functioning of the algorithm we're proposing.]
+
+One has to know matroids and the definition.
+[I think we can expect questions of the form "is the following a matroid? can we solve this problem through MaxI?" or "show that it is a matroid or not; give a greedy algorithm that solves it" or "will a greedy algorithm solve this problem to optimality?".]
+He may asks us to provide an algorithm and provide its running time.
+Or ask "how many times is the operation XXX executed in the algorithm?".
+
+\subsection*{MST}
+
+We can expect questions about Kruskal or other algorithms.
+He won't ask us to explain an algorithm, but rather give a problem and ask us to give an algorithm that solves it, [which will be a variation of an algorithm seen in class].
+
+\subsection*{Knapsack}
+
+Explain why a greedy algorithm is not optimal for the integer version of the Knapsack.
+
+\section*{Divide-and-Conquer}
+
+We can expect some questions about analysing the performance of a DC algorithm, solving it through Akra-Bazzi, or even propose an algorithm to a problem and then analyse its complexity.
+
+It seems to be important to know the binary search algorithm.
+We can expect him to ask us to analyse an algorithm that will resemble binary search.
+
+\subsection*{Mergesort}
+
+We must be capable of modifying mergesort to solve a given problem.
+Also being able to determine its complexity through the master theorem.
+
+Warning: the running time is a function $T: \N \longrightarrow \N$, which is totally different from the function itself or the array (which is usually denoted by $T[1..n]$).
+
+\subsection*{Quicksort}
+
+We have to know its working, along with its time complexity, and how it compares to mergesort.
+He may present a problem that will require a modified quicksort to solve.
+Or present a variation of the quicksort, like a variation of pivoting, and ask what the algorithm does.
+We have to understand the worst-case scenarios to, for example, being able to give an instance that makes the algorithm run in the worst complexity possible (I believe it's $n^2$).
+Even understanding what a given modification of the algorithm does with the running time.
+
+\begin{note}
+    I think we must add to the cheat sheet some characteristics of these algorithm, like complexity of the pivoting function, proof of correctness, detailed running time, etc.
+\end{note}
+
+He said we won't be expected to solve the time complexity of quicksort (as it requires complex techniques), but maybe just write the recurrence equation.
+
+\newpage
+\section*{Notes from Thomas (Discord)}
+
+\begin{itemize}
+    \item Notation $O,o,\omega,\Omega$
+    \item Limit criterion (for  $\Theta, o, \omega$ )
+	\begin{description}
+	    \item[Note] We can't conclude anything if the limit doesn't exist
+	\end{description}
+    \item $\alpha>0, b>1, n^{\alpha} \in o(b^{n})$ ; $a < b \implies n^{a}\in o(n^{b})$ ; $\alpha>0 \implies\log a \in o(n^{\alpha})$, etc.
+\end{itemize}
+
+\begin{itemize}
+    \item Recurrences (how to solve them, no proofs)
+\end{itemize}
+
+\begin{itemize}
+    \item Akra-Bazzi (how to use, no proofs)
+    \item + Master theorem and harmonious function
+    \item + We can use the results shown in class, e.g., $\log n$ is a harmonious function
+\end{itemize}
+
+\begin{itemize}
+    \item Question about algorithms, for example:
+	\begin{itemize}
+	    \item What does this algorithm do?
+	    \item Provide the recurrence relation of the running time
+	    \item Provide the running time give the operation
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item General principles of a greedy algorithm
+	\begin{itemize}
+	    \item Being capable of creating a greedy algorithm for a given problem, perhaps not necessarily optimal
+	    \item When asked "describe an algorithm", we should actually describe it, and not write the pseudo-code
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Matroids: Definition (triviality, heredity, exchange)
+	\begin{itemize}
+	    \item Show whether a set forms a matroid or not
+	    \item Matroid $\to$ greedy algorithm
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Kruskal, knapsack, and/or Dijkstra to simulate
+	\begin{itemize}
+	    \item Explain an arbitrary choice when present
+	    \item For the (non-fractional) knapsack problem, show an example where the fractional algorithm doesn't work
+	\end{itemize}
+\end{itemize}
+
+\begin{itemize}
+    \item Divide-and-conquer, must know the general structure and the running time
+\end{itemize}
+
+\begin{itemize}
+    \item Binary search, mergesort and/or quicksort to simulate/compare. For example:
+	\begin{itemize}
+	    \item Mergesort, but dividing into 3 blocks instead of 2
+	    \item Quicksort with a modified pivot procedure, know the worst case
+	    \item Expected running time of an algorithm with recurrence (if quicksort, no resolution, just showing the recurrence relationship)
+	\end{itemize}
+\end{itemize}
+
+

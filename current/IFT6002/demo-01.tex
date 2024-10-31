@@ -2,7 +2,9 @@
  
 \exercise{R-6.1}
 
-18
+\[
+25 - (10 - 3) = 18
+.\] 
 
 \exercise{R-6.3}
 
@@ -19,25 +21,48 @@
 
 \exercise{R-6.5}
 
-function emptyStack(Stack s) \{
-\begin{enumerate}
-    \item if s.length > 0
-    \begin{enumerate}
-	\item pop(s)
-	\item return emptyStack(s)
-    \end{enumerate}
-    \item else
-    \begin{enumerate}
-        \item return s
-    \end{enumerate}
-\end{enumerate}
-\}
+\begin{algorithm*}
+    \SetKwFunction{FMain}{emptyStack}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{Stack s}}{
+	\If{$s$.length $> 0$}{
+	     $s$.pop()
+	     \Return{\FMain{s}}
+	 }
+     }
+\end{algorithm*}
 
 \exercise{R-6.7}
 
-22
+\[
+32 - (15 - 5) = 22
+.\] 
 
 \exercise{R-6.8}
 
+Note that f is increased only at dequeue operations when the queue is not empty.
+Since there are 10 of those, then f = 10.
+
+\exercise{C-6.19}
+
+\begin{algorithm*}
+\SetKwFunction{FMain}{postfix}
+\SetKwProg{Fn}{Function}{:}{}
+\Fn{\FMain{Array expr}}{
+    inputs $\gets $ new Stack()
+
+    \For{elem in expr}{
+	\If{elem.isOperation()}{
+	    a $\gets $ inputs.pop() \\
+	    b $\gets $ inputs.pop() \\
+	    inputs.push(elem.apply(a, b))
+	}
+	\Else{
+	    inputs.push(elem)
+	}
+    }
+\Return{inputs.pop()}
+}
+\end{algorithm*}
 
 

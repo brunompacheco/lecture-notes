@@ -1,0 +1,84 @@
+\demo{4}{26.09.2024}{}
+ 
+\exercise{1}
+
+Let \[
+t(n) = \sum_{u=1}^{n-1} u^{k}
+.\] 
+
+\paragraph{$k\ge 0$}
+
+Naturally, each $u^{k}$ is bounded above by $n^{k}$, which implies $t(n) \in  O(n^{k+1})$.
+
+Similarly, we have that
+\begin{align*}
+    t(n) &\ge \sum_{u=\left\lceil n / 2 \right\rceil }^{n-1} u^{k}  \\
+    &\ge \sum_{u=\left\lceil n / 2 \right\rceil }^{n-1} (n / 2)^{k}  \\
+    &\ge \frac{n}{2} \left( \frac{n}{2} \right)^{k} = \frac{1}{2^{k+1}} n^{k+1}
+,\end{align*}
+that is, $t \in \Omega(n^{k+1})$.
+
+\paragraph{$-1 < k < 0$ }
+
+We can use similar reasoning as above, but noting that $u^{k} \le n^{k}$.
+Namely, we have
+\begin{align*}
+    t(n) &\ge \sum_{u=1}^{n-1} n^{k} \\
+    &= (n-1)n^{k}
+,\end{align*}
+which leads to $t \in \Omega(n^{k+1})$.
+
+However, to get an upper bound, we will use the continuous conterpart of our series.
+First, we note that \[
+    t(n) \le \int_0^{n-1} x^{k} dx
+.\] 
+
+Then, because \[
+    \int_0^{n-1} x^{k} dx = \frac{n^{k+1}}{k+1} + C
+,\] for some constant $C$, we can state that $t \in O(n^{k+1})$.
+
+\paragraph{$k< -1$}
+
+The same bounds than those for $k \in \left( -1,0 \right) $ still hold, but note that \[
+\lim_{n \to \infty} \frac{n^{k+1}}{k+1} + C = C
+\] and \[
+\lim_{n \to \infty} (n-1)n^{k} = 0
+.\] 
+Therefore, $t\in \Theta(1)$.
+
+\paragraph{$k=-1$}
+
+For this particular case, $t(n)$ is the harmonic series which has the known limit \[
+\lim_{n \to \infty} \sum_{u=1}^{n} \frac{1}{u} = \lim_{n \to \infty} \log n
+,\] which directly implies $t \in \Theta(\log n)$.
+
+\exercise{2}
+
+3 breaks the algorithm.
+
+\exercise{3}
+
+30 gives a non-optimal solution.
+
+\exercise{4}
+
+Let the coins be $\left\{ 1, n, 3n - 1 \right\} $ for $n\gg 3$.
+Then, for $n-1$, the algorithm will return $n$ coins, when the optimal is 3.
+
+\exercise{5}
+
+We need to find $x,y,z \in \N$ such that \[
+6x + 9y + 20z = 43
+.\] Because 43 is odd, then $y\ge 1$. In fact, $y$ must be an odd number.
+Therefore, the problem is actually equivalent to finding \[
+6x + 9y' + 20z = 34
+,\] for $y'+1= y$, where $y'$ is even. 
+Clearly, $z\ge 1$ makes it impossible, thus we reduce it to \[
+6x + 9y' = 34
+.\] Now, if $y'\ge 4$, the problem is also infeasible, so we just reduce it to $y' = 2$ or  $y'=0$.
+
+ \ldots
+
+If we add a 4 coin, then 3x9 + 2x6 + 4 is a solution, but the greedy algorithm will start by picking two 20s, which reduce the problem to an infeasible one. 
+ 
+

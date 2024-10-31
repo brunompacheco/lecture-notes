@@ -1,0 +1,78 @@
+\demo{2}{20.09.2024}{}
+ 
+\exercise{1}
+
+\begin{algorithm}
+    \SetKwFunction{FMain}{add}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{List L, Position j, Element e}}{
+	\If{L.size() < j}{
+	    M $\gets$ new List(new size) \\
+	    \For{i = 1..(j-1)}{
+		M[i] $\gets$ L[i]
+	    }
+	    M[j] $\gets $ e \\
+	    \For{i = j..(L.length)}{
+		M[i+1] $\gets$ L[i]
+	    }
+	}
+	\Else{
+	    $i \gets $ L.length \\
+	    \While{ i > j}{
+		L[i+1] $\gets $ L[i] \\
+		i $\gets $ i - 1
+	    }
+	    L[j] $\gets $ e
+	}
+    }
+\end{algorithm}
+
+\exercise{2}
+
+\begin{algorithm}[H]
+    \SetKwFunction{FMain}{addLast}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{Element e}}{
+	p $\gets $ self.last() \\
+	self.addAfter(p, e)
+    }
+\end{algorithm}
+
+\begin{algorithm}[H] 
+    \SetKwFunction{FMain}{addBefore}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{Element e, Position p}}{
+	p' $\gets $ self.before(p) \\
+	self.addAfter(p', e)
+    }
+\end{algorithm}
+
+\exercise{3}
+
+\begin{algorithm*}
+    \SetKwFunction{FMain}{findPosition}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{Element e}}{
+	p $\gets $ self.first() \\
+	\While{p.getElement() $\neq $ e}{
+	    p $\gets $ self.after(p)
+	}
+    }
+\end{algorithm*}
+
+\exercise{4}
+
+See in \texttt{code}.
+
+\exercise{5}
+
+\begin{algorithm}[H]
+    \SetKwFunction{FMain}{moveToFront}
+    \SetKwProg{Fn}{Function}{:}{}
+    \Fn{\FMain{Position p}}{
+	Position pf = first(); \\
+	Position new\_p = moveBefore(pf, p); \\
+	\Return{new\_p}
+    }
+\end{algorithm}
+

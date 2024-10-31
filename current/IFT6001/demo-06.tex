@@ -1,0 +1,176 @@
+\demo{Intra Pratique}{10.10.2024}{}
+ 
+\exercise{1}
+
+\subexercise{a}
+
+By the limit rule
+\begin{align*}
+    \lim_{n \to \infty} \frac{n \log n}{\frac{n^2}{\log^2 n}} &= \lim_{n \to \infty} \frac{\log^3 n}{n} \\
+    &= \lim_{n \to \infty} \frac{3 \log^2 n}{n \ln a} \\
+    &= \lim_{n \to \infty} \frac{6 \log n}{n \ln^2 a} \\
+    &= \lim_{n \to \infty} \frac{6}{n \ln^3 a} = 0 \\
+.\end{align*}
+
+TRUE
+
+\subexercise{b}
+
+\begin{align*}
+    f(bn) &= \left( bn \right)^{\log bn} \\
+	&= (bn)^{\log b + \log n} \\
+	&= b^{\log b}b^{\log n}n^{\log b}n^{\log n} \\
+	&=  \frac{b^{\log b}}{d^{\log n}n^{\log d}} f(n)
+.\end{align*}
+$b = \frac{1}{d}, d > 1$ 
+
+But \[
+\lim_{n \to \infty} \frac{b^{\log b}}{d^{\log n}n^{\log d}} = 0
+,\]  so for large enough $n$, 
+
+But
+\begin{align*}
+    \lim_{n \to \infty} \frac{b^{\log n}}{n^{d}} &= \lim_{n \to \infty} \frac{b^{\log n}}{\left( b^{\log_b n} \right)^{d}} \\
+    &= \lim_{n \to \infty} b^{\log n - d \log_b n} \\
+    &= \lim_{n \to \infty} b^{(\log b - d)\log_b n} \\
+,\end{align*}
+thus, $\nexists c_1 > 0$ such that $c_1f(n) \le f(bn)$.
+
+Another way to see this is to just take a value for $b$, let us say, $b=\frac{1}{2}$, and then show that we can never find a $c_1$ for such.
+That is, suppose that, for any $b\in (0,1)$, there exists $c_1>0$ such that \[
+c_1f(n) \le f(bn)
+.\] Then, take $b=\frac{1}{2}$ and note that
+\begin{align*}
+    f(bn) &= \frac{n^{\log n / 2}}{2^{\log n / 2}} \\
+    &= \frac{n^{\log n - \log 2}}{2^{\log n - \log 2}} \\
+    &= \frac{2^{\log 2}}{n^{\log 2}2^{\log n}} f(n) \\
+.\end{align*}
+Therefore, we would have \[
+c_1 \le \frac{2^{\log 2}}{n^{\log 2}2^{\log n}},\, \forall^{\infty}n
+,\] a contradiction with $c_1>0$, as the limit of the right-hand side is 0 for $n\to \infty$.
+
+FALSE
+
+\subexercise{c}
+
+Let $f(n)=2$ and $g(n) = n$.
+Clearly, $\left( f\cdot g \right)(n)  \in O(n)$, but \[
+2^{(f\cdot g)(n)} = 4^{n} \not\in O(2^{n})
+.\] 
+
+FALSE
+
+\subexercise{d}
+
+We need to show three properties to prove that $(C,I)$ is a matroid.
+However, heredity does not hold, as, for example, $\left\{ 2,4 \right\} \in I$ but $\left\{ 4 \right\} \not\in I$.
+
+FALSE
+
+\subexercise{e}
+
+By definition, we know that the cost of $A$ grows \emph{at least} linearly with the input size, so we cannot make such statement, as there is no guarantee that the complexity of A does not scale, e.g., exponentially, which would imply that it is more expensive, for large enough $n$, than B, as the complexity of $B$ is limited by a constant factor of complexity $n \log n$.
+
+FALSE
+
+\subexercise{f}
+
+Because we know that $n \log n$ is the optimal complexity??
+
+FALSE
+
+\subexercise{g}
+
+By following Prim's algorithm, we build the following spanning tree
+\begin{enumerate}
+    \item $(b,e)$ with cost 2
+    \item $(e,g)$ with cost 2
+    \item $(b,d)$ with cost 3
+    \item $(b,a)$ with cost 4
+    \item $(a,f)$ with cost 4
+    \item $(d,c)$ with cost 5
+    \item $(g,h)$ with cost 6
+\end{enumerate}
+which has total cost 26. 
+Because Prim's is guaranteed to returns an MST, we know that any MST has cost 26.
+
+TRUE
+
+\subexercise{h}
+
+By the master theorem, we can state that $T(n) \in \Theta(n^{\log_3 28})$, and $\log_3 28 > \log_3 27 = 3$.
+
+FALSE
+
+\exercise{2}
+
+We have the following nonhomogeneous recurrence \[
+t_n - 4 t_{n-1} + 4 t_{n-2} = 5 2^{n}
+.\] 
+As the RHS $f(n) = 5 2^{n}$ is the solution to $(S-2)^{1} f = 0$, our recurrence has the characteristic polynomial \[
+    (S-2)(S^2 - 4S +4) = (S-2)^3
+.\] 
+Which has three roots at $2$.
+Therefore, any solution is of the form \[
+    t_n = 2^{n} \left( c_1 + n c_2 + n^2 c_3 \right) 
+.\] 
+
+Our initial conditions give us
+\begin{align*}
+    t_0 = 0 \implies c_1 = 0 \\
+    t_1 = 2 \implies c_2+c_3 = 1 \\
+    t_2 = 4 t_1 - 4t_0 + 5 \cdot 2^{2} = 28 \implies 2c_2 + 4c_3 = 7 
+.\end{align*}
+Which let us compute $c_3=\frac{5}{2}$ and $c_2 = -\frac{3}{2}$.
+Therefore, \[
+t_n = 2^{n-1}\left( -3 n +5n^2 \right) 
+.\] 
+
+\exercise{3}
+
+Euclid: Let $r_{-2} = 417$ and $r_{-1} = 63$. Now, repeat $r_{k}= r_{k-2} \% r_{k-1}$ (remainder) until the division is exact ($r_n = 0$) which implies that the GCD is  $r_{n-1}$.
+
+The remainder operator is applied iteratively, by incrementing the rounded divisor until just before the multiplication of the denominator surpasses the value of the numerator.
+
+\ldots
+
+\exercise{4}
+
+\subexercise{a}
+
+Let us write \[
+b = \sum_{i=1}^{n} b_i 2^{i-1}
+,\] 
+where $b_i \in \left\{ 0,1 \right\} $, that is, we have the binary representation of $b$ where $b_i$ are its bits.
+Since rounded divisions are just a bit-shifts, we can see the algorithm as just iterating over $b_i$, and at each iteration, $a$ is squared.
+In other words, at the $i$-th iteration, if $b_i = 1$, then $r \gets r \cdot a^{2^{i-1}}$, as the operation is performed before $a$ is squared.
+We can rewrite this as $r \gets r \cdot a^{b_i 2^{i-1}}$ for every iteration.
+Therefore, the return value of the algorithm is \[
+r = \prod_{i=1}^{n} a^{b_i 2^{i-1}} = a^{\sum_{i=1}^{n} b_i 2^{i-1}} = a^{b}
+.\]
+
+\subexercise{b}
+
+The loop will run for $n$ iterations. In the worst case, we have that b is $2^{n}-1$, such that it is always odd.
+Therefore, we will have 3 operations at every iteration, which is linear complexity. In the best case, $2^{n-1}$, we will have 2 operations at each iteration except for the last one. So the complexity is also linear, and, thus, the algorithm is in $\Theta(n)$.
+
+
+\exercise{5}
+
+\subexercise{a}
+
+Run Dijkstra and then include the distance of every node to $u$, keeping track of the smallest.
+
+\subexercise{b}
+
+Complexity of Dijkstra + one pass through the vertices fetching the smallest neighbor (worst case is $|V|^2$, I think). Maybe it is faster by using the priority queue.
+
+\exercise{6}
+
+\subexercise{a}
+
+Naïvely, this can be achieved in complexity $2n$ by using the merge procedure from \emph{mergesort}. 
+Maybe using pivot (see quicksort) reduces the expected time.
+
+
+

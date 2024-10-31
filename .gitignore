@@ -302,3 +302,6 @@ ipython_config.py
 !**/presentations/*
 
 **/.DS_Store
+
+**/.vscode
+**/.devcontainer

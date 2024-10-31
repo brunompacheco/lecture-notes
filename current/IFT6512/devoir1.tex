@@ -1,0 +1,131 @@
+\documentclass[a4paper]{report}
+\input{./preamble.tex}
+\newenvironment{alltt}{\ttfamily}{\par}
+ 
+\begin{document}
+ 
+\title{Devoir 1}
+\author{Bruno M. Pacheco (20308350) \\
+IFT6512 - Programmation Stochastique}
+ 
+\maketitle
+ 
+\exercise{1}
+
+The EVPI can be defined as the difference between the value of the solution to the recourse problem (RP) and the value of the wait-and-see (WS) solution.
+Both values are defined as 
+\begin{align*}
+    WS &= \mathbb{E}_\xi \min_{x\in X} c^Tx + Q(x,\xi) \\
+    RP &= \min_{x\in X} c^Tx + \mathbb{E}_\xi Q(x,\xi)
+.\end{align*}
+Intuitively, the EVPI is positive because the WS approach computes the optimal solution for every realization of the random variable, while the RP solution is merely feasible.
+In other words, for every realization of $\xi$, the WS approach results in a solution at least as good as the RP solution.
+
+Formally, assume that our random variable has a finite support of size $N>0$.
+Furthermore, for any realization $\xi_i$, let \[
+\overline{x}(\xi_i) = \arg\min_{x\in X} c^Tx  + Q(x,\xi_i)
+\] denote the WS solution and \[
+x^{\star} = \arg\min_{x\in X} c^Tx + \mathbb{E}_\xi Q(x,\xi)
+\] be the RP solution.
+Then,
+\begin{align*}
+    WS &= \sum_{i=1}^{N} P(\xi = \xi_i) \min_{x\in X} c^Tx + Q(x, \xi_i) \\
+       &= \sum_{i=1}^{N} P(\xi = \xi_i)\left( c^{T}\overline{x}(\xi_i) + Q(\overline{x}(\xi_i),\xi_i \right) 
+,\end{align*}
+while
+\begin{align*}
+    RP &= \min_{x\in X} c^Tx + \sum_{i=1}^{N} P(\xi=\xi_i) Q(x,\xi_i) \\
+    &= c^{T}x^{\star} + \sum_{i=1}^{N} P(\xi=\xi_i) Q(x^{\star},\xi_i) \\
+    &= \sum_{i=1}^{N} P(\xi=\xi_i)\left( c^{T}x^{\star} + Q(x^{\star},\xi_i) \right)
+.\end{align*}
+Thus,
+\begin{align*}
+    EVPI &= RP - WS \\
+	 &= \sum_{i=1}^{N} P(\xi=\xi_i)\left( c^{T}x^{\star} + Q(x^{\star},\xi_i) - c^{T}\overline{x}(\xi_i) - Q(\overline{x}(\xi_i),\xi_i) \right) \ge 0
+\end{align*}
+because the definition of $\overline{x}(\xi_i)$ implies that \[
+c^{T}x + Q(x,\xi_i) \ge c^{T}\overline{x}(\xi_i) + Q(\overline{x}(\xi_i),\xi_i)
+\] for any $x\in X$.
+Note that minor modifications in the above reasoning yield the desired result for the case of continuous random variables.
+
+Now, to show that the VSS is always non-negative, we follow a similar approach.
+The VSS is the difference between the value of the solution to the RP and the value of the solution to the expected-value problem (EV), defined as \[
+EV = \min_{x\in X} c^{T}x + Q(x,\overline{\xi} )
+,\] where $\overline{\xi}$ is the expected value of our random variable.
+Let $\widetilde{x}$ be the solution of EV.
+Then, we can write 
+\begin{align*}
+    VSS &= \left( \mathbb{E}_\xi c^{T}\widetilde{x} + Q(\widetilde{x},\xi) \right) - RP \\
+    &= \mathbb{E}_\xi \left( c^{T}\widetilde{x} + Q(\widetilde{x},\xi) \right) - \mathbb{E}_\xi \left( c^{T}x^{\star} + Q(x^{\star},\xi) \right)  \\
+    &= c^{T}\widetilde{x} + \mathcal{Q}(\widetilde{x}) - c^{T}x^{\star} - \mathcal{Q}(x^{\star})
+,\end{align*}
+where $\mathcal{Q}(\cdot )$ is as defined in class.
+Similar to the previous result, the definition of $x^{\star}$ implies that $VSS \ge 0$.
+
+\exercise{2}
+
+In the proposed problem, $\overline{\xi}=1.5$, which means that  \[
+    EV = \min_{\substack{x+y \ge 1 \\ x,y \ge 0}} 2x + \frac{3}{2}y = 2
+\] at $x=1,y=0$.
+
+Now, the WS approach yields
+\begin{align*}
+    WS &= \frac{3}{4} \left( \min_{\substack{x+y \ge 1 \\ x,y \ge 0}} 2x + y \right) + \frac{1}{4} \left( \min_{\substack{x+y \ge 1 \\ x,y \ge 0}} 2x + 3y \right) \\
+    &= \frac{3}{4}2 + \frac{1}{4}3 = \frac{9}{4} > EV
+.\end{align*}
+
+\exercise{3}
+
+I have solved this question by following the original problem statement.
+
+See \texttt{devoir.ipynb}.
+
+\exercise{4}
+
+\subexercise{a}
+
+This problem can be seen as a variation of the newsvendor problem.
+The agent has to decide how much bread to make (decision variables), taking into consideration the randomness of the demand (random variable).
+More precisely, we can formulate the problem as
+\begin{align*}
+    \min_{\bm{x}} \quad & \bm{c}^{T}\bm{x} + \mathbb{E}_{\bm{\delta}\sim \mathcal{N}(\bm{\mu},\Sigma)} Q(\bm{x},\bm{\delta}) \\
+    \textrm{s.t.} \quad & \bm{x} \ge \bm{0}
+,\end{align*}
+where
+\begin{align*}
+    \mathcal{Q}(\bm{x}, \bm{\delta}) = \min_{\bm{y}, \bm{w}} \quad & -\bm{q}^{T}\bm{y} - \bm{r}^{T}\bm{w} \\
+    \textrm{s.t.} \quad & \bm{y} \le \bm{\delta} \\
+      & \bm{y} + \bm{w} \le \bm{x} \\
+      & \bm{y}, \bm{w} \ge \bm{0}
+.\end{align*}
+
+The first stage decision variables are $\bm{x}= (x_b,x_e)$, which represent the amount of white and whole bread produced, respectively.
+The second stage variables $\bm{y}=(y_b,y_e)$ represent the amount of bread sold during the day, and $\bm{w}=(w_b,w_e)$ the amount of bread sold in the evening.
+The random variables $\bm{\delta}=(\delta_b,\delta_e)$ are the demands for each type of bread.
+
+The parameters of the problem are adjusted as required, with \[
+\bm{c} = \begin{bmatrix} 1.5 \\ 1.8 \end{bmatrix} ;\; \bm{q} = \begin{bmatrix} 3 \\ 4 \end{bmatrix} ;\; \bm{r} = \begin{bmatrix} 1 \\ 1.2 \end{bmatrix} 
+\] being, resp., the production costs, the price of bread during the day, and the price of bread at the evening.
+Finally, the demand is drawn from a normal distribution with mean and variances \[
+    \bm{\mu} = \begin{bmatrix} 50 \\ 30 \end{bmatrix} ;\; \Sigma = \begin{bmatrix} 5^2 & 0 \\ 0 & 2^2 \end{bmatrix} 
+.\] 
+
+\subexercise{b}
+
+In the problem above, we have $K_1 = \R^{2}_+$.
+However, $K_2(\bm{\delta})$ is only non-empty for non-negative realizations of the random variable, in other words, given that the random variables are drawn from a normal distribution, they can assume negative values, for which the second-stage problem becomes infeasible.
+
+On the other hand, negative demand is nonsensical, thus we assume that \emph{the support of the random variable} is actually $\Delta = \R^{2}+$, so that it \emph{approximately} follows a normal distribution over its support.
+Now, we can state that $K_2(\bm{\delta}) = \R^{2}+$, which yields $K_2 = K_2^{P} = \R^{2}+$.
+
+It is easy to see that the problem has complete recourse.
+In fact, we could reformulate the problem into the standard two-stage form (by adding slack variables and transforming the constraints into equalities) and show that the $W$ matrix has full rank.
+
+\subexercise{c,d,e,f}
+
+I have solved these problems following the original statement.
+
+See \texttt{devoir.ipynb}.
+
+
+\end{document}

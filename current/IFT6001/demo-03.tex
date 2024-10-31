@@ -1,4 +1,4 @@
-\demo{3}{18.09.2024}{Démonstration 3}
+\demo{3}{18.09.2024}{}
  
 \exercise{2}
 
@@ -72,4 +72,24 @@ In the Akra-Bazzi form, we have $r_1(n)=n / 2$ and $r_2(n) = \frac{n}{4}$.
 
 Note that $r_1$
 The master theorem is not applicable here, 
+
+\subexercise{4}
+
+In the Akra-Bazzi form, we have $r_i(n)=n / 4, i=1,\ldots,32$, and $g \in \Theta(n^3)$.
+Therefore, because $k=3 > \log_4 32 $, the master theorem gives us $T \in \Theta(n^3)$.
+
+\subexercise{5}
+
+Note that $g$ is not harmonious, so this is not an Akra-Bazzi recurrence.
+
+\exercise{5}
+
+We can rewrite the general case $n \ge 2$ as a homogeneous linear recurrence \[
+    T(n) - 2T(n-1) + 5T(n-2) = 0
+.\] The roots of its characteristic polynomial are 
+\begin{align*}
+    x &= \frac{-b + |\sqrt{b^2 - 4ac} | }{2a} \\
+    &= \frac{2 + |\sqrt{-16}|}{2} \\
+.\end{align*}
+\textcolor{red}{\textbf{TODO: continue with the complex roots.}}
 

@@ -2,13 +2,106 @@
 
 \section*{Akra-Bazzi Recurrences}
 
+\begin{previouslyseen}
+    Recall that the exponent of an Akra-Bazzi recurrence is the value $p$ such that \[
+    \sum_{i=1}^{k-1} a_i b_i^{p} = 1
+    .\] 
+
+    Furthermore, the exponent always exists and is unique.
+\end{previouslyseen}
+
+We want to show that an Akra-Bazzi recurrence respects \[
+    T \in \Theta\left( n^{p}\left( 1 + \sum_{u=1}^{n-1} \frac{g(u)}{u^{p+1}} \right)  \right) 
+.\] For this, we will need a couple of lemmas.
+
+\begin{lemma}
+    Let $q: \R \longrightarrow \R$ be a function such that $x \mapsto |q'(x)|$ (the absolute value of its derivative) is harmonious.
+    The, for every $i$,\[
+    \left| q(r_i(n)) - q(b_in) \right| \le_O |q'(n)|\cdot |r_i(n)-b_in|
+    .\] 
+\end{lemma}
+\begin{proof}
+    Let $b=\frac{1}{2}min_i b_i$, and let $n$ and $c$ such that
+    \begin{align*}
+	&bn \le r_i(n) \text{ (guaranteed by the properties of $r_i$)} \\
+	& |q'(u)| \le c|q'(n)|,\, \forall u \in \left[ bn,n \right]  \text{ (guaranteed since $|q'|$ is harmonious)}
+    .\end{align*}
+
+    Now, for any interval containing $r_i(n)$ and $b_i n$, $q'(n)$ has a supremum $M$, and we can write \[
+    \left| \frac{q(r_i(n)) - q(b_i n)}{r_i(n) - b_i n} \right| \le M
+    .\] But since $M \le c|q'(n)|$, we can reformulate the above to show the asymptotic relationship desired.
+\end{proof}
+
+\begin{lemma}
+    There are constants $c_3,c_4>0$ such that, $\forall^{\infty} n$, we have \[
+    c_3 g(n) \le \widetilde{g_i}(n) \le c_4 g(n)
+    ,\] where \[
+    \widetilde{g}_i (n) := n^{p} \sum_{u=r_i(n)}^{n-1} \frac{g(u)}{u^{p+1}}
+    .\] 
+\end{lemma}
+\begin{proof}
+    See the pdf, I'm a bit tired.
+\end{proof}
+
+\begin{lemma}
+    Let $\varepsilon(n) := 1 / \ln n$.
+    Then, $\forall^{\infty} n$ \[
+    r_i(n)^{p}\left( 1 - \varepsilon(r_i(n)) \right)  \le  (b_i n)^{p}(1 - \varepsilon(n))
+    \] and \[
+    r_i(n)^{p}\left( 1 - \varepsilon(r_i(n)) \right)  \ge   (b_i n)^{p}(1 + \varepsilon(n))
+    .\] 
+\end{lemma}
+\begin{proof}
+    I gave up (for now). I'll get back to this later if needed.
+\end{proof}
+
+The important thing is:
 \begin{theorem}
     Let $T(n)$ be an Akra-Bazzi recurrence.
     Then \[
     T \in \Theta\left( n^{p}\left( 1 + \sum_{u=1}^{n-1} \frac{g(u)}{u^{p+1}} \right)  \right) 
     ,\] where $p$ is the exponent of $T$.
 \end{theorem}
+
+\subsection*{Master Theorem}
+
+In the vast majority of our applications, we will use the following theorem:
+\begin{theorem}
+    \emph{(Master theorem)}
+    Let $T : \N \longrightarrow \R$ be an Akra-Bazzi recurrence in the form \[
+    T(n) = \sum_{i=0}^{\ell-1} T(r_i(n)) + g(n)
+    ,\] where $\left| r_i(n) - n / b \right| \in o(n / \ln^2 n)$ for every $i$.
+    Then, \[
+    T \in \begin{cases}
+	\Theta(n^{k}) &,\, g \in \Theta(n^{k}), k > \log_b \ell \\
+	\Theta(n^{\log_b \ell} \log n) &,\, g \in \Theta(n^{\log_b l}) \\
+	\Theta(n^{\log_b \ell}) &,\, g \in O(n^{k}), k < \log_b \ell \\
+    \end{cases}
+    .\] 
+\end{theorem}
 \begin{proof}
-    \textcolor{red}{\textbf{TODO: review this in the pdf at studium}}
+    To use the general Akra-Bazzi theorem it is necessary to determine the order of recurrence ($p$ ).
+    In the particular case, we have $b_i = 1 / b, \forall i$, which implies that $p$ satisfies \[
+    \sum_{i=0}^{\ell-1} (1 / b)^{p} = 1 \implies p = \log_b \ell
+    .\] 
+
+    Now, tu compute the sum $\sum_{u=1}^{n-1} \frac{g(u)}{u^{p+1}}$ of the general theorem, we use the fact that \[
+    \sum_{u=1}^{n-1} u^{k} \in \begin{cases}
+	\Theta(n^{k+1}) &,\, k > -1 \\
+	\Theta(\log n) &,\, k = -1 \\
+	\Theta(1) &,\, k < -1 \\
+    \end{cases}
+    ,\] which can be demonstrated by limiting the sum by the integral (?).
+
+    Now, suppose that $g$ falls in the first case, i.e., $g \in \Theta(n^{k})$, with $k>\log_b \ell$.
+    Take $N$ and $C$ such that $g(n) \le Cn^{k}$ for every $n\ge N$.
+    Then, we can write
+    \begin{align*}
+	T&\le_O n^{\log_b \ell}\left( 1 + \sum_{u=1}^{n-1} \frac{g(u)}{u^{\log_b \ell+1}} \right) \\
+	 &\le_O n^{\log_b \ell}\left( 1 + \underbrace{\sum_{u=1}^{N-1} \frac{g(u)}{u^{\log_b \ell+1}}}_{\text{Constant}} + \underbrace{C\sum_{u=N}^{n-1} \frac{u^{k}}{u^{\log_b \ell - 1}}}_{\in O(n^{k-\log_b \ell})} \right) \\
+	 &\le_O n^{k}
+    .\end{align*}
+
+    The reasoning is similar for the other cases and for the lower bound.
 \end{proof}
 

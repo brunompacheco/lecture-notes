@@ -1,0 +1,113 @@
+\lecture{7}{24.09.2024}{Mathematical Prerequis (continuation)}
+
+\begin{previouslyseen}
+    We have seen the structural components of Akra-Bazzi recurrences and how they impact the theorems that allow us to determine its complexity.
+\end{previouslyseen}
+
+\begin{eg}
+    Let $T$ be a recurrence of the forme \[
+    T(n) = T(\left\lfloor n / 2 \right\rfloor) + T(\left\lceil n / 2 \right\rceil ) + \Theta(n)
+    .\] Then,
+    \begin{itemize}
+        \item $\ell = 2$ 
+	\item $r_0(n)=\left\lfloor n / 2 \right\rfloor$ 
+	\item $r_1(n) = \left\lceil n / 2 \right\rceil $
+	\item $b=2$ and, thus, $\log_b \ell = 1$ 
+	\item $g\in \Theta(n)$
+    \end{itemize}
+
+    We fall in the second case of the master theorem $g(n) \in \Theta(n^{\log_b \ell})=\Theta(n)$, and, therefore, \[
+    T \in  \Theta(n \log n)
+    .\] 
+\end{eg}
+
+\section*{Greedy Algorithms}
+
+The goal of a greedy algorithm can be reduced to finding a subset that satisfies certain criteria, but that is optimal among all subsets (all \emph{solutions}) that satisfy these criteria.
+
+\begin{problem}
+    \emph{(Change-making)}
+    Given a set $C\subseteq\N$ of possible values (of coins or bills), and $x\in \N$ a given amount to produce, return the smallest set of $C$-elements (they may repeat) that sums up to $x$.
+\end{problem}
+
+\begin{eg}
+    Let $C=\left\{ 100,25,10,5,1 \right\} $ and $x=138$.
+    A naïve algorithm is to start with the biggest value in $C$ that is smaller than $x$, and add as many as possible. \[
+    100 + 25 + 10 + 3\cdot 1 = x
+    .\] 
+
+    Let $C=\left\{ 5,4,1 \right\} $ and $x=8$.
+    The solution following the naïve algorithm is \[
+    5 + 1 + 1 + 1 = x
+    ,\] which is clearly not optimal.
+    In fact, if the we had $C=\left\{ 5,4,2 \right\} $, then the naïve algorithm wouldn't even find a feasible solution.
+\end{eg}
+
+A general structure of a greedy algorithm follows:
+\begin{algorithm}
+    \KwData{$C$ a set of candidates, $x$ the target amount}
+    \KwResult{A set $S$ such that $\sum S = x$}
+     $S\gets \emptyset$ \\
+     \While{$S$ is not a solution}{
+	 $x\gets $ select$(C,S)$ \\
+	 $C\gets C \setminus \{x\}$\\
+	\If{feasible$(S\cup \{x\})$}{$S\gets S \cup \{x\}$}
+     }
+\end{algorithm}
+
+\begin{problem}
+    (VecIndepMax)
+    Given vectors $\mathcal{V}=\left\{ v_1,\ldots,v_m \right\} \subseteq\R^{d}$ with weights $w: \mathcal{V} \longrightarrow \R^{+}$, find a set of linearly independent vectors with maximum total weight.
+\end{problem}
+
+\begin{algorithm}
+    \KwData{$\mathcal{V}=\left\{ v_1,\ldots,v_m \right\} \subseteq\R^{d}$ and weights $w: \mathcal{V} \longrightarrow \R^{+}$}
+    $L\gets $ sort$(C,w)$ \\
+    $S\gets \emptyset$ \\
+    \While{$L \neq \emptyset$}{
+	$x\gets $ next$(L)$ \\
+	$L \gets  L \setminus \{x\}$ \\
+	\If{feasible($S\cup \left\{ x \right\} $)}{
+	    $S\gets S\cup \left\{ x \right\} $
+	}
+    }
+    \Return{$S$}
+\end{algorithm}
+
+\begin{definition}
+    \emph{(Matroid)} 
+    Let $C$ be a finite set of candidates and $I\subseteq 2^{C}$.
+    The tuple $(C,I)$ is a \emph{matroid} if, and only if, $\forall X,Y \subseteq C$,
+    \begin{itemize}
+        \item $\emptyset \in I$ 
+	\item $X\subseteq Y \land Y \in I \implies X \in I$
+	\item $X\in I \land Y \in I \land |X| < |Y| \implies \exists a \in Y \setminus X $ such that $X\cup \left\{ a \right\} \in I$
+    \end{itemize}
+\end{definition}
+
+Matroids generalize the notion of \emph{independence}.
+
+\begin{lemma}
+    Let $(V,E)$ be a graph. Then, the system
+    \begin{align*}
+	C &:= E \\
+	I &:= \left\{ S \subseteq C : S \text{ does not contain a cycle }\right\} 
+    \end{align*}
+    forms a matroid.
+\end{lemma}
+\begin{proof}
+    We just need to show that the 3 properties hold.
+    The first is obvious.
+    The second is quite straightforward as well, since if a set of edges does not form a cycle, none of its subsets will form a cycle.
+
+    Finally, let $X,Y \in I$, such that $|X| < |Y|$.
+    Note that, each connected component $T$ (set of vertices) in $X$ does not form a cycle also in $Y$, such that $Y$ may have at most  $|T-1|$ edges that connect two vertices in $T$.
+    Therefore, because $|Y|>|X|$ there must be at least one edge in $Y$ that connects two distinct connected components in $X$, otherwise, all edges in $Y$ would belong to the same connected components of $X$, and, thus, the extra edge would have to turn one of them into a cycle.
+\end{proof}
+
+\begin{definition}
+    A \emph{weighted matroid} is a triple $(C,I,w)$ that extends a matroid  $\left( C,I \right) $ with a weight function $w: C \longrightarrow \R^{+}$.
+\end{definition}
+
+\textcolor{red}{\textbf{TODO}}
+

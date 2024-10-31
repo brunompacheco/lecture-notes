@@ -1,0 +1,80 @@
+\lecture{8}{26.09.2024}{Greedy algorithms (continuation)}
+
+\begin{problem}
+    \emph{(MatroidMax)} Given a weighted matroid $(C,I,w)$, find a set $S\in I$ that maximizes $\sum_{x\in S} w(x)$.
+\end{problem}
+
+Note that this can be framed as an optimization problem
+\begin{align*}
+    \max_{S} \quad & \sum_{x\in S} w(x) \\
+    \textrm{s.t.} \quad & S \in I
+.\end{align*}
+
+We will show that the following algorithm is a general solution to optimization problem over matroids.
+
+\begin{algorithm}
+    \KwData{A weighted matroid $\left( C,I,w \right) $.}
+    $L\gets $ sort$(C,-w)$  // sorting in decreasing order by weight \\
+    $S \gets \emptyset $ \\
+    \While{$L\neq \emptyset$ or we are not done}{
+	$x \gets $ next$(L)$ \\
+	$L\gets L \setminus \left\{ x \right\} $ \\
+	\If{$S \cup \left\{ x \right\} \in I$}{
+	    $S\gets S \cup \left\{ x \right\} $ 
+	}
+    }
+
+    \Return{S}
+\end{algorithm}
+
+\begin{lemma}
+    Let $S\le C$ be the set constructed by the algorithm above at the $k$-th iteration of the while loop, and $E\subseteq C$ be the set of elements that have been discarded at all iterations up to then.
+    Then, there exists an optimal solution $T$ such that $S \subseteq T$ and $T \cap E = \emptyset $.
+\end{lemma}
+\begin{proof}
+    We proceed by induction, noting that the case $k=0$ is trivial.
+
+    Now, assume that the statement is true for $k$ and let us prove it for $k+1$.
+    Let $S$ be the set constructed at iteration $k$, $E$ the set of discarded elements, and $T$ be some optimal solution such that $S \subseteq T$ and $T \cap E = \emptyset$.
+    If $S \neq T$, the, by the definition of a matroid, there must exist $x \in T$ such that $S\cup \left\{ x \right\} \in I$, such that we are certain $L \neq \emptyset$ (because $T \cap E = \emptyset$), thus the algorithm does not stop yet.
+
+    So let $z = \text{next}(L)$ be the element added to $S$ at iteration $k+1$.
+    Note that $z \not\in S$.
+    If $x \in T$, all properties are maintained.
+    If $x \not\in T$, but $S\cup \left\{ x \right\} \not\in I$, then all properties are also maintained.
+    Therefore, we focus on the case $x \not\in T \land S\cup \left\{ x \right\} \in I$, that is $S'=S \cup \left\{ x \right\} \not\subseteq T$.
+    If $|S'| = |T|$, then $w(S) = w(T)$, given the construction of $L$ and the optimality of $T$.
+    Otherwise, we can use the exchange property to construct $T' \gets S' \cup T$ such that $S'\subseteq T'$ and $|T'| = |T|$.
+    Let $\hat{z} \in T \setminus T'$, and note that it is unique.
+    Therefore, we have
+    \begin{align*}
+        w(T') &= \sum_{x \in S'} w(x) \\
+	&= w(z) + \sum_{x \in T\cap T'} w(x) \\
+	&= w(z) - w(\hat{z}) + \sum_{x \in T}^{} w(x) \\
+    .\end{align*}
+    But again, by the construction of $L$, $w(z) \ge w(\hat{z})$, as $\hat{z} \in L \setminus z$.
+    Therefore, \[
+    w(T') \ge  \sum_{x\in T}^{} w(x) = w(T)
+    ,\] which implies that $T'$ is also optimal, which maintain the desired properties over the loop invariant, although towards a different optimal than the one in the previous iteration.
+\end{proof}
+
+Now, the following theorem becomes trivial.
+
+\begin{theorem}
+    The algorithm above solves problem \emph{MatroidMax}, i.e., it finds an optimal solution.
+\end{theorem}
+
+\begin{proof}
+    The previous lemma is also true for the last iteration, but because $L = \emptyset$, then $S = T$.
+\end{proof}
+
+\begin{lemma}
+    The algorithm presented for the MatroidMax problem runs in $O(n \log n + n f(n))$, where $f(n)$ is the cost of the $I$-membership function, assuming the operations over $L$ (next and emptiness) run in $O(1)$.
+\end{lemma}
+\begin{proof}
+    Sorting can be done in $\Theta(n \log n)$, and the loop runs at most $n$ times.
+    Therefore, because the trivial operations over $L$ are assumed to run in constant time, each iteration will run in $O(f(n))$.
+\end{proof}
+
+\textcolor{red}{\textbf{Study vector independency, spanning trees, Kruskal's, knapsack and Dijkstra.}}
+
